@@ -1,0 +1,119 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ConsoleBoss.Site.Master.cs" Inherits="MomoSecretSociety.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Haxriderz</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Styles/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <style>
+        .masterStyle {
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .title {
+            padding: 10px;
+            margin: 0px;
+            color: #FF00FF;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .ourNav {
+            right: 0;
+            left: 0;
+        }
+
+        .footerContent {
+            padding: 15px;
+            right: 0;
+            left: 0;
+            color: #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body class="masterStyle" style="background-color: lightblue;">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="jumbotron title">
+            <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova">MomoSecretSociety</h1>
+        </div>
+        <div class="navbar-inverse ourNav" style="background-color: white;">
+            <div class="container" style="background-color: white;">
+                <div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                    <asp:LinkButton runat="server" ID="loginNavBar" Text="LOG IN" PostBackUrl="~/Account/Login.aspx"></asp:LinkButton>
+                                    <%-- </a>--%></li>
+                            </ul>
+                        </AnonymousTemplate>
+
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav">
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">PENDING REPORTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">ACCEPTED REPORTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
+                                <li><a runat="server" href="~/Content/BossConsole/ActionLogs.aspx">LOGS</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/" title="Manage your account" style="color: lightblue;">Hello, 
+                                    <%: Context.User.Identity.GetUserName()  %> !</a>
+                                </li>
+                                <li>
+                                    <asp:LoginStatus runat="server" ID="LoginStatus" LogoutAction="Redirect" LogoutText="LOG OUT" LogoutPageUrl="~/Content/LogoutSummary.aspx" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+
+        </div>
+        <footer class="footerContent">
+            <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by Haxriderz</p>
+        </footer>
+    </form>
+</body>
+</html>
