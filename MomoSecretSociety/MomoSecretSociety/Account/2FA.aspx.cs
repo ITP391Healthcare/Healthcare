@@ -13,5 +13,12 @@ namespace MomoSecretSociety.Account
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            //Verify if 2FA is correct or not 
+            //If match, redirect to either staff/boss page depending on the roles
+            //If not match, error message
+        }
     }
 }
