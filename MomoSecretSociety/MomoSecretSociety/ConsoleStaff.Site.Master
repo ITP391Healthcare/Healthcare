@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Haxriderz</title>
+    <title><%: Page.Title %> - MomoSecretSociety</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -127,7 +127,7 @@
 
         </div>
         <footer class="footerContent">
-            <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by Haxriderz</p>
+            <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by MomoSecretSociety</p>
         </footer>
     </form>
 </body>

@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Haxriderz</title>
+    <title><%: Page.Title %> - MomoSecretSociety</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -79,14 +79,17 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                    <asp:LinkButton runat="server" ID="loginNavBar" Text="LOG IN" PostBackUrl="~/Account/Login.aspx"></asp:LinkButton>
-                                    <%-- </a>--%></li>
+                                <asp:LinkButton runat="server" ID="loginNavBar" Text="LOG IN" PostBackUrl="~/Account/Login.aspx"></asp:LinkButton>
+                                <%-- </a>--%></li>
                             </ul>
                         </AnonymousTemplate>
 
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">PENDING REPORTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">
+                                    <asp:Label runat="server" ID="pendingRep">PENDING REPORTS</asp:Label>
+
+                                </a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">ACCEPTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
                                 <li><a runat="server" href="~/Content/BossConsole/ActionLogs.aspx">LOGS</a></li>
@@ -112,7 +115,7 @@
 
         </div>
         <footer class="footerContent">
-            <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by Haxriderz</p>
+            <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by MomoSecretSociety</p>
         </footer>
     </form>
 </body>

@@ -12,6 +12,7 @@ namespace MomoSecretSociety.Content.BossConsole
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
         }
     }
 }
