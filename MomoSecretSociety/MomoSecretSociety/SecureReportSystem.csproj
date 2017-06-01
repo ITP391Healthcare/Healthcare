@@ -184,6 +184,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\BossConsole\StaffLogs.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -200,7 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login.aspx" />
-    <Content Include="Content\BossConsole\ActionLogs.aspx" />
     <Content Include="Content\BossConsole\PendingReports.aspx" />
     <Content Include="Content\StaffConsole\SubmittedReports.aspx" />
     <Content Include="Default.aspx" />
@@ -256,19 +256,19 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Content\BossConsole\ActionLogs.aspx.cs">
-      <DependentUpon>ActionLogs.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Content\BossConsole\ActionLogs.aspx.designer.cs">
-      <DependentUpon>ActionLogs.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Content\BossConsole\PendingReports.aspx.cs">
       <DependentUpon>PendingReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Content\BossConsole\PendingReports.aspx.designer.cs">
       <DependentUpon>PendingReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\StaffLogs.aspx.cs">
+      <DependentUpon>StaffLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\StaffLogs.aspx.designer.cs">
+      <DependentUpon>StaffLogs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\StaffConsole\SubmittedReports.aspx.cs">
       <DependentUpon>SubmittedReports.aspx</DependentUpon>

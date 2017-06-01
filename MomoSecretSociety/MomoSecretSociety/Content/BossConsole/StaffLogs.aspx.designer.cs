@@ -10,7 +10,7 @@
 namespace MomoSecretSociety.Content.BossConsole {
     
     
-    public partial class ActionLogs {
+    public partial class StaffLogs {
         
         /// <summary>
         /// hihihi control.

@@ -92,7 +92,8 @@
                                 </a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">ACCEPTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
-                                <li><a runat="server" href="~/Content/BossConsole/ActionLogs.aspx">LOGS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/StaffLogs.aspx">STAFF LOGS</a></li>
+                                <li><a runat="server" href="~/Content/BossConsole/SuperiorLogs.aspx">SUPERIOR LOGS</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/" title="Manage your account" style="color: lightblue;">Hello, 
