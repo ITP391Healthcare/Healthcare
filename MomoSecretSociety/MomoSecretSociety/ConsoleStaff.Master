@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ConsoleBoss.Site.Master.cs" Inherits="MomoSecretSociety.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ConsoleStaff.Master.cs" Inherits="MomoSecretSociety.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - MomoSecretSociety</title>
+    <title><%: Page.Title %> - SecureReportSystem</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -64,7 +64,7 @@
         </asp:ScriptManager>
 
         <div class="jumbotron title">
-            <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova">MomoSecretSociety</h1>
+            <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova">SecureReportSystem</h1>
         </div>
         <div class="navbar-inverse ourNav" style="background-color: white;">
             <div class="container" style="background-color: white;">
@@ -78,21 +78,33 @@
                 <div class="navbar-collapse collapse">
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
+                            <%--           <asp:PlaceHolder runat="server" ID="staffConsoleNavBar">
+                                <ul class="nav navbar-nav">
+                                    <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">SUBMITTED REPORTS</a></li>
+                                    <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
+                                    <li><a runat="server" href="~/Content/">DRAFTS</a></li>
+                                </ul>
+                            </asp:PlaceHolder>--%>
+
                             <ul class="nav navbar-nav navbar-right">
-                                <asp:LinkButton runat="server" ID="loginNavBar" Text="LOG IN" PostBackUrl="~/Account/Login.aspx"></asp:LinkButton>
-                                <%-- </a>--%></li>
+                                <%--<li><a runat="server" href="~/Account/Register">REGISTER</a></li>--%>
+                                <li><%--<a runat="server" href="~/Account/Login">--%>
+                                    <asp:LinkButton runat="server" ID="loginNavBar" Text="LOG IN" PostBackUrl="~/Account/Login.aspx"></asp:LinkButton>
+                                    <%-- </a>--%></li>
                             </ul>
                         </AnonymousTemplate>
 
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">
-                                    <asp:Label runat="server" ID="pendingRep">PENDING REPORTS</asp:Label>
-
-                                </a></li>
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">ACCEPTED REPORTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">SUBMITTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
-                                <li><a runat="server" href="~/Content/BossConsole/ActionLogs.aspx">LOGS</a></li>
+                                <li><a runat="server" href="~/Content/">DRAFTS</a></li>
+
+<%--                                <li>
+                                    <asp:LinkButton runat="server" ID="logNavBar" Text="LOGS" OnClick="logNavBar_Click" CausesValidation="false"></asp:LinkButton>
+                                    <%--<a runat="server" href="~/Content/">LOGS</a>--%>
+
+                                </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/" title="Manage your account" style="color: lightblue;">Hello, 
@@ -109,13 +121,13 @@
         </div>
 
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
 
         </div>
         <footer class="footerContent">
-            <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by MomoSecretSociety</p>
+            <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by SecureReportSystem</p>
         </footer>
     </form>
 </body>

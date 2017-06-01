@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ConsoleBoss.Site.Master" AutoEventWireup="true" CodeBehind="ActionLogs.aspx.cs" Inherits="MomoSecretSociety.Content.BossConsole.ActionLogs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ConsoleBoss.Master" AutoEventWireup="true" CodeBehind="ActionLogs.aspx.cs" Inherits="MomoSecretSociety.Content.BossConsole.ActionLogs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
       <div class="jumbotron" style="background-color: white;">
         <h1>LOGS</h1>

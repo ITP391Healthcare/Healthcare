@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ConsoleStaff.Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="MomoSecretSociety.Account.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ConsoleStaff.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="MomoSecretSociety.Account.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 

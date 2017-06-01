@@ -188,7 +188,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ConsoleStaff.Site.Master" />
+    <Content Include="ConsoleStaff.Master" />
     <Content Include="Bundle.config" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
@@ -242,7 +242,7 @@
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Web.config" />
-    <Content Include="ConsoleBoss.Site.Master" />
+    <Content Include="ConsoleBoss.Master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\Login.aspx.cs">
@@ -289,19 +289,19 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConsoleBoss.Site.Master.cs">
-      <DependentUpon>ConsoleBoss.Site.Master</DependentUpon>
+    <Compile Include="ConsoleBoss.Master.cs">
+      <DependentUpon>ConsoleBoss.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ConsoleBoss.Site.Master.designer.cs">
-      <DependentUpon>ConsoleBoss.Site.Master</DependentUpon>
+    <Compile Include="ConsoleBoss.Master.designer.cs">
+      <DependentUpon>ConsoleBoss.Master</DependentUpon>
     </Compile>
-    <Compile Include="ConsoleStaff.Site.Master.cs">
-      <DependentUpon>ConsoleStaff.Site.Master</DependentUpon>
+    <Compile Include="ConsoleStaff.Master.cs">
+      <DependentUpon>ConsoleStaff.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ConsoleStaff.Site.Master.designer.cs">
-      <DependentUpon>ConsoleStaff.Site.Master</DependentUpon>
+    <Compile Include="ConsoleStaff.Master.designer.cs">
+      <DependentUpon>ConsoleStaff.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
