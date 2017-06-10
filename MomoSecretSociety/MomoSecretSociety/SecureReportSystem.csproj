@@ -184,6 +184,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SecureReportSystemDatabase.mdf" />
+    <Content Include="App_Data\SecureReportSystemDatabase_log.ldf">
+      <DependentUpon>SecureReportSystemDatabase.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -203,7 +207,6 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Content\BossConsole\PendingReports.aspx" />
     <Content Include="Content\StaffConsole\SubmittedReports.aspx" />
-    <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
@@ -238,9 +241,37 @@
     <Content Include="scripts\WebForms\WebForms.js" />
     <Content Include="scripts\WebForms\WebParts.js" />
     <Content Include="scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Styles\AdminLTE.css" />
+    <Content Include="Styles\AdminLTE.min.css" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\Site.css" />
+    <Content Include="Styles\skins\skin-black-light.css" />
+    <Content Include="Styles\skins\skin-black-light.min.css" />
+    <Content Include="Styles\skins\skin-black.css" />
+    <Content Include="Styles\skins\skin-black.min.css" />
+    <Content Include="Styles\skins\skin-blue-light.css" />
+    <Content Include="Styles\skins\skin-blue-light.min.css" />
+    <Content Include="Styles\skins\skin-blue.css" />
+    <Content Include="Styles\skins\skin-blue.min.css" />
+    <Content Include="Styles\skins\skin-green-light.css" />
+    <Content Include="Styles\skins\skin-green-light.min.css" />
+    <Content Include="Styles\skins\skin-green.css" />
+    <Content Include="Styles\skins\skin-green.min.css" />
+    <Content Include="Styles\skins\skin-purple-light.css" />
+    <Content Include="Styles\skins\skin-purple-light.min.css" />
+    <Content Include="Styles\skins\skin-purple.css" />
+    <Content Include="Styles\skins\skin-purple.min.css" />
+    <Content Include="Styles\skins\skin-red-light.css" />
+    <Content Include="Styles\skins\skin-red-light.min.css" />
+    <Content Include="Styles\skins\skin-red.css" />
+    <Content Include="Styles\skins\skin-red.min.css" />
+    <Content Include="Styles\skins\skin-yellow-light.css" />
+    <Content Include="Styles\skins\skin-yellow-light.min.css" />
+    <Content Include="Styles\skins\skin-yellow.css" />
+    <Content Include="Styles\skins\skin-yellow.min.css" />
+    <Content Include="Styles\skins\_all-skins.css" />
+    <Content Include="Styles\skins\_all-skins.min.css" />
     <Content Include="Web.config" />
     <Content Include="ConsoleBoss.Master" />
   </ItemGroup>
@@ -277,13 +308,6 @@
     <Compile Include="Content\StaffConsole\SubmittedReports.aspx.designer.cs">
       <DependentUpon>SubmittedReports.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -305,9 +329,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
