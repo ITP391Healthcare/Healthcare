@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\MomoSecretSociety"
+    "\\MomoSecretSociety",
+    "\\MomoSecretSociety\\MomoSecretSociety",
+    "\\MomoSecretSociety\\MomoSecretSociety\\Account",
+    "\\MomoSecretSociety\\MomoSecretSociety\\Content",
+    "\\MomoSecretSociety\\MomoSecretSociety\\Content\\BossConsole",
+    "\\MomoSecretSociety\\MomoSecretSociety\\Content\\StaffConsole"
   ],
-  "SelectedNode": "\\MomoSecretSociety\\MomoSecretSociety.sln",
+  "SelectedNode": "\\MomoSecretSociety\\MomoSecretSociety\\Account\\Login.aspx.cs",
   "PreviewInSolutionExplorer": false
 }
