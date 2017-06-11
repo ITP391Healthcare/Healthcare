@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using MomoSecretSociety.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,17 +14,38 @@ namespace MomoSecretSociety.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Joanne, dont delete these codes
+            if (Request.IsAuthenticated)
+            {
+                string[] cookies = Request.Cookies.AllKeys;
+                foreach (string cookie in cookies)
+                {
+                    Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+                }
+                HttpContext.Current.Session.Abandon();
+                HttpContext.Current.Response.Cookies.Add(new HttpCookie("__AntiXsrfToken", ""));
+            }
+
+            if (!IsPostBack && Request.IsAuthenticated)
+            {
+                Response.Redirect(Request.RawUrl);
+            }
 
         }
 
         protected void LogIn(object sender, EventArgs e)
         {
+            //Joanne, dont delete these codes
             if (IsValid)
             {
                 // Validate the user password
                 if (username.Text.Equals("staff") && Password.Text.Equals("staff"))
                 {
                     Session["AccountUsername"] = username.Text;
+
+                    //Add to logs
+                    ActionLogs.Action action = ActionLogs.Action.Login;
+                    ActionLogs.Log(username.Text, action);
 
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, username.Text, DateTime.Now, DateTime.Now.AddMinutes(10), false, username.Text);
                     String encryptedTicket = FormsAuthentication.Encrypt(authTicket);
@@ -35,6 +58,10 @@ namespace MomoSecretSociety.Account
                 if (username.Text.Equals("boss") && Password.Text.Equals("boss"))
                 {
                     Session["AccountUsername"] = username.Text;
+
+                    //Add to logs
+                    ActionLogs.Action action = ActionLogs.Action.Login;
+                    ActionLogs.Log(username.Text, action);
 
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, username.Text, DateTime.Now, DateTime.Now.AddMinutes(10), false, username.Text);
                     String encryptedTicket = FormsAuthentication.Encrypt(authTicket);

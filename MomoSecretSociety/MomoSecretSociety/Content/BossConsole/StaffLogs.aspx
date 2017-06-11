@@ -19,10 +19,11 @@
             margin-left: -9.5%;
         }
 
+        th {
+            text-align: center;
+        }
 
-      html input[type="button"]
-{
-
+        html input[type="button"] {
             text-shadow: none;
             border-radius: 3px;
             border-color: lightblue;
@@ -32,13 +33,11 @@
             background-color: lightblue;
         }
 
-            
-      html input[type="button"]:hover {
+
+            html input[type="button"]:hover {
                 opacity: 0.7;
                 text-decoration: none;
             }
-
-
     </style>
 
 
@@ -49,10 +48,9 @@
 
             <h2>List of Staff Members</h2>
 
-            <div style=""
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString1 %>" SelectCommand="SELECT DISTINCT(Username) FROM [Logs]"></asp:SqlDataSource>
 
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" HorizontalAlign="Center" RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="true" CellPadding="10" OnRowCommand="GridView1_RowCommand" GridLines="None" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="true" CellPadding="15" OnRowCommand="GridView1_RowCommand" GridLines="None" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" OnRowCreated="grid_RowCreated" Width="30%" RowStyle-VerticalAlign="Middle">
 
 
                 <PagerStyle CssClass="pagerStyle" />

@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-     <!-- Font Awesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -73,8 +73,18 @@
         </asp:ScriptManager>
 
         <div class="jumbotron title">
+
+            <div>
+                <span style="float: right; color: white; font-size: 14px; ">
+                    <asp:Label ID="lastLogin" Text="" runat="server"></asp:Label>
+                    <%--  Text='<%#CustomTitle %>'  --%>
+                </span>
+            </div>
+
             <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova">SecureReportSystem</h1>
         </div>
+
+
         <div class="navbar-inverse ourNav" style="background-color: white;">
             <div class="container" style="background-color: white;">
                 <div>
@@ -95,12 +105,12 @@
 
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/PendingReports">
                                     <asp:Label runat="server" ID="pendingRep">PENDING REPORTS</asp:Label>
 
                                 </a></li>
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">ACCEPTED REPORTS</a></li>
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/AcceptedReports">ACCEPTED REPORTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/RejectedReports">REJECTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/StaffLogs.aspx">STAFF LOGS</a></li>
                                 <li><a runat="server" href="~/Content/BossConsole/SuperiorLogs.aspx">SUPERIOR LOGS</a></li>
                             </ul>
@@ -118,7 +128,9 @@
             </div>
         </div>
 
+
         <div class="container body-content">
+
             <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
