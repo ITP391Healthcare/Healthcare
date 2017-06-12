@@ -46,6 +46,7 @@ namespace MomoSecretSociety.Account
             string dbStatus = "";
 
             string passwordHash = "";
+            string test = "";
             //ComputeHash(inputPassword, "SHA512", dbSalt);
             //ComputeHash (inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt))
             //INPUT PASSWORD + dbSalt --> HASH THE WHOLE THING
