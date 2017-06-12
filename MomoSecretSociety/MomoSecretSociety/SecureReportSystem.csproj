@@ -185,7 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login.aspx" />
-    <Content Include="Account\TEST.aspx" />
     <Content Include="App_Data\SecureReportSystem.mdf" />
     <Content Include="App_Data\SecureReportSystem_log.ldf">
       <DependentUpon>SecureReportSystem.mdf</DependentUpon>
@@ -196,6 +195,7 @@
     <Content Include="Content\BossConsole\SuperiorLogs.aspx" />
     <Content Include="Content\LogoutSummary.aspx" />
     <Content Include="Content\StaffConsole\Drafts.aspx" />
+    <Content Include="Content\StaffConsole\NewReport.aspx" />
     <Content Include="Content\StaffConsole\RejectedReports.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
@@ -291,13 +291,6 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\TEST.aspx.cs">
-      <DependentUpon>TEST.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\TEST.aspx.designer.cs">
-      <DependentUpon>TEST.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -351,6 +344,13 @@
     </Compile>
     <Compile Include="Content\StaffConsole\Drafts.aspx.designer.cs">
       <DependentUpon>Drafts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StaffConsole\NewReport.aspx.cs">
+      <DependentUpon>NewReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\StaffConsole\NewReport.aspx.designer.cs">
+      <DependentUpon>NewReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\StaffConsole\RejectedReports.aspx.cs">
       <DependentUpon>RejectedReports.aspx</DependentUpon>

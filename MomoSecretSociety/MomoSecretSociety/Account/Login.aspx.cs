@@ -97,7 +97,9 @@ namespace MomoSecretSociety.Account
                             String encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                             HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                             Response.Cookies.Add(authCookie);
-                            Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
+                            //Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
+                            Response.Redirect("~/Content/StaffConsole/NewReport.aspx");
+
                         }
                     }
                     else
