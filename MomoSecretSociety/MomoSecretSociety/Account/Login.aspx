@@ -29,11 +29,11 @@
                             <div class="col-md-10">
                                 <asp:TextBox runat="server" ID="password" TextMode="Password" CssClass="form-control" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
-                                <asp:Label ID="IncorrectInputLabel" runat="server" Text="" CssClass="text-danger"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
+                                <asp:Label ID="IncorrectInputLabel" runat="server" Text="" CssClass="text-danger"></asp:Label><br />
                                 <asp:Button runat="server" OnClick="LogIn" Text="Log in" CssClass="btn btn-default" />
                             </div>
                         </div>
