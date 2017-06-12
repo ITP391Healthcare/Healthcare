@@ -49,7 +49,8 @@ namespace MomoSecretSociety.Account
             string dbSalt = "";
             string dbStatus = "";
 
-            string passwordHash = "123";
+            string passwordHash = password.Text;    //here must put method of hash of input pass eg method(password.Text) 
+
             //ComputeHash(inputPassword, "SHA512", dbSalt);
             //ComputeHash (inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt))
             //INPUT PASSWORD + dbSalt --> HASH THE WHOLE THING
@@ -77,24 +78,35 @@ namespace MomoSecretSociety.Account
                 // Validate the user password
                 //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("staff"))
                 //AND CHECK STATUS = staff
-                if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("Staff"))
+                if (dbUsername.Equals(inputUsername))
                 {
-                    Session["AccountUsername"] = username.Text;
+                    if (dbPasswordHash.Equals(passwordHash))
+                    {
 
-                    //Add to logs
-                    ActionLogs.Action action = ActionLogs.Action.Login;
-                    ActionLogs.Log(username.Text, action);
+                        if (dbStatus.Equals("Staff"))
+                        {
 
-                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, username.Text, DateTime.Now, DateTime.Now.AddMinutes(10), false, username.Text);
-                    String encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-                    HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                    Response.Cookies.Add(authCookie);
-                    Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
+
+                            Session["AccountUsername"] = username.Text;
+
+                            //Add to logs
+                            ActionLogs.Action action = ActionLogs.Action.Login;
+                            ActionLogs.Log(username.Text, action);
+
+                            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, username.Text, DateTime.Now, DateTime.Now.AddMinutes(10), false, username.Text);
+                            String encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                            HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                            Response.Cookies.Add(authCookie);
+                            Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
+                        }
+                    }
+                    else
+                    {
+                        IncorrectInputLabel.Text = "incorrect password";
+                    }
+
                 }
-                else
-                {
-                    IncorrectInputLabel.Text = "incorrect input";
-                }
+
 
                 //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("boss"))
                 //AND CHECK STATUS = boss
