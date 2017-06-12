@@ -187,10 +187,6 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\TEST.aspx" />
     <Content Include="App_Data\SecureReportSystem.mdf" />
-    <Content Include="App_Data\SecureReportSystemDatabase.mdf" />
-    <Content Include="App_Data\SecureReportSystemDatabase_log.ldf">
-      <DependentUpon>SecureReportSystemDatabase.mdf</DependentUpon>
-    </Content>
     <Content Include="App_Data\SecureReportSystem_log.ldf">
       <DependentUpon>SecureReportSystem.mdf</DependentUpon>
     </Content>
