@@ -196,7 +196,6 @@
     <Content Include="Content\BossConsole\SuperiorLogs.aspx" />
     <Content Include="Content\LogoutSummary.aspx" />
     <Content Include="Content\StaffConsole\Drafts.aspx" />
-    <Content Include="Content\StaffConsole\NewReport.aspx" />
     <Content Include="Content\StaffConsole\RejectedReports.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
@@ -352,13 +351,6 @@
     </Compile>
     <Compile Include="Content\StaffConsole\Drafts.aspx.designer.cs">
       <DependentUpon>Drafts.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Content\StaffConsole\NewReport.aspx.cs">
-      <DependentUpon>NewReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Content\StaffConsole\NewReport.aspx.designer.cs">
-      <DependentUpon>NewReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\StaffConsole\RejectedReports.aspx.cs">
       <DependentUpon>RejectedReports.aspx</DependentUpon>
