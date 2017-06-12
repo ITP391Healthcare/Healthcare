@@ -29,6 +29,7 @@
                             <div class="col-md-10">
                                 <asp:TextBox runat="server" ID="password" TextMode="Password" CssClass="form-control" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
+                                <asp:Label ID="IncorrectInputLabel" runat="server" Text="" CssClass="text-danger"></asp:Label>
                             </div>
                         </div>
                         <div class="form-group">

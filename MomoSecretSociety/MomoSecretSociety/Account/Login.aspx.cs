@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MomoSecretSociety.Account
 {
@@ -41,15 +43,21 @@ namespace MomoSecretSociety.Account
             string dbUsername = "";
             string dbPasswordHash = "";
             string dbSalt = "";
+            string dbStatus = "";
 
-            string passwordHash = ""; //INPUT PASSWORD + dbSalt --> HASH THE WHOLE THING
+            string passwordHash = "";
+            //ComputeHash(inputPassword, "SHA512", dbSalt);
+            //ComputeHash (inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt))
+            //INPUT PASSWORD + dbSalt --> HASH THE WHOLE THING
             //Compare: passwordHash with dbPasswordHash
             //Compare: dbUsername with username.Text (input username)
-            
+
             //Joanne, dont delete these codes
             if (IsValid)
             {
                 // Validate the user password
+                //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("staff"))
+                //AND CHECK STATUS = staff
                 if (username.Text.Equals("staff") && password.Text.Equals("staff"))
                 {
                     Session["AccountUsername"] = username.Text;
@@ -63,9 +71,14 @@ namespace MomoSecretSociety.Account
                     HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     Response.Cookies.Add(authCookie);
                     Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
-
+                }
+                else
+                {
+                    IncorrectInputLabel.Text = "incorrect input";
                 }
 
+                //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("boss"))
+                //AND CHECK STATUS = boss
                 if (username.Text.Equals("boss") && password.Text.Equals("boss"))
                 {
                     Session["AccountUsername"] = username.Text;
@@ -81,6 +94,20 @@ namespace MomoSecretSociety.Account
                     Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
                 }
             }
+                
+        }
+
+        public static String ComputeHash (string input, HashAlgorithm algorithm, Byte[] salt)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+            Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
+            salt.CopyTo(saltedInput, 0);
+            inputBytes.CopyTo(saltedInput, salt.Length);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
+
+            return BitConverter.ToString(hashedBytes);
         }
 
     }

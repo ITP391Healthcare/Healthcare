@@ -194,6 +194,7 @@
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
     <Content Include="Content\BossConsole\SuperiorLogs.aspx" />
     <Content Include="Content\LogoutSummary.aspx" />
+    <Content Include="Content\StaffConsole\NewReport.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -334,6 +335,13 @@
     </Compile>
     <Compile Include="Content\LogoutSummary.aspx.designer.cs">
       <DependentUpon>LogoutSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StaffConsole\NewReport.aspx.cs">
+      <DependentUpon>NewReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\StaffConsole\NewReport.aspx.designer.cs">
+      <DependentUpon>NewReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\StaffConsole\SubmittedReports.aspx.cs">
       <DependentUpon>SubmittedReports.aspx</DependentUpon>
