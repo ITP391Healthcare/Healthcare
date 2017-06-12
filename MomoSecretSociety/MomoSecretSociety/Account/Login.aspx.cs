@@ -35,11 +35,22 @@ namespace MomoSecretSociety.Account
 
         protected void LogIn(object sender, EventArgs e)
         {
+            string inputUsername = username.Text;
+            string inputPassword = password.Text;
+
+            string dbUsername = "";
+            string dbPasswordHash = "";
+            string dbSalt = "";
+
+            string passwordHash = ""; //INPUT PASSWORD + dbSalt --> HASH THE WHOLE THING
+            //Compare: passwordHash with dbPasswordHash
+            //Compare: dbUsername with username.Text (input username)
+            
             //Joanne, dont delete these codes
             if (IsValid)
             {
                 // Validate the user password
-                if (username.Text.Equals("staff") && Password.Text.Equals("staff"))
+                if (username.Text.Equals("staff") && password.Text.Equals("staff"))
                 {
                     Session["AccountUsername"] = username.Text;
 
@@ -55,7 +66,7 @@ namespace MomoSecretSociety.Account
 
                 }
 
-                if (username.Text.Equals("boss") && Password.Text.Equals("boss"))
+                if (username.Text.Equals("boss") && password.Text.Equals("boss"))
                 {
                     Session["AccountUsername"] = username.Text;
 

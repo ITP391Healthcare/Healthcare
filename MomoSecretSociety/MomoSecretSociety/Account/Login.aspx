@@ -25,9 +25,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
+                            <asp:Label runat="server" AssociatedControlID="password" CssClass="col-md-2 control-label">Password</asp:Label>
                             <div class="col-md-10">
-                                <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="password" TextMode="Password" CssClass="form-control" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
                             </div>
                         </div>
