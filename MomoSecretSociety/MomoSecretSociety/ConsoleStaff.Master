@@ -96,9 +96,9 @@
 
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">SUBMITTED REPORTS</a></li>
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
-                                <li><a runat="server" href="~/Content/">DRAFTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/StaffConsole/SubmittedReports">SUBMITTED REPORTS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/StaffConsole/RejectedReports">REJECTED REPORTS</a></li>
+                                <li><a runat="server" href="~/Content/StaffConsole/Drafts">DRAFTS</a></li>
 
 <%--                                <li>
                                     <asp:LinkButton runat="server" ID="logNavBar" Text="LOGS" OnClick="logNavBar_Click" CausesValidation="false"></asp:LinkButton>

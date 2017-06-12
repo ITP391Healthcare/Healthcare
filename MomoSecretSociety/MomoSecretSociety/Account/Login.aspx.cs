@@ -9,11 +9,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Security.Cryptography;
 using System.Text;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace MomoSecretSociety.Account
 {
     public partial class Login : System.Web.UI.Page
     {
+        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString1"].ConnectionString);
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //Joanne, dont delete these codes
@@ -45,12 +49,32 @@ namespace MomoSecretSociety.Account
             string dbSalt = "";
             string dbStatus = "";
 
-            string passwordHash = "";
+            string passwordHash = "123";
             //ComputeHash(inputPassword, "SHA512", dbSalt);
             //ComputeHash (inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt))
             //INPUT PASSWORD + dbSalt --> HASH THE WHOLE THING
             //Compare: passwordHash with dbPasswordHash
             //Compare: dbUsername with username.Text (input username)
+            
+            connection.Open();
+            SqlCommand myCommand = new SqlCommand("SELECT HashedPassword, Salt, Status, Username FROM UserAccount WHERE Username = @AccountUsername", connection);
+            myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername);
+
+            SqlDataReader myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                dbPasswordHash = (myReader["HashedPassword"].ToString());
+                dbSalt = (myReader["Salt"].ToString());
+                dbStatus = (myReader["Status"].ToString());
+                dbUsername = (myReader["Username"].ToString());
+            }
+            connection.Close();
+
+            Response.Write("testing!!!");
+
+
+            //asdasdasd
+
 
             //Joanne, dont delete these codes
             if (IsValid)
@@ -58,7 +82,7 @@ namespace MomoSecretSociety.Account
                 // Validate the user password
                 //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("staff"))
                 //AND CHECK STATUS = staff
-                if (username.Text.Equals("staff") && password.Text.Equals("staff"))
+                if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("Staff"))
                 {
                     Session["AccountUsername"] = username.Text;
 
@@ -79,7 +103,7 @@ namespace MomoSecretSociety.Account
 
                 //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("boss"))
                 //AND CHECK STATUS = boss
-                if (username.Text.Equals("boss") && password.Text.Equals("boss"))
+                if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("Boss"))
                 {
                     Session["AccountUsername"] = username.Text;
 
