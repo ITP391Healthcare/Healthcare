@@ -9,7 +9,6 @@
         <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox5" CssClass="text-danger" ErrorMessage="The text field is required." />
         <br />--%>
 
-
         <asp:Label ID="Label2" runat="server" Text="Date: "></asp:Label>
         <asp:TextBox ID="TextBox4" runat="server" TextMode="Date"></asp:TextBox>
         <br />
