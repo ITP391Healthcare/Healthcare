@@ -21,7 +21,7 @@
         
         <asp:Label ID="Label5" runat="server" Text="Case Description: "></asp:Label>
         <br />
-        <asp:TextBox ID="TextBox1" runat="server" Height="122px" Width="345px"></asp:TextBox>
+        <asp:TextBox ID="TextBox1" runat="server" Height="240px" Width="562px"></asp:TextBox>
     </div>
 
 </asp:Content>
