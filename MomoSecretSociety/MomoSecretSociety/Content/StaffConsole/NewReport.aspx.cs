@@ -69,12 +69,15 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.ExecuteNonQuery();
             connection.Close();
 
-            Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
             //Show a line: Case #___ is created
             //string script = "alert('Case #');" + cNumber + "alert(' has been created.');";
             //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
 
+            string script = "alert('abc');";
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+
             //Redirect to the submitted reports page
+            Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
         }
 
         protected void SaveAsDraftsButton_Click(object sender, EventArgs e)
