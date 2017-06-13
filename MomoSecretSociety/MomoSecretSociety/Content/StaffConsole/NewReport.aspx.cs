@@ -73,32 +73,71 @@ namespace MomoSecretSociety.Content.StaffConsole
             //string script = "alert('Case #');" + cNumber + "alert(' has been created.');";
             //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
 
+            //GET HELP: Line 78-82
+            //I want to redirect to sumbitted reports after this 
             string script = "alert('abc');";
             ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
 
             //Redirect to the submitted reports page
-            Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
+            //Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
         }
 
         protected void SaveAsDraftsButton_Click(object sender, EventArgs e)
         {
-            //string script = "alert('abc');";
-            //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+            //COPY PASTED FROM SUBMIT BUTTON
+            //Flow: create a case record in the reports db
+
+            //Case Number Created +1 
+            //Retrieve the latest case number and +1
+            string dbCaseNumber = "";
+            connection.Open();
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report", connection);
+            SqlDataReader myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                dbCaseNumber = (myReader["CaseNumber"].ToString());
+            }
+
+            cNumber = int.Parse(dbCaseNumber);
+            connection.Close();
+            cNumber++;
+
+            DateTime DateInput = new DateTime();
+            DateInput = Convert.ToDateTime(TextBox4.Text);
+
+            string NameInput = TextBox3.Text;
+            string SubjectInput = TextBox2.Text;
+            string CaseDesInput = TextBox1.Text;
+            string status = "pending";
+
+            //Add the details into database (done)
+            //Report inserted into database, with ReportStatus = Pending (done)
+            //Report details encrypted (not done)
+
+            connection.Open();
+
+            SqlCommand insertReportCommand = new SqlCommand();
+            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus)" +
+                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status)";
+            insertReportCommand.Parameters.AddWithValue("@caseNumber", cNumber);
+            insertReportCommand.Parameters.AddWithValue("@username", NameInput);
+            insertReportCommand.Parameters.AddWithValue("@date", DateInput);
+            insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
+            insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
+            insertReportCommand.Parameters.AddWithValue("@Remarks", "");
+            insertReportCommand.Parameters.AddWithValue("@status", status);
+
+            insertReportCommand.Connection = connection;
+            insertReportCommand.ExecuteNonQuery();
+            connection.Close();
+
+            //alert 
+            string script = "alert('Your report has been saved in drafts!');";
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+
+            //I want to redirect to sumbitted reports after this 
         }
 
-        //public static bool IsDate(string date)
-        //{
-        //    bool valid = true;
-        //    //check in dd/mm/yyyy format
-        //    valid = Regex.IsMatch(date, "^[0-9]{2}/[0-9]{2}/[0-9]{4}$");
-
-        //    if (valid == true)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //        return false;
-        //}
     }
 
 }
