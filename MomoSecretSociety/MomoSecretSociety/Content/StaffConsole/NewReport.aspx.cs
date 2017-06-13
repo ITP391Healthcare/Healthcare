@@ -12,6 +12,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 {
     public partial class NewReport : System.Web.UI.Page
     {
+        int cNumber;
         static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString1"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
@@ -21,11 +22,23 @@ namespace MomoSecretSociety.Content.StaffConsole
             TextBox3.Text = Session["AccountUsername"].ToString();
             TextBox3.ReadOnly = true;
         }
+            int CaseNumber = 201700000;
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {   //Case Number Created +1 
-            int CaseNumber = 201700000;
-            CaseNumber++;
+            //Retrieve the latest case number and +1
+            string dbCaseNumber="";
+            connection.Open();
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report", connection);
+            SqlDataReader myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                dbCaseNumber = (myReader["CaseNumber"].ToString());
+            }
+
+            cNumber = int.Parse(dbCaseNumber);
+            connection.Close();
+            cNumber++;
 
             DateTime DateInput = new DateTime();
             DateInput = Convert.ToDateTime(TextBox4.Text);
@@ -35,31 +48,39 @@ namespace MomoSecretSociety.Content.StaffConsole
             string CaseDesInput = TextBox1.Text;
             string status = "pending";
 
-            //Add the details into database
+            //Add the details into database (done)
+            //Report inserted into database, with ReportStatus = Pending (done)
+            //Report details encrypted (not done)
+
             connection.Open();
 
             SqlCommand insertReportCommand = new SqlCommand();
-            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, Status)" + 
-                " VALUES (@caseNumber, @username, @date, @subject, @description, @status)";
-            insertReportCommand.Parameters.AddWithValue("@caseNumber", CaseNumber);
+            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus)" + 
+                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status)";
+            insertReportCommand.Parameters.AddWithValue("@caseNumber", cNumber);
             insertReportCommand.Parameters.AddWithValue("@username", NameInput);
             insertReportCommand.Parameters.AddWithValue("@date", DateInput);
             insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
             insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
-            insertReportCommand.Parameters.AddWithValue("@Remarks", null);
+            insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
 
             insertReportCommand.Connection = connection;
             insertReportCommand.ExecuteNonQuery();
             connection.Close();
 
-
-
-
+            Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
             //Show a line: Case #___ is created
-            //Report inserted into database, with ReportStatus = Pending
-            //Report details encrypted
-            //Check that fields are not empty
+            //string script = "alert('Case #');" + cNumber + "alert(' has been created.');";
+            //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+
+            //Redirect to the submitted reports page
+        }
+
+        protected void SaveAsDraftsButton_Click(object sender, EventArgs e)
+        {
+            //string script = "alert('abc');";
+            //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
         }
 
         //public static bool IsDate(string date)

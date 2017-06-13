@@ -39,7 +39,7 @@
         <asp:TextBox ID="TextBox5" runat="server" Height="90px" ReadOnly="True" TextMode="MultiLine" Width="558px"></asp:TextBox>
         <br />
 
-        <asp:Button ID="Button1" runat="server" Text="Save as drafts" />
+        <asp:Button ID="Button1" runat="server" Text="Save as drafts" OnClick="SaveAsDraftsButton_Click" />
         <asp:Button ID="Button2" runat="server" OnClick="SubmitButton_Click" Text="Submit" />
     </div>
 
