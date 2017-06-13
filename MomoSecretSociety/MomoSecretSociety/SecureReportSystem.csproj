@@ -197,6 +197,7 @@
     <Content Include="Content\StaffConsole\Drafts.aspx" />
     <Content Include="Content\StaffConsole\NewReport.aspx" />
     <Content Include="Content\StaffConsole\RejectedReports.aspx" />
+    <Content Include="Content\StaffConsole\ViewAcceptedReport.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -365,6 +366,13 @@
     </Compile>
     <Compile Include="Content\StaffConsole\SubmittedReports.aspx.designer.cs">
       <DependentUpon>SubmittedReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ViewAcceptedReport.aspx.cs">
+      <DependentUpon>ViewAcceptedReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ViewAcceptedReport.aspx.designer.cs">
+      <DependentUpon>ViewAcceptedReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
