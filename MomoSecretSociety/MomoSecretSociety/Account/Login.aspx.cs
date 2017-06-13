@@ -49,16 +49,8 @@ namespace MomoSecretSociety.Account
             string dbSalt = "";
             string dbStatus = "";
 
-            string passwordHash = password.Text;    //here must put method of hash of input pass eg method(password.Text) 
-
-            //ComputeHash(inputPassword, "SHA512", dbSalt);
-            //ComputeHash (inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt))
-            //INPUT PASSWORD + dbSalt --> HASH THE WHOLE THING
-            //Compare: passwordHash with dbPasswordHash
-            //Compare: dbUsername with username.Text (input username)
-
             connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT HashedPassword, Salt, Status, Username FROM UserAccount WHERE Username = @AccountUsername", connection);
+            SqlCommand myCommand = new SqlCommand("SELECT HashedPassword, Salt, Role, Username FROM UserAccount WHERE Username = @AccountUsername", connection);
             myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername);
 
             SqlDataReader myReader = myCommand.ExecuteReader();
@@ -66,27 +58,21 @@ namespace MomoSecretSociety.Account
             {
                 dbPasswordHash = (myReader["HashedPassword"].ToString());
                 dbSalt = (myReader["Salt"].ToString());
-                dbStatus = (myReader["Status"].ToString());
+                dbStatus = (myReader["Role"].ToString());
                 dbUsername = (myReader["Username"].ToString());
             }
             connection.Close();
 
-
-            //Joanne, dont delete these codes
+            string passwordHash = ComputeHash(inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt));
+            
             if (IsValid)
             {
-                // Validate the user password
-                //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("staff"))
-                //AND CHECK STATUS = staff
                 if (dbUsername.Equals(inputUsername))
                 {
                     if (dbPasswordHash.Equals(passwordHash))
                     {
-
                         if (dbStatus.Equals("Staff"))
                         {
-
-
                             Session["AccountUsername"] = username.Text;
 
                             //Add to logs
@@ -110,8 +96,6 @@ namespace MomoSecretSociety.Account
                 }
 
 
-                //if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("boss"))
-                //AND CHECK STATUS = boss
                 if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("Boss"))
                 {
                     Session["AccountUsername"] = username.Text;

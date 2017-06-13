@@ -22,6 +22,9 @@
         <asp:Label ID="Label5" runat="server" Text="Case Description: "></asp:Label>
         <br />
         <asp:TextBox ID="TextBox1" runat="server" Height="240px" Width="562px"></asp:TextBox>
+        <br />
+        <asp:Button ID="Button1" runat="server" Text="Save as drafts" />
+        <asp:Button ID="Button2" runat="server" Text="Submit" />
     </div>
 
 </asp:Content>
