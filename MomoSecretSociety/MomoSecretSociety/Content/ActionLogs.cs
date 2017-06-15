@@ -11,7 +11,7 @@ namespace MomoSecretSociety.Content
     public class ActionLogs
     {
 
-        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString1"].ConnectionString);
+        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         public enum Action
         {

@@ -13,7 +13,7 @@ namespace MomoSecretSociety.Content.StaffConsole
     public partial class NewReport : System.Web.UI.Page
     {
         int cNumber;
-        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString1"].ConnectionString);
+        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {

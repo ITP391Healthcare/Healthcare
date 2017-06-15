@@ -25,7 +25,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
         private void readLogsRespectively()
         {
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString1"].ConnectionString);
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
             connection.Open();
             SqlDataReader dateReader = null;
@@ -40,7 +40,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 //Response.Write("Date : " + date + "<br>");
                 AddDateToPlaceholder(date);
 
-                SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString1"].ConnectionString);
+                SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
                 connection2.Open();
                 SqlDataReader logReader = null;
                 SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE Username = @AccountUsername AND convert(date, Timestamp) = convert(date,@Date) ORDER BY Timestamp ASC", connection2);

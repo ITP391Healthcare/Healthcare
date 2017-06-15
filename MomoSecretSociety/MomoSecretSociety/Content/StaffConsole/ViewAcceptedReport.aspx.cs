@@ -11,7 +11,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 {
     public partial class TestDisplay : System.Web.UI.Page
     {
-        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString1"].ConnectionString);
+        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {
