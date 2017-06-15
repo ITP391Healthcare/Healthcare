@@ -67,7 +67,7 @@ namespace MomoSecretSociety.Account
             
             if (IsValid)
             {
-                if (dbUsername.Equals(inputUsername))
+                if (dbUsername.Equals(inputUsername.Trim()))
                 {
                     if (dbPasswordHash.Equals(passwordHash))
                     {
@@ -93,6 +93,10 @@ namespace MomoSecretSociety.Account
                         IncorrectInputLabel.Text = "incorrect password";
                     }
 
+                }
+                else
+                {
+                    IncorrectInputLabel.Text = "incorrect username";
                 }
 
 
