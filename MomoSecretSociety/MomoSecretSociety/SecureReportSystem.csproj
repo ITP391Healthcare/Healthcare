@@ -190,6 +190,10 @@
     <Content Include="App_Data\SecureReportSystemDatabase_log.ldf">
       <DependentUpon>SecureReportSystemDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\SecureReportSystemDB.mdf" />
+    <Content Include="App_Data\SecureReportSystemDB_log.ldf">
+      <DependentUpon>SecureReportSystemDB.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\SecureReportSystem_log.ldf">
       <DependentUpon>SecureReportSystem.mdf</DependentUpon>
     </Content>
