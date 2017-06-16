@@ -8,7 +8,7 @@
 
     <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
         SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
-        WHERE ([Username] = @Username);">
+        WHERE ([Username] = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected' ));">
         <SelectParameters>
             <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
         </SelectParameters>
