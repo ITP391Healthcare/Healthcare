@@ -4,7 +4,7 @@
     <link href="../../Styles/BossConsole/Reports.css" rel="stylesheet" />
 
        <!-- Pop up Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">

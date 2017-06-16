@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using MomoSecretSociety.Content;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -80,8 +81,8 @@ namespace MomoSecretSociety
 
             Session["AccountUsername"] = Context.User.Identity.Name;
             //Add to logs
-            // ActionLogs.Action action = ActionLogs.Action.Logout;
-            // ActionLogs.Log(Session["AccountUsername"].ToString(), action);
+            ActionLogs.Action action = ActionLogs.Action.Logout;
+            ActionLogs.Log(Session["AccountUsername"].ToString(), action);
 
         }
 

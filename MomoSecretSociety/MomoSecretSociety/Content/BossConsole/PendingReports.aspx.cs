@@ -31,6 +31,7 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 errormsgPasswordAuthenticate.Visible = false;
             }
+            
         }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
