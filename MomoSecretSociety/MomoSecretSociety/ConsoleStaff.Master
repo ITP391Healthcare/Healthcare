@@ -8,6 +8,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - SecureReportSystem</title>
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+    <% if (Session[@"AccountUsername"] != null)
+        {%>
+    <script>
+
+        var timeout = 15 * 1000;
+        var warningTime = 10 * 1000;
+        var warningDuration = timeout - warningTime;
+
+        var hasWarn = false;
+        var lastMoveTime = Date.now();
+
+        function validateSettings() {
+            if (warningTime > timeout) {
+                console.log("Warning time is longer than timeout. Warning is disabled.");
+                warningTime = 0;
+                warningDuration = 0;
+            }
+        }
+
+        $(document).ready(function () {
+            validateSettings();
+            $(document).mousemove(function () {
+                hasWarn = false;
+                lastMoveTime = Date.now();
+
+            });
+
+            startTimeout();
+
+        });
+
+        function startTimeout() {
+
+            function getIdleTime() {
+                return Date.now() - lastMoveTime;
+            }
+
+            function hasReachTimeOut() {
+                return getIdleTime() > timeout;
+            }
+
+            function hasReachWarning() {
+                return getIdleTime() > warningTime;
+            }
+
+            function timeToRedirectInSeconds() {
+                return (timeout - getIdleTime()) / 1000;
+            }
+
+            function redirect() {
+                document.location = "../../Account/Login.aspx";
+            }
+
+
+            function checkTimeout() {
+
+                if (warningTime != 0 && hasReachWarning() && !hasWarn) {
+                    hasWarn = true;
+                }
+                else if (hasReachTimeOut()) {
+                    $('#myModal').modal('show');
+                    // redirect();
+                }
+
+                $('#counter').text("Time to autoredirect " + timeToRedirectInSeconds() + " seconds");
+            }
+
+            setInterval(checkTimeout, 1000);
+        }
+
+
+    </script>
+    <% } %>
+
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -39,9 +117,35 @@
             background-color: rgba(0, 0, 0, 0.6);
         }
     </style>
+
+
+
+    <style>
+        /* Textbox */
+        .textbox, .textbox:focus {
+            /*border: none;*/
+            width: inherit;
+            font-size: 23px;
+            overflow: hidden;
+            /*padding: 4px 4px 4px 4px;*/
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            box-shadow: none;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            margin-left: 24%;
+        }
+    </style>
+
 </head>
+
+
+
 <body class="masterStyle" style="background-color: lightblue;">
+
     <form runat="server">
+
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -100,7 +204,7 @@
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/StaffConsole/RejectedReports">REJECTED REPORTS</a></li>
                                 <li><a runat="server" href="~/Content/StaffConsole/Drafts">DRAFTS</a></li>
 
-<%--                                <li>
+                                <%--                                <li>
                                     <asp:LinkButton runat="server" ID="logNavBar" Text="LOGS" OnClick="logNavBar_Click" CausesValidation="false"></asp:LinkButton>
                                     <%--<a runat="server" href="~/Content/">LOGS</a>--%>
 
@@ -114,14 +218,64 @@
                                     <asp:LoginStatus runat="server" ID="LoginStatus" LogoutAction="Redirect" LogoutText="LOG OUT" LogoutPageUrl="~/Content/LogoutSummary.aspx" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>
+
+
+                            <!-- Pop up Modal -->
+                            <%--<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="text-align:center; font-weight:bold;">Session Timeout</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>To prove that you are the user <b><%: Context.User.Identity.GetUserName()  %> </b>...</h4>
+                    <p style="text-align:center;">Please enter your password in order to continue:</p>
+                    <asp:TextBox ID="txtPasswordAuthenticate" runat="server" TextMode="Password" CssClass="textbox" Text=""></asp:TextBox>
+                  
+                </div>
+                <div class="modal-footer">
+                   <%-- <button type="button" class="btn btn-default" runat="server">Authenticate</button>--%
+                    <asp:Button ID="btnAuthenticate" class="btn btn-default" runat="server" Text="Authenticate" OnClick="btnAuthenticate_Click"/>
+                     <asp:Button ID="btnLogout" class="btn btn-default" runat="server" Text="Logout" PostBackUrl="~/Account/Login.aspx" />
+
+                      <br />
+                    <asp:Label ID="errormsgPasswordAuthenticate" runat="server" Text="Password is incorrect." Visible="false" ForeColor="#da337a"></asp:Label>
+
+<%--                      <asp:CustomValidator ID="validatorPasswordAuthenticate" runat="server" ControlToValidate="txtPasswordAuthenticate" Display="Dynamic" ForeColor="#da337a" OnServerValidate="validatorPasswordAuthenticate_ServerValidate"></asp:CustomValidator>--%>
+
+
+                            <%-- <button type="button" class="btn btn-default" onclick="window.location='../../Account/Login.aspx'">Logout</button>--%>
+                            <%-- <asp:Button ID="btnAuthenticate" class="btn btn-default" runat="server" Text="Authenticate"/> --%>
+
+                            <%--     <asp:Button ID="btnAuthenticate" runat="server" CssClass="imgBtn" />
+                    <asp:Button ID="btnLogout" runat="server" CssClass="imgBtn" />--%
+
+                </div>
+            </div>
+        </div>
+    </div>--%>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
             </div>
         </div>
 
+
+
+
+
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
+
+
+
+                <p>
+                    <span id="counter"></span>
+                </p>
+
+
             </asp:ContentPlaceHolder>
             <hr />
 
