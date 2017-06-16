@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -61,15 +65,13 @@ namespace MomoSecretSociety
                 {
                     throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
                 }
-                
+
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-
-
+          
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -82,7 +84,10 @@ namespace MomoSecretSociety
             // ActionLogs.Log(Session["AccountUsername"].ToString(), action);
 
         }
+
+    
         
+
 
         //protected void logNavBar_Click(object sender, EventArgs e)
         //{
@@ -95,6 +100,6 @@ namespace MomoSecretSociety
         //    }
         //}
 
-    }
 
+    }
 }
