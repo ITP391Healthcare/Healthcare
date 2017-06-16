@@ -1,0 +1,121 @@
+﻿
+        body {
+    font-size: 14px;
+    color: #333333;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h4, h5, h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+
+/* Table */
+td {
+    width: 97.8%;
+    display: inline-block !important;
+    border-top: none !important;
+    padding: 8%;
+}
+
+tr {
+    display: inline;
+}
+
+.table {
+    width: 700px;
+    height: 575px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 17px 25px 17px 25px;
+    /*background-color: #ffffff;
+    border-radius: 10px;
+    -moz-box-shadow: 0 0 15px 1px #bbb;
+    -webkit-box-shadow: 0 0 15px 1px #bbb;
+    box-shadow: 0 0 15px 1px #bbb;*/
+    border: 1px solid lightblue;
+    font-family: Helvetica;
+    text-align: center;
+    background-color: white;
+}
+
+
+    input:focus {
+        outline: none;
+        border: 1px solid #da337a;
+        box-shadow: 0px 0px 8px #da337a;
+        -moz-box-shadow: 0px 0px 8px #da337a;
+        -webkit-box-shadow: 0px 0px 8px #da337a;
+    }
+
+
+/* Bookmark */
+#ribbon-head {
+    display: block;
+    background-color: #90bc2b;
+    width: 60px;
+    height: 60px;
+}
+
+h1 {
+    font-family: 'Impact';
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+}
+
+#ribbon-tail {
+    display: table-row;
+}
+
+#left, #right {
+    display: table-cell;
+    border-top: 30px solid #90bc2b;
+    border-bottom: 30px solid transparent;
+    height: 0px;
+    width: 0px;
+}
+
+#left {
+    border-left: 30px solid #90bc2b;
+}
+
+#right {
+    border-right: 30px solid #90bc2b;
+}
+
+
+ /* Textbox */
+        .textbox {
+            /*border: none;*/
+            width: inherit;
+            font-size: 23px;
+            overflow: hidden;
+            padding: 4px 4px 4px 4px;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            box-shadow: none;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            margin-left: 24%;
+        }
+
+        .textbox:focus{
+             outline: none;
+        border: 1px solid #da337a;
+        box-shadow: 0px 0px 8px #da337a;
+        -moz-box-shadow: 0px 0px 8px #da337a;
+        -webkit-box-shadow: 0px 0px 8px #da337a;
+        padding: 4px 4px 4px 4px;
+        }

@@ -256,6 +256,7 @@
     <Content Include="Styles\AdminLTE.min.css" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\BossConsole\Reports.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\skins\skin-black-light.css" />
     <Content Include="Styles\skins\skin-black-light.min.css" />

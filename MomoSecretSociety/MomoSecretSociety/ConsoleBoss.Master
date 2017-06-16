@@ -17,6 +17,85 @@
 
     <title><%: Page.Title %> - SecureReportSystem</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+    <% if (Session[@"AccountUsername"] != null)
+        {%>
+    <script>
+
+        var timeout = 15 * 1000;
+        var warningTime = 10 * 1000;
+        var warningDuration = timeout - warningTime;
+
+        var hasWarn = false;
+        var lastMoveTime = Date.now();
+
+        function validateSettings() {
+            if (warningTime > timeout) {
+                console.log("Warning time is longer than timeout. Warning is disabled.");
+                warningTime = 0;
+                warningDuration = 0;
+            }
+        }
+
+        $(document).ready(function () {
+            validateSettings();
+            $(document).mousemove(function () {
+                hasWarn = false;
+                lastMoveTime = Date.now();
+
+            });
+
+            startTimeout();
+
+        });
+
+        function startTimeout() {
+
+            function getIdleTime() {
+                return Date.now() - lastMoveTime;
+            }
+
+            function hasReachTimeOut() {
+                return getIdleTime() > timeout;
+            }
+
+            function hasReachWarning() {
+                return getIdleTime() > warningTime;
+            }
+
+            function timeToRedirectInSeconds() {
+                return (timeout - getIdleTime()) / 1000;
+            }
+
+            function redirect() {
+                document.location = "../../Account/Login.aspx";
+            }
+
+
+            function checkTimeout() {
+
+                if (warningTime != 0 && hasReachWarning() && !hasWarn) {
+                    hasWarn = true;
+                }
+                else if (hasReachTimeOut()) {
+                    $('#myModal').modal('show');
+                    // redirect();
+                }
+
+                $('#counter').text("Time to autoredirect " + timeToRedirectInSeconds() + " seconds");
+            }
+
+            setInterval(checkTimeout, 1000);
+        }
+
+
+    </script>
+    <% } %>
+
+
+
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -48,6 +127,34 @@
             background-color: rgba(0, 0, 0, 0.6);
         }
     </style>
+
+    <style>
+        /* Textbox */
+        .textbox {
+            /*border: none;*/
+            width: inherit;
+            font-size: 23px;
+            overflow: hidden;
+            /*padding: 4px 4px 4px 4px;*/
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            box-shadow: none;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            margin-left: 24%;
+        }
+
+            .textbox:focus {
+                outline: none;
+                border: 1px solid #da337a;
+                box-shadow: 0px 0px 8px #da337a;
+                -moz-box-shadow: 0px 0px 8px #da337a;
+                -webkit-box-shadow: 0px 0px 8px #da337a;
+                padding: 4px 4px 4px 4px;
+            }
+    </style>
+
 </head>
 <body class="masterStyle" style="background-color: lightblue;">
     <form runat="server">
@@ -75,7 +182,7 @@
         <div class="jumbotron title">
 
             <div>
-                <span style="float: right; color: white; font-size: 14px; ">
+                <span style="float: right; color: white; font-size: 14px;">
                     <asp:Label ID="lastLogin" Text="" runat="server"></asp:Label>
                     <%--  Text='<%#CustomTitle %>'  --%>
                 </span>
