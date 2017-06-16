@@ -186,20 +186,8 @@
   <ItemGroup>
     <Content Include="Account\Login.aspx" />
     <Content Include="App_Data\SecureReportSystem.mdf" />
-    <Content Include="App_Data\SecureReportSystemDatabase.mdf" />
-    <Content Include="App_Data\SecureReportSystemDatabase_log.ldf">
-      <DependentUpon>SecureReportSystemDatabase.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\SecureReportSystemDB.mdf" />
-    <Content Include="App_Data\SecureReportSystemDB_log.ldf">
-      <DependentUpon>SecureReportSystemDB.mdf</DependentUpon>
-    </Content>
     <Content Include="App_Data\SecureReportSystem_log.ldf">
       <DependentUpon>SecureReportSystem.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\Testing.mdf" />
-    <Content Include="App_Data\Testing_log.ldf">
-      <DependentUpon>Testing.mdf</DependentUpon>
     </Content>
     <Content Include="Content\BossConsole\AcceptedReports.aspx" />
     <Content Include="Content\BossConsole\RejectedReports.aspx" />
