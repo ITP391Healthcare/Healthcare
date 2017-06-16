@@ -72,7 +72,11 @@ namespace MomoSecretSociety
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+            //if (Request.IsAuthenticated)
+            //{
+            //    ((Label)FindControl("lastLogin")).Text = "Your last logged in was <b>"
+            //                + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+            //}
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

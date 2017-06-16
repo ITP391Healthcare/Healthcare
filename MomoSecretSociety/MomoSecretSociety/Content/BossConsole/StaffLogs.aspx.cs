@@ -20,7 +20,7 @@ namespace MomoSecretSociety.Content.BossConsole
         {
             if (Request.IsAuthenticated)
             {
-                ((Label)Master.FindControl("lastLogin")).Text = "Your last logged in was <b>"
+                ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
 
                 if (IsPostBack)

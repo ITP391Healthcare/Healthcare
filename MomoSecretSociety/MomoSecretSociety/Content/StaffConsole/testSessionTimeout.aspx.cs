@@ -15,6 +15,12 @@ namespace MomoSecretSociety.Content.StaffConsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.IsAuthenticated)
+            {
+                ((Label)FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
+                            + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+            }
+
             if (IsPostBack)
             {
                 errormsgPasswordAuthenticate.Visible = false;

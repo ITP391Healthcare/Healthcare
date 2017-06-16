@@ -15,12 +15,12 @@ namespace MomoSecretSociety.Content.BossConsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('"+ ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "" + "');", true);
 
             if (Request.IsAuthenticated)
             {
-                ((Label)Master.FindControl("lastLogin")).Text = "Your last logged in was <b>"
+                ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
             }
 

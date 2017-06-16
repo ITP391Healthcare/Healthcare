@@ -17,6 +17,12 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.IsAuthenticated)
+            {
+                ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
+                            + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+            }
+
             //At page load, the name of the person who sign in will fill in the FROM input box automatically
             //Unable to edit
             TextBox3.Text = Session["AccountUsername"].ToString();

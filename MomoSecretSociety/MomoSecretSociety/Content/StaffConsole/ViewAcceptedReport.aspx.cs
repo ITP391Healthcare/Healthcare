@@ -15,6 +15,12 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.IsAuthenticated)
+            {
+                ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
+                            + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+            }
+
             //This should be on click of the particular report then will appear
             string dbCaseNumber = "";
             string dbUsername = "";

@@ -114,7 +114,6 @@ C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociet
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Providers.xml
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.dll
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.pdb
-C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csprojResolveAssemblyReference.cache
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\ApplicationInsights.config
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\roslyn\csc.exe
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\roslyn\csc.exe.config

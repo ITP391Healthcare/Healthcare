@@ -183,8 +183,7 @@
 
             <div>
                 <span style="float: right; color: white; font-size: 14px;">
-                    <asp:Label ID="lastLogin" Text="" runat="server"></asp:Label>
-                    <%--  Text='<%#CustomTitle %>'  --%>
+                    <asp:Label ID="lastLoginBoss" Text="" runat="server"></asp:Label>
                 </span>
             </div>
 

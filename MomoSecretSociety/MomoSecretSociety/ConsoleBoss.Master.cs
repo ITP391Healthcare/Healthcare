@@ -79,44 +79,10 @@ namespace MomoSecretSociety
         // public string CustomTitle = "This Is Title";
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Page.DataBind();
-
-            //Response.Write("XXX: " + Session["AccountUsername"].ToString());
-            //Response.Write("ZZZ: " + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name));
-
-            ////Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('"+ ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "" + "');", true);
-
-            //if (Session["AccountUsername"] != null)
+            //if (Request.IsAuthenticated)
             //{
-            //    Response.Write("XXX: " + Session["AccountUsername"].ToString());
-
-            //    ((Label)FindControl("lastLogin")).Text = "Your last logged in was <b>"
+            //    ((Label)FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
             //                + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
-            //}
-
-
-            //if (Session["AccountUsername"] != null)
-            //{
-            //    ((PlaceHolder)FindControl("staffConsoleNavBar")).Visible = true;
-            //    ((LinkButton)FindControl("loginNavBar")).Text = "LOG OUT";
-
-            //    Response.Write("XXX: " + Session["AccountUsername"].ToString());
-            // }
-
-            //if (IsPostBack)
-            //{
-            //    if (Request.IsAuthenticated)
-            //    {
-            //        //    Session["AccountUsername"].ToString() == "boss"
-            //        LinkButton Foo = (LinkButton)Master.FindControl("logNavBar");
-            //        if (Foo.Visible == false)
-            //        {
-            //            Foo.Visible = true;
-            //        }
-
-            //        Response.Write(Session["AccountUsername"].ToString());
-
-            //    }
             //}
         }
 

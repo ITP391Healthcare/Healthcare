@@ -177,8 +177,17 @@
         </asp:ScriptManager>
 
         <div class="jumbotron title">
+
+            <div>
+                <span style="float: right; color: white; font-size: 14px;">
+                    <asp:Label ID="lastLoginStaff" Text="" runat="server"></asp:Label>
+                </span>
+            </div>
+
             <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova">SecureReportSystem</h1>
         </div>
+
+
         <div class="navbar-inverse ourNav" style="background-color: white;">
             <div class="container" style="background-color: white;">
                 <div>
