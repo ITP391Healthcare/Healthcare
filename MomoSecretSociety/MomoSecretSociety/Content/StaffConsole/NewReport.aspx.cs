@@ -76,8 +76,20 @@ namespace MomoSecretSociety.Content.StaffConsole
             //GET HELP: Line 78-82
             //test
             //I want to redirect to sumbitted reports after this 
-            string script = "alert('" + "Case number is:" + cNumber + "' + ); window.location = '~/Content/StaffConsole/SubmittedReports.aspx' ";
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+            //string script = "alert('" + "Case number is:" + cNumber + "' + ); window.location = '~/Content/StaffConsole/SubmittedReports.aspx' ";
+            //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+            
+
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Case number is:');" + "window.location ='SubmittedReports.aspx';", true);
+
+
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert",
+            //    "alert('Case #'" + cNumber + "' has been created.');" + "window.location = 'SubmittedReports.aspx'; ", true);
+
+            string message = "Case # " + cNumber + " has been created";
+
+            ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);
+
 
             //Redirect to the submitted reports page
             //Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
