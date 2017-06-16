@@ -6,6 +6,4 @@
     <asp:Table ID="Table1" runat="server">
     </asp:Table>--%>
 
-    <%--Test button to go to view accepted report--%>
-    <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
 </asp:Content>

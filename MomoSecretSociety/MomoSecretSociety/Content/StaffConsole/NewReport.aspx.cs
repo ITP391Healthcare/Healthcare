@@ -40,13 +40,19 @@ namespace MomoSecretSociety.Content.StaffConsole
             connection.Close();
             cNumber++;
 
+            //Converting input date into datetime type input
             DateTime DateInput = new DateTime();
             DateInput = Convert.ToDateTime(TextBox4.Text);
+
+            //Getting the date time when submit drafts/save reports as drafts
+            DateTime createdDateTime = new DateTime();
+            createdDateTime = DateTime.Now;
 
             string NameInput = TextBox3.Text;
             string SubjectInput = TextBox2.Text;
             string CaseDesInput = TextBox1.Text;
             string status = "pending";
+            
 
             //Add the details into database (done)
             //Report inserted into database, with ReportStatus = Pending (done)
@@ -55,8 +61,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             connection.Open();
 
             SqlCommand insertReportCommand = new SqlCommand();
-            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus)" + 
-                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status)";
+            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus, CreatedDateTime)" + 
+                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status, @createdDT)";
             insertReportCommand.Parameters.AddWithValue("@caseNumber", cNumber);
             insertReportCommand.Parameters.AddWithValue("@username", NameInput);
             insertReportCommand.Parameters.AddWithValue("@date", DateInput);
@@ -64,35 +70,18 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
             insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
+            insertReportCommand.Parameters.AddWithValue("@createdDT", createdDateTime);
+
 
             insertReportCommand.Connection = connection;
             insertReportCommand.ExecuteNonQuery();
             connection.Close();
 
-            //Show a line: Case #___ is created
-            //string script = "alert('Case #');" + cNumber + "alert(' has been created.');";
-            //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
-
-            //GET HELP: Line 78-82
-            //test
-            //I want to redirect to sumbitted reports after this 
-            //string script = "alert('" + "Case number is:" + cNumber + "' + ); window.location = '~/Content/StaffConsole/SubmittedReports.aspx' ";
-            //ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
-            
-
-                //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Case number is:');" + "window.location ='SubmittedReports.aspx';", true);
-
-
             //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert",
-            //    "alert('Case #'" + cNumber + "' has been created.');" + "window.location = 'SubmittedReports.aspx'; ", true);
+            //"alert('Case #'" + cNumber + "' has been created.');" + "window.location = 'SubmittedReports.aspx'; ", true);
 
-            string message = "Case # " + cNumber + " has been created";
-
+            string message = "Case #" + cNumber + " has been created.";
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);
-
-
-            //Redirect to the submitted reports page
-            //Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
         }
 
         protected void SaveAsDraftsButton_Click(object sender, EventArgs e)
@@ -115,13 +104,18 @@ namespace MomoSecretSociety.Content.StaffConsole
             connection.Close();
             cNumber++;
 
+            //Converting input date into datetime type input
             DateTime DateInput = new DateTime();
             DateInput = Convert.ToDateTime(TextBox4.Text);
+
+            //Getting the date time when submit drafts/save reports as drafts
+            DateTime createdDateTime = new DateTime();
+            createdDateTime = DateTime.Now;
 
             string NameInput = TextBox3.Text;
             string SubjectInput = TextBox2.Text;
             string CaseDesInput = TextBox1.Text;
-            string status = "pending";
+            string status = "drafts";
 
             //Add the details into database (done)
             //Report inserted into database, with ReportStatus = Pending (done)
@@ -130,8 +124,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             connection.Open();
 
             SqlCommand insertReportCommand = new SqlCommand();
-            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus)" +
-                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status)";
+            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus, CreatedDateTime)" +
+                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status, @createdDT)";
             insertReportCommand.Parameters.AddWithValue("@caseNumber", cNumber);
             insertReportCommand.Parameters.AddWithValue("@username", NameInput);
             insertReportCommand.Parameters.AddWithValue("@date", DateInput);
@@ -139,16 +133,16 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
             insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
+            insertReportCommand.Parameters.AddWithValue("@createdDT", createdDateTime);
+
 
             insertReportCommand.Connection = connection;
             insertReportCommand.ExecuteNonQuery();
             connection.Close();
 
-            //alert 
-            string script = "alert('Your report has been saved in drafts!');";
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
-
-            //I want to redirect to sumbitted reports after this 
+            //alert
+            string message = "Your report has been saved in drafts!";
+            ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);
         }
 
     }
