@@ -42,7 +42,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Close();
 
-            Label2.Text = dbCaseNumber;
+            Label2.Text = dbCaseNumber + "-";
             Label4.Text = dbDate;
             Label6.Text = dbUsername;
             Label8.Text = dbSubject;
