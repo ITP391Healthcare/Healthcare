@@ -73,7 +73,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             //"alert('Case #'" + cNumber + "' has been created.');" + "window.location = 'SubmittedReports.aspx'; ", true);
 
             string message = "Case #" + cNumber + " has been created.";
-
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);
         }
 
@@ -103,7 +102,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             string NameInput = TextBox3.Text;
             string SubjectInput = TextBox2.Text;
             string CaseDesInput = TextBox1.Text;
-            string status = "pending";
+            string status = "drafts";
 
             //Add the details into database (done)
             //Report inserted into database, with ReportStatus = Pending (done)
@@ -126,11 +125,9 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.ExecuteNonQuery();
             connection.Close();
 
-            //alert 
-            string script = "alert('Your report has been saved in drafts!');";
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
-
-            //I want to redirect to sumbitted reports after this 
+            //alert
+            string message = "Your report has been saved in drafts!";
+            ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);
         }
 
     }
