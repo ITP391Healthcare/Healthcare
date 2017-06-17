@@ -155,6 +155,9 @@
     <Reference Include="Owin">
       <HintPath>..\..\..\..\..\Desktop\Haxriderz\Haxriderz\bin\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.Pdf">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\e-iceblue\Spire.Pdf\Bin\NET4.0\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />

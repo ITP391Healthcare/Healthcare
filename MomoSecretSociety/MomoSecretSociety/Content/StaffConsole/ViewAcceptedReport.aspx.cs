@@ -122,5 +122,9 @@ namespace MomoSecretSociety.Content.StaffConsole
             return BitConverter.ToString(hashedBytes);
         }
 
+        protected void btnSaveAsPDF_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

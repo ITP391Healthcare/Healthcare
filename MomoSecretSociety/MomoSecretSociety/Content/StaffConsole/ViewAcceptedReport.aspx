@@ -53,4 +53,8 @@
         <asp:Label ID="Label11" runat="server" Text="Remarks: "></asp:Label><br />
         <asp:Label ID="Label12" runat="server" Text="" Font-Bold="true"></asp:Label><br />
     </div>
+
+    <div>
+        <asp:Button ID="btnSaveAsPDF" runat="server" Text="Save Report" OnClick="btnSaveAsPDF_Click" />
+    </div>
 </asp:Content>
