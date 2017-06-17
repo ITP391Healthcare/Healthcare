@@ -184,7 +184,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             PdfBrush brush1 = new PdfSolidBrush(Color.LightGray);
             PdfTrueTypeFont font1 = new PdfTrueTypeFont(new Font("Arial", 8f, FontStyle.Italic));
             PdfStringFormat format1 = new PdfStringFormat(PdfTextAlignment.Right);
-            String text = "Report Case Number #" + dbCaseNumber +".Pdf";
+            String text = "Report Case Number #" + dbCaseNumber +".pdf";
             page.Canvas.DrawString(text, font1, brush1, pageWidth, y, format1);
             SizeF size = font1.MeasureString(text, format1);
             y = y + size.Height + 1;
@@ -223,12 +223,12 @@ namespace MomoSecretSociety.Content.StaffConsole
             PdfBrush brush3 = PdfBrushes.Blue;
             x1 = x1 + size.Width;
 
-            page.Canvas.DrawString(text1, font3, brush2, x1, y, format3);
+            //page.Canvas.DrawString(text1, font3, brush2, x1, y, format3);
             y = y + size.Height;
 
             //content
             PdfStringFormat format4 = new PdfStringFormat();
-            text = dbDescription + "\n" + dbRemarks; //testing
+            text = dbDate + "\n" + dbUsername + "\n" + dbSubject + "\n" + dbDescription + "\n" + dbRemarks + dbCreatedDateTime; //testing
             PdfTrueTypeFont font5 = new PdfTrueTypeFont(new Font("Arial", 10f));
             format4.LineSpacing = font5.Size * 1.5f;
             PdfStringLayouter textLayouter = new PdfStringLayouter();
