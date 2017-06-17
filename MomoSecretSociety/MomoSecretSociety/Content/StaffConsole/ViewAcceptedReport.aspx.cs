@@ -9,6 +9,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Spire.Pdf;
+using Spire.Pdf.Graphics;
+using System.Drawing;
+using Spire.Pdf.Security;
+
 namespace MomoSecretSociety.Content.StaffConsole
 {
     public partial class TestDisplay : System.Web.UI.Page
@@ -124,7 +129,21 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void btnSaveAsPDF_Click(object sender, EventArgs e)
         {
+            string inputUsername = Session["AccountUsername"].ToString();
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+            connection.Open();
+            SqlCommand myCommand = new SqlCommand("SELECT HashedPassword, Salt, Role, Username FROM Reports WHERE Username = @AccountUsername", connection);
+            myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername);
 
+            SqlDataReader myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                dbPasswordHash = (myReader["HashedPassword"].ToString());
+                dbSalt = (myReader["Salt"].ToString());
+                dbStatus = (myReader["Role"].ToString());
+                dbUsername = (myReader["Username"].ToString());
+            }
+            connection.Close();
         }
     }
 }

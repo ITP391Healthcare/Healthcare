@@ -73,7 +73,7 @@ namespace MomoSecretSociety.Account
                     {
                         if (dbStatus.Equals("Staff"))
                         {
-                            Session["AccountUsername"] = username.Text;
+                            Session["AccountUsername"] = inputUsername;
 
                             //Add to logs
                             ActionLogs.Action action = ActionLogs.Action.Login;
