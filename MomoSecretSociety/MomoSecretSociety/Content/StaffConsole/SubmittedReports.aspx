@@ -59,4 +59,6 @@
         </Columns>
     </asp:GridView>
 
+    <asp:Button ID="Button1" runat="server" Text="View Accepted Report (test)" OnClick="Button1_Click" />
+
 </asp:Content>

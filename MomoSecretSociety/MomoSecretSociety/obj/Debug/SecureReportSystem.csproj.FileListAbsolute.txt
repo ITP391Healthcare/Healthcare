@@ -302,3 +302,8 @@ C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSoc
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csprojResolveAssemblyReference.cache
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.dll
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.pdb
+C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.dll
+C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.dll
+C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.mshtml.dll
+C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.xml
+C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.xml

@@ -85,5 +85,11 @@ namespace MomoSecretSociety.Content.StaffConsole
         }
 
 
+        //Joanne test button - View Accepted reports
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~\\Content\\StaffConsole\\ViewAcceptedReport");
+
+        }
     }
 }
