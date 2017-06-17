@@ -132,7 +132,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             string status = "drafts";
 
             //Add the details into database (done)
-            //Report inserted into database, with ReportStatus = Pending (done)
+            //Report inserted into database, with ReportStatus = drafts (done)
             //Report details encrypted (not done)
 
             connection.Open();
