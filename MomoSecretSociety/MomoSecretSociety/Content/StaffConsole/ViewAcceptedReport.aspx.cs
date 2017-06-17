@@ -185,9 +185,11 @@ namespace MomoSecretSociety.Content.StaffConsole
             PdfTrueTypeFont font1 = new PdfTrueTypeFont(new Font("Arial", 8f, FontStyle.Italic));
             PdfStringFormat format1 = new PdfStringFormat(PdfTextAlignment.Right);
             String text = "Report Case Number #" + dbCaseNumber +".pdf";
+            //.DrawString(string s, PdfFontBase font, PdfBrush brush, float x, float y, PdfStringFormat format);
             page.Canvas.DrawString(text, font1, brush1, pageWidth, y, format1);
             SizeF size = font1.MeasureString(text, format1);
             y = y + size.Height + 1;
+            //.DrawLine(PdfPen pen, float x1, float y1, float x2, float y2);
             page.Canvas.DrawLine(pen1, 0, y, pageWidth, y);
 
             //title
@@ -203,9 +205,15 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //icon
             PdfImage image = PdfImage.FromFile(@"C:\\Users\\User\\Desktop\\vntest.jpg");
-            page.Canvas.DrawImage(image, new PointF(pageWidth - image.PhysicalDimension.Width, y));
+            float width = image.Width * 0.1f;
+            float height = image.Height * 0.1f;
+            float x = (page.Canvas.ClientSize.Width - width) / 2;
+
+            page.Canvas.DrawImage(image, x, 60, width, height);
+            //page.Canvas.DrawImage(image, new PointF(pageWidth - image.PhysicalDimension.Width, y));
             float imageLeftSpace = pageWidth - image.PhysicalDimension.Width - 2;
             float imageBottom = image.PhysicalDimension.Height + y;
+
 
             //reference content
             PdfTrueTypeFont font3 = new PdfTrueTypeFont(new Font("Arial", 9f));
