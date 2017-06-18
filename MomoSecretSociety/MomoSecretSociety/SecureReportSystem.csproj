@@ -196,6 +196,8 @@
     <Content Include="Content\BossConsole\RejectedReports.aspx" />
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
     <Content Include="Content\BossConsole\SuperiorLogs.aspx" />
+    <Content Include="Content\BossConsole\testingPendingReports.aspx" />
+    <Content Include="Content\BossConsole\ViewPendingReport.aspx" />
     <Content Include="Content\LogoutSummary.aspx" />
     <Content Include="Content\StaffConsole\Drafts.aspx" />
     <Content Include="Content\StaffConsole\NewReport.aspx" />
@@ -337,6 +339,20 @@
     </Compile>
     <Compile Include="Content\BossConsole\SuperiorLogs.aspx.designer.cs">
       <DependentUpon>SuperiorLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\testingPendingReports.aspx.cs">
+      <DependentUpon>testingPendingReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\testingPendingReports.aspx.designer.cs">
+      <DependentUpon>testingPendingReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\ViewPendingReport.aspx.cs">
+      <DependentUpon>ViewPendingReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\ViewPendingReport.aspx.designer.cs">
+      <DependentUpon>ViewPendingReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\LogoutSummary.aspx.cs">
       <DependentUpon>LogoutSummary.aspx</DependentUpon>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -15,6 +16,16 @@ namespace MomoSecretSociety.Content.BossConsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //List<x> myList = GetList();
+
+            //GridView1.DataSource = myList;
+            //GridView1.DataBind();
+
+            //DataTable dt = showPendingReportsSummary();
+
+            //GridView1.DataSource = dt;
+            //GridView1.DataBind();
 
             //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('"+ ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "" + "');", true);
 
@@ -31,7 +42,27 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 errormsgPasswordAuthenticate.Visible = false;
             }
-            
+
+        }
+
+        public static DataTable showPendingReportsSummary()
+        {
+
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+            connection.Open();
+
+            SqlCommand getPendingReportsCommand = new SqlCommand(
+            "SELECT Username, CaseNumber, Subject FROM Report WHERE ReportStatus = @ReportStatus ", connection);
+            getPendingReportsCommand.Parameters.AddWithValue("@ReportStatus", "pending");
+
+            SqlDataReader summaryReader = getPendingReportsCommand.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(summaryReader);
+
+            connection.Close();
+
+            return dt;
         }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -89,6 +120,36 @@ namespace MomoSecretSociety.Content.BossConsole
             Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
 
             return BitConverter.ToString(hashedBytes);
+        }
+
+        protected void link_Click(object sender, EventArgs e)
+        {
+            //Session["usernameOfPendingReport"] = 
+            //    Response.Redirect("~/Content/BossConsole/ViewPendingReport.aspx");
+
+            //    < asp:HyperLinkField DataTextField = "CaseNumber" HeaderText = "Case Number" NavigateUrl = "~/Content/BossConsole/ViewPendingReport.aspx" ></ asp:HyperLinkField > --%>
+
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DataCommand")
+            {
+                //  var value = e.CommandArgument;
+
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string firstArgVal = commandArgs[0];
+                string secondArgVal = commandArgs[1];
+
+                Session["usernameOfThisPendingReport"] = firstArgVal;
+                Session["caseNumberOfThisPendingReport"] = secondArgVal;
+
+
+
+
+                Response.Redirect("~/Content/BossConsole/ViewPendingReport.aspx");
+
+            }
         }
     }
 }

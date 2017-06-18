@@ -24,7 +24,7 @@
         {%>
     <script>
 
-        var timeout = 15 * 1000;
+        var timeout = 60 * 1000;    //15 * 1000 -> 15seconds.
         var warningTime = 10 * 1000;
         var warningDuration = timeout - warningTime;
 
