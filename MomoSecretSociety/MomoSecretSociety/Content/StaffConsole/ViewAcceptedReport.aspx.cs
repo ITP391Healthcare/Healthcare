@@ -127,6 +127,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             return BitConverter.ToString(hashedBytes);
         }
 
+
         public static string dbCaseNumber = "";
         public static string dbUsername = "";
         public static string dbDate = "";
@@ -134,6 +135,7 @@ namespace MomoSecretSociety.Content.StaffConsole
         public static string dbDescription = "";
         public static string dbRemarks = "";
         public static string dbCreatedDateTime = "";
+
         protected void btnSaveAsPDF_Click(object sender, EventArgs e)
         {
             string inputUsername = Session["AccountUsername"].ToString();
