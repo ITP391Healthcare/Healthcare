@@ -200,36 +200,30 @@
                 <div class="navbar-collapse collapse">
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
-                            <%--           <asp:PlaceHolder runat="server" ID="staffConsoleNavBar">
-                                <ul class="nav navbar-nav">
-                                    <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/">SUBMITTED REPORTS</a></li>
-                                    <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/">REJECTED REPORTS</a></li>
-                                    <li><a runat="server" href="~/Content/">DRAFTS</a></li>
-                                </ul>
-                            </asp:PlaceHolder>--%>
-
                             <ul class="nav navbar-nav navbar-right">
-                                <%--<li><a runat="server" href="~/Account/Register">REGISTER</a></li>--%>
-                                <li><%--<a runat="server" href="~/Account/Login">--%>
+                                <li>
                                     <asp:LinkButton runat="server" ID="loginNavBar" Text="LOG IN" PostBackUrl="~/Account/Login.aspx"></asp:LinkButton>
-                                    <%-- </a>--%></li>
+                                </li>
                             </ul>
                         </AnonymousTemplate>
 
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/StaffConsole/SubmittedReports">SUBMITTED REPORTS</a></li>
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/StaffConsole/RejectedReports">REJECTED REPORTS</a></li>
-                                <li><a runat="server" href="~/Content/StaffConsole/Drafts">DRAFTS</a></li>
-
-                                <%--                                <li>
-                                    <asp:LinkButton runat="server" ID="logNavBar" Text="LOGS" OnClick="logNavBar_Click" CausesValidation="false"></asp:LinkButton>
-                                    <%--<a runat="server" href="~/Content/">LOGS</a>--%>
-
+                                <li style="border-right: lightblue 2px solid;">
+                                    <a runat="server" href="~/Content/StaffConsole/SubmittedReports">SUBMITTED REPORTS</a>
+                                </li>
+                                <li style="border-right: lightblue 2px solid;">
+                                    <a runat="server" href="~/Content/StaffConsole/RejectedReports">REJECTED REPORTS</a>
+                                </li>
+                                <li><a runat="server" href="~/Content/StaffConsole/Drafts">DRAFTS</a>
                                 </li>
                             </ul>
+
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/" title="Manage your account" style="color: lightblue;">Hello, 
+                                <li><a runat="server" href="~/Content/StaffConsole/NewReport">
+                                    <img src="../../../Resources/AddNewReport.png" style="height: 20px; vertical-align: top;" /></a></li>
+
+                                <li><a runat="server" href="~/" title="Manage your account" style="color: lightblue; pointer-events: none;">Hello, 
                                     <%: Context.User.Identity.GetUserName()  %> !</a>
                                 </li>
                                 <li>
@@ -237,62 +231,18 @@
                                 </li>
                             </ul>
 
-
-                            <!-- Pop up Modal -->
-                            <%--<div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title" style="text-align:center; font-weight:bold;">Session Timeout</h3>
-                </div>
-                <div class="modal-body">
-                    <h4>To prove that you are the user <b><%: Context.User.Identity.GetUserName()  %> </b>...</h4>
-                    <p style="text-align:center;">Please enter your password in order to continue:</p>
-                    <asp:TextBox ID="txtPasswordAuthenticate" runat="server" TextMode="Password" CssClass="textbox" Text=""></asp:TextBox>
-                  
-                </div>
-                <div class="modal-footer">
-                   <%-- <button type="button" class="btn btn-default" runat="server">Authenticate</button>--%
-                    <asp:Button ID="btnAuthenticate" class="btn btn-default" runat="server" Text="Authenticate" OnClick="btnAuthenticate_Click"/>
-                     <asp:Button ID="btnLogout" class="btn btn-default" runat="server" Text="Logout" PostBackUrl="~/Account/Login.aspx" />
-
-                      <br />
-                    <asp:Label ID="errormsgPasswordAuthenticate" runat="server" Text="Password is incorrect." Visible="false" ForeColor="#da337a"></asp:Label>
-
-<%--                      <asp:CustomValidator ID="validatorPasswordAuthenticate" runat="server" ControlToValidate="txtPasswordAuthenticate" Display="Dynamic" ForeColor="#da337a" OnServerValidate="validatorPasswordAuthenticate_ServerValidate"></asp:CustomValidator>--%>
-
-
-                            <%-- <button type="button" class="btn btn-default" onclick="window.location='../../Account/Login.aspx'">Logout</button>--%>
-                            <%-- <asp:Button ID="btnAuthenticate" class="btn btn-default" runat="server" Text="Authenticate"/> --%>
-
-                            <%--     <asp:Button ID="btnAuthenticate" runat="server" CssClass="imgBtn" />
-                    <asp:Button ID="btnLogout" runat="server" CssClass="imgBtn" />--%
-
-                </div>
-            </div>
-        </div>
-    </div>--%>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
             </div>
         </div>
 
-
-
-
-
-
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-
-
 
                 <p>
                     <span id="counter"></span>
                 </p>
-
 
             </asp:ContentPlaceHolder>
             <hr />
