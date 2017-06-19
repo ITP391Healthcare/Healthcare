@@ -14,20 +14,13 @@ namespace MomoSecretSociety.Content.BossConsole
 {
     public partial class PendingReports : System.Web.UI.Page
     {
+        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+        static SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //List<x> myList = GetList();
 
-            //GridView1.DataSource = myList;
-            //GridView1.DataBind();
-
-            //DataTable dt = showPendingReportsSummary();
-
-            //GridView1.DataSource = dt;
-            //GridView1.DataBind();
-
-            //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('"+ ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "" + "');", true);
 
             if (Request.IsAuthenticated)
             {
@@ -43,27 +36,56 @@ namespace MomoSecretSociety.Content.BossConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-        }
+            //Pop up for new pending reports
 
-        public static DataTable showPendingReportsSummary()
-        {
+            connection2.Open();
+            SqlCommand myCommand2 = new SqlCommand("SELECT count(CaseNumber) FROM Report WHERE(ReportStatus = @ReportStatus AND isNew = @isNew)", connection2);
+            myCommand2.Parameters.AddWithValue("@ReportStatus", "pending");
+            myCommand2.Parameters.AddWithValue("@isNew", "0");
 
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+            SqlDataReader myReader2 = myCommand2.ExecuteReader();
+            myReader2.Close();
+            noOfNewPendingReports.Text = myCommand2.ExecuteScalar().ToString();
+            //while (myReader2.Read())
+            //{
+            //}
+            connection2.Close();
 
             connection.Open();
+            SqlCommand myCommand = new SqlCommand("SELECT Username, CaseNumber, Subject FROM Report WHERE(ReportStatus = @ReportStatus AND isNew = @isNew)", connection);
+            myCommand.Parameters.AddWithValue("@ReportStatus", "pending");
+            myCommand.Parameters.AddWithValue("@isNew", "0");
 
-            SqlCommand getPendingReportsCommand = new SqlCommand(
-            "SELECT Username, CaseNumber, Subject FROM Report WHERE ReportStatus = @ReportStatus ", connection);
-            getPendingReportsCommand.Parameters.AddWithValue("@ReportStatus", "pending");
+            SqlDataReader myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal2').modal('show')", true);
 
-            SqlDataReader summaryReader = getPendingReportsCommand.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(summaryReader);
-
+            }
             connection.Close();
 
-            return dt;
+
         }
+
+        //public static DataTable showPendingReportsSummary()
+        //{
+
+        //    SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+        //    connection.Open();
+
+        //    SqlCommand getPendingReportsCommand = new SqlCommand(
+        //    "SELECT Username, CaseNumber, Subject FROM Report WHERE ReportStatus = @ReportStatus ", connection);
+        //    getPendingReportsCommand.Parameters.AddWithValue("@ReportStatus", "pending");
+
+        //    SqlDataReader summaryReader = getPendingReportsCommand.ExecuteReader();
+        //    DataTable dt = new DataTable();
+        //    dt.Load(summaryReader);
+
+        //    connection.Close();
+
+        //    return dt;
+        //}
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {
@@ -122,20 +144,11 @@ namespace MomoSecretSociety.Content.BossConsole
             return BitConverter.ToString(hashedBytes);
         }
 
-        protected void link_Click(object sender, EventArgs e)
-        {
-            //Session["usernameOfPendingReport"] = 
-            //    Response.Redirect("~/Content/BossConsole/ViewPendingReport.aspx");
-
-            //    < asp:HyperLinkField DataTextField = "CaseNumber" HeaderText = "Case Number" NavigateUrl = "~/Content/BossConsole/ViewPendingReport.aspx" ></ asp:HyperLinkField > --%>
-
-        }
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "DataCommand")
             {
-                //  var value = e.CommandArgument;
 
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 string firstArgVal = commandArgs[0];
@@ -143,6 +156,18 @@ namespace MomoSecretSociety.Content.BossConsole
 
                 Session["usernameOfThisPendingReport"] = firstArgVal;
                 Session["caseNumberOfThisPendingReport"] = secondArgVal;
+
+
+                connection.Open();
+
+                SqlCommand updateOldOrNew = new SqlCommand("UPDATE Report SET isNew = @isNew WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
+                updateOldOrNew.Parameters.AddWithValue("@isNew", "1");
+                updateOldOrNew.Parameters.AddWithValue("@AccountUsername", Session["usernameOfThisPendingReport"].ToString());
+                updateOldOrNew.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
+
+                updateOldOrNew.ExecuteNonQuery();
+
+                connection.Close();
 
 
 

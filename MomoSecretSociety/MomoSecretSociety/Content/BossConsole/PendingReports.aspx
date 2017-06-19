@@ -40,6 +40,49 @@
     </div>
 
 
+    <!-- Pop up Modal for new Pending Reports NOT VIEWED yet -->
+    <div class="modal fade" id="myModal2" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="text-align: center; font-weight: bold;">New Pending Reports</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>You have <b><asp:Label ID="noOfNewPendingReports" runat="server"></asp:Label></b> Pending Reports yet to view...</h4>
+
+                    <br />
+
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
+                        SelectCommand="SELECT [Username], [CaseNumber], [Subject], [CreatedDateTime] FROM [Report]
+        WHERE (ReportStatus = 'pending' AND isNew = '0');"></asp:SqlDataSource>
+
+                    <asp:GridView ID="GridView2" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small"
+                        HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
+                        HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
+                        RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource2" Width="100%" AutoGenerateColumns="false">
+
+                        <PagerStyle CssClass="pagerStyle" />
+
+                        <Columns>
+                            <asp:BoundField DataField="CreatedDateTime" HeaderText="Date of Submission" />
+                            <asp:BoundField DataField="CaseNumber" HeaderText="Case Number" />
+                            <asp:BoundField DataField="Username" HeaderText="Username" />
+                            <asp:BoundField DataField="Subject" HeaderText="Subject" />
+                        </Columns>
+                    </asp:GridView>
+
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="Button1" class="btn btn-default" runat="server" Text="Close" CausesValidation="false" data-dismiss="modal" />
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div>
         <table class="table" style="border-collapse: initial !important; border-spacing: 0;">
             <tr style="height: 5%;">
@@ -73,14 +116,14 @@
                         <asp:GridView ID="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium"
                             HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
                             HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
-                            RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" DataKeyNames="Username">
+                            RowStyle-HorizontalAlign="Center" PageSize="10" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" DataKeyNames="Username">
 
                             <PagerStyle CssClass="pagerStyle" />
 
                             <Columns>
                                 <asp:TemplateField HeaderText="Case Number">
                                     <ItemTemplate>
-                                        <asp:LinkButton runat="server" ID="link" OnClick="link_Click"
+                                        <asp:LinkButton runat="server" ID="link"
                                             CommandArgument='<%# Eval("Username") + "," + Eval("CaseNumber")%>' CommandName="DataCommand"
                                             Text='<%# Eval("CaseNumber") %>'></asp:LinkButton>
                                     </ItemTemplate>
