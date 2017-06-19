@@ -194,23 +194,37 @@ namespace MomoSecretSociety.Content.StaffConsole
             float pageWidth = page.Canvas.ClientSize.Width;
             float y = 0;
 
+            //.DrawString(string s, PdfFontBase font, PdfBrush brush, float x, float y, PdfStringFormat format);
+            //.DrawLine(PdfPen pen, float x1, float y1, float x2, float y2);
+
             //page header
             PdfPen pen1 = new PdfPen(Color.LightGray, 1f);
             PdfBrush brush1 = new PdfSolidBrush(Color.LightGray);
             PdfTrueTypeFont font1 = new PdfTrueTypeFont(new Font("Arial", 8f, FontStyle.Italic));
             PdfStringFormat format1 = new PdfStringFormat(PdfTextAlignment.Right);
             String text = "Report Case Number #" + dbCaseNumber +".pdf";
-            //.DrawString(string s, PdfFontBase font, PdfBrush brush, float x, float y, PdfStringFormat format);
             page.Canvas.DrawString(text, font1, brush1, pageWidth, y, format1);
             SizeF size = font1.MeasureString(text, format1);
             y = y + size.Height + 1;
-            //.DrawLine(PdfPen pen, float x1, float y1, float x2, float y2);
             page.Canvas.DrawLine(pen1, 0, y, pageWidth, y);
+
+            //page footer
+            /*
+            PdfPen footerpen = new PdfPen(Color.LightGray, 1f);
+            PdfBrush footerbrush = new PdfSolidBrush(Color.LightGray);
+            PdfTrueTypeFont footerfont = new PdfTrueTypeFont(new Font("Arial", 8f, FontStyle.Italic));
+            PdfStringFormat footerformat = new PdfStringFormat(PdfTextAlignment.Right);
+            String footertext = "Created on: " + dbCreatedDateTime;
+            page.Canvas.DrawString(footertext, footerfont, footerbrush, pageWidth, y, footerformat);
+            SizeF footersize = font1.MeasureString(footertext, footerformat);
+            y = y + footersize.Height + 1;
+            page.Canvas.DrawLine(footerpen, 0, y, pageWidth, y);
+            */
 
             //title
             y = y + 5;
             PdfBrush brush2 = new PdfSolidBrush(Color.Black);
-            PdfTrueTypeFont font2 = new PdfTrueTypeFont(new Font("Georgia", 16f, FontStyle.Bold));
+            PdfTrueTypeFont font2 = new PdfTrueTypeFont(new Font("Arial", 16f, FontStyle.Bold));
             PdfStringFormat format2 = new PdfStringFormat(PdfTextAlignment.Center);
             //format2.CharacterSpacing = 1f;
             text = "Report Case #" + dbCaseNumber;
@@ -251,7 +265,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //content
             PdfStringFormat format4 = new PdfStringFormat();
-            text = dbDate + "\n" + dbUsername + "\n" + dbSubject + "\n" + dbDescription + "\n" + dbRemarks + dbCreatedDateTime; //testing
+            text = "Date: " + dbDate + "\n" + "From: " + dbUsername + "\n" + " Subject: " + dbSubject + "\n" + "Case Description: " + dbDescription + "\n" + "Remarks: " + "\n" + dbRemarks; //testing
             PdfTrueTypeFont font5 = new PdfTrueTypeFont(new Font("Arial", 10f));
             format4.LineSpacing = font5.Size * 1.5f;
             PdfStringLayouter textLayouter = new PdfStringLayouter();
