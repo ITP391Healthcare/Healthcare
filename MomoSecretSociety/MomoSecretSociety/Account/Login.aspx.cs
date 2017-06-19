@@ -74,7 +74,7 @@ namespace MomoSecretSociety.Account
                         if (dbStatus.Equals("Staff"))
                         {
                             Session["AccountUsername"] = inputUsername;
-
+                            
                             //Add to logs
                             ActionLogs.Action action = ActionLogs.Action.Login;
                             ActionLogs.Log(username.Text, action);
@@ -90,20 +90,20 @@ namespace MomoSecretSociety.Account
                     }
                     else
                     {
-                        IncorrectInputLabel.Text = "incorrect password";
+                        IncorrectInputLabel.Text = "Incorrect username/password";
                     }
 
                 }
                 else
                 {
-                    IncorrectInputLabel.Text = "incorrect username";
+                    IncorrectInputLabel.Text = "Incorrect username/password";
                 }
 
 
                 if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("Boss"))
                 {
                     Session["AccountUsername"] = username.Text;
-
+                    
                     //Add to logs
                     ActionLogs.Action action = ActionLogs.Action.Login;
                     ActionLogs.Log(username.Text, action);

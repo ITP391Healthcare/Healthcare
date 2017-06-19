@@ -18,6 +18,8 @@ namespace MomoSecretSociety
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
 
+        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
         protected void Page_Init(object sender, EventArgs e)
         {
             // The code below helps to protect against XSRF attacks
@@ -81,6 +83,7 @@ namespace MomoSecretSociety
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
+         
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
             Session["AccountUsername"] = Context.User.Identity.Name;
@@ -88,10 +91,18 @@ namespace MomoSecretSociety
             ActionLogs.Action action = ActionLogs.Action.Logout;
             ActionLogs.Log(Session["AccountUsername"].ToString(), action);
 
+            connection.Open();
+            SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET hasAccessed = @hasAccessed WHERE Username = @AccountUsername", connection);
+            updateFirstLoginAccess.Parameters.AddWithValue("@hasAccessed", "0");
+            updateFirstLoginAccess.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
+            updateFirstLoginAccess.ExecuteNonQuery();
+            connection.Close();
+
+
         }
 
-    
-        
+
+
 
 
         //protected void logNavBar_Click(object sender, EventArgs e)

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using MomoSecretSociety.Content;
 using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -13,6 +15,8 @@ namespace MomoSecretSociety
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+
+        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -89,15 +93,24 @@ namespace MomoSecretSociety
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
+         
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
             // FormsAuthentication.SignOut();
+            // FormsAuthentication.RedirectToLoginPage();
             Session["AccountUsername"] = Context.User.Identity.Name;
 
             //Add to logs
              ActionLogs.Action action = ActionLogs.Action.Logout;
              ActionLogs.Log(Session["AccountUsername"].ToString(), action);
-            
+
+            connection.Open();
+            SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET hasAccessed = @hasAccessed WHERE Username = @AccountUsername", connection);
+            updateFirstLoginAccess.Parameters.AddWithValue("@hasAccessed", "0");
+            updateFirstLoginAccess.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
+            updateFirstLoginAccess.ExecuteNonQuery();
+            connection.Close();
+
 
             //Response.Cache.SetCacheability(HttpCacheability.NoCache);
             //Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
