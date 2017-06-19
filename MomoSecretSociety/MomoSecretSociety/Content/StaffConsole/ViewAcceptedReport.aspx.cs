@@ -265,7 +265,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //content
             PdfStringFormat format4 = new PdfStringFormat();
-            text = "Date: " + dbDate + "\n" + "From: " + dbUsername + "\n" + " Subject: " + dbSubject + "\n" + "Case Description: " + dbDescription + "\n" + "Remarks: " + "\n" + dbRemarks; //testing
+            text = "Date: " + dbDate + "\n" + "From: " + dbUsername + "\n" + "Subject: " + dbSubject + "\n" + "Case Description: " + dbDescription + "\n" + "Remarks: " + "\n" + dbRemarks; //testing
             PdfTrueTypeFont font5 = new PdfTrueTypeFont(new Font("Arial", 10f));
             format4.LineSpacing = font5.Size * 1.5f;
             PdfStringLayouter textLayouter = new PdfStringLayouter();
