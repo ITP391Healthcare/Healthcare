@@ -20,7 +20,6 @@ namespace MomoSecretSociety.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Joanne, dont delete these codes
             if (Request.IsAuthenticated)
             {
                 string[] cookies = Request.Cookies.AllKeys;
@@ -34,6 +33,12 @@ namespace MomoSecretSociety.Account
 
             if (!IsPostBack && Request.IsAuthenticated)
             {
+                connection.Open();
+                SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET hasAccessed = @hasAccessed", connection);
+                updateFirstLoginAccess.Parameters.AddWithValue("@hasAccessed", "0");
+                updateFirstLoginAccess.ExecuteNonQuery();
+                connection.Close();
+
                 Response.Redirect(Request.RawUrl);
             }
 
@@ -64,7 +69,7 @@ namespace MomoSecretSociety.Account
             connection.Close();
 
             string passwordHash = ComputeHash(inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt));
-            
+
             if (IsValid)
             {
                 if (dbUsername.Equals(inputUsername.Trim()))
@@ -74,7 +79,7 @@ namespace MomoSecretSociety.Account
                         if (dbStatus.Equals("Staff"))
                         {
                             Session["AccountUsername"] = inputUsername;
-                            
+
                             //Add to logs
                             ActionLogs.Action action = ActionLogs.Action.Login;
                             ActionLogs.Log(username.Text, action);
@@ -83,7 +88,7 @@ namespace MomoSecretSociety.Account
                             String encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                             HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                             Response.Cookies.Add(authCookie);
-                            //Response.Redirect("~/Content/StaffConsole/SubmittedReports.aspx");
+
                             Response.Redirect("~/Content/StaffConsole/NewReport.aspx");
 
                         }
@@ -103,7 +108,7 @@ namespace MomoSecretSociety.Account
                 if (dbUsername.Equals(inputUsername) && dbPasswordHash.Equals(passwordHash) && dbStatus.Equals("Boss"))
                 {
                     Session["AccountUsername"] = username.Text;
-                    
+
                     //Add to logs
                     ActionLogs.Action action = ActionLogs.Action.Login;
                     ActionLogs.Log(username.Text, action);
@@ -112,6 +117,7 @@ namespace MomoSecretSociety.Account
                     String encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     Response.Cookies.Add(authCookie);
+
                     Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
                 }
             }

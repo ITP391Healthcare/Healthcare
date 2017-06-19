@@ -8,7 +8,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" style="text-align: center; font-weight: bold;">Session Timeout</h3>
+                    <h3 class="modal-title" style="text-align: center; font-weight: bold;">Your account has been locked</h3>
                 </div>
                 <div class="modal-body">
                     <h4>To prove that you are the user <b><%: Context.User.Identity.GetUserName()  %> </b>...</h4>

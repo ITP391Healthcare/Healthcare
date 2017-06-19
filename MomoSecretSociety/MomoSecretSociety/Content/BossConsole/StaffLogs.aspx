@@ -48,7 +48,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" style="text-align: center; font-weight: bold;">Session Timeout</h3>
+                    <h3 class="modal-title" style="text-align: center; font-weight: bold;">Your account has been locked</h3>
                 </div>
                 <div class="modal-body">
                     <h4>To prove that you are the user <b><%: Context.User.Identity.GetUserName()  %> </b>...</h4>
@@ -70,7 +70,6 @@
     </div>
 
     <asp:Panel runat="server" ID="panel1">
-
 
         <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%); box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4); text-align: center;">
 

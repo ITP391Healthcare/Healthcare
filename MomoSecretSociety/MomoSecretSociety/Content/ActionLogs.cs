@@ -15,21 +15,9 @@ namespace MomoSecretSociety.Content
 
         public enum Action
         {
-            Register,
             Login,
             Logout,
-            ChangeProfilePicture,
-            ChangePassword,
-            ResetPassword,
-            ChangeEmail,
-            ChangeContactNo,
-            ChallengeCompleted,
-            WriteUpSubmitted,
-            FeedbackSubmitted,
-            Disable2FA,
-            Enable2FA,
-            DisableAccount,
-            EnableAccount,
+            ReportSubmitted,
         };
 
         public static void Log(string username, Action action)
@@ -50,12 +38,8 @@ namespace MomoSecretSociety.Content
         public static string getActionString(Action action)
         {
             String actionString = "";
-
-            if (action == Action.Register)
-            {
-                actionString = "Register";
-            }
-            else if (action == Action.Login)
+            
+            if (action == Action.Login)
             {
                 actionString = "Login";
             }
@@ -63,53 +47,9 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Logout";
             }
-            else if (action == Action.ChangeProfilePicture)
+            else if (action == Action.ReportSubmitted)
             {
-                actionString = "Profile Picture was changed";
-            }
-            else if (action == Action.ChangePassword)
-            {
-                actionString = "Password was changed";
-            }
-            else if (action == Action.ResetPassword)
-            {
-                actionString = "Password was reset";
-            }
-            else if (action == Action.ChangeEmail)
-            {
-                actionString = "Email was changed";
-            }
-            else if (action == Action.ChangeContactNo)
-            {
-                actionString = "Contact No was changed";
-            }
-            else if (action == Action.ChallengeCompleted)
-            {
-                actionString = "Challenge was completed";
-            }
-            else if (action == Action.WriteUpSubmitted)
-            {
-                actionString = "Write up was submitted";
-            }
-            else if (action == Action.FeedbackSubmitted)
-            {
-                actionString = "Feedback was submitted";
-            }
-            else if (action == Action.Disable2FA)
-            {
-                actionString = "2FA was disabled";
-            }
-            else if (action == Action.Enable2FA)
-            {
-                actionString = "2FA was enabled";
-            }
-            else if (action == Action.DisableAccount)
-            {
-                actionString = "Account was disabled";
-            }
-            else if (action == Action.EnableAccount)
-            {
-                actionString = "Account was enabled";
+                actionString = "Report was submitted";
             }
 
             return actionString;

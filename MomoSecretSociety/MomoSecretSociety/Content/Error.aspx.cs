@@ -11,7 +11,11 @@ namespace MomoSecretSociety.Content
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //if (Request.IsAuthenticated)
+            //{
+            //    ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
+            //                + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+            //}
         }
     }
 }
