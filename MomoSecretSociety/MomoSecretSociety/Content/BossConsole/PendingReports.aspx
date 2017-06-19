@@ -110,13 +110,13 @@
                     <div style="padding: 10px; background-color: #f4f6f5;">
 
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
-                            SelectCommand="SELECT [Username], [CaseNumber], [Subject] FROM [Report]
+                            SelectCommand="SELECT [Username], [CaseNumber], [Subject], [isNew] FROM [Report]
         WHERE (ReportStatus = 'pending');"></asp:SqlDataSource>
 
                         <asp:GridView ID="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium"
                             HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
                             HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
-                            RowStyle-HorizontalAlign="Center" PageSize="10" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" DataKeyNames="Username">
+                            RowStyle-HorizontalAlign="Center" PageSize="10" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" DataKeyNames="Username, CaseNumber, isNew" OnRowDataBound="GridView1_RowDataBound">
 
                             <PagerStyle CssClass="pagerStyle" />
 
@@ -131,6 +131,7 @@
 
                                 <asp:BoundField DataField="Username" HeaderText="Username" />
                                 <asp:BoundField DataField="Subject" HeaderText="Subject" />
+                                <asp:BoundField DataField="isNew" HeaderText="Status"/>
                             </Columns>
 
 

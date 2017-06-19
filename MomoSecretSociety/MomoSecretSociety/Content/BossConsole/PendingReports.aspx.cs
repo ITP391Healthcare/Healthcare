@@ -64,7 +64,6 @@ namespace MomoSecretSociety.Content.BossConsole
             }
             connection.Close();
 
-
         }
 
         //public static DataTable showPendingReportsSummary()
@@ -147,6 +146,8 @@ namespace MomoSecretSociety.Content.BossConsole
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            
+
             if (e.CommandName == "DataCommand")
             {
 
@@ -174,6 +175,24 @@ namespace MomoSecretSociety.Content.BossConsole
 
                 Response.Redirect("~/Content/BossConsole/ViewPendingReport.aspx");
 
+            }
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string isNew = e.Row.Cells[3].Text;
+                if (isNew == "False")
+                {
+                    e.Row.Cells[3].Text = "New";
+                    e.Row.BackColor = System.Drawing.Color.FromArgb(200, 224, 233);
+                    e.Row.Cells[3].ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    e.Row.Cells[3].Text = "Old";
+                }
             }
         }
     }
