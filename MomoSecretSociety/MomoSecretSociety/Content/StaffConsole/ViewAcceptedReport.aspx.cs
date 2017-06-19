@@ -170,6 +170,19 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Draw the contents of page
             DrawPage(page);
 
+            string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
+
+            // + Watermark (text) -> DrawString(string s, PdfFontBase font, PdfBrush brush, float x, float y, PdfStringFormat format)
+            PdfTilingBrush brush = new PdfTilingBrush(new SizeF(page.Canvas.ClientSize.Width / 2, page.Canvas.ClientSize.Height / 3));
+            brush.Graphics.SetTransparency(0.3f);
+            brush.Graphics.Save();
+            brush.Graphics.TranslateTransform(brush.Size.Width / 2, brush.Size.Height / 2);
+            brush.Graphics.RotateTransform(-45);
+            brush.Graphics.DrawString(wmText, new PdfFont(PdfFontFamily.Helvetica, 24), PdfBrushes.Black, 0, 0, new PdfStringFormat(PdfTextAlignment.Center));
+            brush.Graphics.Restore();
+            brush.Graphics.SetTransparency(1);
+            page.Canvas.DrawRectangle(brush, new RectangleF(new PointF(1, 1), page.Canvas.ClientSize));
+
             //Save pdf to a location
             doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
