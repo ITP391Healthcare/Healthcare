@@ -12,6 +12,29 @@
         }
     </style>
 
+    <script>
+
+        //$('#modal').on('hidden', function () {
+        //    $(this).data('modal').$element.removeData();
+        //    alert('a');
+
+        //    switch (event.keyCode) {
+        //        case 116: // 'F5'
+        //            event.returnValue = false;
+        //            event.keyCode = 0;
+        //            window.status = "We have disabled F5";
+        //            break;
+        //    }
+        //});
+
+
+
+        //window.onbeforeunload = function () { return false; }
+
+</script>
+
+
+
 
     <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">

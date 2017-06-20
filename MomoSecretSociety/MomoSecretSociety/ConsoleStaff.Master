@@ -73,6 +73,15 @@
                 }
                 else if (hasReachTimeOut()) {
                     $('#myModal').modal('show');
+
+                    document.onkeydown = function () {
+                        switch (event.keyCode) {
+                            case 116: //F5 button
+                                event.returnValue = false;
+                                event.keyCode = 0;
+                                return false;
+                        }
+                    }
                     // redirect();
                 }
 
@@ -85,6 +94,15 @@
 
     </script>
     <% } %>
+
+
+         <script type="text/javascript"> 
+function disableRightClick() 
+{ 
+alert("Sorry, right click is not allowed !!"); 
+return false; 
+} 
+</script> 
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -151,7 +169,7 @@
 
 
 
-<body class="masterStyle" style="background-color: lightblue;">
+<body class="masterStyle" style="background-color: lightblue;" oncontextmenu="return disableRightClick();">
 
     <form runat="server">
 

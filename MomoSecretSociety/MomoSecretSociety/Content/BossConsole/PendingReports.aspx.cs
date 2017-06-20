@@ -21,6 +21,8 @@ namespace MomoSecretSociety.Content.BossConsole
         static SqlConnection pendingReportsDetailsConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         static SqlConnection connection4 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+        
+              static SqlConnection lockAccountConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +30,9 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+
+                showNewPendingReports();
+
             }
 
             if (IsPostBack)
@@ -35,12 +40,67 @@ namespace MomoSecretSociety.Content.BossConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-            showNewPendingReports();
+            //Boolean IsRefresh = false;
+            //if (Request.RawUrl !=null)
+            //{
+            //    IsRefresh = true;
+            //    Response.Write("987");
+            //}
+            //else
+            //{
+            //    Response.Write("12");
+            //}
+
+
+          
+            //if (Session["isLocked"] != null)
+            //{
+
+            //    if (Session["isLocked"].ToString() == "1")
+            //    {
+            //        accountLocked();
+            //        Response.Write("disable refresh!");
+            //    }
+            //    else
+            //    {
+            //        Response.Write("NOT OCKED");
+            //    }
+            //}
+            //else
+            //{
+            //    return;
+            //}
+
+            string isAccountLocked = "";
+
+            //Retrieve check if account is locked. If locked -> dont allow refresh to bypass
+            //lockAccountConnection.Open();
+            //SqlCommand lockAccountCommand = new SqlCommand("SELECT isLocked FROM UserAccount WHERE Username = @AccountUsername", lockAccountConnection);
+            //lockAccountCommand.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
+
+            //SqlDataReader lockAccountReader = lockAccountCommand.ExecuteReader();
+
+            //while (lockAccountReader.Read())
+            //{
+            //    isAccountLocked = (lockAccountReader["isLocked"].ToString());
+
+
+            //    if (isAccountLocked == "True")
+            //    {
+            //        Response.Write("disable refresh!");
+            //    }
+
+            //}
+            //lockAccountReader.Close();
+
+            //lockAccountConnection.Close();
+
 
         }
 
         private void showNewPendingReports()
         {
+
             //Check if is 1st time login. If 1st time login, then only pop up summary of NEW pending reports
             string dbHasAccessed = "";
             firstLoginAccessConnection.Open();
@@ -91,7 +151,19 @@ namespace MomoSecretSociety.Content.BossConsole
                 firstLoginAccessConnection.Close();
             }
         }
-        
+
+        private void accountLocked()
+        {
+            lockAccountConnection.Open();
+
+            SqlCommand lockAccountCommand = new SqlCommand("UPDATE UserAccount SET isLocked = @isLocked WHERE Username = @AccountUsername", lockAccountConnection);
+            lockAccountCommand.Parameters.AddWithValue("@isLocked", "1");
+            lockAccountCommand.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
+            lockAccountCommand.ExecuteNonQuery();
+
+            lockAccountConnection.Close();
+        }
+
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -125,11 +197,14 @@ namespace MomoSecretSociety.Content.BossConsole
                     if (dbPasswordHash.Equals(passwordHash))
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('hide')", true);
+
                     }
                     else
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('show')", true);
                         errormsgPasswordAuthenticate.Visible = true;
+
+                        
                     }
 
                 }

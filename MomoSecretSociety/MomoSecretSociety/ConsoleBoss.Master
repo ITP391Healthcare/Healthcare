@@ -24,7 +24,7 @@
         {%>
     <script>
 
-        var timeout = 60 * 1000;    //15 * 1000 -> 15seconds.
+        var timeout = 5 * 1000;    //15 * 1000 -> 15seconds.
         var warningTime = 10 * 1000;
         var warningDuration = timeout - warningTime;
 
@@ -80,7 +80,39 @@
                     hasWarn = true;
                 }
                 else if (hasReachTimeOut()) {
+                    
                     $('#myModal').modal('show');
+
+                    document.onkeydown = function () {
+                        switch (event.keyCode) {
+                            case 116: //F5 button
+                                event.returnValue = false;
+                                event.keyCode = 0;
+
+                                return false;
+                        }
+                    }
+
+                 //   CallbackFunction(event);
+                    //if (window.performance) {
+                    //    alert("window.performance work's fine on this browser");
+                    //}
+                    //if (performance.navigation.type == 1) {
+                    //    alert('This page is reloaded. CANNOT');
+                    //    return;
+                    //} else {
+                    //    alert('This page is not reloaded');
+                    //}
+
+
+                    // var myValue = 
+                    // $get(<% %>).Value;
+                    // JavascriptValue.ClientID
+                 
+<%--                    var myHidden = document.getElementById("<%:JavascriptValue.ClientID%>");
+myHidden.value = myJSVariable;--%>
+
+
                     // redirect();
                 }
 
@@ -88,12 +120,45 @@
             }
 
             setInterval(checkTimeout, 1000);
+
+
         }
+
+
+        //function UnLoadWindow() {
+        //    //if (performance.navigation.type == 1) {
+        //    //    alert('This page is reloaded. CANNOT');
+        //    //    return;
+        //    //} else {
+        //    //    alert('This page is not reloaded');
+        //    //}
+        //    return 'We strongly recommends NOT closing this window yet.'
+        //}
+
+        //window.onbeforeunload = UnLoadWindow;
+
+        //$(window).bind('beforeunload', function () {
+        //    return "'Are you sure you want to leave the page. All data will be lost!";
+        //});
+
+        //$('#a_exit').live('click', function () {
+        //    $(window).unbind('beforeunload');
+        //});
+
+
 
 
     </script>
     <% } %>
 
+    
+     <script type="text/javascript"> 
+function disableRightClick() 
+{ 
+alert("Sorry, right click is not allowed !!"); 
+return false; 
+} 
+</script> 
 
 
     <asp:PlaceHolder runat="server">
@@ -156,7 +221,7 @@
     </style>
 
 </head>
-<body class="masterStyle" style="background-color: lightblue;">
+<body class="masterStyle" style="background-color: lightblue;" oncontextmenu="return disableRightClick();" Onkeydown="return showKeyCode(event)">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -238,6 +303,11 @@
         <div class="container body-content">
 
             <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
+
+                
+        <asp:HiddenField runat="server" ID="JavascriptValue" value="1"/>
+
+
             </asp:ContentPlaceHolder>
             <hr />
 

@@ -75,7 +75,13 @@
 
             <h2 style="text-align: center;">List of Staff Members</h2>
 
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>" SelectCommand="SELECT DISTINCT(Username) FROM [Logs]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>" SelectCommand="SELECT DISTINCT(Username) FROM [Logs] WHERE Username != @Username ">
+
+                <SelectParameters>
+                    <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
+                </SelectParameters>
+
+            </asp:SqlDataSource>
 
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="true" CellPadding="15" OnRowCommand="GridView1_RowCommand" GridLines="None" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" OnRowCreated="grid_RowCreated" RowStyle-VerticalAlign="Middle">
 

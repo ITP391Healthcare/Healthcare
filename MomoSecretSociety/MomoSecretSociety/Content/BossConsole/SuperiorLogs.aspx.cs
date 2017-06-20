@@ -22,6 +22,8 @@ namespace MomoSecretSociety.Content.BossConsole
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
 
                 readLogsRespectively();
+                bossUsername.Text = Context.User.Identity.Name;
+
             }
 
 

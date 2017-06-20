@@ -32,7 +32,9 @@
 
         <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%);">
 
-            <h2>Boss's Logs</h2>
+            <h2>Boss Logs -
+                <asp:Label ID="bossUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>'s
+            </h2>
 
             <div class="col-md-9" style="height: calc(100%); width: calc(100%);">
 

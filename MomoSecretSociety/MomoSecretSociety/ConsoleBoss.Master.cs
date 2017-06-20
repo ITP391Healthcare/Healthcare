@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using MomoSecretSociety.Content;
+using MomoSecretSociety.Content.BossConsole;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -18,9 +19,10 @@ namespace MomoSecretSociety
 
         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
+        static SqlConnection lockAccountConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
         protected void Page_Init(object sender, EventArgs e)
         {
-
             // The code below helps to protect against XSRF attacks
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
             Guid requestCookieGuidValue;
@@ -88,6 +90,14 @@ namespace MomoSecretSociety
             //    ((Label)FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
             //                + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
             //}
+
+            //string val = ((HiddenField)FindControl("JavascriptValue")).Value;
+            //Session["isLocked"] = val;
+
+
+            //var myJSVariableValue = ((HiddenField)FindControl("JavascriptValue")).Value;
+            //Session["isLocked"] = myJSVariableValue;
+
         }
 
 
@@ -142,6 +152,13 @@ namespace MomoSecretSociety
         //        }
         //    }
         //}
+
+
+
+
+
+        //PendingReports.accountLocked();
+
 
     }
 
