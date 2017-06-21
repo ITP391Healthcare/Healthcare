@@ -168,7 +168,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             PdfPageBase page = doc.Pages.Add();
 
             //Draw the contents of page
-            DrawPage(page);
+            AlignText(page);
 
             string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
 
@@ -178,7 +178,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             brush.Graphics.Save();
             brush.Graphics.TranslateTransform(brush.Size.Width / 2, brush.Size.Height / 2);
             brush.Graphics.RotateTransform(-45);
-            brush.Graphics.DrawString(wmText, new PdfFont(PdfFontFamily.Helvetica, 24), PdfBrushes.Black, 0, 0, new PdfStringFormat(PdfTextAlignment.Center));
+            brush.Graphics.DrawString(wmText, new PdfFont(PdfFontFamily.Helvetica, 20), PdfBrushes.Black, 0, 0, new PdfStringFormat(PdfTextAlignment.Center));
             brush.Graphics.Restore();
             brush.Graphics.SetTransparency(1);
             page.Canvas.DrawRectangle(brush, new RectangleF(new PointF(1, 1), page.Canvas.ClientSize));
@@ -189,6 +189,63 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         }
 
+        private static void AlignText(PdfPageBase page)
+        {
+            float x1 = 20;
+            float y1 = 50;
+            float x2 =90;
+            string text = "";
+            float pageWidth = page.Canvas.ClientSize.Width;
+
+            //Title
+            PdfBrush brush1 = new PdfSolidBrush(Color.Black);
+            PdfTrueTypeFont font1 = new PdfTrueTypeFont(new Font("Arial", 16f, FontStyle.Bold));
+            PdfStringFormat format1 = new PdfStringFormat(PdfTextAlignment.Center);
+            //format2.CharacterSpacing = 1f;
+            text = "Report Case #" + dbCaseNumber;
+            page.Canvas.DrawString(text, font1, brush1, pageWidth / 2, 10, format1);
+            
+
+
+            //Draw the text - alignment
+            PdfFont font2 = new PdfFont(PdfFontFamily.Helvetica, 10f);
+            PdfTrueTypeFont font3 = new PdfTrueTypeFont(new Font("Helvetica", 10f, FontStyle.Bold));
+            PdfSolidBrush brush = new PdfSolidBrush(Color.Black);
+
+            PdfStringFormat leftAlignment = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Middle);
+            page.Canvas.DrawString("Date: ", font2, brush, x1, y1, leftAlignment);
+            page.Canvas.DrawString(dbDate, font3, brush, x2, y1, leftAlignment);
+            y1 = y1 + 30;
+
+            page.Canvas.DrawString("From: ", font2, brush, x1, y1, leftAlignment);
+            page.Canvas.DrawString(dbUsername, font3, brush, x2, y1, leftAlignment);
+            y1 = y1 + 30;
+
+            page.Canvas.DrawString("Subject: ", font2, brush, x1, y1, leftAlignment);
+            page.Canvas.DrawString(dbSubject, font3, brush, x2, y1, leftAlignment);
+            y1 = y1 + 30;
+
+            page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
+            y1 = y1 + 30;
+            page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment);
+            y1 = y1 + 30;
+
+            page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
+            y1 = y1 + 30;
+            page.Canvas.DrawString(dbRemarks, font3, brush, x2, y1, leftAlignment);
+
+
+            //PdfStringFormat rightAlignment = new PdfStringFormat(PdfTextAlignment.Right, PdfVerticalAlignment.Middle);
+            //page.Canvas.DrawString("Right!", font, brush, page.Canvas.ClientSize.Width, 30, rightAlignment);
+            //page.Canvas.DrawString("Right!", font, brush, page.Canvas.ClientSize.Width, 60, rightAlignment);
+
+            //PdfStringFormat centerAlignment
+            //    = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
+            //page.Canvas.DrawString("Go! Turn Around! Go! Go! Go!",
+            //    font, brush, page.Canvas.ClientSize.Width / 2, 40, centerAlignment);
+        }
+
+        /*
         private static void DrawPage(PdfPageBase page)
         {
             float pageWidth = page.Canvas.ClientSize.Width;
@@ -208,18 +265,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             y = y + size.Height + 1;
             page.Canvas.DrawLine(pen1, 0, y, pageWidth, y);
 
-            //page footer
-            /*
-            PdfPen footerpen = new PdfPen(Color.LightGray, 1f);
-            PdfBrush footerbrush = new PdfSolidBrush(Color.LightGray);
-            PdfTrueTypeFont footerfont = new PdfTrueTypeFont(new Font("Arial", 8f, FontStyle.Italic));
-            PdfStringFormat footerformat = new PdfStringFormat(PdfTextAlignment.Right);
-            String footertext = "Created on: " + dbCreatedDateTime;
-            page.Canvas.DrawString(footertext, footerfont, footerbrush, pageWidth, y, footerformat);
-            SizeF footersize = font1.MeasureString(footertext, footerformat);
-            y = y + footersize.Height + 1;
-            page.Canvas.DrawLine(footerpen, 0, y, pageWidth, y);
-            */
 
             //title
             y = y + 5;
@@ -292,5 +337,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             textWidget.StringFormat = format4;
             textWidget.Draw(page, bounds, textLayout);
         }
+        */
+
     }
 }
