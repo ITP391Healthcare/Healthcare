@@ -314,3 +314,5 @@ C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociet
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csprojResolveAssemblyReference.cache
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.Resource1.resources
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csproj.GenerateResource.Cache
+C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.Resource1.resources
+C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csproj.GenerateResource.Cache
