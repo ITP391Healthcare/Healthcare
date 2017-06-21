@@ -229,14 +229,20 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(dbSubject, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
-            //PdfWordWrapType wordWrap;
-            //BreakLine(dbDescription, 90, 515);
-
             //CASE DESCRIPTION
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
             page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
+
+            //REMARKS
+            page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
+            y1 = y1 + 30;
+            page.Canvas.DrawString(dbRemarks, font3, brush, x2, y1, leftAlignment);
+
+
+            //PdfWordWrapType wordWrap;
+            //BreakLine(dbDescription, 90, 515);
 
             //if (dbDescription.Length.Equals(515))
             //{
@@ -246,10 +252,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             //    }
             //}
 
-            //REMARKS
-            page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
-            y1 = y1 + 30;
-            page.Canvas.DrawString(dbRemarks, font3, brush, x2, y1, leftAlignment);
+
 
             //WIDTH 515 HEIGHT 762
             //To print out the size of the whole page
