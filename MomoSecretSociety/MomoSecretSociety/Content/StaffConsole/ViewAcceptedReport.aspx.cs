@@ -206,15 +206,13 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(text, font1, brush1, pageWidth / 2, 10, format1);
             
 
-
             //Draw the text - alignment
             PdfFont font2 = new PdfFont(PdfFontFamily.Helvetica, 10f);
             PdfTrueTypeFont font3 = new PdfTrueTypeFont(new Font("Helvetica", 10f, FontStyle.Bold));
             PdfSolidBrush brush = new PdfSolidBrush(Color.Black);
-
             PdfStringFormat leftAlignment = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Middle);
-            page.Canvas.DrawString("Date: ", font2, brush, x1, y1, leftAlignment);
 
+            page.Canvas.DrawString("Date: ", font2, brush, x1, y1, leftAlignment);
             page.Canvas.DrawString(dbDate, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
@@ -235,15 +233,11 @@ namespace MomoSecretSociety.Content.StaffConsole
             y1 = y1 + 30;
             page.Canvas.DrawString(dbRemarks, font3, brush, x2, y1, leftAlignment);
 
+            y1 = y1 + 30;
+            SizeF size = page.Canvas.ClientSize;
+            string sizeText = size.ToString();
+            page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
 
-            //PdfStringFormat rightAlignment = new PdfStringFormat(PdfTextAlignment.Right, PdfVerticalAlignment.Middle);
-            //page.Canvas.DrawString("Right!", font, brush, page.Canvas.ClientSize.Width, 30, rightAlignment);
-            //page.Canvas.DrawString("Right!", font, brush, page.Canvas.ClientSize.Width, 60, rightAlignment);
-
-            //PdfStringFormat centerAlignment
-            //    = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
-            //page.Canvas.DrawString("Go! Turn Around! Go! Go! Go!",
-            //    font, brush, page.Canvas.ClientSize.Width / 2, 40, centerAlignment);
         }
 
         /*
