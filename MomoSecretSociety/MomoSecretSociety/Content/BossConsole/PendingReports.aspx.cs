@@ -26,7 +26,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.IsAuthenticated)
+            if (Request.IsAuthenticated && (IsPostBack || !IsPostBack))
             {
                 ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";

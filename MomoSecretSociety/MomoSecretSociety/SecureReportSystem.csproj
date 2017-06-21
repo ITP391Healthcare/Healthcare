@@ -197,6 +197,7 @@
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
     <Content Include="Content\BossConsole\SuperiorLogs.aspx" />
     <Content Include="Content\BossConsole\testingPendingReports.aspx" />
+    <Content Include="Content\BossConsole\testPageWithErrors.aspx" />
     <Content Include="Content\BossConsole\ViewPendingReport.aspx" />
     <Content Include="Content\Error.aspx" />
     <Content Include="Content\LogoutSummary.aspx" />
@@ -348,6 +349,13 @@
     </Compile>
     <Compile Include="Content\BossConsole\testingPendingReports.aspx.designer.cs">
       <DependentUpon>testingPendingReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\testPageWithErrors.aspx.cs">
+      <DependentUpon>testPageWithErrors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\testPageWithErrors.aspx.designer.cs">
+      <DependentUpon>testPageWithErrors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\BossConsole\ViewPendingReport.aspx.cs">
       <DependentUpon>ViewPendingReport.aspx</DependentUpon>
