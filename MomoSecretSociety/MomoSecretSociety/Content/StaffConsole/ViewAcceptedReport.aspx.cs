@@ -214,6 +214,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             PdfStringFormat leftAlignment = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Middle);
             page.Canvas.DrawString("Date: ", font2, brush, x1, y1, leftAlignment);
+
             page.Canvas.DrawString(dbDate, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
