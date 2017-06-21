@@ -173,7 +173,12 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //DigitalSignature (KaiTat)
 
-
+            String pfxPath = @"..\test.pfx"
+            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
+            PdfSignature signature -new PdfSignature(doc, page, digi, "demo");
+            signature.ContactInfo = "Harry";
+            signature.Certificated = true;
+            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
 
             string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
 
