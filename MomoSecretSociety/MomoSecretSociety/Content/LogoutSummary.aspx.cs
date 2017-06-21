@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +13,8 @@ namespace MomoSecretSociety.Content
 {
     public partial class LogoutSummary : System.Web.UI.Page
     {
+        SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["AccountUsername"] != null)
@@ -23,6 +27,13 @@ namespace MomoSecretSociety.Content
                 GridView1.DataBind();
                 
                 Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                connection.Open();
+                SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed WHERE Username = @AccountUsername", connection);
+                updateFirstLoginAccess.Parameters.AddWithValue("@isFirstTimeAccessed", "0");
+                updateFirstLoginAccess.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
+                updateFirstLoginAccess.ExecuteNonQuery();
+                connection.Close();
             }
 
         }

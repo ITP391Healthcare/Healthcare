@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ConsoleBoss.Master.cs" Inherits="MomoSecretSociety.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ConsoleBoss.Master.cs" Inherits="MomoSecretSociety.SiteMaster" Debug="true" %>
 
 <!DOCTYPE html>
 
@@ -93,6 +93,7 @@
                         }
                     }
 
+
                  //   CallbackFunction(event);
                     //if (window.performance) {
                     //    alert("window.performance work's fine on this browser");
@@ -110,7 +111,7 @@
                     // JavascriptValue.ClientID
                  
 <%--                    var myHidden = document.getElementById("<%:JavascriptValue.ClientID%>");
-myHidden.value = myJSVariable;--%>
+                        myHidden.value = myJSVariable;--%>
 
 
                     // redirect();
@@ -123,6 +124,7 @@ myHidden.value = myJSVariable;--%>
 
 
         }
+
 
 
         //function UnLoadWindow() {
@@ -305,7 +307,7 @@ return false;
             <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
 
                 
-        <asp:HiddenField runat="server" ID="JavascriptValue" value="1"/>
+        <%--<asp:HiddenField runat="server" ID="JavascriptValue" value="1"/>--%>
 
 
             </asp:ContentPlaceHolder>

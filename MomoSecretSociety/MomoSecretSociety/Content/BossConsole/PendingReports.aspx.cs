@@ -21,8 +21,8 @@ namespace MomoSecretSociety.Content.BossConsole
         static SqlConnection pendingReportsDetailsConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         static SqlConnection connection4 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
-        
-              static SqlConnection lockAccountConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+        string dbIsFirstTimeAccessed = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,7 +32,6 @@ namespace MomoSecretSociety.Content.BossConsole
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
 
                 showNewPendingReports();
-
             }
 
             if (IsPostBack)
@@ -40,83 +39,27 @@ namespace MomoSecretSociety.Content.BossConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-            //Boolean IsRefresh = false;
-            //if (Request.RawUrl !=null)
-            //{
-            //    IsRefresh = true;
-            //    Response.Write("987");
-            //}
-            //else
-            //{
-            //    Response.Write("12");
-            //}
-
-
-          
-            //if (Session["isLocked"] != null)
-            //{
-
-            //    if (Session["isLocked"].ToString() == "1")
-            //    {
-            //        accountLocked();
-            //        Response.Write("disable refresh!");
-            //    }
-            //    else
-            //    {
-            //        Response.Write("NOT OCKED");
-            //    }
-            //}
-            //else
-            //{
-            //    return;
-            //}
-
-            string isAccountLocked = "";
-
-            //Retrieve check if account is locked. If locked -> dont allow refresh to bypass
-            //lockAccountConnection.Open();
-            //SqlCommand lockAccountCommand = new SqlCommand("SELECT isLocked FROM UserAccount WHERE Username = @AccountUsername", lockAccountConnection);
-            //lockAccountCommand.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
-
-            //SqlDataReader lockAccountReader = lockAccountCommand.ExecuteReader();
-
-            //while (lockAccountReader.Read())
-            //{
-            //    isAccountLocked = (lockAccountReader["isLocked"].ToString());
-
-
-            //    if (isAccountLocked == "True")
-            //    {
-            //        Response.Write("disable refresh!");
-            //    }
-
-            //}
-            //lockAccountReader.Close();
-
-            //lockAccountConnection.Close();
-
-
-        }
+           
+            }
 
         private void showNewPendingReports()
         {
-
             //Check if is 1st time login. If 1st time login, then only pop up summary of NEW pending reports
-            string dbHasAccessed = "";
+
             firstLoginAccessConnection.Open();
-            SqlCommand firstLoginAccessCommand = new SqlCommand("SELECT hasAccessed FROM UserAccount WHERE Username = @AccountUsername", firstLoginAccessConnection);
+            SqlCommand firstLoginAccessCommand = new SqlCommand("SELECT isFirstTimeAccessed FROM UserAccount WHERE Username = @AccountUsername", firstLoginAccessConnection);
             firstLoginAccessCommand.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
 
             SqlDataReader firstLoginAccessReader = firstLoginAccessCommand.ExecuteReader();
             while (firstLoginAccessReader.Read())
             {
-                dbHasAccessed = (firstLoginAccessReader["hasAccessed"].ToString());
+                dbIsFirstTimeAccessed = (firstLoginAccessReader["isFirstTimeAccessed"].ToString());
             }
             firstLoginAccessReader.Close();
             firstLoginAccessConnection.Close();
 
             //Pop up for NEW pending reports for 1st Login Access 
-            if (dbHasAccessed == "False")
+            if (dbIsFirstTimeAccessed == "False")
             {
                 //Retrieve amount of NEW pending reports
                 caseNumberQtyConnection.Open();
@@ -139,29 +82,21 @@ namespace MomoSecretSociety.Content.BossConsole
                 while (pendingReportsDetailsReader.Read())
                 {
                     Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal2').modal('show')", true);
+
+                    //Update 1st Login Access to TRUE to make sure it doesn't pop up again within this session
+                    firstLoginAccessConnection.Open();
+                    SqlCommand firstLoginAccessCommandUpdate = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed WHERE Username = @AccountUsername", firstLoginAccessConnection);
+                    firstLoginAccessCommandUpdate.Parameters.AddWithValue("@isFirstTimeAccessed", "1");
+                    firstLoginAccessCommandUpdate.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
+                    firstLoginAccessCommandUpdate.ExecuteNonQuery();
+                    firstLoginAccessConnection.Close();
+
+
                 }
                 pendingReportsDetailsConnection.Close();
 
-                //Update 1st Login Access to TRUE to make sure it doesn't pop up again within this session
-                firstLoginAccessConnection.Open();
-                SqlCommand firstLoginAccessCommandUpdate = new SqlCommand("UPDATE UserAccount SET hasAccessed = @hasAccessed WHERE Username = @AccountUsername", firstLoginAccessConnection);
-                firstLoginAccessCommandUpdate.Parameters.AddWithValue("@hasAccessed", "1");
-                firstLoginAccessCommandUpdate.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
-                firstLoginAccessCommandUpdate.ExecuteNonQuery();
-                firstLoginAccessConnection.Close();
+
             }
-        }
-
-        private void accountLocked()
-        {
-            lockAccountConnection.Open();
-
-            SqlCommand lockAccountCommand = new SqlCommand("UPDATE UserAccount SET isLocked = @isLocked WHERE Username = @AccountUsername", lockAccountConnection);
-            lockAccountCommand.Parameters.AddWithValue("@isLocked", "1");
-            lockAccountCommand.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
-            lockAccountCommand.ExecuteNonQuery();
-
-            lockAccountConnection.Close();
         }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -204,7 +139,7 @@ namespace MomoSecretSociety.Content.BossConsole
                         Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('show')", true);
                         errormsgPasswordAuthenticate.Visible = true;
 
-                        
+
                     }
 
                 }
@@ -223,7 +158,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
             return BitConverter.ToString(hashedBytes);
         }
-        
+
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "DataCommand")
@@ -246,7 +181,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
                 updateOldOrNewCommand.ExecuteNonQuery();
                 updateReportStatusToOldConnection.Close();
-                
+
                 Response.Redirect("~/Content/BossConsole/ViewPendingReport.aspx");
             }
         }
@@ -267,6 +202,26 @@ namespace MomoSecretSociety.Content.BossConsole
                     e.Row.Cells[3].Text = "Old";
                 }
             }
+        }
+
+        protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (dbIsFirstTimeAccessed == "True")
+            {
+                //Retrieve NEW pending reports' details
+                pendingReportsDetailsConnection.Open();
+                SqlCommand pendingReportsDetailsCommand = new SqlCommand("SELECT Username, CaseNumber, Subject FROM Report WHERE(ReportStatus = @ReportStatus AND isNew = @isNew)", pendingReportsDetailsConnection);
+                pendingReportsDetailsCommand.Parameters.AddWithValue("@ReportStatus", "pending");
+                pendingReportsDetailsCommand.Parameters.AddWithValue("@isNew", "0");
+
+                SqlDataReader pendingReportsDetailsReader = pendingReportsDetailsCommand.ExecuteReader();
+                while (pendingReportsDetailsReader.Read())
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal2').modal('show')", true);
+                }
+                pendingReportsDetailsConnection.Close();
+            }
+
         }
     }
 }

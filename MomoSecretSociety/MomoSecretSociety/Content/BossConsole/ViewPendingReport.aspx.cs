@@ -156,6 +156,10 @@ namespace MomoSecretSociety.Content.BossConsole
 
             connection.Close();
 
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.BossApprovedReport;
+            ActionLogs.Log(Context.User.Identity.Name, action);
+
             Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
         }
 
@@ -170,6 +174,10 @@ namespace MomoSecretSociety.Content.BossConsole
             updateReportStatus.ExecuteNonQuery();
 
             connection.Close();
+
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.BossRejectedReport;
+            ActionLogs.Log(Context.User.Identity.Name, action);
 
             Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
         }

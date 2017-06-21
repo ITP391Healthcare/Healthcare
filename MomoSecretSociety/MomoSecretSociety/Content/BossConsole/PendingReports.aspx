@@ -83,7 +83,7 @@
                     <asp:GridView ID="GridView2" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small"
                         HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
                         HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
-                        RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource2" Width="100%" AutoGenerateColumns="false">
+                        RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource2" Width="100%" AutoGenerateColumns="false" OnPageIndexChanging="GridView2_PageIndexChanging">
 
                         <PagerStyle CssClass="pagerStyle" />
 

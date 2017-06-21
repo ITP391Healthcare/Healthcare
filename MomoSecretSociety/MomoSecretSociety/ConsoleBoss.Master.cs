@@ -19,62 +19,60 @@ namespace MomoSecretSociety
 
         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
-        static SqlConnection lockAccountConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
-
         protected void Page_Init(object sender, EventArgs e)
         {
-            // The code below helps to protect against XSRF attacks
-            var requestCookie = Request.Cookies[AntiXsrfTokenKey];
-            Guid requestCookieGuidValue;
-            if (requestCookie != null && Guid.TryParse(requestCookie.Value, out requestCookieGuidValue))
-            {
-                // Use the Anti-XSRF token from the cookie
-                _antiXsrfTokenValue = requestCookie.Value;
-                Page.ViewStateUserKey = _antiXsrfTokenValue;
-            }
-            else
-            {
-                // Generate a new Anti-XSRF token and save to the cookie
-                _antiXsrfTokenValue = Guid.NewGuid().ToString("N");
-                Page.ViewStateUserKey = _antiXsrfTokenValue;
+            //// The code below helps to protect against XSRF attacks
+            //var requestCookie = Request.Cookies[AntiXsrfTokenKey];
+            //Guid requestCookieGuidValue;
+            //if (requestCookie != null && Guid.TryParse(requestCookie.Value, out requestCookieGuidValue))
+            //{
+            //    // Use the Anti-XSRF token from the cookie
+            //    _antiXsrfTokenValue = requestCookie.Value;
+            //    Page.ViewStateUserKey = _antiXsrfTokenValue;
+            //}
+            //else
+            //{
+            //    // Generate a new Anti-XSRF token and save to the cookie
+            //    _antiXsrfTokenValue = Guid.NewGuid().ToString("N");
+            //    Page.ViewStateUserKey = _antiXsrfTokenValue;
 
-                var responseCookie = new HttpCookie(AntiXsrfTokenKey)
-                {
-                    HttpOnly = true,
-                    Value = _antiXsrfTokenValue
-                };
-                if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
-                {
-                    responseCookie.Secure = true;
-                }
-                Response.Cookies.Set(responseCookie);
-            }
+            //    var responseCookie = new HttpCookie(AntiXsrfTokenKey)
+            //    {
+            //        HttpOnly = true,
+            //        Value = _antiXsrfTokenValue
+            //    };
+            //    if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
+            //    {
+            //        responseCookie.Secure = true;
+            //    }
+            //    Response.Cookies.Set(responseCookie);
+            //}
 
-            Page.PreLoad += master_Page_PreLoad;
+            //Page.PreLoad += master_Page_PreLoad;
 
 
         }
 
         protected void master_Page_PreLoad(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                // Set Anti-XSRF token
-                ViewState[AntiXsrfTokenKey] = Page.ViewStateUserKey;
-                ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
+            //if (!IsPostBack)
+            //{
+            //    // Set Anti-XSRF token
+            //    ViewState[AntiXsrfTokenKey] = Page.ViewStateUserKey;
+            //    ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-                // Validate the Anti-XSRF token
-                if ((string)ViewState[AntiXsrfTokenKey] != _antiXsrfTokenValue
-                    || (string)ViewState[AntiXsrfUserNameKey] != (Context.User.Identity.Name ?? String.Empty))
-                {
-                    throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
-                }
+            //    // Validate the Anti-XSRF token
+            //    if ((string)ViewState[AntiXsrfTokenKey] != _antiXsrfTokenValue
+            //        || (string)ViewState[AntiXsrfUserNameKey] != (Context.User.Identity.Name ?? String.Empty))
+            //    {
+            //        throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
+            //    }
 
-            }
+            //}
 
 
 
@@ -115,8 +113,8 @@ namespace MomoSecretSociety
              ActionLogs.Log(Session["AccountUsername"].ToString(), action);
 
             connection.Open();
-            SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET hasAccessed = @hasAccessed WHERE Username = @AccountUsername", connection);
-            updateFirstLoginAccess.Parameters.AddWithValue("@hasAccessed", "0");
+            SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed WHERE Username = @AccountUsername", connection);
+            updateFirstLoginAccess.Parameters.AddWithValue("@isFirstTimeAccessed", "0");
             updateFirstLoginAccess.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
             updateFirstLoginAccess.ExecuteNonQuery();
             connection.Close();

@@ -34,8 +34,8 @@ namespace MomoSecretSociety.Account
             if (!IsPostBack && Request.IsAuthenticated)
             {
                 connection.Open();
-                SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET hasAccessed = @hasAccessed", connection);
-                updateFirstLoginAccess.Parameters.AddWithValue("@hasAccessed", "0");
+                SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed", connection);
+                updateFirstLoginAccess.Parameters.AddWithValue("@isFirstTimeAccessed", "0");
                 updateFirstLoginAccess.ExecuteNonQuery();
                 connection.Close();
 

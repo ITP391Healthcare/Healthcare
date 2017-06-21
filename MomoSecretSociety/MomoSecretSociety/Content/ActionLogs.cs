@@ -18,6 +18,8 @@ namespace MomoSecretSociety.Content
             Login,
             Logout,
             ReportSubmitted,
+            BossApprovedReport,
+            BossRejectedReport
         };
 
         public static void Log(string username, Action action)
@@ -50,6 +52,14 @@ namespace MomoSecretSociety.Content
             else if (action == Action.ReportSubmitted)
             {
                 actionString = "Report was submitted";
+            }
+            else if (action == Action.BossApprovedReport)
+            {
+                actionString = "Report was approved";
+            }
+            else if (action == Action.BossRejectedReport)
+            {
+                actionString = "Report was rejected";
             }
 
             return actionString;
