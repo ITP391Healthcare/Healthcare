@@ -166,6 +166,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //Create a page
             PdfPageBase page = doc.Pages.Add();
+            
 
             //Draw the contents of page
             AlignText(page);
@@ -193,7 +194,7 @@ namespace MomoSecretSociety.Content.StaffConsole
         {
             float x1 = 20;
             float y1 = 50;
-            float x2 =90;
+            float x2 = 90;
             string text = "";
             float pageWidth = page.Canvas.ClientSize.Width;
 
@@ -205,134 +206,78 @@ namespace MomoSecretSociety.Content.StaffConsole
             text = "Report Case #" + dbCaseNumber;
             page.Canvas.DrawString(text, font1, brush1, pageWidth / 2, 10, format1);
             
-
             //Draw the text - alignment
             PdfFont font2 = new PdfFont(PdfFontFamily.Helvetica, 10f);
             PdfTrueTypeFont font3 = new PdfTrueTypeFont(new Font("Helvetica", 10f, FontStyle.Bold));
             PdfSolidBrush brush = new PdfSolidBrush(Color.Black);
             PdfStringFormat leftAlignment = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Middle);
 
+            //DATE
             page.Canvas.DrawString("Date: ", font2, brush, x1, y1, leftAlignment);
             page.Canvas.DrawString(dbDate, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //FROM
             page.Canvas.DrawString("From: ", font2, brush, x1, y1, leftAlignment);
             page.Canvas.DrawString(dbUsername, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //SUBJECT
             page.Canvas.DrawString("Subject: ", font2, brush, x1, y1, leftAlignment);
             page.Canvas.DrawString(dbSubject, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //PdfWordWrapType wordWrap;
+            //BreakLine(dbDescription, 90, 515);
+
+            //CASE DESCRIPTION
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
             page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //if (dbDescription.Length.Equals(515))
+            //{
+            //    string[] words = dbDescription.Split(' ');
+            //    foreach (string word in words)
+            //    {
+            //    }
+            //}
+
+            //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
             page.Canvas.DrawString(dbRemarks, font3, brush, x2, y1, leftAlignment);
 
+            //WIDTH 515 HEIGHT 762
+            //To print out the size of the whole page
+            /*
             y1 = y1 + 30;
             SizeF size = page.Canvas.ClientSize;
             string sizeText = size.ToString();
             page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
+            */
 
         }
 
-        /*
-        private static void DrawPage(PdfPageBase page)
+        //I need to add breakline 
+        private static int BreakLine(string text, int pos, int max)
         {
-            float pageWidth = page.Canvas.ClientSize.Width;
-            float y = 0;
+            // Find last whitespace in line
+            int i = max;
+            while (i >= 0 && !Char.IsWhiteSpace(text[pos + i]))
+                i--;
 
-            //.DrawString(string s, PdfFontBase font, PdfBrush brush, float x, float y, PdfStringFormat format);
-            //.DrawLine(PdfPen pen, float x1, float y1, float x2, float y2);
+            // If no whitespace found, break at maximum length
+            if (i < 0)
+                return max;
 
-            //page header
-            PdfPen pen1 = new PdfPen(Color.LightGray, 1f);
-            PdfBrush brush1 = new PdfSolidBrush(Color.LightGray);
-            PdfTrueTypeFont font1 = new PdfTrueTypeFont(new Font("Arial", 8f, FontStyle.Italic));
-            PdfStringFormat format1 = new PdfStringFormat(PdfTextAlignment.Right);
-            String text = "Report Case Number #" + dbCaseNumber +".pdf";
-            page.Canvas.DrawString(text, font1, brush1, pageWidth, y, format1);
-            SizeF size = font1.MeasureString(text, format1);
-            y = y + size.Height + 1;
-            page.Canvas.DrawLine(pen1, 0, y, pageWidth, y);
+            // Find start of whitespace
+            while (i >= 0 && Char.IsWhiteSpace(text[pos + i]))
+                i--;
 
-
-            //title
-            y = y + 5;
-            PdfBrush brush2 = new PdfSolidBrush(Color.Black);
-            PdfTrueTypeFont font2 = new PdfTrueTypeFont(new Font("Arial", 16f, FontStyle.Bold));
-            PdfStringFormat format2 = new PdfStringFormat(PdfTextAlignment.Center);
-            //format2.CharacterSpacing = 1f;
-            text = "Report Case #" + dbCaseNumber;
-            page.Canvas.DrawString(text, font2, brush2, pageWidth / 2, y, format2);
-            size = font2.MeasureString(text, format2);
-            y = y + size.Height + 6;
-
-            //icon
-            PdfImage image = PdfImage.FromFile(@"C:\\Users\\User\\Desktop\\vntest.jpg");
-            float width = image.Width * 0.1f;
-            float height = image.Height * 0.1f;
-            float x = (page.Canvas.ClientSize.Width - width) / 2;
-
-            page.Canvas.DrawImage(image, x, 60, width, height);
-            //page.Canvas.DrawImage(image, new PointF(pageWidth - image.PhysicalDimension.Width, y));
-            float imageLeftSpace = pageWidth - image.PhysicalDimension.Width - 2;
-            float imageBottom = image.PhysicalDimension.Height + y;
-
-
-            //reference content
-            PdfTrueTypeFont font3 = new PdfTrueTypeFont(new Font("Arial", 9f));
-            PdfStringFormat format3 = new PdfStringFormat();
-            format3.ParagraphIndent = font3.Size * 2;
-            format3.MeasureTrailingSpaces = true;
-            format3.LineSpacing = font3.Size * 1.5f;
-            String text1 = "(All contents are strictly confidential, do not distribute)";
-            page.Canvas.DrawString(text1, font3, brush2, 0, y, format3);
-            //-
-            size = font3.MeasureString(text1, format3);
-            float x1 = size.Width;
-            format3.ParagraphIndent = 0;
-            PdfTrueTypeFont font4 = new PdfTrueTypeFont(new Font("Arial", 9f, FontStyle.Underline));
-            PdfBrush brush3 = PdfBrushes.Blue;
-            x1 = x1 + size.Width;
-
-            //page.Canvas.DrawString(text1, font3, brush2, x1, y, format3);
-            y = y + size.Height;
-
-            //content
-            PdfStringFormat format4 = new PdfStringFormat();
-            text = "Date: " + dbDate + "\n" + "From: " + dbUsername + "\n" + "Subject: " + dbSubject + "\n" + "Case Description: " + dbDescription + "\n" + "Remarks: " + "\n" + dbRemarks; //testing
-            PdfTrueTypeFont font5 = new PdfTrueTypeFont(new Font("Arial", 10f));
-            format4.LineSpacing = font5.Size * 1.5f;
-            PdfStringLayouter textLayouter = new PdfStringLayouter();
-            float imageLeftBlockHeight = imageBottom - y;
-            PdfStringLayoutResult result = textLayouter.Layout(text, font5, format4, new SizeF(imageLeftSpace, imageLeftBlockHeight));
-            if (result.ActualSize.Height < imageBottom - y)
-            {
-                imageLeftBlockHeight = imageLeftBlockHeight + result.LineHeight;
-                result = textLayouter.Layout(text, font5, format4, new SizeF(imageLeftSpace, imageLeftBlockHeight));
-            }
-            foreach (LineInfo line in result.Lines)
-            {
-                page.Canvas.DrawString(line.Text, font5, brush2, 0, y, format4);
-                y = y + result.LineHeight;
-            }
-
-            //PdfTextWidget textWidget = new PdfTextWidget(result.Remainder, font5, brush2);
-            PdfTextWidget textWidget = new PdfTextWidget("", font5, brush2);
-
-            PdfTextLayout textLayout = new PdfTextLayout();
-            textLayout.Break = PdfLayoutBreakType.FitPage;
-            textLayout.Layout = PdfLayoutType.Paginate;
-            RectangleF bounds = new RectangleF(new PointF(0, y), page.Canvas.ClientSize);
-            textWidget.StringFormat = format4;
-            textWidget.Draw(page, bounds, textLayout);
+            // Return length of text before whitespace
+            return i + 1;
         }
-        */
-
     }
 }
