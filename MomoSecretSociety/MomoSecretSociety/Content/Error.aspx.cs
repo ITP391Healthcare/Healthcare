@@ -17,7 +17,7 @@ namespace MomoSecretSociety.Content
         {
             if (Request.IsAuthenticated)
             {
-                ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
+                ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
             }
 
