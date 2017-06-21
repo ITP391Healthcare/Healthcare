@@ -16,6 +16,14 @@ namespace MomoSecretSociety.Content
             //    ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
             //                + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
             //}
+            //try
+            //{
+
+            //}
+            //catch(Exception e)
+            //{
+            //    Response.Write(e.Message);
+            //}
         }
     }
 }
