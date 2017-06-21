@@ -166,10 +166,12 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //Create a page
             PdfPageBase page = doc.Pages.Add();
-            
 
+            
             //Draw the contents of page
             AlignText(page);
+
+            //DigitalSignature (KaiTat)
 
             string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
 
