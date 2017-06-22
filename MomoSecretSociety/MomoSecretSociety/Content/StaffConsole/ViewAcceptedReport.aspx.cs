@@ -167,21 +167,20 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Create a page
             PdfPageBase page = doc.Pages.Add();
 
-            
             //Draw the contents of page
             AlignText(page);
 
-            // + DigitalSignature (KaiTat)
-            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
-            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
-            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
-            signature.ContactInfo = "Harry";
-            signature.Certificated = true;
-            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
+            /*
+            // + Encryption (Joanne) 
+            doc.Security.KeySize = PdfEncryptionKeySize.Key128Bit;
+            doc.Security.OwnerPassword = "e-iceblue";
+            doc.Security.UserPassword = "test";
+            doc.Security.Permissions = PdfPermissionsFlags.Print | PdfPermissionsFlags.FillFields;
+            */
 
+            // + Watermark - Text (Joanne)
             string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
 
-            // + Watermark (text) -> DrawString(string s, PdfFontBase font, PdfBrush brush, float x, float y, PdfStringFormat format)
             PdfTilingBrush brush = new PdfTilingBrush(new SizeF(page.Canvas.ClientSize.Width / 2, page.Canvas.ClientSize.Height / 3));
             brush.Graphics.SetTransparency(0.3f);
             brush.Graphics.Save();
@@ -195,6 +194,16 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Save pdf to a location
             doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
+            //Launching the PDF File
+            System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+
+            // + DigitalSignature (KaiTat)
+            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
+            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
+            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
+            signature.ContactInfo = "Harry";
+            signature.Certificated = true;
+            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
 
         }
 
