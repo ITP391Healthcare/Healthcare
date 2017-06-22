@@ -172,10 +172,9 @@ namespace MomoSecretSociety.Content.StaffConsole
             AlignText(page);
 
             //DigitalSignature (KaiTat)
-
-            String pfxPath = @"..\test.pfx"
+            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
             PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
-            PdfSignature signature -new PdfSignature(doc, page, digi, "demo");
+            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
             signature.ContactInfo = "Harry";
             signature.Certificated = true;
             signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
