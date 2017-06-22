@@ -281,9 +281,13 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
             */
 
+            //Just printing size details
             y1 = y1 + 30;
             page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
-
+            y1 = y1 + 30;
+            SizeF size = page.Canvas.ClientSize;
+            string sizeText = size.ToString();
+            page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
         }
 
         //I need to add breakline 
