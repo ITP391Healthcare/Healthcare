@@ -209,8 +209,6 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         private static void AlignText(PdfPageBase page)
         {
-            Console.ReadLine();
-
             float x1 = 20;
             float y1 = 50;
             float x2 = 90;
