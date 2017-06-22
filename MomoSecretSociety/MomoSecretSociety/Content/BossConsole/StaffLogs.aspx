@@ -43,6 +43,35 @@
         }
     </style>
 
+
+    <style>
+        .btnSearch {
+            border-top: thick solid #e5e5e5;
+            border-right: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            margin-left: -2%;
+            /*box-shadow: 0px 0px 0px 0px #e5e5e5;*/
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+        .txtSearch {
+            border-top: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+            text-align:center;
+        }
+
+            .txtSearch:focus, .btnSearch:focus {
+                /*box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+                border: 1px solid rgba(81, 203, 238, 1);*/
+                outline:none;
+            }
+    </style>
+
     <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">
@@ -75,7 +104,7 @@
 
             <h2 style="text-align: center;">List of Staff Members</h2>
 
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>" SelectCommand="SELECT DISTINCT(Username) FROM [Logs] WHERE Username != @Username ">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>" SelectCommand="SELECT DISTINCT(Username) FROM [UserAccount] WHERE Username != @Username ">
 
                 <SelectParameters>
                     <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
@@ -105,6 +134,16 @@
 
             <h2>Staff Logs -
                 <asp:Label ID="staffUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>'s</h2>
+
+            <%--    <div style="padding: 10px; background-color: #f4f6f5; width: 50%">--%>
+
+            <div style="float: right; margin-top: -8%">
+                <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter an action..." CssClass="txtSearch" />
+                <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
+            </div>
+
+            <%-- </div>--%>
+
             <div class="col-md-9" style="height: calc(100%); width: calc(100%);">
 
                 <div class="box box-primary">
@@ -114,7 +153,7 @@
                             <asp:PlaceHolder ID="phTimeline" runat="server"></asp:PlaceHolder>
 
                             <li>
-                                <i class="fa fa-clock-o bg-gray"></i>
+                                    <i class="fa fa-clock-o bg-gray"></i>
                             </li>
                         </ul>
                     </div>
