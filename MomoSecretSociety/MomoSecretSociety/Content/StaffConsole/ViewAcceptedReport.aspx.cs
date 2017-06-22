@@ -209,11 +209,14 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         private static void AlignText(PdfPageBase page)
         {
+            Console.ReadLine();
+
             float x1 = 20;
             float y1 = 50;
             float x2 = 90;
             string text = "";
             float pageWidth = page.Canvas.ClientSize.Width;
+            string w = page.Canvas.Size.ToString();
 
             //Title
             PdfBrush brush1 = new PdfSolidBrush(Color.Black);
@@ -250,6 +253,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+
+
             //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
@@ -277,6 +282,9 @@ namespace MomoSecretSociety.Content.StaffConsole
             string sizeText = size.ToString();
             page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
             */
+
+            y1 = y1 + 30;
+            page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
 
         }
 
