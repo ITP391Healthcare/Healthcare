@@ -178,6 +178,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             doc.Security.Permissions = PdfPermissionsFlags.Print | PdfPermissionsFlags.FillFields;
             */
 
+            // + DigitalSignature (KaiTat)
+            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
+            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
+            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
+            signature.ContactInfo = "Harry";
+            signature.Certificated = true;
+            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
+
             // + Watermark - Text (Joanne)
             string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
 
@@ -196,14 +204,6 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //Launching the PDF File
             System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
-
-            // + DigitalSignature (KaiTat)
-            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
-            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
-            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
-            signature.ContactInfo = "Harry";
-            signature.Certificated = true;
-            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
 
         }
 
