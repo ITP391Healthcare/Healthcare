@@ -214,7 +214,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             float x2 = 90;
             string text = "";
             float pageWidth = page.Canvas.ClientSize.Width;
-            string w = page.Canvas.Size.ToString();
 
             //Title
             PdfBrush brush1 = new PdfSolidBrush(Color.Black);
@@ -245,12 +244,13 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(dbSubject, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+
+
             //CASE DESCRIPTION
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
             page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
-
 
 
             //REMARKS
@@ -281,13 +281,17 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
             */
 
-            //Just printing size details
-            y1 = y1 + 30;
-            page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
-            y1 = y1 + 30;
-            SizeF size = page.Canvas.ClientSize;
-            string sizeText = size.ToString();
-            page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
+            //if (dbDescription.Length > pageWidth) {
+                //Just printing size details
+                string w = page.Canvas.Size.ToString();
+                y1 = y1 + 30;
+                page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
+                y1 = y1 + 30;
+                SizeF size = page.Canvas.ClientSize;
+                string sizeText = size.ToString();
+                page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
+            //}
+  
         }
 
         //I need to add breakline 
