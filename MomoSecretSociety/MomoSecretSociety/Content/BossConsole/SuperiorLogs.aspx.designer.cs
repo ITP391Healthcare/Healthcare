@@ -49,15 +49,6 @@ namespace MomoSecretSociety.Content.BossConsole {
         protected global::System.Web.UI.WebControls.Panel panel2;
         
         /// <summary>
-        /// bossUsername control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label bossUsername;
-        
-        /// <summary>
         /// txtSearchValue control.
         /// </summary>
         /// <remarks>
@@ -92,6 +83,15 @@ namespace MomoSecretSociety.Content.BossConsole {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearchDate;
+        
+        /// <summary>
+        /// bossUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label bossUsername;
         
         /// <summary>
         /// phTimeline control.

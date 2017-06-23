@@ -15,8 +15,7 @@ namespace MomoSecretSociety.Content.BossConsole
     public partial class StaffLogs : System.Web.UI.Page
     {
         String staffName;
-
-        HtmlGenericControl header;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
@@ -140,6 +139,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
             HtmlGenericControl container = new HtmlGenericControl("div");
             container.Attributes.Add("class", "timeline-item");
+            container.Attributes.Add("background-color", "white");
 
             HtmlGenericControl timeholder = new HtmlGenericControl("span");
             timeholder.Attributes.Add("class", "time");
@@ -150,7 +150,7 @@ namespace MomoSecretSociety.Content.BossConsole
             timeholder.Controls.Add(new LiteralControl(actionDate.ToString()));
             container.Controls.Add(timeholder);
 
-            header = new HtmlGenericControl("h3");
+            HtmlGenericControl header = new HtmlGenericControl("h3");
             header.Attributes.Add("class", "timeline-header no-border");
             header.InnerHtml = action.ToString();
             container.Controls.Add(header);
@@ -169,7 +169,7 @@ namespace MomoSecretSociety.Content.BossConsole
             li.Attributes.Add("class", "time-label");
 
             HtmlGenericControl span = new HtmlGenericControl("span");
-            span.Attributes.Add("class", "bg-purple");
+            span.Attributes.Add("class", "bg-blue");
             span.InnerHtml = date.ToLongDateString();
 
             li.Controls.Add(span);

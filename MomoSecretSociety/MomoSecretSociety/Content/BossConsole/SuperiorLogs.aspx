@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
-    
+
     <style>
         .btnSearch {
             border-top: thick solid #e5e5e5;
@@ -31,7 +31,48 @@
             }
     </style>
 
-         <!-- Pop up Modal -->
+    <style>
+        .ribbon {
+            position: relative;
+            box-shadow: 0px 1px 3px lightblue;
+            clear: both;
+        }
+
+        div.both_ribbon {
+            text-align: center;
+            color: #000;
+            z-index: 1;
+            box-shadow: 0 0 15px lightblue;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+            div.both_ribbon::before {
+                display: block;
+                width: 10px;
+                height: 0px;
+                position: absolute;
+                bottom: -10px;
+                left: -11px;
+                content: "";
+                border-bottom: 10px solid transparent;
+                border-right: 10px solid rgb(0, 80, 116);
+            }
+
+            div.both_ribbon::after {
+                display: block;
+                width: 10px;
+                height: 0px;
+                position: absolute;
+                bottom: -10px;
+                right: -10px;
+                content: "";
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid rgb(0, 80, 116);
+            }
+    </style>
+
+    <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -57,28 +98,36 @@
         </div>
     </div>
 
-     <asp:Panel runat="server" ID="panel2">
+    <asp:Panel runat="server" ID="panel2">
 
         <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%);">
 
-            <h2>Boss Logs -
-                <asp:Label ID="bossUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>'s
-            </h2>
-
-                <div style="float: right; margin-top: -8%">
+            <div style="float: right;">
                 <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword of action" CssClass="txtSearch" />
                 <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
             </div>
 
-            <br />
+            <div style="clear: both;"></div>
 
-            <div style="float: right; margin-top: -7%">
+            <div style="float: right; margin-top: 1%">
                 <asp:TextBox ID="txtSearchValueDate" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
-                <asp:Button ID="btnSearchDate" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearchDate_Click"/>
+                <asp:Button ID="btnSearchDate" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearchDate_Click" />
             </div>
 
 
-            <div class="col-md-9" style="height: calc(100%); width: calc(100%);">
+
+            <br />
+            <br />
+
+            <div class="ribbon both_ribbon">
+                <h2 style="padding: 0.5%; text-shadow: 1px 1px black;">Boss Logs of 
+                <asp:Label ID="bossUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>
+                </h2>
+            </div>
+
+
+
+            <div class="col-md-9" style="height: calc(100%); width: calc(100%); box-shadow: 0 0 10px lightblue">
 
                 <div class="box box-primary">
                     <!-- The timeline -->

@@ -176,7 +176,7 @@ namespace MomoSecretSociety.Content.BossConsole
             li.Attributes.Add("class", "time-label");
 
             HtmlGenericControl span = new HtmlGenericControl("span");
-            span.Attributes.Add("class", "bg-purple");
+            span.Attributes.Add("class", "bg-blue");
             span.InnerHtml = date.ToLongDateString();
 
             li.Controls.Add(span);
