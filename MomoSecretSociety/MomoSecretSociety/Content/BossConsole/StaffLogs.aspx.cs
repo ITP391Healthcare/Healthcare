@@ -241,6 +241,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            bool hasData = false;
 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
@@ -270,12 +271,19 @@ namespace MomoSecretSociety.Content.BossConsole
 
                 while (logReader.Read())
                 {
+                    hasData = true;
+
                     string action = logReader["Action"].ToString();
                     DateTime actionDate = (DateTime)logReader["Timestamp"];
                     //Response.Write("Date : " + actionDate + " Action : " + action + "<br>");
                     AddActionToPlaceholder(action, actionDate);
 
                 }
+            }
+
+            if (hasData == false)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
             }
 
         }

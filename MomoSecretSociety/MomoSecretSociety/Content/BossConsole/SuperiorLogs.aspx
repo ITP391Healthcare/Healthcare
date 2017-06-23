@@ -2,6 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
+    
+    <style>
+        .btnSearch {
+            border-top: thick solid #e5e5e5;
+            border-right: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            margin-left: -2%;
+            /*box-shadow: 0px 0px 0px 0px #e5e5e5;*/
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+        .txtSearch {
+            border-top: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+            text-align: center;
+        }
+
+            .txtSearch:focus, .btnSearch:focus {
+                /*box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+                border: 1px solid rgba(81, 203, 238, 1);*/
+                outline: none;
+            }
+    </style>
+
          <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">
@@ -35,6 +64,19 @@
             <h2>Boss Logs -
                 <asp:Label ID="bossUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>'s
             </h2>
+
+                <div style="float: right; margin-top: -8%">
+                <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword of action" CssClass="txtSearch" />
+                <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
+            </div>
+
+            <br />
+
+            <div style="float: right; margin-top: -7%">
+                <asp:TextBox ID="txtSearchValueDate" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
+                <asp:Button ID="btnSearchDate" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearchDate_Click"/>
+            </div>
+
 
             <div class="col-md-9" style="height: calc(100%); width: calc(100%);">
 
