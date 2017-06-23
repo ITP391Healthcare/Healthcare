@@ -17,7 +17,7 @@ namespace MomoSecretSociety.Content
         {
             Login,
             Logout,
-            ReportSubmitted,
+            StaffSubmittedReport,
             BossApprovedReport,
             BossRejectedReport
         };
@@ -49,7 +49,7 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Logout";
             }
-            else if (action == Action.ReportSubmitted)
+            else if (action == Action.StaffSubmittedReport)
             {
                 actionString = "Report was submitted";
             }

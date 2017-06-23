@@ -16,6 +16,7 @@ namespace MomoSecretSociety.Content.BossConsole
     {
         String staffName;
 
+        HtmlGenericControl header;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
@@ -27,6 +28,8 @@ namespace MomoSecretSociety.Content.BossConsole
                 {
                     errormsgPasswordAuthenticate.Visible = false;
                 }
+
+
             }
         }
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -99,6 +102,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
             while (dateReader.Read())
             {
+
                 DateTime date = (DateTime)dateReader["Date"];
                 //Response.Write("Date : " + date + "<br>");
                 AddDateToPlaceholder(date);
@@ -117,6 +121,7 @@ namespace MomoSecretSociety.Content.BossConsole
                     string action = logReader["Action"].ToString();
                     DateTime actionDate = (DateTime)logReader["Timestamp"];
                     //Response.Write("Date : " + actionDate + " Action : " + action + "<br>");
+
                     AddActionToPlaceholder(action, actionDate);
                 }
             }
@@ -145,15 +150,16 @@ namespace MomoSecretSociety.Content.BossConsole
             timeholder.Controls.Add(new LiteralControl(actionDate.ToString()));
             container.Controls.Add(timeholder);
 
-            HtmlGenericControl header = new HtmlGenericControl("h3");
+            header = new HtmlGenericControl("h3");
             header.Attributes.Add("class", "timeline-header no-border");
             header.InnerHtml = action.ToString();
             container.Controls.Add(header);
 
+            //header.Attributes.CssStyle.Add("font-weight", "bold");
+            //header.Attributes.CssStyle.Add("color", "red");
 
             li.Controls.Add(container);
             phTimeline.Controls.Add(li);
-
 
         }
 
@@ -173,11 +179,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
         private string GetIconStyle(string actionString)
         {
-            if (actionString == "Register")
-            {
-                return "fa-registered bg-aqua";
-            }
-            else if (actionString == "Login")
+            if (actionString == "Login")
             {
                 return "fa-sign-in bg-aqua";
             }
@@ -185,53 +187,17 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-sign-out bg-aqua";
             }
-            else if (actionString == "Profile Picture was changed")
-            {
-                return "fa-picture-o bg-aqua";
-            }
-            else if (actionString == "Password was changed")
-            {
-                return "fa-lock bg-green";
-            }
-            else if (actionString == "Password was reset")
-            {
-                return "fa-lock bg-red";
-            }
-            else if (actionString == "Email was changed")
-            {
-                return "fa-envelope bg-aqua";
-            }
-            else if (actionString == "Contact No was changed")
-            {
-                return "fa-phone bg-aqua";
-            }
-            else if (actionString == "Challenge was completed")
-            {
-                return "fa-bullseye bg-aqua";
-            }
-            else if (actionString == "Write up was submitted")
+            else if (actionString == "Report was submitted")
             {
                 return "fa-file-text bg-aqua";
             }
-            else if (actionString == "Feedback was submitted")
+            else if (actionString == "Report was approved")
             {
-                return "fa-edit bg-aqua"; //fa-commenting
+                return "fa-check-square-o bg-aqua";
             }
-            else if (actionString == "2FA was disabled")
+            else if (actionString == "Report was rejected")
             {
-                return "fa-mobile bg-red";
-            }
-            else if (actionString == "2FA was enabled")
-            {
-                return "fa-mobile bg-green";
-            }
-            else if (actionString == "Account was disabled")
-            {
-                return "fa-user bg-red";
-            }
-            else if (actionString == "Account was enabled")
-            {
-                return "fa-user bg-green";
+                return "fa-exclamation-circle bg-aqua";
             }
 
             return "fa-user bg-aqua";
@@ -273,5 +239,45 @@ namespace MomoSecretSociety.Content.BossConsole
 
         }
 
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+            connection.Open();
+            SqlDataReader dateReader = null;
+            SqlCommand dateCommand = new SqlCommand("SELECT DISTINCT(convert(date, Timestamp)) AS Date FROM Logs WHERE lower(Action) LIKE @Action AND Username = @AccountUsername ORDER BY convert(date,Timestamp) DESC", connection);
+
+            dateCommand.Parameters.AddWithValue("@Action", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
+            dateCommand.Parameters.AddWithValue("@AccountUsername", staffUsername.Text);
+            dateReader = dateCommand.ExecuteReader();
+
+            while (dateReader.Read())
+            {
+                DateTime date = (DateTime)dateReader["Date"];
+                //Response.Write("Date : " + date + "<br>");
+                AddDateToPlaceholder(date);
+
+                SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+                connection2.Open();
+                SqlDataReader logReader = null;
+                SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE lower(Action) LIKE @Action AND Username = @AccountUsername AND convert(date, Timestamp) = convert(date,@Date) ORDER BY Timestamp ASC", connection2);
+
+                logCommand.Parameters.AddWithValue("@Action", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
+                logCommand.Parameters.AddWithValue("@AccountUsername", staffUsername.Text);
+                logCommand.Parameters.AddWithValue("@Date", date);
+                logReader = logCommand.ExecuteReader();
+
+                while (logReader.Read())
+                {
+                    string action = logReader["Action"].ToString();
+                    DateTime actionDate = (DateTime)logReader["Timestamp"];
+                    //Response.Write("Date : " + actionDate + " Action : " + action + "<br>");
+                    AddActionToPlaceholder(action, actionDate);
+
+                }
+            }
+
+        }
     }
 }

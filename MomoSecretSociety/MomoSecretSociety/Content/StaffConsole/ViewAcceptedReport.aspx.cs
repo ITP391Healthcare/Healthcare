@@ -167,22 +167,28 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Create a page
             PdfPageBase page = doc.Pages.Add();
 
-            
             //Draw the contents of page
             AlignText(page);
 
-            //DigitalSignature (KaiTat)
+            /*
+            // + Encryption (Joanne) 
+            doc.Security.KeySize = PdfEncryptionKeySize.Key128Bit;
+            doc.Security.OwnerPassword = "e-iceblue";
+            doc.Security.UserPassword = "test";
+            doc.Security.Permissions = PdfPermissionsFlags.Print | PdfPermissionsFlags.FillFields;
+            */
 
-            //String pfxPath = @"..\test.pfx"
-            //PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
-            //PdfSignature signature -new PdfSignature(doc, page, digi, "demo");
-            //signature.ContactInfo = "Harry";
-            //signature.Certificated = true;
-            //signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
+            // + DigitalSignature (KaiTat)
+            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
+            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
+            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
+            signature.ContactInfo = "Harry";
+            signature.Certificated = true;
+            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
 
+            // + Watermark - Text (Joanne)
             string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
 
-            // + Watermark (text) -> DrawString(string s, PdfFontBase font, PdfBrush brush, float x, float y, PdfStringFormat format)
             PdfTilingBrush brush = new PdfTilingBrush(new SizeF(page.Canvas.ClientSize.Width / 2, page.Canvas.ClientSize.Height / 3));
             brush.Graphics.SetTransparency(0.3f);
             brush.Graphics.Save();
@@ -196,6 +202,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Save pdf to a location
             doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
+            //Launching the PDF File
+            System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
         }
 
@@ -236,11 +244,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(dbSubject, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+
+
             //CASE DESCRIPTION
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
             page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
+
 
             //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
@@ -270,6 +281,17 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
             */
 
+            //if (dbDescription.Length > pageWidth) {
+                //Just printing size details
+                string w = page.Canvas.Size.ToString();
+                y1 = y1 + 30;
+                page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
+                y1 = y1 + 30;
+                SizeF size = page.Canvas.ClientSize;
+                string sizeText = size.ToString();
+                page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
+            //}
+  
         }
 
         //I need to add breakline 

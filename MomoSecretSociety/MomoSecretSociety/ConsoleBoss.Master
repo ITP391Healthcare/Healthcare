@@ -80,7 +80,7 @@
                     hasWarn = true;
                 }
                 else if (hasReachTimeOut()) {
-                    
+
                     $('#myModal').modal('show');
 
                     document.onkeydown = function () {
@@ -93,28 +93,6 @@
                         }
                     }
 
-
-                 //   CallbackFunction(event);
-                    //if (window.performance) {
-                    //    alert("window.performance work's fine on this browser");
-                    //}
-                    //if (performance.navigation.type == 1) {
-                    //    alert('This page is reloaded. CANNOT');
-                    //    return;
-                    //} else {
-                    //    alert('This page is not reloaded');
-                    //}
-
-
-                    // var myValue = 
-                    // $get(<% %>).Value;
-                    // JavascriptValue.ClientID
-                 
-<%--                    var myHidden = document.getElementById("<%:JavascriptValue.ClientID%>");
-                        myHidden.value = myJSVariable;--%>
-
-
-                    // redirect();
                 }
 
                 $('#counter').text("Time to autoredirect " + timeToRedirectInSeconds() + " seconds");
@@ -127,40 +105,17 @@
 
 
 
-        //function UnLoadWindow() {
-        //    //if (performance.navigation.type == 1) {
-        //    //    alert('This page is reloaded. CANNOT');
-        //    //    return;
-        //    //} else {
-        //    //    alert('This page is not reloaded');
-        //    //}
-        //    return 'We strongly recommends NOT closing this window yet.'
-        //}
-
-        //window.onbeforeunload = UnLoadWindow;
-
-        //$(window).bind('beforeunload', function () {
-        //    return "'Are you sure you want to leave the page. All data will be lost!";
-        //});
-
-        //$('#a_exit').live('click', function () {
-        //    $(window).unbind('beforeunload');
-        //});
-
-
-
 
     </script>
     <% } %>
 
-    
-     <script type="text/javascript"> 
-function disableRightClick() 
-{ 
-alert("Sorry, right click is not allowed !!"); 
-return false; 
-} 
-</script> 
+
+<%--    <script type="text/javascript">
+        function disableRightClick() {
+            alert("Sorry, right click is not allowed !!");
+            return false;
+        }
+    </script>--%>
 
 
     <asp:PlaceHolder runat="server">
@@ -223,7 +178,7 @@ return false;
     </style>
 
 </head>
-<body class="masterStyle" style="background-color: lightblue;" oncontextmenu="return disableRightClick();" Onkeydown="return showKeyCode(event)">
+<body class="masterStyle" style="background-color: lightblue;" oncontextmenu="return disableRightClick();" onkeydown="return showKeyCode(event)">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -306,10 +261,8 @@ return false;
 
             <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
 
-                
-        <%--<asp:HiddenField runat="server" ID="JavascriptValue" value="1"/>--%>
 
-
+                <%--<asp:HiddenField runat="server" ID="JavascriptValue" value="1"/>--%>
             </asp:ContentPlaceHolder>
             <hr />
 
