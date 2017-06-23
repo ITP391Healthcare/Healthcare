@@ -197,7 +197,7 @@ namespace MomoSecretSociety.Content.BossConsole
             }
             else if (actionString == "Report was rejected")
             {
-                return "fa-exclamation-circle bg-aqua";
+                return "fa-exclamation-triangle bg-aqua";
             }
 
             return "fa-user bg-aqua";
@@ -276,6 +276,73 @@ namespace MomoSecretSociety.Content.BossConsole
                     AddActionToPlaceholder(action, actionDate);
 
                 }
+            }
+
+        }
+
+
+        protected void btnSearchDate_Click(object sender, EventArgs e)
+        {
+            string s = txtSearchValueDate.Text;
+
+            DateTime dt;
+            if (DateTime.TryParse(s, out dt))
+            {
+                string date = s.ToString().Split(' ')[0];
+
+                date = String.Format("{0:dd/MM/yyyy}", date);
+                DateTime InputDate = Convert.ToDateTime(date);
+
+                try
+                {
+
+                    SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+                    connection.Open();
+
+                    SqlCommand dateCommand = new SqlCommand("SELECT DISTINCT(Timestamp) AS [DD/MM/YYYY] FROM LOGS WHERE Username = @AccountUsername AND convert(date, Timestamp, 103) = @Timestamp", connection);
+
+                    dateCommand.Parameters.AddWithValue("@AccountUsername", staffUsername.Text);
+                    dateCommand.Parameters.AddWithValue("@Timestamp", InputDate);
+
+                    var dbDate = (DateTime)dateCommand.ExecuteScalar();
+
+                    if (dbDate != null)
+                    {
+                        AddDateToPlaceholder(dbDate);
+
+                        SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+                        connection2.Open();
+                        SqlDataReader logReader = null;
+                        SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE Username = @AccountUsername AND convert(date, Timestamp, 103) = convert(date, @Timestamp, 103) ORDER BY convert(date,Timestamp,103) ASC", connection2);
+
+                        logCommand.Parameters.AddWithValue("@AccountUsername", staffUsername.Text);
+                        logCommand.Parameters.AddWithValue("@Timestamp", dbDate);
+                        logReader = logCommand.ExecuteReader();
+
+                        while (logReader.Read())
+                        {
+                            string action = logReader["Action"].ToString();
+                            string actionDate = logReader["Timestamp"].ToString();
+                            //Response.Write("Date : " + actionDate + " Action : " + action + "<br>");
+                            DateTime actionDateDT = Convert.ToDateTime(actionDate);
+
+                            AddActionToPlaceholder(action, actionDateDT);
+
+                        }
+
+                    }
+
+
+                }
+                catch (System.NullReferenceException exc)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
+                }
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please check that you have entered a correct format in DD/MM/YYYY.')", true);
             }
 
         }
