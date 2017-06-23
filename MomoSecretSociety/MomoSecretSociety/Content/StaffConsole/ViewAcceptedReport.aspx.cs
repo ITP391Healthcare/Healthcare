@@ -13,6 +13,9 @@ using Spire.Pdf;
 using Spire.Pdf.Graphics;
 using System.Drawing;
 using Spire.Pdf.Security;
+using Spire.Pdf.Exporting.XPS.Schema;
+using Spire.Pdf.Widget;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MomoSecretSociety.Content.StaffConsole
 {
@@ -179,7 +182,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             */
 
             // + DigitalSignature (KaiTat)
-            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
+            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf-fe\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
             PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
             PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
             signature.ContactInfo = "Harry";
@@ -200,10 +203,50 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawRectangle(brush, new RectangleF(new PointF(1, 1), page.Canvas.ClientSize));
 
             //Save pdf to a location
-            doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //Kt testing
+            doc.SaveToFile("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
             //Launching the PDF File
-            System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //Kt testing
+            System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+
+            //Get and Verify Signature (Kt)
+
+            string filename = @"C:\Users\Kai Tat\Desktop\CreatePDFTest";
+            List<PdfSignature> signatures = new List<PdfSignature>();
+            doc.LoadFromFile(filename);
+            var form = (PdfFormWidget)doc.Form;
+            for (int i = 0; i < form.FieldsWidget.Count; ++i)
+            {
+                var field = form.FieldsWidget[i] as PdfSignatureFieldWidget;
+                if (field != null && field.Signature != null)
+                {
+                    PdfSignature signature1 = field.Signature;
+                    signatures.Add(signature);
+                }
+            }
+
+            //Get first signature
+            PdfSignature signatureOne = signatures[0];
+            //Verify
+            try
+            {
+                bool bSignature = signatureOne.VerifySignature();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+            //Get cert, date, date valid and end, version, subject
+            X509Certificate2 certificate = signatureOne.Certificate as X509Certificate2;
+            DateTime date = signatureOne.Date;
+            DateTime validStart = certificate.NotBefore;
+            DateTime validEnd = certificate.NotAfter;
+            int version = certificate.Version;
+            string subject = certificate.Subject;
 
         }
 
