@@ -62,13 +62,13 @@
             border-bottom: thick solid #e5e5e5;
             box-shadow: 0 0 5px rgba(81, 203, 238, 1);
             border: 1px solid rgba(81, 203, 238, 1);
-            text-align:center;
+            text-align: center;
         }
 
             .txtSearch:focus, .btnSearch:focus {
                 /*box-shadow: 0 0 5px rgba(81, 203, 238, 1);
                 border: 1px solid rgba(81, 203, 238, 1);*/
-                outline:none;
+                outline: none;
             }
     </style>
 
@@ -138,9 +138,17 @@
             <%--    <div style="padding: 10px; background-color: #f4f6f5; width: 50%">--%>
 
             <div style="float: right; margin-top: -8%">
-                <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter an action..." CssClass="txtSearch" />
+                <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword of action" CssClass="txtSearch" />
                 <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
             </div>
+
+            <br />
+
+            <div style="float: right; margin-top: -7%">
+                <asp:TextBox ID="txtSearchValueDate" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
+                <asp:Button ID="btnSearchDate" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearchDate_Click" />
+            </div>
+
 
             <%-- </div>--%>
 
@@ -153,7 +161,7 @@
                             <asp:PlaceHolder ID="phTimeline" runat="server"></asp:PlaceHolder>
 
                             <li>
-                                    <i class="fa fa-clock-o bg-gray"></i>
+                                <i class="fa fa-clock-o bg-gray"></i>
                             </li>
                         </ul>
                     </div>
