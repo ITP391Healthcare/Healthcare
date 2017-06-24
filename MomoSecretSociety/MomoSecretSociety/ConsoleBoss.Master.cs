@@ -97,7 +97,7 @@ namespace MomoSecretSociety
             //Session["isLocked"] = myJSVariableValue;
 
         }
-
+        
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {

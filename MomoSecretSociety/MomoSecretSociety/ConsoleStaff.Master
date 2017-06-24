@@ -96,13 +96,12 @@
     <% } %>
 
 
-         <script type="text/javascript"> 
-function disableRightClick() 
-{ 
-alert("Sorry, right click is not allowed !!"); 
-return false; 
-} 
-</script> 
+    <script type="text/javascript">
+        function disableRightClick() {
+            alert("Sorry, right click is not allowed !!");
+            return false;
+        }
+    </script>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -202,7 +201,7 @@ return false;
                 </span>
             </div>
 
-            <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova">SecureReportSystem</h1>
+            <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova; text-shadow: 2px 2px beige;">SecureReportSystem</h1>
         </div>
 
 

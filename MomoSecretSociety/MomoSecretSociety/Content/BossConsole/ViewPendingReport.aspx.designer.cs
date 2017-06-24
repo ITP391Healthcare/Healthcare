@@ -58,15 +58,6 @@ namespace MomoSecretSociety.Content.BossConsole {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Label2_2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2_2;
-        
-        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -157,15 +148,6 @@ namespace MomoSecretSociety.Content.BossConsole {
         protected global::System.Web.UI.WebControls.TextBox Label12_remarks;
         
         /// <summary>
-        /// Button_Approve control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_Approve;
-        
-        /// <summary>
         /// Button_Reject control.
         /// </summary>
         /// <remarks>
@@ -173,5 +155,14 @@ namespace MomoSecretSociety.Content.BossConsole {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_Reject;
+        
+        /// <summary>
+        /// Button_Approve control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Approve;
     }
 }

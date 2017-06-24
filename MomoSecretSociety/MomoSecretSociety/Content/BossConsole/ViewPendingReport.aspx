@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
     <style>
-        .button-link {
+        .button-linkReject, .button-linkApprove {
             text-shadow: none;
             border-radius: 3px;
             border-color: #19c589;
@@ -11,12 +11,63 @@
             font: 13px/16px "lft-etica-n4", "lft-etica", Arial, sans-serif;
             padding: 8px 17px;
             background-color: #19c589;
+            float: right;
         }
 
-            .button-link:hover {
+            .button-linkReject:hover, .button-linkApprove:hover {
                 opacity: 0.7;
                 text-decoration: none;
             }
+
+        .button-linkReject {
+            margin-top: 1%;
+        }
+
+        .button-linkApprove {
+            margin-top: 1%;
+        }
+    </style>
+
+
+    <style>
+        .table tbody > tr > td {
+            border-top: none;
+        }
+
+        td {
+            min-width: 200px;
+        }
+
+        textarea.textbox_remarks {
+            border: 1px solid #c4c4c4;
+            /*width: 180px;*/
+            width: 700px;
+            font-size: 13px;
+            padding: 3px;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            box-shadow: 0px 0px 8px #d9d9d9;
+            -moz-box-shadow: 0px 0px 8px #d9d9d9;
+            -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+        }
+
+            textarea.textbox_remarks:focus {
+                outline: none;
+                border: 1px solid #b5b5f9;
+                box-shadow: 0px 0px 8px #b5b5f9;
+                -moz-box-shadow: 0px 0px 8px #b5b5f9;
+                -webkit-box-shadow: 0px 0px 8px #b5b5f9;
+            }
+
+
+        .label_caseDesc {
+            width: 500px !important;
+        }
+
+        .label_subject {
+            border-bottom: 2px solid lightblue;
+        }
     </style>
 
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -44,37 +95,70 @@
         </div>
     </div>
 
-
-    <asp:Label ID="Label1" runat="server" Text="- REPORT #" Font-Size="30px" Font-Bold="True"></asp:Label>
-    <asp:Label ID="Label2" runat="server" Text="" Font-Size="30px" Font-Bold="True"></asp:Label>
-    <asp:Label ID="Label2_2" runat="server" Text=" -" Font-Size="30px" Font-Bold="true"></asp:Label>
-
-    <div class="jumbotron" style="background-color: white;">
-
-        <asp:Label ID="Label3" runat="server" Text="Date: "></asp:Label>
-        <asp:Label ID="Label4" runat="server" Text="" Font-Bold="true"></asp:Label><br />
-
-        <asp:Label ID="Label5" runat="server" Text="From: "></asp:Label>
-        <asp:Label ID="Label6" runat="server" Text="" Font-Bold="true"></asp:Label><br />
-
-        <asp:Label ID="Label7" runat="server" Text="Subject: "></asp:Label>
-        <asp:Label ID="Label8" runat="server" Text="" Font-Bold="true"></asp:Label><br />
-
-        <asp:Label ID="Label9" runat="server" Text="Case Description: "></asp:Label><br />
-        <asp:Label ID="Label10" runat="server" Text="" Font-Bold="true"></asp:Label><br />
-        <br />
-
-        <asp:Label ID="Label11" runat="server" Text="Remarks: "></asp:Label><br />
-        <%--<asp:Label ID="Label12" runat="server" Text="" Font-Bold="true"></asp:Label><br />--%>
-        <asp:TextBox TextMode="MultiLine" ID="Label12_remarks" runat="server"></asp:TextBox>
-
-        <br />
-
-        <asp:Button ID="Button_Approve" runat="server" CssClass="button-link" Text="Approve" OnClick="Button_Approve_Click"/>
-
-        <asp:Button ID="Button_Reject" runat="server" CssClass="button-link" Text="Reject" OnClick="Button_Reject_Click" />
-
+    <%--    <marquee hspace="40%" style="text-align: center;">--%>
+    <div class="header" style="text-align: center; margin-top: 2%; text-shadow: 2px 2px beige;">
+        <asp:Label ID="Label1" runat="server" Text="You are currently viewing Report of #" Font-Size="30px" Font-Bold="True"></asp:Label>
+        <asp:Label ID="Label2" runat="server" Text="" Font-Size="30px" Font-Bold="True"></asp:Label>
+        <%--<asp:Label ID="Label2_2" runat="server" Text=" -" Font-Size="30px" Font-Bold="true"></asp:Label>--%>
     </div>
+    <%--    </marquee>--%>
+
+    <table class="jumbotron" style="background-color: white; border-collapse: initial; border-spacing: 0; padding-left: 12%; padding-right: 12%; font-size: medium">
+        <tr>
+            <td>
+                <asp:Label ID="Label3" runat="server" Text="Date: "></asp:Label>
+            </td>
+            <td>
+                <asp:Label ID="Label4" runat="server" Text="" Font-Bold="true"></asp:Label><br />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <asp:Label ID="Label5" runat="server" Text="From: "></asp:Label>
+            </td>
+            <td>
+                <asp:Label ID="Label6" runat="server" Text="" Font-Bold="true"></asp:Label><br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label7" runat="server" Text="Subject: "></asp:Label>
+            </td>
+            <td style="padding-bottom: 2%;">
+                <asp:Label ID="Label8" runat="server" Text="" Font-Bold="true" CssClass="label_subject"></asp:Label><br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label9" runat="server" Text="Case Description: "></asp:Label><br />
+            </td>
+            <td style="min-width: 700px !important; line-height: 120% !important;">
+
+                <asp:Label ID="Label10" runat="server" Text="" CssClass="label_caseDesc" Font-Bold="true"></asp:Label><br />
+
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 2%; vertical-align: top;">
+                <asp:Label ID="Label11" runat="server" Text="Remarks: "></asp:Label><br />
+                <%--<asp:Label ID="Label12" runat="server" Text="" Font-Bold="true"></asp:Label><br />--%>
+            </td>
+            <td style="padding-top: 2%;">
+                <asp:TextBox TextMode="MultiLine" ID="Label12_remarks" runat="server" CssClass="textbox_remarks"></asp:TextBox>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <asp:Button ID="Button_Reject" runat="server" CssClass="button-linkReject" Text="Reject" OnClick="Button_Reject_Click" />
+
+                <asp:Button ID="Button_Approve" runat="server" CssClass="button-linkApprove" Text="Approve" OnClick="Button_Approve_Click" />
+            </td>
+        </tr>
+
+    </table>
 
 
 

@@ -127,7 +127,7 @@
 
         <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%); box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4); text-align: center;">
 
-            <h2 style="text-align: center;">List of Staff Members</h2>
+            <h2 style="text-align: center; text-shadow: 2px 2px beige;">List of Staff Members</h2>
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>" SelectCommand="SELECT DISTINCT(Username) FROM [UserAccount] WHERE Username != @Username ">
 

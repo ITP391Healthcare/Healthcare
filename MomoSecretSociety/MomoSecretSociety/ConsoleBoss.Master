@@ -110,7 +110,7 @@
     <% } %>
 
 
-<%--    <script type="text/javascript">
+    <%--    <script type="text/javascript">
         function disableRightClick() {
             alert("Sorry, right click is not allowed !!");
             return false;
@@ -209,7 +209,7 @@
                 </span>
             </div>
 
-            <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova">SecureReportSystem</h1>
+            <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova; text-shadow: 2px 2px beige;">SecureReportSystem</h1>
         </div>
 
 
@@ -233,10 +233,11 @@
 
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
-                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/PendingReports">
-                                    <asp:Label runat="server" ID="pendingRep">PENDING REPORTS</asp:Label>
-
-                                </a></li>
+                                <li style="border-right: lightblue 2px solid;">
+                                    <a runat="server" href="~/Content/BossConsole/PendingReports">
+                                        <asp:Label runat="server" ID="pendingRep">PENDING REPORTS</asp:Label>
+                                    </a>
+                                </li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/AcceptedReports">ACCEPTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/RejectedReports">REJECTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/StaffLogs.aspx">STAFF LOGS</a></li>

@@ -39,8 +39,9 @@ namespace MomoSecretSociety.Content.BossConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-           
-            }
+
+
+        }
 
         private void showNewPendingReports()
         {
