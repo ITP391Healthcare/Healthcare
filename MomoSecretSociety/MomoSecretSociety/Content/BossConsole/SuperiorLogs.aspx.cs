@@ -21,8 +21,12 @@ namespace MomoSecretSociety.Content.BossConsole
                 ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
 
-                readLogsRespectively();
-                bossUsername.Text = Context.User.Identity.Name;
+                               bossUsername.Text = Context.User.Identity.Name;
+
+                if (!IsPostBack)
+                {
+                    readLogsRespectively();
+                }
 
             }
 
@@ -30,7 +34,13 @@ namespace MomoSecretSociety.Content.BossConsole
             if (IsPostBack)
             {
                 errormsgPasswordAuthenticate.Visible = false;
+
+                if (txtSearchValue.Text == null && txtSearchValueDate.Text == null)
+                {
+                    readLogsRespectively();
+                }
             }
+
         }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -166,7 +176,7 @@ namespace MomoSecretSociety.Content.BossConsole
             li.Attributes.Add("class", "time-label");
 
             HtmlGenericControl span = new HtmlGenericControl("span");
-            span.Attributes.Add("class", "bg-purple");
+            span.Attributes.Add("class", "bg-blue");
             span.InnerHtml = date.ToLongDateString();
 
             li.Controls.Add(span);
@@ -176,11 +186,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
         private string GetIconStyle(string actionString)
         {
-            if (actionString == "Register")
-            {
-                return "fa-registered bg-aqua";
-            }
-            else if (actionString == "Login")
+            if (actionString == "Login")
             {
                 return "fa-sign-in bg-aqua";
             }
@@ -188,56 +194,137 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-sign-out bg-aqua";
             }
-            else if (actionString == "Profile Picture was changed")
-            {
-                return "fa-picture-o bg-aqua";
-            }
-            else if (actionString == "Password was changed")
-            {
-                return "fa-lock bg-green";
-            }
-            else if (actionString == "Password was reset")
-            {
-                return "fa-lock bg-red";
-            }
-            else if (actionString == "Email was changed")
-            {
-                return "fa-envelope bg-aqua";
-            }
-            else if (actionString == "Contact No was changed")
-            {
-                return "fa-phone bg-aqua";
-            }
-            else if (actionString == "Challenge was completed")
-            {
-                return "fa-bullseye bg-aqua";
-            }
-            else if (actionString == "Write up was submitted")
+            else if (actionString == "Report was submitted")
             {
                 return "fa-file-text bg-aqua";
             }
-            else if (actionString == "Feedback was submitted")
+            else if (actionString == "Report was approved")
             {
-                return "fa-edit bg-aqua"; //fa-commenting
+                return "fa-check-square-o bg-aqua";
             }
-            else if (actionString == "2FA was disabled")
+            else if (actionString == "Report was rejected")
             {
-                return "fa-mobile bg-red";
-            }
-            else if (actionString == "2FA was enabled")
-            {
-                return "fa-mobile bg-green";
-            }
-            else if (actionString == "Account was disabled")
-            {
-                return "fa-user bg-red";
-            }
-            else if (actionString == "Account was enabled")
-            {
-                return "fa-user bg-green";
+                return "fa-exclamation-triangle bg-aqua";
             }
 
             return "fa-user bg-aqua";
+
+        }
+
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            bool hasData = false;
+
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+            connection.Open();
+            SqlDataReader dateReader = null;
+            SqlCommand dateCommand = new SqlCommand("SELECT DISTINCT(convert(date, Timestamp)) AS Date FROM Logs WHERE lower(Action) LIKE @Action AND Username = @AccountUsername ORDER BY convert(date,Timestamp) DESC", connection);
+
+            dateCommand.Parameters.AddWithValue("@Action", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
+            dateCommand.Parameters.AddWithValue("@AccountUsername", bossUsername.Text);
+            dateReader = dateCommand.ExecuteReader();
+
+            while (dateReader.Read())
+            {
+                DateTime date = (DateTime)dateReader["Date"];
+                //Response.Write("Date : " + date + "<br>");
+                AddDateToPlaceholder(date);
+
+                SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+                connection2.Open();
+                SqlDataReader logReader = null;
+                SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE lower(Action) LIKE @Action AND Username = @AccountUsername AND convert(date, Timestamp) = convert(date,@Date) ORDER BY Timestamp ASC", connection2);
+
+                logCommand.Parameters.AddWithValue("@Action", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
+                logCommand.Parameters.AddWithValue("@AccountUsername", bossUsername.Text);
+                logCommand.Parameters.AddWithValue("@Date", date);
+                logReader = logCommand.ExecuteReader();
+
+                while (logReader.Read())
+                {
+                    hasData = true;
+
+                    string action = logReader["Action"].ToString();
+                    DateTime actionDate = (DateTime)logReader["Timestamp"];
+                    //Response.Write("Date : " + actionDate + " Action : " + action + "<br>");
+                    AddActionToPlaceholder(action, actionDate);
+
+                }
+            }
+
+            if (hasData == false)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
+            }
+
+        }
+
+
+        protected void btnSearchDate_Click(object sender, EventArgs e)
+        {
+            string s = txtSearchValueDate.Text;
+
+            DateTime dt;
+            if (DateTime.TryParse(s, out dt))
+            {
+                string date = s.ToString().Split(' ')[0];
+
+                date = String.Format("{0:dd/MM/yyyy}", date);
+                DateTime InputDate = Convert.ToDateTime(date);
+
+                try
+                {
+
+                    SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+                    connection.Open();
+
+                    SqlCommand dateCommand = new SqlCommand("SELECT DISTINCT(Timestamp) AS [DD/MM/YYYY] FROM LOGS WHERE Username = @AccountUsername AND convert(date, Timestamp, 103) = convert(date, @Timestamp, 103)", connection);
+
+                    dateCommand.Parameters.AddWithValue("@AccountUsername", bossUsername.Text);
+                    dateCommand.Parameters.AddWithValue("@Timestamp", InputDate);
+
+                    var dbDate = (DateTime)dateCommand.ExecuteScalar();
+
+                    if (dbDate != null)
+                    {
+                        AddDateToPlaceholder(dbDate);
+
+                        SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+                        connection2.Open();
+                        SqlDataReader logReader = null;
+                        SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE Username = @AccountUsername AND convert(date, Timestamp, 103) = convert(date, @Timestamp, 103) ORDER BY convert(date,Timestamp,103) ASC", connection2);
+
+                        logCommand.Parameters.AddWithValue("@AccountUsername", bossUsername.Text);
+                        logCommand.Parameters.AddWithValue("@Timestamp", dbDate);
+                        logReader = logCommand.ExecuteReader();
+
+                        while (logReader.Read())
+                        {
+                            string action = logReader["Action"].ToString();
+                            string actionDate = logReader["Timestamp"].ToString();
+                            //Response.Write("Date : " + actionDate + " Action : " + action + "<br>");
+                            DateTime actionDateDT = Convert.ToDateTime(actionDate);
+
+                            AddActionToPlaceholder(action, actionDateDT);
+
+                        }
+
+                    }
+
+
+                }
+                catch (System.NullReferenceException exc)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
+                }
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please check that you have entered a correct format in DD/MM/YYYY.')", true);
+            }
 
         }
 

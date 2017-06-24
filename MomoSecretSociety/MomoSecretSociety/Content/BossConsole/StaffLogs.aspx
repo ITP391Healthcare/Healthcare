@@ -3,22 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
     <style>
-        .circleIcon {
-            width: 30px;
-            height: 30px;
-            font-size: 15px;
-            line-height: 30px;
-            position: absolute;
-            color: #666;
-            /*background: #0073b7;*/
-            background: #d2d6de;
-            border-radius: 50%;
-            text-align: center;
-            left: 18px;
-            top: 0;
-            margin-left: -9.5%;
-        }
-
         th {
             text-align: center;
         }
@@ -69,6 +53,47 @@
                 /*box-shadow: 0 0 5px rgba(81, 203, 238, 1);
                 border: 1px solid rgba(81, 203, 238, 1);*/
                 outline: none;
+            }
+    </style>
+
+    <style>
+        .ribbon {
+            position: relative;
+            box-shadow: 0px 1px 3px lightblue;
+            clear: both;
+        }
+
+        div.both_ribbon {
+            text-align: center;
+            color: #000;
+            z-index: 1;
+            box-shadow: 0 0 15px lightblue;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+            div.both_ribbon::before {
+                display: block;
+                width: 10px;
+                height: 0px;
+                position: absolute;
+                bottom: -10px;
+                left: -11px;
+                content: "";
+                border-bottom: 10px solid transparent;
+                border-right: 10px solid rgb(0, 80, 116);
+            }
+
+            div.both_ribbon::after {
+                display: block;
+                width: 10px;
+                height: 0px;
+                position: absolute;
+                bottom: -10px;
+                right: -10px;
+                content: "";
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid rgb(0, 80, 116);
             }
     </style>
 
@@ -132,27 +157,28 @@
 
         <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%);">
 
-            <h2>Staff Logs -
-                <asp:Label ID="staffUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>'s</h2>
-
-            <%--    <div style="padding: 10px; background-color: #f4f6f5; width: 50%">--%>
-
-            <div style="float: right; margin-top: -8%">
+            <div style="float: right;">
                 <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword of action" CssClass="txtSearch" />
                 <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
             </div>
 
-            <br />
+            <div style="clear: both;"></div>
 
-            <div style="float: right; margin-top: -7%">
+            <div style="float: right; margin-top: 1%;">
                 <asp:TextBox ID="txtSearchValueDate" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
                 <asp:Button ID="btnSearchDate" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearchDate_Click" />
             </div>
 
+            <br />
+            <br />
 
-            <%-- </div>--%>
+            <div class="ribbon both_ribbon">
+                <h2 style="padding: 0.5%; text-shadow: 1px 1px black;">Staff Logs of
+                    <asp:Label ID="staffUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>
+                </h2>
+            </div>
 
-            <div class="col-md-9" style="height: calc(100%); width: calc(100%);">
+            <div class="col-md-9" style="height: calc(100%); width: calc(100%); box-shadow: 0 0 10px lightblue">
 
                 <div class="box box-primary">
                     <!-- The timeline -->
