@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -38,8 +40,73 @@ namespace MomoSecretSociety.Content.StaffConsole
         }
             int CaseNumber = 201700000;
 
+        //Encryption of subject and description
+
+        private string Encrypt(string clearText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
+
+        private string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
+
+
         protected void SubmitButton_Click(object sender, EventArgs e)
-        {   //Case Number Created +1 
+        {
+
+            string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Report VALUES(@subject, @description)"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@subject", Encrypt(TextBox2.Text.Trim()));
+                    cmd.Parameters.AddWithValue("@description", Encrypt(TextBox1.Text.Trim()));
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            Response.Redirect(Request.Url.AbsoluteUri);
+
+            //Case Number Created +1 
             //Retrieve the latest case number and +1
             string dbCaseNumber="";
             connection.Open();
@@ -66,7 +133,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             string SubjectInput = TextBox2.Text;
             string CaseDesInput = TextBox1.Text;
             string status = "pending";
-            
 
             //Add the details into database (done)
             //Report inserted into database, with ReportStatus = Pending (done)
@@ -74,14 +140,15 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Open();
 
+
             SqlCommand insertReportCommand = new SqlCommand();
-            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus, CreatedDateTime)" + 
-                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status, @createdDT)";
+            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Remarks, ReportStatus, CreatedDateTime)" + 
+                " VALUES (@caseNumber, @username, @date, @remarks, @status, @createdDT)";
             insertReportCommand.Parameters.AddWithValue("@caseNumber", cNumber);
             insertReportCommand.Parameters.AddWithValue("@username", NameInput);
             insertReportCommand.Parameters.AddWithValue("@date", DateInput);
-            insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
-            insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
+            //insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
+            //insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
             insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
             insertReportCommand.Parameters.AddWithValue("@createdDT", createdDateTime);
@@ -218,7 +285,6 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             return BitConverter.ToString(hashedBytes);
         }
-
     }
 
 }
