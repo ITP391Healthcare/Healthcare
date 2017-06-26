@@ -398,3 +398,9 @@ C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSoc
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.dll
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.xml
 C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.xml
+C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.dll
+C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.mshtml.dll
+C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.xml
+C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.xml
+C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.Resource1.resources
+C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csproj.GenerateResource.Cache

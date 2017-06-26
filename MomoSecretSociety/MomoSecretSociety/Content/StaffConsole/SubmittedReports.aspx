@@ -53,6 +53,7 @@
             <label style ="color: red; font-weight: bold; font-size: 30px;"> There are no reports at the moment</label>
         </EmptyDataTemplate>
         <Columns>
+            <%--<asp:HyperLinkField DataTextField="CaseNumber" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="ViewSelectedReport.aspx?Id={0}" />--%>
             <asp:BoundField DataField="CaseNumber" HeaderText="Case Number" ItemStyle-Width="200" />
             <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Width="200" />
             <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="200" />
