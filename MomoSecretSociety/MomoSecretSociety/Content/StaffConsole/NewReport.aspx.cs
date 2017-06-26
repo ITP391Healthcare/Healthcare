@@ -90,21 +90,7 @@ namespace MomoSecretSociety.Content.StaffConsole
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
 
-            string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Report VALUES(@subject, @description)"))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@subject", Encrypt(TextBox2.Text.Trim()));
-                    cmd.Parameters.AddWithValue("@description", Encrypt(TextBox1.Text.Trim()));
-                    cmd.Connection = con;
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
-            Response.Redirect(Request.Url.AbsoluteUri);
+            
 
             //Case Number Created +1 
             //Retrieve the latest case number and +1
@@ -140,6 +126,23 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Open();
 
+
+            //(KT)
+            string constr = ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Report VALUES(@Subject, @Description)"))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Subject", Encrypt(TextBox2.Text.Trim()));
+                    cmd.Parameters.AddWithValue("@Description", Encrypt(TextBox1.Text.Trim()));
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            Response.Redirect(Request.Url.AbsoluteUri);
 
             SqlCommand insertReportCommand = new SqlCommand();
             insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Remarks, ReportStatus, CreatedDateTime)" + 
