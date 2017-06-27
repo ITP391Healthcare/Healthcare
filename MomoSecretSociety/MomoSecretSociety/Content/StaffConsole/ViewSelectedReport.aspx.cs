@@ -32,11 +32,11 @@ namespace MomoSecretSociety.Content.StaffConsole
                 {
                     //let say i retrieve username
                     CaseNumber.Text = selectedReportsDetailsReader["CaseNumber"].ToString();
-                    Username.Text = "From: <b>" + selectedReportsDetailsReader["Username"].ToString() + "</b>";
-                    Date.Text = "Date: " + selectedReportsDetailsReader["Username"].ToString();
-                    Subject.Text = "Subject: " + selectedReportsDetailsReader["Subject"].ToString();
-                    Description.Text = "Description: " + selectedReportsDetailsReader["Description"].ToString();
-                    Remarks.Text = "Remarks: " + selectedReportsDetailsReader["Remarks"].ToString();
+                    Username.Text = "From: <b>" + selectedReportsDetailsReader["Date"].ToString() + "</b>";
+                    Date.Text = "Date: <b>" + selectedReportsDetailsReader["Username"].ToString() + "</b>";
+                    Subject.Text = "Subject: <b>" + selectedReportsDetailsReader["Subject"].ToString() + "</b>";
+                    Description.Text = selectedReportsDetailsReader["Description"].ToString();
+                    Remarks.Text = "Remarks: <b>" + selectedReportsDetailsReader["Remarks"].ToString() + "</b>";
 
                 }
                 viewSelectedReportsDetailsConnection.Close();

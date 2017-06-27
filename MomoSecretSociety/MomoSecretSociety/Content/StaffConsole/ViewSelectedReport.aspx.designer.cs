@@ -58,6 +58,15 @@ namespace MomoSecretSociety.Content.StaffConsole {
         protected global::System.Web.UI.WebControls.Label Status;
         
         /// <summary>
+        /// CaseDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CaseDescription;
+        
+        /// <summary>
         /// Description control.
         /// </summary>
         /// <remarks>
