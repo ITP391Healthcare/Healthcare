@@ -31,12 +31,12 @@ namespace MomoSecretSociety.Content.StaffConsole
                 while (selectedReportsDetailsReader.Read())
                 {
                     //let say i retrieve username
-                    CaseNumber.Text = selectedReportsDetailsReader["CaseNumber"].ToString();
-                    Username.Text = "From: <b>" + selectedReportsDetailsReader["Date"].ToString() + "</b>";
-                    Date.Text = "Date: <b>" + selectedReportsDetailsReader["Username"].ToString() + "</b>";
-                    Subject.Text = "Subject: <b>" + selectedReportsDetailsReader["Subject"].ToString() + "</b>";
-                    Description.Text = selectedReportsDetailsReader["Description"].ToString();
-                    Remarks.Text = "Remarks: <b>" + selectedReportsDetailsReader["Remarks"].ToString() + "</b>";
+                    Label2.Text = selectedReportsDetailsReader["CaseNumber"].ToString();
+                    Label6.Text = selectedReportsDetailsReader["Date"].ToString();
+                    Label4.Text = selectedReportsDetailsReader["Username"].ToString();
+                    Label8.Text = selectedReportsDetailsReader["Subject"].ToString();
+                    Label10.Text = selectedReportsDetailsReader["Description"].ToString();
+                    Label12.Text =selectedReportsDetailsReader["Remarks"].ToString();
 
                 }
                 viewSelectedReportsDetailsConnection.Close();
