@@ -174,16 +174,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Draw the contents of page
             AlignText(page);
 
-            /*
             // + Encryption (Joanne) 
             doc.Security.KeySize = PdfEncryptionKeySize.Key128Bit;
             doc.Security.OwnerPassword = "e-iceblue";
             doc.Security.UserPassword = "test";
             doc.Security.Permissions = PdfPermissionsFlags.Print | PdfPermissionsFlags.FillFields;
-            */
 
             // + DigitalSignature Method 1 (KaiTat)
-            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf-fe\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
+            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx";
             PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
             PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
             signature.ContactInfo = "Harry Hu";
@@ -218,15 +216,15 @@ namespace MomoSecretSociety.Content.StaffConsole
             
 
             //Save pdf to a location
-            //doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
             //Kt testing
-            doc.SaveToFile("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //doc.SaveToFile("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
 
             //Launching the PDF File
-            //System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
             //Kt testing
-            System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
         }
 
@@ -268,11 +266,25 @@ namespace MomoSecretSociety.Content.StaffConsole
             y1 = y1 + 30;
 
 
+            string[] delimiter = new string[] { " " };
+            string[] result;
 
+            string finalResult = "";
+            int counter = 0;
+
+            result = dbDescription.Split(delimiter, StringSplitOptions.None);
+
+            foreach (string s in result)
+            {
+                
+            }
+
+
+                
             //CASE DESCRIPTION
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
-            page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment);
+            page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment); //Characters count: 76
             y1 = y1 + 30;
 
 
