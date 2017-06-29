@@ -3,6 +3,26 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <style>
+
+        .myDataGrid {
+             border: 2px solid black;
+             width: 80%;
+         }
+ 
+         th, td{
+             text-align:center;
+             height:40px;
+         }
+ 
+         .header{
+             background-color:#535360;
+             font-family: Arial;
+             color: white;
+             border: none;
+         }
+
+    </style>
     
       <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -46,7 +66,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1" 
-        AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand">
+        AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5">
         
         <%-- If There are no reports --%>
         <EmptyDataTemplate>

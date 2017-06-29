@@ -106,7 +106,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
                 Session["caseNumberOfThisSelectedReport"] = commandArgs;
 
-                Response.Redirect("ViewSelectedReport.aspx");
+                Response.Redirect("ViewAcceptedReport.aspx");
               
                 
             }

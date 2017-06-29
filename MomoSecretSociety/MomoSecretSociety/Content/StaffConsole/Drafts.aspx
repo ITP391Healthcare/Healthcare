@@ -1,6 +1,26 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ConsoleStaff.Master" AutoEventWireup="true" CodeBehind="Drafts.aspx.cs" Inherits="MomoSecretSociety.Content.StaffConsole.Drafts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+  
+    <style>
 
+        .myDataGrid {
+             border: 2px solid black;
+             width: 80%;
+         }
+ 
+         th, td{
+             text-align:center;
+             height:40px;
+         }
+ 
+         .header{
+             background-color:#535360;
+             font-family: Arial;
+             color: white;
+             border: none;
+         }
+
+    </style>
       <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">
@@ -26,5 +46,40 @@
             </div>
         </div>
     </div>
+
+        <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
+        SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
+        WHERE ([Username] = @Username AND (ReportStatus = 'pending'));">
+        <SelectParameters>
+            <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1" 
+        AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5">
+        
+        <%-- If There are no reports --%>
+        <EmptyDataTemplate>
+            <label style ="color: red; font-weight: bold; font-size: 30px;"> There are no reports at the moment</label>
+        </EmptyDataTemplate>
+        <Columns>
+            <%--<asp:HyperLinkField DataTextField="CaseNumber" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="ViewSelectedReport.aspx?Id={0}" />--%>
+            <%--<asp:BoundField DataField="CaseNumber" HeaderText="Case Number" ItemStyle-Width="200" />--%>
+            <asp:TemplateField HeaderText="Case Number">
+                <ItemTemplate>
+                    <asp:LinkButton runat="server" ID="link" CommandArgument='<%# Eval("CaseNumber")%>' CommandName="DataCommand" Text='<%# Eval("CaseNumber") %>'></asp:LinkButton>
+                 </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Width="200" />
+            <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="200" />
+            <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="200" />
+            <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="200" />
+
+
+
+
+
+
+        </Columns>
+    </asp:GridView>
 
 </asp:Content>
