@@ -19,7 +19,9 @@ namespace MomoSecretSociety.Content
             Logout,
             StaffSubmittedReport,
             BossApprovedReport,
-            BossRejectedReport
+            BossRejectedReport,
+            ReportSavedToPdf,
+            SessionTimeout
         };
 
         public static void Log(string username, Action action)
@@ -60,6 +62,14 @@ namespace MomoSecretSociety.Content
             else if (action == Action.BossRejectedReport)
             {
                 actionString = "Report was rejected";
+            }
+            else if (action == Action.ReportSavedToPdf)
+            {
+                actionString = "Report saved to PDF";
+            }
+            else if (action == Action.SessionTimeout)
+            {
+                actionString = "Session Timeout";
             }
 
             return actionString;
