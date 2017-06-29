@@ -74,6 +74,7 @@
                 else if (hasReachTimeOut()) {
                     $('#myModal').modal('show');
 
+                    //Prevent user from refreshing page by pressing F5
                     document.onkeydown = function () {
                         switch (event.keyCode) {
                             case 116: //F5 button
@@ -82,7 +83,7 @@
                                 return false;
                         }
                     }
-                    
+
                     //Prevent user from pressing back button
                     DisableBackButton();
                     window.onload = DisableBackButton;
@@ -98,6 +99,23 @@
 
         function DisableBackButton() {
             window.history.forward()
+        }
+
+        //Prevent user from pressing the Refresh button
+        window.onload = function () {
+            if (window.performance) {
+                if (performance.navigation.type == 1) {
+                    alert("You are logged out due to non-authentication from Session Timeout. \nPlease re-login to continue using SecureReportSystem.");
+                    //s.abort = true;
+
+                   <%-- <%Session["refreshFromSessionTimeout"]="Logout due to Non-authentication from Session Timeout";%>;--%>
+
+                    document.location = "../../Account/Login.aspx";
+                    //document.location = "../LogoutSummary.aspx";
+
+                }
+
+            };
         }
 
     </script>

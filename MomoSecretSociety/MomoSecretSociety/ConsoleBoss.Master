@@ -84,7 +84,7 @@
 
                     $('#myModal').modal('show');
 
-                    //Prevent user from refreshing page
+                    //Prevent user from refreshing page by pressing F5
                     document.onkeydown = function () {
                         switch (event.keyCode) {
                             case 116: //F5 button
@@ -94,23 +94,11 @@
                         }
                     }
 
-                    //if (window.Event)
-                    //     document.captureEvents(Event.MOUSEUP);
-                    // function nocontextmenu()
-                    //     {
-                    //         event.cancelBubble = true
-                    //         event.returnValue = false;
-                    //         return false;
-                    //         }
-
                     //Prevent user from pressing back button
                     DisableBackButton();
                     window.onload = DisableBackButton;
                     window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
                     window.onunload = function () { void (0) }
-
-                    //window.location.href = request;
-                    //alert(window.location.href);
                 }
 
                 $('#counter').text("Time to autoredirect " + timeToRedirectInSeconds() + " seconds");
@@ -124,6 +112,22 @@
             window.history.forward()
         }
 
+        //Prevent user from pressing the Refresh button
+        window.onload = function () {
+            if (window.performance) {
+                if (performance.navigation.type == 1) {
+                    alert("You are logged out due to non-authentication from Session Timeout. \nPlease re-login to continue using SecureReportSystem.");
+                    //s.abort = true;
+
+                   <%-- <%Session["refreshFromSessionTimeout"]="Logout due to Non-authentication from Session Timeout";%>;--%>
+
+                    document.location = "../../Account/Login.aspx";
+                    //document.location = "../LogoutSummary.aspx";
+
+                }
+
+            };
+        }
 
 
     </script>
