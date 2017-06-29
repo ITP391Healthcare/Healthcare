@@ -35,7 +35,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //At page load, the name of the person who sign in will fill in the FROM input box automatically
             //Unable to edit
-            TextBox3.Text = Session["AccountUsername"].ToString();
+            TextBox3.Text = Context.User.Identity.Name;
             TextBox3.ReadOnly = true;
         }
             int CaseNumber = 201700000;

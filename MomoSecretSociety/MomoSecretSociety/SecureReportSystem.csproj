@@ -207,6 +207,7 @@
     <Content Include="Content\StaffConsole\testSaveReport.aspx" />
     <Content Include="Content\StaffConsole\testSessionTimeout.aspx" />
     <Content Include="Content\StaffConsole\ViewAcceptedReport.aspx" />
+    <Content Include="Content\StaffConsole\ViewSelectedReport.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -427,6 +428,13 @@
     </Compile>
     <Compile Include="Content\StaffConsole\ViewAcceptedReport.aspx.designer.cs">
       <DependentUpon>ViewAcceptedReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ViewSelectedReport.aspx.cs">
+      <DependentUpon>ViewSelectedReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ViewSelectedReport.aspx.designer.cs">
+      <DependentUpon>ViewSelectedReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

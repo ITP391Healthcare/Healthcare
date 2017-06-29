@@ -94,5 +94,42 @@ namespace MomoSecretSociety.Content.StaffConsole
             Response.Redirect("~\\Content\\StaffConsole\\ViewAcceptedReport");
 
         }
+        
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "DataCommand")
+            {
+                string commandArgs = e.CommandArgument.ToString();
+
+
+                Session["caseNumberOfThisSelectedReport"] = commandArgs;
+
+                Response.Redirect("ViewSelectedReport.aspx");
+              
+                
+            }
+        }
+
+        //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        string isNew = e.Row.Cells[3].Text;
+        //        if (isNew == "False")
+        //        {
+        //            e.Row.Cells[3].Text = "New";
+        //            e.Row.BackColor = System.Drawing.Color.FromArgb(200, 224, 233);
+        //            e.Row.Cells[3].ForeColor = System.Drawing.Color.Red;
+        //        }
+        //        else
+        //        {
+        //            e.Row.Cells[3].Text = "Old";
+        //        }
+        //    }
+
+        //}
+        
     }
 }
