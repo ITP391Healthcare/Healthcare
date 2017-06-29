@@ -21,7 +21,8 @@ namespace MomoSecretSociety.Content
             BossApprovedReport,
             BossRejectedReport,
             ReportSavedToPdf,
-            SessionTimeout
+            SessionTimeout,
+            ExceptionError
         };
 
         public static void Log(string username, Action action)
@@ -71,6 +72,8 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Session Timeout";
             }
+         
+
 
             return actionString;
         }

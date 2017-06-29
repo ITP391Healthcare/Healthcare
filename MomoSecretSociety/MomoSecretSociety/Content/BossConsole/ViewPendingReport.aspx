@@ -54,10 +54,10 @@
 
             textarea.textbox_remarks:focus {
                 outline: none;
-                border: 1px solid #b5b5f9;
-                box-shadow: 0px 0px 8px #b5b5f9;
-                -moz-box-shadow: 0px 0px 8px #b5b5f9;
-                -webkit-box-shadow: 0px 0px 8px #b5b5f9;
+                border: 1px solid lightblue;
+                box-shadow: 0px 0px 8px lightblue;
+                -moz-box-shadow: 0px 0px 8px lightblue;
+                -webkit-box-shadow: 0px 0px 8px lightblue;
             }
 
 

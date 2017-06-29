@@ -79,6 +79,8 @@ namespace MomoSecretSociety
 
         }
 
+        string err = "";
+        string errorMessage = "";
 
         // public string CustomTitle = "This Is Title";
         protected void Page_Load(object sender, EventArgs e)
@@ -96,8 +98,40 @@ namespace MomoSecretSociety
             //var myJSVariableValue = ((HiddenField)FindControl("JavascriptValue")).Value;
             //Session["isLocked"] = myJSVariableValue;
 
+            //try
+            //{
+            //    err = "Error in: " + System.Web.HttpContext.Current.Request.Url.ToString() +
+            //                  ". \nError Message:" + errorMessage;
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    errorMessage = ex.Message;
+            //    ActionLogs.Log(Context.User.Identity.Name, ActionLogs.Action.ExceptionError);
+            //   // ActionLogs.getActionString(ActionLogs.Action.ExceptionError);
+                
+
+            //    Response.Write(errorMessage);
+            //}
+
         }
-        
+
+        //public void WriteLogError(string errorMessage)
+        //{
+        //    try
+        //    {
+        //            err = "Error in: " + System.Web.HttpContext.Current.Request.Url.ToString() +
+        //                          ". \nError Message:" + errorMessage;
+                
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        WriteLogError(ex.Message);
+
+        //    }
+
+        //}
+
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {

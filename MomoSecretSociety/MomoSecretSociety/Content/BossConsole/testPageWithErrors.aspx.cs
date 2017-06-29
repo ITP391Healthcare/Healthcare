@@ -13,6 +13,9 @@ namespace MomoSecretSociety.Content.BossConsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //One of the error:
+
             string dbPasswordHash = "";
             string dbSalt = "";
             string dbUsername = "";
