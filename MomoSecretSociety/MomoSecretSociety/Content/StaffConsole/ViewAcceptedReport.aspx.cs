@@ -142,7 +142,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void btnSaveAsPDF_Click(object sender, EventArgs e)
         {
-            string inputUsername = Session["AccountUsername"].ToString();
+            string inputUsername = Context.User.Identity.Name;
             string rStatus = "accepted";
 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
@@ -180,23 +180,24 @@ namespace MomoSecretSociety.Content.StaffConsole
             doc.Security.UserPassword = "test";
             doc.Security.Permissions = PdfPermissionsFlags.Print | PdfPermissionsFlags.FillFields;
 
-            // + DigitalSignature Method 1 (KaiTat)
-            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx";
-            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
-            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
-            signature.ContactInfo = "Harry Hu";
-            signature.Certificated = true;
-            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
+            //// + DigitalSignature Method 1 (KaiTat)
+            //String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf\\Demos\\Data\\Demo.pfx";
+            //PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
+            //PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
+            //signature.ContactInfo = "Harry Hu";
+            //signature.Certificated = true;
+            //signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
 
             //KT Digital Signature Method 2
-            //PdfSignatureField signaturefield = new PdfSignatureField(page, "Signature");
-            //signaturefield.BorderWidth = 1.0f;
-            //signaturefield.BorderStyle = PdfBorderStyle.Solid;
-            //signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
-            //signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            //signaturefield.Bounds = new RectangleF(100, 100, 100, 100);
+            PdfSignatureField signaturefield = new PdfSignatureField(page, "Signature");
+            signaturefield.BorderWidth = 1.0f;
+            signaturefield.BorderStyle = PdfBorderStyle.Solid;
+            signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
+            signaturefield.HighlightMode = PdfHighlightMode.Outline;
+            signaturefield.Bounds = new RectangleF(320, 40, 200, 150);
+            
 
-            //doc.Form.Fields.Add(signaturefield);
+            doc.Form.Fields.Add(signaturefield);
 
 
 
@@ -216,15 +217,15 @@ namespace MomoSecretSociety.Content.StaffConsole
             
 
             //Save pdf to a location
-            doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
             //Kt testing
-            //doc.SaveToFile("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            doc.SaveToFile("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
 
             //Launching the PDF File
-            System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
             //Kt testing
-            //System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
         }
 
