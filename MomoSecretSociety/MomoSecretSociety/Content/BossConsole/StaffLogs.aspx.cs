@@ -199,6 +199,15 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-exclamation-triangle bg-aqua";
             }
+            else if (actionString == "Report saved to PDF")
+            {
+                return "fa-file-pdf-o bg-aqua";
+            }
+            else if (actionString == "Session Timeout")
+            {
+                return "fa-hourglass-o bg-aqua";
+            }
+            
 
             return "fa-user bg-aqua";
 
