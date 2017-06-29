@@ -17,7 +17,7 @@ namespace MomoSecretSociety.Account
     public partial class Login : System.Web.UI.Page
     {
         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)

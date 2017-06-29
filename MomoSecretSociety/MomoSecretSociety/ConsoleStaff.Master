@@ -82,7 +82,12 @@
                                 return false;
                         }
                     }
-                    // redirect();
+                    
+                    //Prevent user from pressing back button
+                    DisableBackButton();
+                    window.onload = DisableBackButton;
+                    window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+                    window.onunload = function () { void (0) }
                 }
 
                 $('#counter').text("Time to autoredirect " + timeToRedirectInSeconds() + " seconds");
@@ -91,6 +96,9 @@
             setInterval(checkTimeout, 1000);
         }
 
+        function DisableBackButton() {
+            window.history.forward()
+        }
 
     </script>
     <% } %>

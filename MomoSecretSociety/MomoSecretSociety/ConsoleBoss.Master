@@ -25,7 +25,7 @@
         {%>
     <script>
 
-        var timeout = 60 * 1000;    //15 * 1000 -> 15seconds.
+        var timeout = 5 * 1000;    //15 * 1000 -> 15seconds.
         var warningTime = 10 * 1000;
         var warningDuration = timeout - warningTime;
 
@@ -84,16 +84,33 @@
 
                     $('#myModal').modal('show');
 
+                    //Prevent user from refreshing page
                     document.onkeydown = function () {
                         switch (event.keyCode) {
                             case 116: //F5 button
                                 event.returnValue = false;
                                 event.keyCode = 0;
-
                                 return false;
                         }
                     }
 
+                    //if (window.Event)
+                    //     document.captureEvents(Event.MOUSEUP);
+                    // function nocontextmenu()
+                    //     {
+                    //         event.cancelBubble = true
+                    //         event.returnValue = false;
+                    //         return false;
+                    //         }
+
+                    //Prevent user from pressing back button
+                    DisableBackButton();
+                    window.onload = DisableBackButton;
+                    window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+                    window.onunload = function () { void (0) }
+
+                    //window.location.href = request;
+                    //alert(window.location.href);
                 }
 
                 $('#counter').text("Time to autoredirect " + timeToRedirectInSeconds() + " seconds");
@@ -101,9 +118,11 @@
 
             setInterval(checkTimeout, 1000);
 
-
         }
 
+        function DisableBackButton() {
+            window.history.forward()
+        }
 
 
 
