@@ -183,20 +183,20 @@ namespace MomoSecretSociety.Content.StaffConsole
             */
 
             // + DigitalSignature Method 1 (KaiTat)
-            String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf-fe\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
-            PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
-            PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
-            signature.ContactInfo = "Harry Hu";
-            signature.Certificated = true;
-            signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
+            //String pfxPath = @"C:\\Program Files (x86)\\e-iceblue\\Spire.pdf-fe\\Demos\\Data\\Demo.pfx"; //KT i change your previous path here cause error
+            //PdfCertificate digi = new PdfCertificate(pfxPath, "e-iceblue");
+            //PdfSignature signature = new PdfSignature(doc, page, digi, "demo");
+            //signature.ContactInfo = "Harry Hu";
+            //signature.Certificated = true;
+            //signature.DocumentPermissions = PdfCertificationFlags.AllowFormFill;
 
             //KT Digital Signature Method 2
-            //PdfSignatureField signaturefield = new PdfSignatureField(page, "Signature");
-            //signaturefield.BorderWidth = 1.0f;
-            //signaturefield.BorderStyle = PdfBorderStyle.Solid;
-            //signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
-            //signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            //signaturefield.Bounds = new RectangleF(100, 100, 100, 100);
+            PdfSignatureField signaturefield = new PdfSignatureField(page, "Signature");
+            signaturefield.BorderWidth = 1.0f;
+            signaturefield.BorderStyle = PdfBorderStyle.Solid;
+            signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
+            signaturefield.HighlightMode = PdfHighlightMode.Outline;
+            signaturefield.Bounds = new RectangleF(300, 300, 300, 300);
 
             //doc.Form.Fields.Add(signaturefield);
 
