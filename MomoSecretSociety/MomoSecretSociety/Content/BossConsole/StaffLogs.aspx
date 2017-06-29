@@ -54,6 +54,10 @@
                 border: 1px solid rgba(81, 203, 238, 1);*/
                 outline: none;
             }
+
+            .txtSearch:focus{
+                border-bottom: 2px solid black;
+            }
     </style>
 
     <style>
