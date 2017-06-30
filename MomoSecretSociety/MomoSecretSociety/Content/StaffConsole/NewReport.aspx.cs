@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //Joanne
+
 namespace MomoSecretSociety.Content.StaffConsole
 {
     public partial class NewReport : System.Web.UI.Page
@@ -89,14 +90,13 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-
-            
-
+            string uname = Context.User.Identity.Name;
             //Case Number Created +1 
             //Retrieve the latest case number and +1
             string dbCaseNumber="";
             connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report", connection);
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report WHERE Username = @username", connection);
+            myCommand.Parameters.AddWithValue("@username", uname);
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
@@ -104,8 +104,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             cNumber = int.Parse(dbCaseNumber);
-            connection.Close();
             cNumber++;
+            connection.Close();
 
             //Converting input date into datetime type input
             DateTime DateInput = new DateTime();
@@ -126,32 +126,35 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Open();
 
-
+            
             //(KT)
             string constr = ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Report VALUES(@Subject, @Description)"))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Subject", Encrypt(TextBox2.Text.Trim()));
-                    cmd.Parameters.AddWithValue("@Description", Encrypt(TextBox1.Text.Trim()));
-                    cmd.Connection = con;
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
-            Response.Redirect(Request.Url.AbsoluteUri);
+            //using (SqlConnection con = new SqlConnection(constr))
+            //{
+            //    con.Open();
+            //    using (SqlCommand cmd = new SqlCommand("INSERT INTO Report (Subject, Description) VALUES(@Subject, @Description)"))
+            //    {
+            //        cmd.CommandType = CommandType.Text;
+            //        cmd.Parameters.AddWithValue("@Subject", Encrypt(TextBox2.Text.Trim()));
+            //        cmd.Parameters.AddWithValue("@Description", Encrypt(TextBox1.Text.Trim()));
+            //        cmd.Connection = con;
+                    
+            //        cmd.ExecuteNonQuery();
+            //        con.Close();
+            //    }
+            //}
+            //Response.Redirect(Request.Url.AbsoluteUri);
 
             SqlCommand insertReportCommand = new SqlCommand();
-            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Remarks, ReportStatus, CreatedDateTime)" + 
-                " VALUES (@caseNumber, @username, @date, @remarks, @status, @createdDT)";
+            insertReportCommand.CommandText = "INSERT INTO Report (CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus, CreatedDateTime)" + 
+                " VALUES (@caseNumber, @username, @date, @subject, @description, @remarks, @status, @createdDT)";
             insertReportCommand.Parameters.AddWithValue("@caseNumber", cNumber);
             insertReportCommand.Parameters.AddWithValue("@username", NameInput);
             insertReportCommand.Parameters.AddWithValue("@date", DateInput);
             //insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
             //insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
+            insertReportCommand.Parameters.AddWithValue("@subject", Encrypt(TextBox2.Text.Trim()));
+            insertReportCommand.Parameters.AddWithValue("@description", Encrypt(TextBox1.Text.Trim()));
             insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
             insertReportCommand.Parameters.AddWithValue("@createdDT", createdDateTime);
