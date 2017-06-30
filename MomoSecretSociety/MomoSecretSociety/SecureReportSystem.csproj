@@ -195,15 +195,19 @@
       <DependentUpon>SecureReportSystem.mdf</DependentUpon>
     </Content>
     <Content Include="Content\BossConsole\AcceptedReports.aspx" />
+    <Content Include="Content\BossConsole\ErrorPages\Error.aspx" />
     <Content Include="Content\BossConsole\RejectedReports.aspx" />
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
     <Content Include="Content\BossConsole\SuperiorLogs.aspx" />
     <Content Include="Content\BossConsole\testLogsSearchEngine.aspx" />
-    <Content Include="Content\BossConsole\testPageWithErrors.aspx" />
+    <Content Include="Content\BossConsole\ErrorPages\demoPageWithError1SQL.aspx" />
+    <Content Include="Content\BossConsole\ErrorPages\demoPageWithError2DivideByZero.aspx" />
     <Content Include="Content\BossConsole\ViewPendingReport.aspx" />
-    <Content Include="Content\Error.aspx" />
     <Content Include="Content\LogoutSummary.aspx" />
     <Content Include="Content\StaffConsole\Drafts.aspx" />
+    <Content Include="Content\StaffConsole\ErrorPages\demoPageWithError1SQL.aspx" />
+    <Content Include="Content\StaffConsole\ErrorPages\demoPageWithError2DivideByZero.aspx" />
+    <Content Include="Content\StaffConsole\ErrorPages\Error.aspx" />
     <Content Include="Content\StaffConsole\NewReport.aspx" />
     <Content Include="Content\StaffConsole\RejectedReports.aspx" />
     <Content Include="Content\StaffConsole\testSaveReport.aspx" />
@@ -319,6 +323,13 @@
     <Compile Include="Content\BossConsole\AcceptedReports.aspx.designer.cs">
       <DependentUpon>AcceptedReports.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Content\BossConsole\ErrorPages\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\ErrorPages\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Content\BossConsole\PendingReports.aspx.cs">
       <DependentUpon>PendingReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -354,12 +365,19 @@
     <Compile Include="Content\BossConsole\testLogsSearchEngine.aspx.designer.cs">
       <DependentUpon>testLogsSearchEngine.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Content\BossConsole\testPageWithErrors.aspx.cs">
-      <DependentUpon>testPageWithErrors.aspx</DependentUpon>
+    <Compile Include="Content\BossConsole\ErrorPages\demoPageWithError1SQL.aspx.cs">
+      <DependentUpon>demoPageWithError1SQL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Content\BossConsole\testPageWithErrors.aspx.designer.cs">
-      <DependentUpon>testPageWithErrors.aspx</DependentUpon>
+    <Compile Include="Content\BossConsole\ErrorPages\demoPageWithError1SQL.aspx.designer.cs">
+      <DependentUpon>demoPageWithError1SQL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\ErrorPages\demoPageWithError2DivideByZero.aspx.cs">
+      <DependentUpon>demoPageWithError2DivideByZero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\ErrorPages\demoPageWithError2DivideByZero.aspx.designer.cs">
+      <DependentUpon>demoPageWithError2DivideByZero.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\BossConsole\ViewPendingReport.aspx.cs">
       <DependentUpon>ViewPendingReport.aspx</DependentUpon>
@@ -367,13 +385,6 @@
     </Compile>
     <Compile Include="Content\BossConsole\ViewPendingReport.aspx.designer.cs">
       <DependentUpon>ViewPendingReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Error.aspx.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Content\Error.aspx.designer.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\LogoutSummary.aspx.cs">
       <DependentUpon>LogoutSummary.aspx</DependentUpon>
@@ -388,6 +399,27 @@
     </Compile>
     <Compile Include="Content\StaffConsole\Drafts.aspx.designer.cs">
       <DependentUpon>Drafts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ErrorPages\demoPageWithError1SQL.aspx.cs">
+      <DependentUpon>demoPageWithError1SQL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ErrorPages\demoPageWithError1SQL.aspx.designer.cs">
+      <DependentUpon>demoPageWithError1SQL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ErrorPages\demoPageWithError2DivideByZero.aspx.cs">
+      <DependentUpon>demoPageWithError2DivideByZero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ErrorPages\demoPageWithError2DivideByZero.aspx.designer.cs">
+      <DependentUpon>demoPageWithError2DivideByZero.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ErrorPages\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\StaffConsole\ErrorPages\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\StaffConsole\NewReport.aspx.cs">
       <DependentUpon>NewReport.aspx</DependentUpon>

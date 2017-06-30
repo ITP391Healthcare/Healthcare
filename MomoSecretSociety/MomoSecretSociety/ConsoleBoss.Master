@@ -113,13 +113,11 @@
         }
 
         //Prevent user from pressing the Refresh button
-        window.onload = function () {
+       <%-- window.onload = function () {
             if (window.performance) {
                 if (performance.navigation.type == 1) {
                     alert("You are logged out due to non-authentication from Session Timeout. \nPlease re-login to continue using SecureReportSystem.");
                     //s.abort = true;
-
-                   <%-- <%Session["refreshFromSessionTimeout"]="Logout due to Non-authentication from Session Timeout";%>;--%>
 
                     document.location = "../../Account/Login.aspx";
                     //document.location = "../LogoutSummary.aspx";
@@ -127,7 +125,7 @@
                 }
 
             };
-        }
+        }--%>
 
 
     </script>
