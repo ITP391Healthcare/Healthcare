@@ -276,7 +276,18 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             foreach (string s in result)
             {
-                //test
+                int charCount = s.Length;
+                counter += charCount;
+                if (counter < 76)
+                {
+                    finalResult += s + " ";
+                    //add the word to the final result with a space
+                }
+                else if (counter >= 76)
+                {
+                    counter = 0;
+                    finalResult += "\n";
+                }
             }
 
 
