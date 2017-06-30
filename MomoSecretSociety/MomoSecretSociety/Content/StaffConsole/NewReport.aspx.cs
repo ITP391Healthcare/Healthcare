@@ -89,14 +89,13 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-
-            
-
+            string uname = Context.User.Identity.Name;
             //Case Number Created +1 
             //Retrieve the latest case number and +1
             string dbCaseNumber="";
             connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report", connection);
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report WHERE Username = @username", connection);
+            myCommand.Parameters.AddWithValue("@username", uname);
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
@@ -104,8 +103,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             cNumber = int.Parse(dbCaseNumber);
-            connection.Close();
             cNumber++;
+            connection.Close();
 
             //Converting input date into datetime type input
             DateTime DateInput = new DateTime();
