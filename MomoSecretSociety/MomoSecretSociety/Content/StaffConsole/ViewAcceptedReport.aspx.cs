@@ -265,6 +265,9 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(dbSubject, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //CASE DESCRIPTION
+            page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
+            y1 = y1 + 30;
 
             string[] delimiter = new string[] { " " };
             string[] result;
@@ -278,6 +281,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             {
                 int charCount = s.Length;
                 counter += charCount;
+
                 if (counter < 76)
                 {
                     finalResult += s + " ";
@@ -286,18 +290,20 @@ namespace MomoSecretSociety.Content.StaffConsole
                 else if (counter >= 76)
                 {
                     counter = 0;
+                    counter += charCount;
+                    finalResult.Remove(counter);
                     finalResult += "\n";
+                    //y1 += 10;
                 }
             }
 
-
-                
-            //CASE DESCRIPTION
-            page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
+            page.Canvas.DrawString(finalResult, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
+                
+            /*
             page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment); //Characters count: 76
             y1 = y1 + 30;
-
+            */
 
             //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
