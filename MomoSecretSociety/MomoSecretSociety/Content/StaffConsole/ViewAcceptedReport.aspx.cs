@@ -282,28 +282,25 @@ namespace MomoSecretSociety.Content.StaffConsole
                 int charCount = s.Length;
                 counter += charCount;
 
-                if (counter < 76)
+                if (counter < 70)
                 {
                     finalResult += s + " ";
                     //add the word to the final result with a space
                 }
-                else if (counter >= 76)
+                else if (counter >= 70)
                 {
                     counter = 0;
                     counter += charCount;
-                    finalResult.Remove(counter);
-                    finalResult += "\n";
+                    finalResult += "\n" + s + " ";
                     //y1 += 10;
                 }
             }
 
             page.Canvas.DrawString(finalResult, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
-                
-            /*
-            page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment); //Characters count: 76
-            y1 = y1 + 30;
-            */
+
+            //page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment); //Characters count: 76
+            //y1 = y1 + 30;
 
             //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
