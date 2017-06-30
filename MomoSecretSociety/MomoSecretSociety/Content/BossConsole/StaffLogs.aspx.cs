@@ -207,7 +207,14 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-hourglass-o bg-aqua";
             }
-            
+            else if (actionString == "Authenticated due to Session Timeout")
+            {
+                return "fa-handshake-o bg-aqua";
+            }
+            else if (actionString == "Boss View Pending Report")
+            {
+                return "fa-edit bg-aqua";
+            }
 
             return "fa-user bg-aqua";
 

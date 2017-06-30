@@ -266,6 +266,9 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(dbSubject, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //CASE DESCRIPTION
+            page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
+            y1 = y1 + 30;
 
             string[] delimiter = new string[] { " " };
             string[] result;
@@ -277,35 +280,33 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             foreach (string s in result)
             {
-                //test
+                int charCount = s.Length;
+                counter += charCount;
+
+                if (counter < 70)
+                {
+                    finalResult += s + " ";
+                    //add the word to the final result with a space
+                }
+                else if (counter >= 70)
+                {
+                    counter = 0;
+                    counter += charCount;
+                    finalResult += "\n" + s + " ";
+                    //y1 += 10;
+                }
             }
 
-
-                
-            //CASE DESCRIPTION
-            page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
-            y1 = y1 + 30;
-            page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment); //Characters count: 76
+            page.Canvas.DrawString(finalResult, font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment); //Characters count: 76
+            //y1 = y1 + 30;
 
             //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
             page.Canvas.DrawString(dbRemarks, font3, brush, x2, y1, leftAlignment);
-
-
-            //PdfWordWrapType wordWrap;
-            //BreakLine(dbDescription, 90, 515);
-
-            //if (dbDescription.Length.Equals(515))
-            //{
-            //    string[] words = dbDescription.Split(' ');
-            //    foreach (string word in words)
-            //    {
-            //    }
-            //}
-
 
 
             //WIDTH 515 HEIGHT 762
@@ -317,8 +318,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
             */
 
-            //if (dbDescription.Length > pageWidth) {
-                //Just printing size details
                 string w = page.Canvas.Size.ToString();
                 y1 = y1 + 30;
                 page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
@@ -326,28 +325,7 @@ namespace MomoSecretSociety.Content.StaffConsole
                 SizeF size = page.Canvas.ClientSize;
                 string sizeText = size.ToString();
                 page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
-            //}
   
-        }
-
-        //I need to add breakline 
-        private static int BreakLine(string text, int pos, int max)
-        {
-            // Find last whitespace in line
-            int i = max;
-            while (i >= 0 && !Char.IsWhiteSpace(text[pos + i]))
-                i--;
-
-            // If no whitespace found, break at maximum length
-            if (i < 0)
-                return max;
-
-            // Find start of whitespace
-            while (i >= 0 && Char.IsWhiteSpace(text[pos + i]))
-                i--;
-
-            // Return length of text before whitespace
-            return i + 1;
         }
     }
 }

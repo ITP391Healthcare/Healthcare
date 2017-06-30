@@ -17,9 +17,10 @@ namespace MomoSecretSociety.Account
     public partial class Login : System.Web.UI.Page
     {
         SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Request.IsAuthenticated)
             {
                 string[] cookies = Request.Cookies.AllKeys;
@@ -29,10 +30,13 @@ namespace MomoSecretSociety.Account
                 }
                 HttpContext.Current.Session.Abandon();
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie("__AntiXsrfToken", ""));
+
+
             }
 
-            if (!IsPostBack && Request.IsAuthenticated)
+            if ((!IsPostBack && Request.IsAuthenticated) || (IsPostBack && Request.IsAuthenticated))
             {
+
                 connection.Open();
                 SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed", connection);
                 updateFirstLoginAccess.Parameters.AddWithValue("@isFirstTimeAccessed", "0");
@@ -41,6 +45,8 @@ namespace MomoSecretSociety.Account
 
                 Response.Redirect(Request.RawUrl);
             }
+            
+
 
         }
 
