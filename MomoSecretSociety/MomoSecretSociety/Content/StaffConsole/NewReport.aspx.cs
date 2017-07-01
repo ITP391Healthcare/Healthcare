@@ -36,7 +36,8 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //At page load, the name of the person who sign in will fill in the FROM input box automatically
             //Unable to edit
-            TextBox3.Text = Context.User.Identity.Name;
+            //TextBox3.Text = Context.User.Identity.Name;
+            TextBox3.Text = Session["AccountUsername"].ToString();
             TextBox3.ReadOnly = true;
         }
             int CaseNumber = 201700000;
@@ -90,13 +91,13 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            string uname = Context.User.Identity.Name;
+            //string uname = Context.User.Identity.Name;
+            string uname = Session["AccountUsername"].ToString();
             //Case Number Created +1 
             //Retrieve the latest case number and +1
             string dbCaseNumber="";
             connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report WHERE Username = @username", connection);
-            myCommand.Parameters.AddWithValue("@username", uname);
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber FROM Report", connection);
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
@@ -120,9 +121,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             string CaseDesInput = TextBox1.Text;
             string status = "pending";
 
-            //Add the details into database (done)
-            //Report inserted into database, with ReportStatus = Pending (done)
-            //Report details encrypted (not done)
 
             connection.Open();
 
@@ -151,10 +149,10 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.Parameters.AddWithValue("@caseNumber", cNumber);
             insertReportCommand.Parameters.AddWithValue("@username", NameInput);
             insertReportCommand.Parameters.AddWithValue("@date", DateInput);
-            //insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
-            //insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
-            insertReportCommand.Parameters.AddWithValue("@subject", Encrypt(TextBox2.Text.Trim()));
-            insertReportCommand.Parameters.AddWithValue("@description", Encrypt(TextBox1.Text.Trim()));
+            insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
+            insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
+            //insertReportCommand.Parameters.AddWithValue("@subject", Encrypt(TextBox2.Text.Trim()));
+            //insertReportCommand.Parameters.AddWithValue("@description", Encrypt(TextBox1.Text.Trim()));
             insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
             insertReportCommand.Parameters.AddWithValue("@createdDT", createdDateTime);
