@@ -4,7 +4,7 @@
 
 
     <div class="jumbotron" style="background-color: white;">
-        <h1>&nbsp;L O G I N</h1>
+        <h1>L O G I N</h1>
         <div class="row">
             <div class="col-md-8">
                 <section id="loginForm">

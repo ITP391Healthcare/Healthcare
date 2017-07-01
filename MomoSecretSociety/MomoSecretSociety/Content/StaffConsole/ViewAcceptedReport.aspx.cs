@@ -48,7 +48,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Open();
             SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus FROM Report WHERE CaseNumber = @caseNo", connection);
-            myCommand.Parameters.AddWithValue("@caseNo", 201700001); //Hardcoded the case number - next time change to auto input when onclick of the particular report
+            myCommand.Parameters.AddWithValue("@caseNo", Session["caseNumberOfThisSelectedReport"].ToString()); 
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
@@ -142,20 +142,23 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void btnSaveAsPDF_Click(object sender, EventArgs e)
         {
-            //string inputUsername = Context.User.Identity.Name;
-            string inputUsername = Session["AccountUsername"].ToString();
+            string inputUsername = Context.User.Identity.Name;
+            //string inputUsername = Session["AccountUsername"].ToString();
             string rStatus = "accepted";
+            dbCaseNumber = Session["caseNumberOfThisSelectedReport"].ToString();
 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
             connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, CreatedDateTime FROM Report WHERE Username = @AccountUsername AND ReportStatus = @reportStatus" , connection);
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, CreatedDateTime FROM Report WHERE Username = @AccountUsername AND ReportStatus = @reportStatus AND CaseNumber = @cNum" , connection);
             myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername); //Taking the latest report of that user only. //Should be click on a particular report number - thats the report that we should take
             myCommand.Parameters.AddWithValue("@reportStatus", rStatus);
+            myCommand.Parameters.AddWithValue("@cNum", dbCaseNumber);
+
 
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
-                dbCaseNumber = (myReader["CaseNumber"].ToString());
+                //dbCaseNumber = (myReader["CaseNumber"].ToString());
                 dbUsername = (myReader["Username"].ToString());
                 dbDate = (myReader["Date"].ToString());
                 dbSubject = (myReader["Subject"].ToString());
