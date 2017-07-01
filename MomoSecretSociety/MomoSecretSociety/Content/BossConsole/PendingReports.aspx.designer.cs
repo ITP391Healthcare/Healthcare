@@ -13,6 +13,42 @@ namespace MomoSecretSociety.Content.BossConsole {
     public partial class PendingReports {
         
         /// <summary>
+        /// alertBoxApproved control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertBoxApproved;
+        
+        /// <summary>
+        /// approvedMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label approvedMsg;
+        
+        /// <summary>
+        /// alertBoxRejected control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertBoxRejected;
+        
+        /// <summary>
+        /// rejectedMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label rejectedMsg;
+        
+        /// <summary>
         /// txtPasswordAuthenticate control.
         /// </summary>
         /// <remarks>

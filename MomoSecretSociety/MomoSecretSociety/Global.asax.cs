@@ -84,11 +84,13 @@ namespace MomoSecretSociety
 
             if (dbRole.Equals("Boss"))
             {
-                Server.Transfer("~/Content/BossConsole/ErrorPages/Error.aspx");
+                Response.Redirect("~/Content/BossConsole/ErrorPages/Error.aspx");
+               // Server.Transfer("~/Content/BossConsole/ErrorPages/Error.aspx");
             }
             else
             {
-                Server.Transfer("~/Content/StaffConsole/ErrorPages/Error.aspx");
+                Response.Redirect("~/Content/StaffConsole/ErrorPages/Error.aspx");
+                // Server.Transfer("~/Content/StaffConsole/ErrorPages/Error.aspx");
             }
 
 

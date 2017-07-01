@@ -31,9 +31,17 @@
 
         //window.onbeforeunload = function () { return false; }
 
-</script>
+    </script>
 
 
+    <%--Div to show alert message whether pending report is being approved/rejected--%>
+    <div class="alert" runat="server" style="padding: 25px; border-radius: 2px; border: 4px solid #146882; background-color: white; margin-top: 20px; margin-bottom: 20px; text-align: center;" id="alertBoxApproved" visible="false">
+        <asp:Label ID="approvedMsg" runat="server" Visible="false"></asp:Label>
+    </div>
+
+    <div class="alert" runat="server" style="padding: 25px; border-radius: 2px; border: 4px solid #146882; background-color: white; margin-top: 20px; margin-bottom: 20px; text-align: center;" id="alertBoxRejected" visible="false">
+        <asp:Label ID="rejectedMsg" runat="server" Visible="false"></asp:Label>
+    </div>
 
 
     <!-- Pop up Modal -->
@@ -72,7 +80,8 @@
                     <h3 class="modal-title" style="text-align: center; font-weight: bold;">New Pending Reports</h3>
                 </div>
                 <div class="modal-body">
-                    <h4>You have <b><asp:Label ID="noOfNewPendingReports" runat="server"></asp:Label></b> Pending Reports yet to view...</h4>
+                    <h4>You have <b>
+                        <asp:Label ID="noOfNewPendingReports" runat="server"></asp:Label></b> Pending Reports yet to view...</h4>
 
                     <br />
 
@@ -154,7 +163,7 @@
 
                                 <asp:BoundField DataField="Username" HeaderText="Username" />
                                 <asp:BoundField DataField="Subject" HeaderText="Subject" />
-                                <asp:BoundField DataField="isNew" HeaderText="Status"/>
+                                <asp:BoundField DataField="isNew" HeaderText="Status" />
                             </Columns>
 
 
