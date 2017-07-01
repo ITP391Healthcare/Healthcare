@@ -25,8 +25,19 @@ namespace MomoSecretSociety.Content.StaffConsole
         static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
-            //This should be on click of the particular report then will appear
+        {
+
+            if (Request.IsAuthenticated)
+            {
+                ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
+                            + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+            }
+
+            if (IsPostBack)
+            {
+                errormsgPasswordAuthenticate.Visible = false;
+            }
+
             string dbCaseNumber = "";
             string dbUsername = "";
             string dbDate = "";
@@ -60,23 +71,11 @@ namespace MomoSecretSociety.Content.StaffConsole
             Label10.Text = dbDescription;
             Label12.Text = dbRemarks;
             
+            //means if pending/drafts/rejected cannot save pdf until the report has been approved
             if (dbReportStatus != "accepted")
             {
                 btnSaveAsPDF.Enabled = false;
             }
-
-            if (Request.IsAuthenticated)
-            {
-                ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
-                            + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
-            }
-
-            if (IsPostBack)
-            {
-                errormsgPasswordAuthenticate.Visible = false;
-            }
-
-
         }
 
 
