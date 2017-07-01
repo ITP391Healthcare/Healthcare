@@ -188,6 +188,11 @@
             }
     </style>
 
+    <style>
+        .navbar-collapse .navbar-nav.navbar-right:last-child {
+            margin-right: 0px !important;
+        }
+    </style>
 </head>
 
 

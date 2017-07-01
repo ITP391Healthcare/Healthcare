@@ -195,6 +195,7 @@
       <DependentUpon>SecureReportSystem.mdf</DependentUpon>
     </Content>
     <Content Include="Content\BossConsole\AcceptedReports.aspx" />
+    <Content Include="Content\BossConsole\ErrorExceptionLogs.aspx" />
     <Content Include="Content\BossConsole\ErrorPages\Error.aspx" />
     <Content Include="Content\BossConsole\RejectedReports.aspx" />
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
@@ -222,6 +223,8 @@
     <Content Include="ConsoleStaff.Master" />
     <Content Include="Bundle.config" />
     <None Include="Resources\AddNewReport.png" />
+    <Content Include="Resources\ViewErrorExceptionLog.jpg" />
+    <Content Include="Resources\ViewErrorExceptionLog2.png" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="test.pdf" />
     <None Include="Web.Debug.config">
@@ -322,6 +325,13 @@
     </Compile>
     <Compile Include="Content\BossConsole\AcceptedReports.aspx.designer.cs">
       <DependentUpon>AcceptedReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\ErrorExceptionLogs.aspx.cs">
+      <DependentUpon>ErrorExceptionLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\ErrorExceptionLogs.aspx.designer.cs">
+      <DependentUpon>ErrorExceptionLogs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\BossConsole\ErrorPages\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
