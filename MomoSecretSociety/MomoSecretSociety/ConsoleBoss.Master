@@ -113,7 +113,7 @@
         }
 
         //Prevent user from pressing the Refresh button
-       <%-- window.onload = function () {
+        <%-- window.onload = function () {
             if (window.performance) {
                 if (performance.navigation.type == 1) {
                     alert("You are logged out due to non-authentication from Session Timeout. \nPlease re-login to continue using SecureReportSystem.");
@@ -199,6 +199,23 @@
             }
     </style>
 
+
+    <style>
+        .navbar-collapse {
+            padding-right: 0px !important;
+            padding-left: 0px !important;
+        }
+
+        .container {
+            padding-right: 0px !important;
+            padding-left: 0px !important;
+        }
+
+        .navbar-collapse .navbar-nav.navbar-right:last-child {
+            margin-right: 0px !important;
+        }
+    </style>
+
 </head>
 <body class="masterStyle" style="background-color: lightblue;" oncontextmenu="return disableRightClick();" onkeydown="return showKeyCode(event)">
     <form runat="server">
@@ -263,7 +280,8 @@
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/AcceptedReports">ACCEPTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/RejectedReports">REJECTED REPORTS</a></li>
                                 <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/StaffLogs.aspx">STAFF LOGS</a></li>
-                                <li><a runat="server" href="~/Content/BossConsole/SuperiorLogs.aspx">SUPERIOR LOGS</a></li>
+                                <li style="border-right: lightblue 2px solid;"><a runat="server" href="~/Content/BossConsole/SuperiorLogs.aspx">SUPERIOR LOGS</a></li>
+                                <li><a runat="server" href="~/Content/BossConsole/ErrorExceptionLogs.aspx">ERROR LOGS</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/" title="Manage your account" style="color: lightblue; pointer-events: none;">Hello, 
