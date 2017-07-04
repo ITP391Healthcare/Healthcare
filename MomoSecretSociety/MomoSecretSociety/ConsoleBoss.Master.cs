@@ -21,6 +21,10 @@ namespace MomoSecretSociety
 
         protected void Page_Init(object sender, EventArgs e)
         {
+
+
+
+
             //// The code below helps to protect against XSRF attacks
             //var requestCookie = Request.Cookies[AntiXsrfTokenKey];
             //Guid requestCookieGuidValue;
@@ -79,12 +83,13 @@ namespace MomoSecretSociety
 
         }
 
-        string err = "";
-        string errorMessage = "";
 
         // public string CustomTitle = "This Is Title";
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+
             //if (Request.IsAuthenticated)
             //{
             //    ((Label)FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
@@ -98,53 +103,26 @@ namespace MomoSecretSociety
             //var myJSVariableValue = ((HiddenField)FindControl("JavascriptValue")).Value;
             //Session["isLocked"] = myJSVariableValue;
 
-            //try
-            //{
-            //    err = "Error in: " + System.Web.HttpContext.Current.Request.Url.ToString() +
-            //                  ". \nError Message:" + errorMessage;
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    errorMessage = ex.Message;
-            //    ActionLogs.Log(Context.User.Identity.Name, ActionLogs.Action.ExceptionError);
-            //   // ActionLogs.getActionString(ActionLogs.Action.ExceptionError);
-                
-
-            //    Response.Write(errorMessage);
-            //}
 
         }
 
-        //public void WriteLogError(string errorMessage)
-        //{
-        //    try
-        //    {
-        //            err = "Error in: " + System.Web.HttpContext.Current.Request.Url.ToString() +
-        //                          ". \nError Message:" + errorMessage;
-                
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        WriteLogError(ex.Message);
-
-        //    }
-
-        //}
 
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
-         
+
+
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
 
             // FormsAuthentication.SignOut();
             // FormsAuthentication.RedirectToLoginPage();
             Session["AccountUsername"] = Context.User.Identity.Name;
 
             //Add to logs
-             ActionLogs.Action action = ActionLogs.Action.Logout;
-             ActionLogs.Log(Session["AccountUsername"].ToString(), action);
+            ActionLogs.Action action = ActionLogs.Action.Logout;
+            ActionLogs.Log(Session["AccountUsername"].ToString(), action);
 
             connection.Open();
             SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed WHERE Username = @AccountUsername", connection);
@@ -152,7 +130,6 @@ namespace MomoSecretSociety
             updateFirstLoginAccess.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
             updateFirstLoginAccess.ExecuteNonQuery();
             connection.Close();
-
 
             //Response.Cache.SetCacheability(HttpCacheability.NoCache);
             //Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));

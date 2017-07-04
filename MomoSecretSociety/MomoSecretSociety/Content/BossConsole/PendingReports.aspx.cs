@@ -39,6 +39,20 @@ namespace MomoSecretSociety.Content.BossConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
+            if (Session["approvedMsg"] != null)
+            {
+                alertBoxApproved.Visible = true;
+                approvedMsg.Visible = true;
+                approvedMsg.Text = Session["approvedMsg"].ToString();
+            }
+
+
+            if (Session["rejectedMsg"] != null)
+            {
+                alertBoxRejected.Visible = true;
+                rejectedMsg.Visible = true;
+                rejectedMsg.Text = Session["rejectedMsg"].ToString();
+            }
 
 
         }

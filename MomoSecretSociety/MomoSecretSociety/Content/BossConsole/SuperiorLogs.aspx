@@ -102,10 +102,12 @@
         </div>
     </div>
 
+
     <asp:Panel runat="server" ID="panel2">
 
         <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%);">
 
+            
             <div style="float: right;">
                 <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword of action" CssClass="txtSearch" />
                 <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
@@ -128,8 +130,6 @@
                 <asp:Label ID="bossUsername" runat="server" Font-Bold="true" Font-Underline="true"></asp:Label>
                 </h2>
             </div>
-
-
 
             <div class="col-md-9" style="height: calc(100%); width: calc(100%); box-shadow: 0 0 10px lightblue">
 

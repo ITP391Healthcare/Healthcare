@@ -160,10 +160,13 @@ namespace MomoSecretSociety.Content.BossConsole
             ActionLogs.Action action = ActionLogs.Action.BossApprovedReport;
             ActionLogs.Log(Context.User.Identity.Name, action);
 
-            ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Report with the Case Number of #" + Session["caseNumberOfThisPendingReport"].ToString() + " has been approved.'); window.location = 'PendingReports.aspx'; ", true);
+            Session["approvedMsg"] = "Report with the Case Number of <b><u><big>#" + Session["caseNumberOfThisPendingReport"].ToString() + "</b></u></big> has been <b>approved</b>.";
+            Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
+
+            //ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Report with the Case Number of #" + Session["caseNumberOfThisPendingReport"].ToString() + " has been approved.'); window.location = 'PendingReports.aspx'; ", true);
 
             //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('This report has been approved.')", true);
-            //Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
+
         }
 
         protected void Button_Reject_Click(object sender, EventArgs e)
@@ -182,10 +185,13 @@ namespace MomoSecretSociety.Content.BossConsole
             ActionLogs.Action action = ActionLogs.Action.BossRejectedReport;
             ActionLogs.Log(Context.User.Identity.Name, action);
 
-            ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Report with the Case Number of #" + Session["caseNumberOfThisPendingReport"].ToString() + " has been rejected.'); window.location = 'PendingReports.aspx'; ", true);
+            Session["rejectedMsg"] = "Report with the Case Number of <b><u><big>#" + Session["caseNumberOfThisPendingReport"].ToString() + "</b></u></big> has been <b>rejected</b>.";
+            Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
+
+            //ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Report with the Case Number of #" + Session["caseNumberOfThisPendingReport"].ToString() + " has been rejected.'); window.location = 'PendingReports.aspx'; ", true);
 
             //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('This report has been rejected.')", true);
-            //Response.Redirect("~/Content/BossConsole/PendingReports.aspx");
+
         }
     }
 

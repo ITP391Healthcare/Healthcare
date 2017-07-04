@@ -79,6 +79,9 @@ namespace MomoSecretSociety
             //    ((Label)FindControl("lastLogin")).Text = "Your last logged in was <b>"
             //                + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
             //}
+
+            
+
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -91,12 +94,12 @@ namespace MomoSecretSociety
             ActionLogs.Action action = ActionLogs.Action.Logout;
             ActionLogs.Log(Session["AccountUsername"].ToString(), action);
 
-            //connection.Open();
-            //SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed WHERE Username = @AccountUsername", connection);
-            //updateFirstLoginAccess.Parameters.AddWithValue("@isFirstTimeAccessed", "0");
-            //updateFirstLoginAccess.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
-            //updateFirstLoginAccess.ExecuteNonQuery();
-            //connection.Close();
+            connection.Open();
+            SqlCommand updateFirstLoginAccess = new SqlCommand("UPDATE UserAccount SET isFirstTimeAccessed = @isFirstTimeAccessed WHERE Username = @AccountUsername", connection);
+            updateFirstLoginAccess.Parameters.AddWithValue("@isFirstTimeAccessed", "0");
+            updateFirstLoginAccess.Parameters.AddWithValue("@AccountUsername", Session["AccountUsername"].ToString());
+            updateFirstLoginAccess.ExecuteNonQuery();
+            connection.Close();
 
 
         }

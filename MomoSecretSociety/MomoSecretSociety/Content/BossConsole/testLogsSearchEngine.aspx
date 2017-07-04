@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ConsoleBoss.Master" AutoEventWireup="true" CodeBehind="testLogsSearchEngine.aspx.cs" Inherits="MomoSecretSociety.Content.BossConsole.testLogsSearchEngine" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
     <style>
@@ -69,5 +71,66 @@
 
             </div>
         </div>
+ <%-- asd --%>
     
+    <asp:Chart ID="Chart1" runat="server" DataSourceID="SqlDataSource1">
+        <Series>
+            <asp:Series Name="Series1" ChartType="Pie" YValuesPerPoint="4">
+                  <Points>
+                    <asp:DataPoint YValues="45" />
+                    <asp:DataPoint YValues="15" />
+                    <asp:DataPoint YValues="70" />
+                    <asp:DataPoint YValues="50" />
+                    <asp:DataPoint YValues="30" />
+                    <asp:DataPoint YValues="10" />
+                </Points>
+            </asp:Series>
+        </Series>
+        <ChartAreas>
+            <asp:ChartArea Name="ChartArea1">
+                 <AxisY Title="Frequency" TitleForeColor="#ff0000" Interval="20">
+                    <MajorGrid Enabled ="true" />
+                </AxisY>
+               <AxisX Title="Activity" IsLabelAutoFit="True" TitleForeColor="#ff0000">
+            <%--<LabelStyle Format="dddd, dd-MM-yy" />--%>
+            <MajorGrid Enabled ="true" />
+        </AxisX> 
+            </asp:ChartArea>
+        </ChartAreas>
+    </asp:Chart>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>" 
+        SelectCommand="SELECT Username, COUNT(Action) AS TotalNumberOfActivity, ROUND(COUNT(Action) * 100 / (SELECT COUNT(*) AS Expr1 FROM Logs), 2) AS PercentageOfActivity FROM Logs AS Logs_1 GROUP BY Username">
+    </asp:SqlDataSource>
+
+<%--    <asp:UpdatePanel runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+        <ContentTemplate>
+            <shield:ShieldChart ID="ShieldChart1" runat="server" AutoPostBack="true" OnSelectionChanged="ShieldChart1_SelectionChanged" Width="320px" Height="330px" 
+                            OnTakeDataSource="ShieldChart1_TakeDataSource"> 
+                            <PrimaryHeader Text="Quarterly Sales"> 
+                            </PrimaryHeader> 
+                            <ExportOptions AllowExportToImage="false" AllowPrint="false" /> 
+                            <TooltipSettings CustomPointText="Sales Volume: <b>{point.y}</b>"> 
+                            </TooltipSettings> 
+                            <Axes> 
+                                <shield:ChartAxisX CategoricalValuesField="Quarter"> 
+                                </shield:ChartAxisX> 
+                                <shield:ChartAxisY> 
+                                    <Title Text="Quarter Overview"></Title> 
+                                </shield:ChartAxisY> 
+                            </Axes> 
+                            <DataSeries> 
+                                <shield:ChartBarSeries DataFieldY="Sales"> 
+                                    <Settings EnablePointSelection="true" EnableAnimation="true"> 
+                                        <DataPointText BorderWidth=""> 
+                                        </DataPointText> 
+                                    </Settings> 
+                                </shield:ChartBarSeries> 
+                            </DataSeries> 
+                            <Legend Align="Center" BorderWidth=""></Legend> 
+                        </shield:ShieldChart> 
+                    </ContentTemplate> 
+                </asp:UpdatePanel>--%>
+
+
 </asp:Content>

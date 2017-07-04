@@ -22,9 +22,9 @@ namespace MomoSecretSociety.Content
             BossRejectedReport,
             ReportSavedToPdf,
             SessionTimeout,
-            ExceptionError,
             AuthenticatedDueToSessionTimeout,
-            BossViewPendingReport
+            BossViewPendingReport,
+            ExceptionError
         };
 
         public static void Log(string username, Action action)
@@ -36,6 +36,24 @@ namespace MomoSecretSociety.Content
             insertLogsCommand.Parameters.AddWithValue("@Username", username);
             insertLogsCommand.Parameters.AddWithValue("@Action", getActionString(action));
             insertLogsCommand.Parameters.AddWithValue("@Timestamp", DateTime.Now);
+            insertLogsCommand.Connection = connection;
+            insertLogsCommand.ExecuteNonQuery();
+
+            connection.Close();
+        }
+
+        public static void LogExceptionError(string username, Exception ex, string location)
+        {
+            connection.Open();
+
+            SqlCommand insertLogsCommand = new SqlCommand();
+            insertLogsCommand.CommandText = "INSERT INTO ErrorExceptionLogs (username, exceptiontype, errormessage, errorsource, timestamp, location) VALUES (@Username, @ExceptionType, @ErrorMessage, @ErrorSource, @Timestamp, @Location)";
+            insertLogsCommand.Parameters.AddWithValue("@Username", username);
+            insertLogsCommand.Parameters.AddWithValue("@ExceptionType", ex.GetType().Name);
+            insertLogsCommand.Parameters.AddWithValue("@ErrorMessage", ex.Message);
+            insertLogsCommand.Parameters.AddWithValue("@ErrorSource", ex.Source);
+            insertLogsCommand.Parameters.AddWithValue("@Timestamp", DateTime.Now);
+            insertLogsCommand.Parameters.AddWithValue("@Location", location);
             insertLogsCommand.Connection = connection;
             insertLogsCommand.ExecuteNonQuery();
 
@@ -82,6 +100,10 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Boss View Pending Report";
             }
+            else if (action == Action.ExceptionError)
+            {
+                actionString = "Exception Error";
+            }
 
 
 
@@ -104,6 +126,10 @@ namespace MomoSecretSociety.Content
             if (getLastLoggedInReader.Read())
             {
                 timestamp = getLastLoggedInReader["Timestamp"].ToString();
+            }
+            else
+            {
+                timestamp = "--/--/---- --:--:-- AM/PM";
             }
             connection.Close();
 

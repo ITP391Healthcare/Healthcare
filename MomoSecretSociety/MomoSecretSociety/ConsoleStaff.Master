@@ -102,31 +102,29 @@
         }
 
         //Prevent user from pressing the Refresh button
-        window.onload = function () {
-            if (window.performance) {
-                if (performance.navigation.type == 1) {
-                    alert("You are logged out due to non-authentication from Session Timeout. \nPlease re-login to continue using SecureReportSystem.");
-                    //s.abort = true;
+        //window.onload = function () {
+        //    if (window.performance) {
+        //        if (performance.navigation.type == 1) {
+        //            alert("You are logged out due to non-authentication from Session Timeout. \nPlease re-login to continue using SecureReportSystem.");
+        //            //s.abort = true;
 
-                   <%-- <%Session["refreshFromSessionTimeout"]="Logout due to Non-authentication from Session Timeout";%>;--%>
+        //            document.location = "../../Account/Login.aspx";
+        //            //document.location = "../LogoutSummary.aspx";
 
-                    document.location = "../../Account/Login.aspx";
-                    //document.location = "../LogoutSummary.aspx";
+        //        }
 
-                }
-
-            };
-        }
+        //    };
+        //}
 
     </script>
     <% } %>
 
 
     <script type="text/javascript">
-        function disableRightClick() {
-            alert("Sorry, right click is not allowed !!");
-            return false;
-        }
+        //function disableRightClick() {
+        //    alert("Sorry, right click is not allowed !!");
+        //    return false;
+        //}
     </script>
 
     <asp:PlaceHolder runat="server">
@@ -190,6 +188,11 @@
             }
     </style>
 
+    <style>
+        .navbar-collapse .navbar-nav.navbar-right:last-child {
+            margin-right: 0px !important;
+        }
+    </style>
 </head>
 
 
