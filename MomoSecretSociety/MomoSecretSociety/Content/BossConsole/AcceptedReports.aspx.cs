@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,7 +27,6 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 errormsgPasswordAuthenticate.Visible = false;
             }
-
         }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -84,6 +84,22 @@ namespace MomoSecretSociety.Content.BossConsole
             Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
 
             return BitConverter.ToString(hashedBytes);
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "DataCommand")
+            {
+                string commandArgs = e.CommandArgument.ToString();
+
+
+                Session["caseNumberOfThisSelectedReport"] = commandArgs;
+
+                Response.Redirect("ViewAcceptedReport.aspx");
+
+
+            }
         }
     }
 }

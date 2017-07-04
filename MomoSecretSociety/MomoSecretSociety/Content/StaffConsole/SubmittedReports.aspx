@@ -84,12 +84,6 @@
             <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="200" />
             <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="200" />
             <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="200" />
-
-
-
-
-
-
         </Columns>
     </asp:GridView>
 
