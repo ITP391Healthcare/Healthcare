@@ -54,12 +54,39 @@ namespace MomoSecretSociety.Content.StaffConsole
             connection.Close();
 
             Label2.Text = dbCaseNumber + " -";
+
             Label4.Text = dbDate;
             Label6.Text = dbUsername;
             Label8.Text = dbSubject;
             Label10.Text = dbDescription;
+
+            TextBox3.Text = dbDate;
+            TextBox5.Text = dbUsername;
+            TextBox7.Text = dbSubject;
+            TextBox9.Text = dbDescription;
             Label12.Text = dbRemarks;
             
+            if(dbReportStatus == "rejected")
+            {
+                //Make the labels disappear
+                Label4.Visible = false;
+                Label6.Visible = false;
+                Label8.Visible = false;
+                Label10.Visible = false;
+
+                //Make the textbox visible
+                TextBox3.Visible = true;
+                TextBox5.Visible = true;
+                TextBox7.Visible = true;
+                TextBox9.Visible = true;
+
+                //Make textbox editable to resubmit
+                TextBox3.ReadOnly = false;
+                TextBox5.ReadOnly = false;
+                TextBox7.ReadOnly = false;
+                TextBox9.ReadOnly = false;
+            }
+
             if (dbReportStatus != "accepted")
             {
                 btnSaveAsPDF.Enabled = false;
@@ -78,6 +105,8 @@ namespace MomoSecretSociety.Content.StaffConsole
 
 
         }
+
+
 
 
 
