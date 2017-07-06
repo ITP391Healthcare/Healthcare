@@ -234,7 +234,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(320, 40, 90, 90);
+            signaturefield.Bounds = new RectangleF(400, 20, 90, 90);
             
 
             doc.Form.Fields.Add(signaturefield);
