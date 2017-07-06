@@ -12,6 +12,33 @@
         }
     </style>
 
+<%--    
+    <script>
+        function alertMsgDisplay() {
+            //if (document.getElementById("alertBoxApproved").style.visibility == 'visible') 
+            //{
+                setTimeout(function () {
+                    document.getElementById('alertBoxApproved').style.visibility = 'hidden'
+                }, 3000);
+            //}
+
+            //if (document.getElementById("alertBoxRejected").style.visibility == 'visible')
+            //{
+                setTimeout(function () {
+                    document.getElementById('alertBoxRejected').style.visibility = 'hidden'
+                }, 3000);
+            //}
+        }
+
+        window.onload(alertMsgDisplay); //body onload=""
+    </script>
+    --%>
+
+
+    <%-- function myFunction() {
+    setTimeout(function(){document.getElementById('alertBoxRejected').style.visibility = 'hidden'}, 3000);
+} --%>
+
 
     <%--Div to show alert message whether pending report is being approved/rejected--%>
     <div class="alert" runat="server" style="padding: 25px; border-radius: 2px; border: 4px solid #146882; background-color: white; margin-top: 20px; margin-bottom: 20px; text-align: center;" id="alertBoxApproved" visible="false">
