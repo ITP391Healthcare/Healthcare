@@ -234,7 +234,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(400, 20, 90, 90);
+            signaturefield.Bounds = new RectangleF(400, 0, 90, 90);
             
 
             doc.Form.Fields.Add(signaturefield);
@@ -308,7 +308,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //CASE DESCRIPTION
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
-            y1 = y1 + 30;
+            y1 = y1 + 20;
 
 
             string[] delimiter = new string[] { " " };
@@ -338,12 +338,11 @@ namespace MomoSecretSociety.Content.StaffConsole
                     finalResult += "\n" + s + " ";
                     lineCount++;
                     //counter++;
-                    //y1 += 10;
                 }
             }
 
             page.Canvas.DrawString(finalResult, font3, brush, x2, y1, leftAlignment);
-            y1 = y1 + (lineCount * 15); //count the number of lines + Y1
+            y1 = y1 + (lineCount * 20); //count the number of lines + Y1
 
             //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
