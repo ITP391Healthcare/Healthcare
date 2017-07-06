@@ -190,7 +190,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             myCommand.Parameters.AddWithValue("@reportStatus", rStatus);
             myCommand.Parameters.AddWithValue("@cNum", dbCaseNumber);
 
-
+            
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
@@ -234,7 +234,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(320, 40, 200, 150);
+            signaturefield.Bounds = new RectangleF(320, 40, 90, 90);
             
 
             doc.Form.Fields.Add(signaturefield);
@@ -289,7 +289,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             PdfFont font2 = new PdfFont(PdfFontFamily.Helvetica, 10f);
             PdfTrueTypeFont font3 = new PdfTrueTypeFont(new Font("Helvetica", 10f, FontStyle.Bold));
             PdfSolidBrush brush = new PdfSolidBrush(Color.Black);
-            PdfStringFormat leftAlignment = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Middle);
+            PdfStringFormat leftAlignment = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Top);
 
             //DATE
             page.Canvas.DrawString("Date: ", font2, brush, x1, y1, leftAlignment);
@@ -310,38 +310,40 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
 
+
             string[] delimiter = new string[] { " " };
             string[] result;
 
             string finalResult = "";
             int counter = 0;
+            int lineCount = 0;
 
             result = dbDescription.Split(delimiter, StringSplitOptions.None);
 
             foreach (string s in result)
             {
                 int charCount = s.Length;
-                counter += charCount;
+                //counter += charCount;
 
-                if (counter < 70)
+                if (counter + charCount < 80)
                 {
+                    counter += charCount + 1;
                     finalResult += s + " ";
                     //add the word to the final result with a space
                 }
-                else if (counter >= 70)
+                else if (counter + charCount >= 80)
                 {
-                    counter = 0;
-                    counter += charCount;
+                    counter = charCount + 1;
+                    //counter += charCount;
                     finalResult += "\n" + s + " ";
+                    lineCount++;
+                    //counter++;
                     //y1 += 10;
                 }
             }
 
             page.Canvas.DrawString(finalResult, font3, brush, x2, y1, leftAlignment);
-            y1 = y1 + 30;
-
-            //page.Canvas.DrawString(dbDescription, font3, brush, x2, y1, leftAlignment); //Characters count: 76
-            //y1 = y1 + 30;
+            y1 = y1 + (lineCount * 15); //count the number of lines + Y1
 
             //REMARKS
             page.Canvas.DrawString("Remarks: ", font2, brush, x1, y1, leftAlignment);
@@ -358,14 +360,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
             */
 
-                string w = page.Canvas.Size.ToString();
-                y1 = y1 + 30;
-                page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
-                y1 = y1 + 30;
-                SizeF size = page.Canvas.ClientSize;
-                string sizeText = size.ToString();
-                page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
-  
+            //string w = page.Canvas.Size.ToString();
+            //y1 = y1 + 30;
+            //page.Canvas.DrawString(w, font3, brush, x2, y1, leftAlignment);
+            //y1 = y1 + 30;
+            //SizeF size = page.Canvas.ClientSize;
+            //string sizeText = size.ToString();
+            //page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
+
         }
     }
 }
