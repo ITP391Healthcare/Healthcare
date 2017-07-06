@@ -190,7 +190,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             myCommand.Parameters.AddWithValue("@reportStatus", rStatus);
             myCommand.Parameters.AddWithValue("@cNum", dbCaseNumber);
 
-
+            
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
@@ -234,7 +234,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(320, 40, 200, 150);
+            signaturefield.Bounds = new RectangleF(320, 40, 90, 90);
             
 
             doc.Form.Fields.Add(signaturefield);
@@ -310,6 +310,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             page.Canvas.DrawString("Case Description: ", font2, brush, x1, y1, leftAlignment);
             y1 = y1 + 30;
 
+            //dbDescription = dbDescription.Trim()
+
             string[] delimiter = new string[] { " " };
             string[] result;
 
@@ -321,18 +323,20 @@ namespace MomoSecretSociety.Content.StaffConsole
             foreach (string s in result)
             {
                 int charCount = s.Length;
-                counter += charCount;
+                //counter += charCount;
 
-                if (counter < 70)
+                if (counter + charCount < 80)
                 {
+                    counter += charCount + 1;
                     finalResult += s + " ";
                     //add the word to the final result with a space
                 }
-                else if (counter >= 70)
+                else if (counter + charCount >= 80)
                 {
-                    counter = 0;
-                    counter += charCount;
+                    counter = charCount + 1;
+                    //counter += charCount;
                     finalResult += "\n" + s + " ";
+                    //counter++;
                     //y1 += 10;
                 }
             }
