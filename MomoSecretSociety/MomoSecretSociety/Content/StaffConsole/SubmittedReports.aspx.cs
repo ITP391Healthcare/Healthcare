@@ -89,11 +89,11 @@ namespace MomoSecretSociety.Content.StaffConsole
 
 
         //Joanne test button - View Accepted reports
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~\\Content\\StaffConsole\\ViewAcceptedReport");
+        //protected void Button1_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("~\\Content\\StaffConsole\\ViewAcceptedReport");
 
-        }
+        //}
         
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
