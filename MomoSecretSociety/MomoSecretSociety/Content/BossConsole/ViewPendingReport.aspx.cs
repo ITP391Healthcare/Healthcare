@@ -154,7 +154,9 @@ namespace MomoSecretSociety.Content.BossConsole
             connection.Open();
 
             SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
+            //SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, AlertIsDisplayed = @AlertIsDisplayed WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
             updateReportStatus.Parameters.AddWithValue("@ReportStatus", "accepted");
+            //updateReportStatus.Parameters.AddWithValue("@AlertIsDisplayed", "1");
             updateReportStatus.Parameters.AddWithValue("@AccountUsername", Label6.Text);
             updateReportStatus.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
 

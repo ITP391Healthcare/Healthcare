@@ -24,6 +24,8 @@ namespace MomoSecretSociety.Content.BossConsole
 
         string dbIsFirstTimeAccessed = "";
 
+        static SqlConnection displayAlertConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated && (IsPostBack || !IsPostBack))
@@ -59,6 +61,78 @@ namespace MomoSecretSociety.Content.BossConsole
                     rejectedMsg.Text = Session["rejectedMsg"].ToString();
                 }
             }
+
+            string isDisplayed = "";
+
+            //if (!IsPostBack)
+            //{
+
+            //if (!IsPostBack)
+            //{
+
+            //    displayAlertConnection.Open();
+            //    SqlCommand displayAlertCommand = new SqlCommand("SELECT AlertIsDisplayed FROM Report WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", displayAlertConnection);
+            //    displayAlertCommand.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
+            //    displayAlertCommand.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
+
+            //    SqlDataReader displayAlertReader = displayAlertCommand.ExecuteReader();
+            //    while (displayAlertReader.Read())
+            //    {
+            //        isDisplayed = (displayAlertReader["AlertIsDisplayed"].ToString());
+            //    }
+            //    displayAlertReader.Close();
+            //    displayAlertConnection.Close();
+
+            //    if (isDisplayed == "True")
+            //    {
+            //        alertBoxApproved.Visible = true;
+            //        Response.Write("HI");
+                    //    displayAlertConnection.Open();
+                    //    SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, AlertIsDisplayed = @AlertIsDisplayed WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", displayAlertConnection);
+                    //    updateReportStatus.Parameters.AddWithValue("@ReportStatus", "accepted");
+                    //    updateReportStatus.Parameters.AddWithValue("@AlertIsDisplayed", "0");
+                    //    updateReportStatus.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
+                    //    updateReportStatus.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
+
+                    //    updateReportStatus.ExecuteNonQuery();
+                    //    displayAlertConnection.Close();
+                    //    isDisplayed = "False";
+            //    }
+            //}
+
+            //if (isDisplayed == "False")
+            //{
+            //    alertBoxApproved.Visible = false;
+            //}
+
+            //}
+
+            //    if (alertBoxApproved.Visible == true)
+            //    {
+            //        displayAlertConnection.Open();
+            //        SqlCommand displayAlertCommand2 = new SqlCommand("SELECT AlertIsDisplayed FROM Report WHERE Username = @AccountUsername", displayAlertConnection);
+            //        displayAlertCommand2.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
+
+            //        SqlDataReader displayAlertReader2 = displayAlertCommand.ExecuteReader();
+            //        while (displayAlertReader.Read())
+            //        {
+            //            isDisplayed = (displayAlertReader2["AlertIsDisplayed"].ToString());
+            //        }
+            //        displayAlertReader2.Close();
+            //        displayAlertConnection.Close();
+
+            //        if (isDisplayed == "False")
+            //        {
+            //            alertBoxApproved.Visible = false;
+            //        }
+
+            //    }
+
+
+            //}
+
+
+
         }
 
         private void showNewPendingReports()
