@@ -20,10 +20,6 @@ namespace MomoSecretSociety.Content.BossConsole
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-
-
             if (Request.IsAuthenticated)
             {
                 ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
@@ -149,6 +145,8 @@ namespace MomoSecretSociety.Content.BossConsole
         //public static string dbRemarks = "";
         //public static string dbCreatedDateTime = "";
 
+        //public static string displayCaseNumber = "";
+
         protected void Button_Approve_Click(object sender, EventArgs e)
         {
             connection.Open();
@@ -188,7 +186,7 @@ namespace MomoSecretSociety.Content.BossConsole
             updateReportStatus.ExecuteNonQuery();
 
             connection.Close();
-
+            
             //Add to logs
             ActionLogs.Action action = ActionLogs.Action.BossRejectedReport;
             ActionLogs.Log(Context.User.Identity.Name, action);
