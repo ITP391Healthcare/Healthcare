@@ -26,6 +26,7 @@ namespace MomoSecretSociety.Content.StaffConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
+
         }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
