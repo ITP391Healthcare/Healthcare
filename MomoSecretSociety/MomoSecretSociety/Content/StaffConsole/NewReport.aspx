@@ -2,7 +2,74 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    
+<style>
+    .button-linkReject, .button-linkApprove {
+        text-shadow: none;
+        border-radius: 3px;
+        border-color: #19c589;
+        color: #fff;
+        font: 13px/16px "lft-etica-n4", "lft-etica", Arial, sans-serif;
+        padding: 8px 17px;
+        background-color: #19c589;
+        float: right;
+    }
+
+        .button-linkReject:hover, .button-linkApprove:hover {
+            opacity: 0.7;
+            text-decoration: none;
+        }
+
+    .button-linkReject {
+        margin-top: 1%;
+    }
+
+    .button-linkApprove {
+        margin-top: 1%;
+    }
+</style>
+
+
+<style>
+    .table tbody > tr > td {
+        border-top: none;
+    }
+
+    td {
+        min-width: 200px;
+    }
+
+    textarea.textbox_remarks {
+        border: 1px solid #c4c4c4;
+        /*width: 180px;*/
+        width: 700px;
+        font-size: 13px;
+        padding: 3px;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        box-shadow: 0px 0px 8px #d9d9d9;
+        -moz-box-shadow: 0px 0px 8px #d9d9d9;
+        -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+    }
+
+        textarea.textbox_remarks:focus {
+            outline: none;
+            border: 1px solid lightblue;
+            box-shadow: 0px 0px 8px lightblue;
+            -moz-box-shadow: 0px 0px 8px lightblue;
+            -webkit-box-shadow: 0px 0px 8px lightblue;
+        }
+
+
+    .label_caseDesc {
+        width: 500px !important;
+    }
+
+    .label_subject {
+        border-bottom: 2px solid lightblue;
+    }
+</style>
+
       <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">
@@ -32,44 +99,61 @@
 
 
     <h3 style="text-align: center"><b>- NEW REPORT -</b></h3>
-    <div class="jumbotron" style="background-color: white;">
-<%--    <asp:Label ID="Label1" runat="server" Text="Case Number: "></asp:Label>
-        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-        <br />
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox5" CssClass="text-danger" ErrorMessage="The text field is required." />
-        <br />--%>
+    <table class="jumbotron" style="background-color: white; border-collapse: initial; border-spacing: 0; padding-left: 12%; padding-right: 12%; font-size: medium">
+        <tr>
+            <td>
+                <asp:Label ID="Label2" runat="server" Text="Date: " Font-Bold="true"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="TextBox4" runat="server" TextMode="Date" Font-Bold="true"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox4" CssClass="text-danger" ErrorMessage="The text field is required." />
+            </td>
+        </tr>
 
-        <asp:Label ID="Label2" runat="server" Text="Date: "></asp:Label>
-        <asp:TextBox ID="TextBox4" runat="server" TextMode="Date"></asp:TextBox>
-        <br />
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox4" CssClass="text-danger" ErrorMessage="The text field is required." />
-        <br />
+        <tr>
+            <td>
+                <asp:Label ID="Label3" runat="server" Text="From: " Font-Bold="true"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True" Font-Bold="true"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox3" CssClass="text-danger" ErrorMessage="The text field is required." />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label4" runat="server" Text="Subject: " Font-Bold="true"></asp:Label>
+            </td>
+            <td style="padding-bottom: 2%;">
+                <asp:TextBox ID="TextBox2" runat="server" Font-Bold="true"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox2" CssClass="text-danger" ErrorMessage="The text field is required." />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label5" runat="server" Text="Case Description: " Font-Bold="true"></asp:Label>
+            </td>
+            <td style="min-width: 700px !important; line-height: 120% !important;">
+                <asp:TextBox ID="TextBox1" runat="server" Height="240px" Width="562px" TextMode="MultiLine" Font-Bold="true"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1" CssClass="text-danger" ErrorMessage="The text field is required." />
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 2%; vertical-align: top;">
+                <asp:Label ID="Label6" runat="server" Text="Remarks (for higherups)" Font-Bold="true"></asp:Label>
+            </td>
+            <td style="padding-top: 2%;">
+                <asp:TextBox ID="TextBox5" runat="server" Height="90px" ReadOnly="True" TextMode="MultiLine" Width="558px"></asp:TextBox>
+            </td>
+        </tr>
 
-        <asp:Label ID="Label3" runat="server" Text="From: "></asp:Label>
-        <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
-        <br />
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox3" CssClass="text-danger" ErrorMessage="The text field is required." />
-        <br />
+        <tr>
+            <td></td>
+            <td>
+                <asp:Button ID="Button1" runat="server" CssClass="button-linkReject" Text="Save as drafts" OnClick="SaveAsDraftsButton_Click" />
+                <asp:Button ID="Button2" runat="server" CssClass="button-linkApprove" Text="Submit" OnClick="SubmitButton_Click" />
+            </td>
+        </tr>
 
-        <asp:Label ID="Label4" runat="server" Text="Subject: "></asp:Label>
-        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-        <br />
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox2" CssClass="text-danger" ErrorMessage="The text field is required." />
-        <br />
-
-        <asp:Label ID="Label5" runat="server" Text="Case Description: "></asp:Label>
-        <br />
-        <asp:TextBox ID="TextBox1" runat="server" Height="240px" Width="562px" TextMode="MultiLine"></asp:TextBox>
-        <br />
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox1" CssClass="text-danger" ErrorMessage="The text field is required." />
-        <br />
-        <asp:Label ID="Label6" runat="server" Text="Remarks (for higherups)"></asp:Label>
-        <br />
-        <asp:TextBox ID="TextBox5" runat="server" Height="90px" ReadOnly="True" TextMode="MultiLine" Width="558px"></asp:TextBox>
-        <br />
-
-        <asp:Button ID="Button1" runat="server" Text="Save as drafts" OnClick="SaveAsDraftsButton_Click" />
-        <asp:Button ID="Button2" runat="server" OnClick="SubmitButton_Click" Text="Submit" />
-    </div>
+    </table>
 
 </asp:Content>
