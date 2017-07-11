@@ -41,19 +41,25 @@ namespace MomoSecretSociety.Content.BossConsole
 
             if (Session["approvedMsg"] != null)
             {
-                alertBoxApproved.Visible = true;
-                approvedMsg.Visible = true;
-                approvedMsg.Text = Session["approvedMsg"].ToString();
+                if (System.Web.HttpContext.Current.Request.Url.ToString() == "http://localhost:53380/Content/BossConsole/PendingReports")
+                {
+                    alertBoxApproved.Visible = true;
+                    approvedMsg.Visible = true;
+                    approvedMsg.Text = Session["approvedMsg"].ToString();
+                    Session["approvedMsg"] = null;
+                }
             }
-
 
             if (Session["rejectedMsg"] != null)
             {
-                alertBoxRejected.Visible = true;
-                rejectedMsg.Visible = true;
-                rejectedMsg.Text = Session["rejectedMsg"].ToString();
+                if (System.Web.HttpContext.Current.Request.Url.ToString() == "http://localhost:53380/Content/BossConsole/PendingReports")
+                {
+                    alertBoxRejected.Visible = true;
+                    rejectedMsg.Visible = true;
+                    rejectedMsg.Text = Session["rejectedMsg"].ToString();
+                    Session["rejectedMsg"] = null;
+                }
             }
-
 
         }
 

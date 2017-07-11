@@ -38,23 +38,39 @@
     <div class="jumbotron" style="background-color: white;">
 
         <asp:Label ID="Label3" runat="server" Text="Date: "></asp:Label>
-        <asp:Label ID="Label4" runat="server" Text="" Font-Bold="true"></asp:Label><br />
-
-        <asp:Label ID="Label5" runat="server" Text="From: "></asp:Label>
-        <asp:Label ID="Label6" runat="server" Text="" Font-Bold="true"></asp:Label><br />
-
-        <asp:Label ID="Label7" runat="server" Text="Subject: "></asp:Label>
-        <asp:Label ID="Label8" runat="server" Text="" Font-Bold="true"></asp:Label><br />
-
-        <asp:Label ID="Label9" runat="server" Text="Case Description: "></asp:Label><br />
-        <asp:Label ID="Label10" runat="server" Text="" Font-Bold="true"></asp:Label><br />
+        <asp:Label ID="Label4" runat="server" Text="" Font-Bold="true"></asp:Label>
+        <asp:TextBox ID="TextBox3" runat="server" Font-Bold="true" ReadOnly="true" Visible="false"></asp:TextBox>
+        <br />
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox3" CssClass="text-danger" ErrorMessage="The text field is required." />
         <br />
 
+        <asp:Label ID="Label5" runat="server" Text="From: "></asp:Label>
+        <asp:Label ID="Label6" runat="server" Text="" Font-Bold="true"></asp:Label>
+        <asp:TextBox ID="TextBox5" runat="server" Font-Bold="true" ReadOnly="true" Visible="false"></asp:TextBox>
+        <br />
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox5" CssClass="text-danger" ErrorMessage="The text field is required." />
+        <br />
+
+        <asp:Label ID="Label7" runat="server" Text="Subject: "></asp:Label>
+        <asp:Label ID="Label8" runat="server" Text="" Font-Bold="true"></asp:Label>
+        <asp:TextBox ID="TextBox7" runat="server" Font-Bold="true" ReadOnly="true" Visible="false"></asp:TextBox>
+        <br />
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox7" CssClass="text-danger" ErrorMessage="The text field is required." />
+        <br />
+
+
+        <asp:Label ID="Label9" runat="server" Text="Case Description: "></asp:Label><br />
+        <asp:Label ID="Label10" runat="server" Text="" Font-Bold="true"></asp:Label>
+        <asp:TextBox ID="TextBox9" runat="server" Font-Bold="true" ReadOnly="true" Visible="false" Height="240px" Width="562px" TextMode="MultiLine"></asp:TextBox><br />
+        <br />
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBox9" CssClass="text-danger" ErrorMessage="The text field is required." />
+        <br />
         <asp:Label ID="Label11" runat="server" Text="Remarks: "></asp:Label><br />
         <asp:Label ID="Label12" runat="server" Text="" Font-Bold="true"></asp:Label><br />
     </div>
 
     <div>
         <asp:Button ID="btnSaveAsPDF" runat="server" Text="Save Report" OnClick="btnSaveAsPDF_Click" />
+        <asp:Button ID="Button2" runat="server" Text="Submit" />
     </div>
 </asp:Content>

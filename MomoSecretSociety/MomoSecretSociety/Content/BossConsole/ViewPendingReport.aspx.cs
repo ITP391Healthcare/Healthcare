@@ -20,13 +20,6 @@ namespace MomoSecretSociety.Content.BossConsole
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["caseNumberOfThisPendingReport"] == null || Session["caseNumberOfThisPendingReport"] == null)
-            {
-                return;
-            }
-
-
             if (Request.IsAuthenticated)
             {
                 ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
@@ -38,41 +31,50 @@ namespace MomoSecretSociety.Content.BossConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-            //This should be on click of the particular report then will appear
-            string dbCaseNumber = "";
-            string dbUsername = "";
-            string dbDate = "";
-            string dbSubject = "";
-            string dbDescription = "";
-            string dbRemarks = "";
-            string dbReportStatus = "";
-
-            connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, ReportStatus FROM Report WHERE CaseNumber = @caseNo AND Username = @AccountUsername", connection);
-            myCommand.Parameters.AddWithValue("@caseNo", Session["caseNumberOfThisPendingReport"].ToString());
-            myCommand.Parameters.AddWithValue("@AccountUsername", Session["usernameOfThisPendingReport"].ToString());
-
-            //Hardcoded the case number - next time change to auto input when onclick of the particular report
-            SqlDataReader myReader = myCommand.ExecuteReader();
-
-
-            while (myReader.Read())
+            if (Session["caseNumberOfThisPendingReport"] == null || Session["usernameOfThisPendingReport"] == null)
             {
-                dbCaseNumber = (myReader["CaseNumber"].ToString());
-                dbUsername = (myReader["Username"].ToString());
-                dbDate = (myReader["Date"].ToString());
-                dbSubject = (myReader["Subject"].ToString());
-                dbDescription = (myReader["Description"].ToString());
-                dbReportStatus = (myReader["ReportStatus"].ToString());
+                return;
             }
+            else
+            {
 
-            connection.Close();
+                //This should be on click of the particular report then will appear
+                string dbCaseNumber = "";
+                string dbUsername = "";
+                string dbDate = "";
+                string dbSubject = "";
+                string dbDescription = "";
+                string dbRemarks = "";
+                string dbReportStatus = "";
 
-            Label2.Text = dbCaseNumber;
-            Label4.Text = dbDate;
-            Label6.Text = dbUsername;
-            Label8.Text = dbSubject;
-            Label10.Text = dbDescription;
+                connection.Open();
+                SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, ReportStatus FROM Report WHERE CaseNumber = @caseNo AND Username = @AccountUsername", connection);
+                myCommand.Parameters.AddWithValue("@caseNo", Session["caseNumberOfThisPendingReport"].ToString());
+                myCommand.Parameters.AddWithValue("@AccountUsername", Session["usernameOfThisPendingReport"].ToString());
+
+                //Hardcoded the case number - next time change to auto input when onclick of the particular report
+                SqlDataReader myReader = myCommand.ExecuteReader();
+
+
+                while (myReader.Read())
+                {
+                    dbCaseNumber = (myReader["CaseNumber"].ToString());
+                    dbUsername = (myReader["Username"].ToString());
+                    dbDate = (myReader["Date"].ToString());
+                    dbSubject = (myReader["Subject"].ToString());
+                    dbDescription = (myReader["Description"].ToString());
+                    dbReportStatus = (myReader["ReportStatus"].ToString());
+                }
+
+                connection.Close();
+
+                Label2.Text = dbCaseNumber;
+                Label4.Text = dbDate;
+                Label6.Text = dbUsername;
+                Label8.Text = dbSubject;
+                Label10.Text = dbDescription;
+            }
+            
         }
 
 
@@ -135,21 +137,25 @@ namespace MomoSecretSociety.Content.BossConsole
         }
 
 
-        public static string dbCaseNumber = "";
-        public static string dbUsername = "";
-        public static string dbDate = "";
-        public static string dbSubject = "";
-        public static string dbDescription = "";
-        public static string dbRemarks = "";
-        public static string dbCreatedDateTime = "";
+        //public static string dbCaseNumber = "";
+        //public static string dbUsername = "";
+        //public static string dbDate = "";
+        //public static string dbSubject = "";
+        //public static string dbDescription = "";
+        //public static string dbRemarks = "";
+        //public static string dbCreatedDateTime = "";
+
+        //public static string displayCaseNumber = "";
 
         protected void Button_Approve_Click(object sender, EventArgs e)
         {
             connection.Open();
 
             SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
+            //SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, AlertIsDisplayed = @AlertIsDisplayed WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
             updateReportStatus.Parameters.AddWithValue("@ReportStatus", "accepted");
-            updateReportStatus.Parameters.AddWithValue("@AccountUsername", Session["usernameOfThisPendingReport"].ToString());
+            //updateReportStatus.Parameters.AddWithValue("@AlertIsDisplayed", "1");
+            updateReportStatus.Parameters.AddWithValue("@AccountUsername", Label6.Text);
             updateReportStatus.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
 
             updateReportStatus.ExecuteNonQuery();
@@ -175,12 +181,12 @@ namespace MomoSecretSociety.Content.BossConsole
 
             SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
             updateReportStatus.Parameters.AddWithValue("@ReportStatus", "rejected");
-            updateReportStatus.Parameters.AddWithValue("@AccountUsername", Session["usernameOfThisPendingReport"].ToString());
+            updateReportStatus.Parameters.AddWithValue("@AccountUsername", Label6.Text);
             updateReportStatus.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
             updateReportStatus.ExecuteNonQuery();
 
             connection.Close();
-
+            
             //Add to logs
             ActionLogs.Action action = ActionLogs.Action.BossRejectedReport;
             ActionLogs.Log(Context.User.Identity.Name, action);

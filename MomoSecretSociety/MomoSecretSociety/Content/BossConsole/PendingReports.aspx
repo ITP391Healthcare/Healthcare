@@ -11,8 +11,7 @@
             text-align: center;
         }
     </style>
-
-
+    
     <%--Div to show alert message whether pending report is being approved/rejected--%>
     <div class="alert" runat="server" style="padding: 25px; border-radius: 2px; border: 4px solid #146882; background-color: white; margin-top: 20px; margin-bottom: 20px; text-align: center;" id="alertBoxApproved" visible="false">
         <asp:Label ID="approvedMsg" runat="server" Visible="false"></asp:Label>
