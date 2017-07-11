@@ -204,6 +204,7 @@
     <Content Include="Content\BossConsole\ErrorPages\demoPageWithError1SQL.aspx" />
     <Content Include="Content\BossConsole\ErrorPages\demoPageWithError2DivideByZero.aspx" />
     <Content Include="Content\BossConsole\ViewPendingReport.aspx" />
+    <Content Include="Content\BossConsole\BossAcceptedReports.aspx" />
     <Content Include="Content\LogoutSummary.aspx" />
     <Content Include="Content\StaffConsole\Drafts.aspx" />
     <Content Include="Content\StaffConsole\ErrorPages\demoPageWithError1SQL.aspx" />
@@ -395,6 +396,13 @@
     </Compile>
     <Compile Include="Content\BossConsole\ViewPendingReport.aspx.designer.cs">
       <DependentUpon>ViewPendingReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\BossAcceptedReports.aspx.cs">
+      <DependentUpon>BossAcceptedReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\BossAcceptedReports.aspx.designer.cs">
+      <DependentUpon>BossAcceptedReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\LogoutSummary.aspx.cs">
       <DependentUpon>LogoutSummary.aspx</DependentUpon>
