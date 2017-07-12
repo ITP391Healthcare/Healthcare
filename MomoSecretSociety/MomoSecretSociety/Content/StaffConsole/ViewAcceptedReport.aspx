@@ -166,7 +166,7 @@
             <td></td>
             <td>
                 <asp:Button ID="btnSaveAsPDF" runat="server" Text="Save Report" OnClick="btnSaveAsPDF_Click" />
-                <asp:Button ID="Button2" runat="server" Text="Submit" />
+                <asp:Button ID="btnReSubmitRpt" runat="server" Text="Submit" OnClick="btnReSubmitRpt_Click" />
             </td>
         </tr>
 
