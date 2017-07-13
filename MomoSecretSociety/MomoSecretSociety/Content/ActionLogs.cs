@@ -23,7 +23,7 @@ namespace MomoSecretSociety.Content
             BossRejectedReport,
             ReportSavedToPdf,
             SessionTimeout,
-            AuthenticatedDueToSessionTimeout,
+            ReauthenticatedDueToAccountLockout,
             BossViewPendingReport,
             ExceptionError
         };
@@ -93,9 +93,9 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Session Timeout";
             }
-            else if (action == Action.AuthenticatedDueToSessionTimeout)
+            else if (action == Action.ReauthenticatedDueToAccountLockout)
             {
-                actionString = "Authenticated due to Session Timeout";
+                actionString = "Re-authenticated due to Account Lockout";
             }
             else if (action == Action.BossViewPendingReport)
             {

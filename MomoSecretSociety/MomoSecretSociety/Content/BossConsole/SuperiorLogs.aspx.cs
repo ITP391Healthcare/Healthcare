@@ -214,7 +214,7 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-hourglass-o bg-aqua";
             }
-            else if (actionString == "Authenticated due to Session Timeout")
+            else if (actionString == "Re-authenticated due to Account Lockout")
             {
                 return "fa-handshake-o bg-aqua";
             }
