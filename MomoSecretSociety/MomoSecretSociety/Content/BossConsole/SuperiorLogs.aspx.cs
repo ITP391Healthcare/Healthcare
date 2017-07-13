@@ -210,7 +210,7 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-file-pdf-o bg-aqua";
             }
-            else if (actionString == "Session Timeout")
+            else if (actionString == "Account Lockout")
             {
                 return "fa-hourglass-o bg-aqua";
             }

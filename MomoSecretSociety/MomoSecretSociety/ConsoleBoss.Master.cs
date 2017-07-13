@@ -79,7 +79,7 @@ namespace MomoSecretSociety
             //}
 
 
-
+             
 
         }
 
@@ -87,9 +87,6 @@ namespace MomoSecretSociety
         // public string CustomTitle = "This Is Title";
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-
             //if (Request.IsAuthenticated)
             //{
             //    ((Label)FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"
