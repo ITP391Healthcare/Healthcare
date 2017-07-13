@@ -198,11 +198,11 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-file-text bg-aqua";
             }
-            else if (actionString == "Report was approved")
+            else if (actionString.Contains("approved"))
             {
                 return "fa-check-square-o bg-aqua";
             }
-            else if (actionString == "Report was rejected")
+            else if (actionString.Contains("rejected"))
             {
                 return "fa-exclamation-triangle bg-aqua";
             }
@@ -214,7 +214,7 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-hourglass-o bg-aqua";
             }
-            else if (actionString == "Authenticated due to Session Timeout")
+            else if (actionString == "Re-authenticated due to Account Lockout")
             {
                 return "fa-handshake-o bg-aqua";
             }
