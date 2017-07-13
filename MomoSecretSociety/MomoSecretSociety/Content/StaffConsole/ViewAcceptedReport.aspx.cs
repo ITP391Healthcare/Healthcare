@@ -111,9 +111,10 @@ namespace MomoSecretSociety.Content.StaffConsole
         //Resubmit Report
         protected void btnReSubmitRpt_Click(object sender, EventArgs e)
         {
+            dbCaseNumber = Session["caseNumberOfThisSelectedReport"].ToString();
 
             connection.Open();
-            SqlCommand updateReport = new SqlCommand("UPDATE Report SET ReportStatus=@ReportStatus WHERE CaseNumber = @CaseNumber AND Subject = @Subject AND Description = @Description", connection);
+            SqlCommand updateReport = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, Description = @Description, Subject = @Subject WHERE CaseNumber = @CaseNumber ", connection);
             updateReport.Parameters.AddWithValue("@Subject", TextBox7.Text);
             updateReport.Parameters.AddWithValue("@Description", TextBox9.Text);
             updateReport.Parameters.AddWithValue("@ReportStatus", "pending");
@@ -385,7 +386,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             //page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
 
         }
-
 
     }
 }
