@@ -52,7 +52,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             connection.Close();
-
+            if (!IsPostBack) { 
             Label2.Text = dbCaseNumber + " -";
 
             Label4.Text = dbDate;
@@ -65,8 +65,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             TextBox7.Text = dbSubject;
             TextBox9.Text = dbDescription;
             Label12.Text = dbRemarks;
-
-            if(dbReportStatus == "accepted")
+            }
+            if (dbReportStatus == "accepted" || dbReportStatus == "pending")
 
             {
                 btnReSubmitRpt.Visible = false;
@@ -112,13 +112,12 @@ namespace MomoSecretSociety.Content.StaffConsole
         protected void btnReSubmitRpt_Click(object sender, EventArgs e)
         {
             dbCaseNumber = Session["caseNumberOfThisSelectedReport"].ToString();
-
             connection.Open();
-            SqlCommand updateReport = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, Description = @Description, Subject = @Subject WHERE CaseNumber = @CaseNumber ", connection);
+            SqlCommand updateReport = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, Description = @Description, Subject = @Subject WHERE CaseNumber = @CaseNumber", connection);
             updateReport.Parameters.AddWithValue("@Subject", TextBox7.Text);
             updateReport.Parameters.AddWithValue("@Description", TextBox9.Text);
             updateReport.Parameters.AddWithValue("@ReportStatus", "pending");
-            updateReport.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisSelectedReport"].ToString());
+            updateReport.Parameters.AddWithValue("@CaseNumber", dbCaseNumber);
             updateReport.ExecuteNonQuery();
             connection.Close();
 
