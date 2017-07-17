@@ -84,5 +84,22 @@ namespace MomoSecretSociety.Content.BossConsole
 
             return BitConverter.ToString(hashedBytes);
         }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "DataCommand")
+            {
+                string commandArgs = e.CommandArgument.ToString();
+
+
+                Session["caseNumberOfThisSelectedReport"] = commandArgs;
+
+                Response.Redirect("ViewAcceptedReport.aspx");
+
+
+            }
+        }
+
     }
 }

@@ -392,6 +392,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 }
             }
             return cipherText;
+            Response.Redirect("BossAcceptedReports.aspx");
         }
 
     }
