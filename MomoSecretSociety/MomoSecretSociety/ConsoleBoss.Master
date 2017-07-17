@@ -82,23 +82,34 @@
                 }
                 else if (hasReachTimeOut()) {
 
-                    $('#myModal').modal('show');
+                    hiddenValue.value = 1;
 
-                    //Prevent user from refreshing page by pressing F5
-                    document.onkeydown = function () {
-                        switch (event.keyCode) {
-                            case 116: //F5 button
-                                event.returnValue = false;
-                                event.keyCode = 0;
-                                return false;
+                    if (hiddenValue.value == 1) {
+
+                        $('#myModal').modal('show');
+
+                        //Prevent user from refreshing page by pressing F5
+                        document.onkeydown = function () {
+                            switch (event.keyCode) {
+                                case 116: //F5 button
+                                    event.returnValue = false;
+                                    event.keyCode = 0;
+                                    return false;
+                            }
                         }
+
+                        //Prevent user from pressing back button
+                        DisableBackButton();
+                        window.onload = DisableBackButton;
+                        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+                        window.onunload = function () { void (0) }
+
+                    }
+                    else
+                    {
+                        $('#myModal').modal('hide');
                     }
 
-                    //Prevent user from pressing back button
-                    DisableBackButton();
-                    window.onload = DisableBackButton;
-                    window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
-                    window.onunload = function () { void (0) }
                 }
 
                 $('#counter').text("Time to autoredirect " + timeToRedirectInSeconds() + " seconds");
@@ -251,6 +262,8 @@
             <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova; text-shadow: 2px 2px beige;">SecureReportSystem</h1>
         </div>
 
+        
+    <asp:HiddenField ID="hiddenValue" runat="server" Value="0"/>
 
         <div class="navbar-inverse ourNav" style="background-color: white;">
             <div class="container" style="background-color: white;">

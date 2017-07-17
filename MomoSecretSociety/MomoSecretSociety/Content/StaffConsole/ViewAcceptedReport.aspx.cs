@@ -52,7 +52,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             connection.Close();
-
+            if (!IsPostBack) { 
             Label2.Text = dbCaseNumber + " -";
 
             Label4.Text = dbDate;
@@ -65,27 +65,28 @@ namespace MomoSecretSociety.Content.StaffConsole
             TextBox7.Text = dbSubject;
             TextBox9.Text = dbDescription;
             Label12.Text = dbRemarks;
-            
-            if(dbReportStatus == "rejected")
+            }
+            if (dbReportStatus == "accepted" || dbReportStatus == "pending")
+
+            {
+                btnReSubmitRpt.Visible = false;
+            }
+           
+            if(dbReportStatus == "rejected" || dbReportStatus == "drafts")
             {
                 //Make the labels disappear
-                Label4.Visible = false;
-                Label6.Visible = false;
                 Label8.Visible = false;
                 Label10.Visible = false;
 
                 //Make the textbox visible
-                TextBox3.Visible = true;
-                TextBox5.Visible = true;
                 TextBox7.Visible = true;
                 TextBox9.Visible = true;
 
                 //Make textbox editable to resubmit
-                TextBox3.ReadOnly = false;
-                TextBox5.ReadOnly = false;
                 TextBox7.ReadOnly = false;
                 TextBox9.ReadOnly = false;
             }
+
 
             if (dbReportStatus != "accepted")
             {
@@ -107,7 +108,23 @@ namespace MomoSecretSociety.Content.StaffConsole
         }
 
 
+        //Resubmit Report
+        protected void btnReSubmitRpt_Click(object sender, EventArgs e)
+        {
+            dbCaseNumber = Session["caseNumberOfThisSelectedReport"].ToString();
+            connection.Open();
+            SqlCommand updateReport = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, Description = @Description, Subject = @Subject WHERE CaseNumber = @CaseNumber", connection);
+            updateReport.Parameters.AddWithValue("@Subject", TextBox7.Text);
+            updateReport.Parameters.AddWithValue("@Description", TextBox9.Text);
+            updateReport.Parameters.AddWithValue("@ReportStatus", "pending");
+            updateReport.Parameters.AddWithValue("@CaseNumber", dbCaseNumber);
+            updateReport.ExecuteNonQuery();
+            connection.Close();
 
+            //alert
+            string message = "Your report has been updated successfully.";
+            ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);
+        }
 
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -368,5 +385,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             //page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
 
         }
+
     }
 }

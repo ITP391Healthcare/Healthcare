@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MomoSecretSociety.Content.BossConsole;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -21,8 +22,8 @@ namespace MomoSecretSociety.Content
             BossApprovedReport,
             BossRejectedReport,
             ReportSavedToPdf,
-            SessionTimeout,
-            AuthenticatedDueToSessionTimeout,
+            AccountLockout,
+            ReauthenticatedDueToAccountLockout,
             BossViewPendingReport,
             ExceptionError
         };
@@ -78,23 +79,23 @@ namespace MomoSecretSociety.Content
             }
             else if (action == Action.BossApprovedReport)
             {
-                actionString = "Report was approved";
+                actionString = "Report of #" + ViewPendingReport.caseNumberOfReport + " was approved";
             }
             else if (action == Action.BossRejectedReport)
             {
-                actionString = "Report was rejected";
+                actionString = "Report of #" + ViewPendingReport.caseNumberOfReport + " was rejected";
             }
             else if (action == Action.ReportSavedToPdf)
             {
                 actionString = "Report saved to PDF";
             }
-            else if (action == Action.SessionTimeout)
+            //else if (action == Action.AccountLockout)
+            //{
+            //    actionString = "Account Lockout";
+            //}
+            else if (action == Action.ReauthenticatedDueToAccountLockout)
             {
-                actionString = "Session Timeout";
-            }
-            else if (action == Action.AuthenticatedDueToSessionTimeout)
-            {
-                actionString = "Authenticated due to Session Timeout";
+                actionString = "Re-authenticated due to Account Lockout";
             }
             else if (action == Action.BossViewPendingReport)
             {

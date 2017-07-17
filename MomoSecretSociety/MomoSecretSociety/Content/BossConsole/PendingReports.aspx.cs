@@ -30,7 +30,7 @@ namespace MomoSecretSociety.Content.BossConsole
             if (Context.User.Identity.Name != "KaiTatL97")
             {
                 ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
-                
+
                 return;
             }
 
@@ -70,9 +70,6 @@ namespace MomoSecretSociety.Content.BossConsole
                     Session["rejectedMsg"] = null;
                 }
             }
-
-
-
 
 
 
@@ -139,6 +136,7 @@ namespace MomoSecretSociety.Content.BossConsole
         {
             if (IsPostBack)
             {
+
                 string inputUsername = Context.User.Identity.Name;
                 string inputPassword = txtPasswordAuthenticate.Text;
 
@@ -168,6 +166,10 @@ namespace MomoSecretSociety.Content.BossConsole
                     if (dbPasswordHash.Equals(passwordHash))
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('hide')", true);
+
+                        //Add to logs
+                        ActionLogs.Action action = ActionLogs.Action.ReauthenticatedDueToAccountLockout;
+                        ActionLogs.Log(Context.User.Identity.Name, action);
 
                     }
                     else

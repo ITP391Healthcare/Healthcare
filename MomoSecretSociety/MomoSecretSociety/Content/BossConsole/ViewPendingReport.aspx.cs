@@ -162,6 +162,9 @@ namespace MomoSecretSociety.Content.BossConsole
 
             connection.Close();
 
+            caseNumberOfReport = Session["caseNumberOfThisPendingReport"].ToString();
+
+
             //Add to logs
             ActionLogs.Action action = ActionLogs.Action.BossApprovedReport;
             ActionLogs.Log(Context.User.Identity.Name, action);
@@ -175,6 +178,8 @@ namespace MomoSecretSociety.Content.BossConsole
 
         }
 
+        public static string caseNumberOfReport = "";
+
         protected void Button_Reject_Click(object sender, EventArgs e)
         {
             connection.Open();
@@ -186,7 +191,9 @@ namespace MomoSecretSociety.Content.BossConsole
             updateReportStatus.ExecuteNonQuery();
 
             connection.Close();
-            
+
+            caseNumberOfReport = Session["caseNumberOfThisPendingReport"].ToString();
+
             //Add to logs
             ActionLogs.Action action = ActionLogs.Action.BossRejectedReport;
             ActionLogs.Log(Context.User.Identity.Name, action);
