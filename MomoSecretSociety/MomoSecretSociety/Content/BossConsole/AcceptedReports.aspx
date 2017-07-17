@@ -40,13 +40,15 @@
 
                  <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
         SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
-        WHERE ([Username] = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected' ));">
+        WHERE (ReportStatus = 'accepted');">
         <SelectParameters>
             <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1" 
-        AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5">
+    <asp:GridView ID ="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium"
+                            HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
+                            HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
+                            RowStyle-HorizontalAlign="Center" PageSize="10" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" >
         
         <%-- If There are no reports --%>
         <EmptyDataTemplate>
