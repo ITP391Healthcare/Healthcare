@@ -366,11 +366,6 @@ namespace MomoSecretSociety.Content.BossConsole
 
         }
 
-        protected void Decrypt(object sender, EventArgs e)
-        {
-            Label9.Text = this.Decrypt(Label9.Text.Trim());
-            Label10.Text = this.Decrypt(Label10.Text.Trim());
-        }
 
         private string Decrypt(string cipherText)
         {
@@ -392,7 +387,14 @@ namespace MomoSecretSociety.Content.BossConsole
                 }
             }
             return cipherText;
-            Response.Redirect("BossAcceptedReports.aspx");
+            //Response.Redirect("BossAcceptedReports.aspx");
+        }
+
+
+        protected void Decrypt(object sender, EventArgs e)
+        {
+            Label9.Text = this.Decrypt(Label9.Text.Trim());
+            Label10.Text = this.Decrypt(Label10.Text.Trim());
         }
 
     }
