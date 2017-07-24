@@ -165,7 +165,9 @@
         <tr>
             <td></td>
             <td>
-                <asp:TextBox ID="PasswordTxt" runat="server" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="PasswordTxt" runat="server" TextMode="Password"></asp:TextBox><br />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordTxt" CssClass="text-danger" ErrorMessage="Password is required for your saved PDF." Display="Dynamic" />
+                <br />
                 <asp:Button ID="btnSaveAsPDF" runat="server" Text="Save Report" OnClick="btnSaveAsPDF_Click" />
                 <asp:Button ID="btnReSubmitRpt" runat="server" Text="Submit" OnClick="btnReSubmitRpt_Click" />
             </td>
