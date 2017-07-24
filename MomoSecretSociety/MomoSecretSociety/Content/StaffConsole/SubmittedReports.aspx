@@ -57,7 +57,7 @@
     <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" style="height: 26px" /><br />
     <asp:Table ID="Table1" runat="server">
     </asp:Table>--%>
-
+    <br />
     <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
         SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
         WHERE ([Username] = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected' ));">
@@ -65,9 +65,9 @@
             <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1" 
-        AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5">
-        
+    <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1" AllowPaging="true"
+        AutoGenerateColumns="false" OnSorting="GridView1_Sorting" OnRowCommand="GridView1_RowCommand" AllowSorting="true" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5">
+        <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
         <%-- If There are no reports --%>
         <EmptyDataTemplate>
             <label style ="color: red; font-weight: bold; font-size: 30px;"> There are no reports at the moment</label>
@@ -75,15 +75,15 @@
         <Columns>
             <%--<asp:HyperLinkField DataTextField="CaseNumber" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="ViewSelectedReport.aspx?Id={0}" />--%>
             <%--<asp:BoundField DataField="CaseNumber" HeaderText="Case Number" ItemStyle-Width="200" />--%>
-            <asp:TemplateField HeaderText="Case Number">
+            <asp:TemplateField HeaderText="CaseNumber" SortExpression="CaseNumber">
                 <ItemTemplate>
                     <asp:LinkButton runat="server" ID="link" CommandArgument='<%# Eval("CaseNumber")%>' CommandName="DataCommand" Text='<%# Eval("CaseNumber") %>'></asp:LinkButton>
                  </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Width="200" />
-            <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="200" />
-            <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="200" />
-            <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="200" />
+            <asp:BoundField DataField="Date"  HeaderText="Date" ItemStyle-Width="200" SortExpression="Date" />
+            <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="200" SortExpression="Subject"/>
+            <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="200" SortExpression="ReportStatus" />
+            <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="200" SortExpression="CreatedDateTime" />
         </Columns>
     </asp:GridView>
 
