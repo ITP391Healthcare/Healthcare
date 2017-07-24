@@ -366,9 +366,22 @@ namespace MomoSecretSociety.Content.BossConsole
 
         }
 
+        //protected void Decrypt(object sender, EventArgs e)
+        //{
+        //    TextBox7.Text = this.Decrypt(TextBox7.Text.Trim());
+        //    TextBox9.Text = this.Decrypt(TextBox9.Text.Trim());
+        //}
+
+        protected void Decrypt(object sender, EventArgs e)
+        {
+            Label8.Text = this.Decrypt(Label8.Text.Trim());
+            Label10.Text = this.Decrypt(Label10.Text.Trim());
+        }
 
         private string Decrypt(string cipherText)
         {
+            //Label8.Text = this.Decrypt(Label8.Text.Trim());
+            //Label10.Text = this.Decrypt(Label10.Text.Trim());
             string EncryptionKey = "MAKV2SPBNI99212";
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
@@ -388,13 +401,6 @@ namespace MomoSecretSociety.Content.BossConsole
             }
             return cipherText;
             //Response.Redirect("BossAcceptedReports.aspx");
-        }
-
-
-        protected void Decrypt(object sender, EventArgs e)
-        {
-            Label9.Text = this.Decrypt(Label9.Text.Trim());
-            Label10.Text = this.Decrypt(Label10.Text.Trim());
         }
 
     }
