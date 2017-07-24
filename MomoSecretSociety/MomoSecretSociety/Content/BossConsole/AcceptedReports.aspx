@@ -58,8 +58,10 @@
             <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:GridView ID ="GridView1" runat="server" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1"
-        AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5" >
+    <asp:GridView ID ="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small"
+                        HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
+                        HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
+                        RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" >
         
         <%-- If There are no reports --%>
         <EmptyDataTemplate>
@@ -79,11 +81,7 @@
             <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="200" />
         </Columns>
     </asp:GridView>
-                    
-            <br>
-                    <div style="padding: 10px; background-color: #f4f6f5; height: 250px;">
-
-                        </div>
+            <br />
                     </td>
             </tr>
 
