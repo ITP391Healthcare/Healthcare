@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -19,7 +20,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             {
                 ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
                             + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
-                
+
             }
 
             if (IsPostBack)
@@ -27,7 +28,7 @@ namespace MomoSecretSociety.Content.StaffConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-            
+
         }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -94,7 +95,7 @@ namespace MomoSecretSociety.Content.StaffConsole
         //    Response.Redirect("~\\Content\\StaffConsole\\ViewAcceptedReport");
 
         //}
-        
+
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -107,29 +108,63 @@ namespace MomoSecretSociety.Content.StaffConsole
                 Session["caseNumberOfThisSelectedReport"] = commandArgs;
 
                 Response.Redirect("ViewAcceptedReport.aspx");
-              
-                
+
+
             }
         }
 
-        //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-        //        string isNew = e.Row.Cells[3].Text;
-        //        if (isNew == "False")
-        //        {
-        //            e.Row.Cells[3].Text = "New";
-        //            e.Row.BackColor = System.Drawing.Color.FromArgb(200, 224, 233);
-        //            e.Row.Cells[3].ForeColor = System.Drawing.Color.Red;
-        //        }
-        //        else
-        //        {
-        //            e.Row.Cells[3].Text = "Old";
-        //        }
-        //    }
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            DataTable dataTable = GridView1.DataSource as DataTable;
 
-        //}
-        
+            if (dataTable != null)
+            {
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+                GridView1.DataSource = dataView;
+                GridView1.DataBind();
+            }
+        }
+
+        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        {
+            string newSortDirection = String.Empty;
+
+            switch (sortDirection)
+            {
+                case SortDirection.Ascending:
+                    newSortDirection = "ASC";
+                    break;
+
+                case SortDirection.Descending:
+                    newSortDirection = "DESC";
+                    break;
+            }
+
+            return newSortDirection;
+        }
+
+        /*
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string isNew = e.Row.Cells[3].Text;
+                if (isNew == "False")
+                {
+                    e.Row.Cells[3].Text = "New";
+                    e.Row.BackColor = System.Drawing.Color.FromArgb(200, 224, 233);
+                    e.Row.Cells[3].ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    e.Row.Cells[3].Text = "Old";
+                }
+            }
+
+        }
+        */
+
     }
 }
