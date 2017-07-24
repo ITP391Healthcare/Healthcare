@@ -165,6 +165,7 @@
         <tr>
             <td></td>
             <td>
+                <asp:TextBox ID="PasswordTxt" runat="server" TextMode="Password"></asp:TextBox>
                 <asp:Button ID="btnSaveAsPDF" runat="server" Text="Save Report" OnClick="btnSaveAsPDF_Click" />
                 <asp:Button ID="btnReSubmitRpt" runat="server" Text="Submit" OnClick="btnReSubmitRpt_Click" />
             </td>
