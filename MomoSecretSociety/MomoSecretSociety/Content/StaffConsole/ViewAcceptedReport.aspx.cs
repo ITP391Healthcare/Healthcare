@@ -66,12 +66,18 @@ namespace MomoSecretSociety.Content.StaffConsole
             TextBox9.Text = dbDescription;
             Label12.Text = dbRemarks;
             }
+
+
             if (dbReportStatus == "accepted" || dbReportStatus == "pending")
 
             {
                 btnReSubmitRpt.Visible = false;
             }
-           
+            if (dbReportStatus != "accepted")
+            {
+                Label13.Visible = false;
+                PasswordTxt.Visible = false;
+            }
             if(dbReportStatus == "rejected" || dbReportStatus == "drafts")
             {
                 //Make the labels disappear
@@ -274,15 +280,10 @@ namespace MomoSecretSociety.Content.StaffConsole
             
 
             //Save pdf to a location
-            doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
-            //Kt testing
-            //doc.SaveToFile("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
-
+            doc.SaveToFile("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
 
             //Launching the PDF File
-            System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
-            //Kt testing
-            //System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            System.Diagnostics.Process.Start("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
 
         }
 
