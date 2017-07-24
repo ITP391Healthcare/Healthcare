@@ -57,10 +57,10 @@
             <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:GridView ID ="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium"
-                            HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
-                            HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
-                            RowStyle-HorizontalAlign="Center" PageSize="10" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" >
+    <asp:GridView ID ="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small"
+                        HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
+                        HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
+                        RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand">
         
         <%-- If There are no reports --%>
         <EmptyDataTemplate>
@@ -82,9 +82,6 @@
     </asp:GridView>
                     
             <br>
-                    <div style="padding: 10px; background-color: #f4f6f5; height: 250px;">
-
-                        </div>
                     </td>
             </tr>
 

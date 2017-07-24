@@ -70,7 +70,5 @@
 
     <div>
         <asp:Button ID="btnSaveAsPDF" runat="server" Text="Save Report" OnClick="btnSaveAsPDF_Click" />
-        <asp:Button ID="Button2" runat="server" Text="Submit" />
-        <asp:Button ID="btnDecrypt" runat="server" Text="Decrypt" OnClick="Decrypt"/>
     </div>
 </asp:Content>
