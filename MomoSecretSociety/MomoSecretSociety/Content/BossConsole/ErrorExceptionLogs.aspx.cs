@@ -26,7 +26,7 @@ namespace MomoSecretSociety.Content.BossConsole
         {
             connection.Open();
 
-            SqlCommand retrieveErrorsDetailsCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs ORDER BY convert(date,Timestamp) DESC", connection);
+            SqlCommand retrieveErrorsDetailsCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs ORDER BY convert(datetime,Timestamp) DESC", connection);
 
 
             SqlDataReader summaryReader = retrieveErrorsDetailsCommand.ExecuteReader();
