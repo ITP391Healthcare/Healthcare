@@ -45,7 +45,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
             connection.Open();
             SqlDataReader dataReader = null;
-            SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE (lower(Username) LIKE @txtSearchValue OR lower(ExceptionType) LIKE @txtSearchValue OR lower(ErrorMessage) LIKE @txtSearchValue OR lower(ErrorSource) LIKE @txtSearchValue OR lower(Location) LIKE @txtSearchValue) ORDER BY convert(date,Timestamp) DESC", connection);
+            SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE (lower(Username) LIKE @txtSearchValue OR lower(ExceptionType) LIKE @txtSearchValue OR lower(ErrorMessage) LIKE @txtSearchValue OR lower(ErrorSource) LIKE @txtSearchValue OR lower(Location) LIKE @txtSearchValue) ORDER BY convert(datetime,Timestamp) DESC", connection);
 
             dateCommand.Parameters.AddWithValue("@txtSearchValue", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
             dataReader = dateCommand.ExecuteReader();
@@ -100,7 +100,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
                     connection.Open();
 
-                    SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE convert(date, Timestamp, 103) = @Timestamp", connection);
+                    SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE convert(datetime, Timestamp, 103) = @Timestamp", connection);
                     //OR convert(time(0), Timestamp) = @Time)
                     //SELECT (convert(varchar(15), Timestamp, 108)) FROM ErrorExceptionLogs
 
