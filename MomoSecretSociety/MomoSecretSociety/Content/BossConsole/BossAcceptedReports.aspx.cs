@@ -105,11 +105,11 @@ namespace MomoSecretSociety.Content.BossConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-            Label8.Text = this.Decrypt(Label8.Text.Trim());
-            Label10.Text = this.Decrypt(Label10.Text.Trim());
-            }
+            //Label8.Text = this.Decrypt(Label8.Text.Trim());
+            Label10.Text = Decrypt(Label10.Text.Trim());
+        }
 
-        private string Decrypt(string cipherText)
+        public static string Decrypt(string cipherText)
         {
             //Label8.Text = this.Decrypt(Label8.Text.Trim());
             //Label10.Text = this.Decrypt(Label10.Text.Trim());
@@ -202,15 +202,15 @@ namespace MomoSecretSociety.Content.BossConsole
 
         protected void btnSaveAsPDF_Click(object sender, EventArgs e)
         {
-            string inputUsername = Context.User.Identity.Name;
+            //string inputUsername = Context.User.Identity.Name;
             //string inputUsername = Session["AccountUsername"].ToString();
             string rStatus = "accepted";
             dbCaseNumber = Session["caseNumberOfThisSelectedReport"].ToString();
 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
             connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, CreatedDateTime FROM Report WHERE Username = @AccountUsername AND ReportStatus = @reportStatus AND CaseNumber = @cNum", connection);
-            myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername); //Taking the latest report of that user only. //Should be click on a particular report number - thats the report that we should take
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, CreatedDateTime FROM Report WHERE ReportStatus = @reportStatus AND CaseNumber = @cNum", connection);
+            //myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername); //Taking the latest report of that user only. //Should be click on a particular report number - thats the report that we should take
             myCommand.Parameters.AddWithValue("@reportStatus", rStatus);
             myCommand.Parameters.AddWithValue("@cNum", dbCaseNumber);
 
@@ -258,7 +258,7 @@ namespace MomoSecretSociety.Content.BossConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(400, 0, 90, 90);
+            signaturefield.Bounds = new RectangleF(400, 0, 120, 120);
 
 
             doc.Form.Fields.Add(signaturefield);
@@ -281,19 +281,20 @@ namespace MomoSecretSociety.Content.BossConsole
 
 
             //Save pdf to a location
-            doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            //doc.SaveToFile("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            doc.SaveToFile("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
             //Kt testing
             //doc.SaveToFile("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
 
             //Launching the PDF File
-            System.Diagnostics.Process.Start("C:\\Users\\User\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+            System.Diagnostics.Process.Start("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
             //Kt testing
             //System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
         }
 
-        private static void AlignText(PdfPageBase page)
+             private static void AlignText(PdfPageBase page)
         {
             float x1 = 20;
             float y1 = 50;
@@ -341,8 +342,9 @@ namespace MomoSecretSociety.Content.BossConsole
             string finalResult = "";
             int counter = 0;
             int lineCount = 0;
+            string decryptedDes = Decrypt(dbDescription);
 
-            result = dbDescription.Split(delimiter, StringSplitOptions.None);
+            result = decryptedDes.Split(delimiter, StringSplitOptions.None);
 
             foreach (string s in result)
             {

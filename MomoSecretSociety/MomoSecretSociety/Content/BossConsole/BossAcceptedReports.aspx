@@ -70,5 +70,7 @@
 
     <div>
         <asp:Button ID="btnSaveAsPDF" runat="server" Text="Save Report" OnClick="btnSaveAsPDF_Click" />
+        <%--<asp:TextBox ID="PasswordTxt" runat="server" TextMode="Password"></asp:TextBox><br />
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordTxt" CssClass="text-danger" ErrorMessage="Password is required for your saved PDF." Display="Dynamic" />--%>
     </div>
 </asp:Content>

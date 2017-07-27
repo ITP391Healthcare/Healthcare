@@ -111,14 +111,37 @@ namespace MomoSecretSociety.Content.StaffConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
-            Label8.Text = this.Decrypt(Label8.Text.Trim());
+            //Label8.Text = this.Decrypt(Label8.Text.Trim());
             Label10.Text = this.Decrypt(Label10.Text.Trim());
         }
 
+        private string Decrypt(string cipherText)
+        {
+            //Label8.Text = this.Decrypt(Label8.Text.Trim());
+            //Label10.Text = this.Decrypt(Label10.Text.Trim());
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+            //Response.Redirect("BossAcceptedReports.aspx");
+        }
 
-
-    //Resubmit Report
-    protected void btnReSubmitRpt_Click(object sender, EventArgs e)
+        //Resubmit Report
+        protected void btnReSubmitRpt_Click(object sender, EventArgs e)
         {
             dbCaseNumber = Session["caseNumberOfThisSelectedReport"].ToString();
             connection.Open();
@@ -260,7 +283,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(400, 0, 90, 90);
+            signaturefield.Bounds = new RectangleF(400, 0, 140, 140);
             
 
             doc.Form.Fields.Add(signaturefield);
@@ -389,31 +412,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             //page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
 
         }
-
-        private string Decrypt(string cipherText)
-        {
-            //Label8.Text = this.Decrypt(Label8.Text.Trim());
-            //Label10.Text = this.Decrypt(Label10.Text.Trim());
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(cipherBytes, 0, cipherBytes.Length);
-                        cs.Close();
-                    }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
-                }
-            }
-            return cipherText;
             //Response.Redirect("BossAcceptedReports.aspx");
         }
 
     }
-}
