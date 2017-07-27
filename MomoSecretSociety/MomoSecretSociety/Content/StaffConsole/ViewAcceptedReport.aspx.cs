@@ -112,10 +112,10 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             //Label8.Text = this.Decrypt(Label8.Text.Trim());
-            Label10.Text = this.Decrypt(Label10.Text.Trim());
+            Label10.Text = Decrypt(dbDescription);
         }
 
-        private string Decrypt(string cipherText)
+        public static string Decrypt(string cipherText)
         {
             //Label8.Text = this.Decrypt(Label8.Text.Trim());
             //Label10.Text = this.Decrypt(Label10.Text.Trim());
@@ -283,7 +283,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(400, 0, 140, 140);
+            signaturefield.Bounds = new RectangleF(400, 0, 150, 150);
             
 
             doc.Form.Fields.Add(signaturefield);
@@ -361,8 +361,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             string finalResult = "";
             int counter = 0;
             int lineCount = 0;
-
-            result = dbDescription.Split(delimiter, StringSplitOptions.None);
+            string decryptedDes = Decrypt(dbDescription);
+            result = decryptedDes.Split(delimiter, StringSplitOptions.None);
 
             foreach (string s in result)
             {
