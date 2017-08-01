@@ -112,7 +112,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             //Label8.Text = this.Decrypt(Label8.Text.Trim());
-            Label10.Text = Decrypt(dbDescription);
+            Label10.Text = Decrypt(dbDescription.Trim());
         }
 
         public static string Decrypt(string cipherText)
