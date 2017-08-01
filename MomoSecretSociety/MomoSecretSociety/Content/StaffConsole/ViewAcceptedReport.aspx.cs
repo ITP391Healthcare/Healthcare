@@ -112,7 +112,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             //Label8.Text = this.Decrypt(Label8.Text.Trim());
-            Label10.Text = Decrypt(dbDescription);
+            Label10.Text = Decrypt(dbDescription.Trim());
         }
 
         public static string Decrypt(string cipherText)
@@ -283,7 +283,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(400, 0, 150, 150);
+            signaturefield.Bounds = new RectangleF(350, 600, 100, 100);
             
 
             doc.Form.Fields.Add(signaturefield);
@@ -298,9 +298,9 @@ namespace MomoSecretSociety.Content.StaffConsole
             brush.Graphics.Save();
             brush.Graphics.TranslateTransform(brush.Size.Width / 2, brush.Size.Height / 2);
             brush.Graphics.RotateTransform(-45);
-            brush.Graphics.DrawString(wmText, new PdfFont(PdfFontFamily.Helvetica, 20), PdfBrushes.Black, 0, 0, new PdfStringFormat(PdfTextAlignment.Center));
+            brush.Graphics.DrawString(wmText, new PdfFont(PdfFontFamily.Helvetica, 14), PdfBrushes.Black, 0, 0, new PdfStringFormat(PdfTextAlignment.Center));
             brush.Graphics.Restore();
-            brush.Graphics.SetTransparency(1);
+            brush.Graphics.SetTransparency(1/2);
             page.Canvas.DrawRectangle(brush, new RectangleF(new PointF(1, 1), page.Canvas.ClientSize));
 
             
