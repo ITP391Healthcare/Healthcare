@@ -135,6 +135,110 @@ namespace MomoSecretSociety.Content.BossConsole
 
         }
 
+        protected void btnSearchBoth_Click(object sender, EventArgs e)
+        {
+
+            string s = TextBox2.Text;
+
+            DateTime datetimeDT;
+            if (DateTime.TryParse(s, out datetimeDT))
+            {
+                string date = s.ToString().Split(' ')[0];
+
+                date = String.Format("{0:dd/MM/yyyy}", date);
+                DateTime InputDate = Convert.ToDateTime(date);
+
+
+                SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+                connection.Open();
+                SqlDataReader dataReader = null;
+                SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE ((lower(Username) LIKE @txtSearchValue OR lower(ExceptionType) LIKE @txtSearchValue OR lower(ErrorMessage) LIKE @txtSearchValue OR lower(ErrorSource) LIKE @txtSearchValue OR lower(Location) LIKE @txtSearchValue) AND convert(date, Timestamp, 103) = convert(date,@Timestamp,103)) ORDER BY convert(date,Timestamp) DESC", connection);
+
+                dateCommand.Parameters.AddWithValue("@txtSearchValue", "%" + TextBox1.Text.Trim().ToLower() + "%");
+                dateCommand.Parameters.AddWithValue("@Timestamp", InputDate);
+
+                dataReader = dateCommand.ExecuteReader();
+
+                DataTable dt = new DataTable();
+                dt.Load(dataReader);
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+
+                if (dt.Rows.Count == 0)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
+                }
+
+                connection.Close();
+
+
+            }
+
+
+
+
+            //SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+            //connection.Open();
+            //SqlDataReader dataReader = null;
+            //SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE (lower(Username) LIKE @txtSearchValue OR lower(ExceptionType) LIKE @txtSearchValue OR lower(ErrorMessage) LIKE @txtSearchValue OR lower(ErrorSource) LIKE @txtSearchValue OR lower(Location) LIKE @txtSearchValue) ORDER BY convert(datetime,Timestamp) DESC", connection);
+
+            //dateCommand.Parameters.AddWithValue("@txtSearchValue", "%" + TextBox1.Text.Trim().ToLower() + "%");
+            //dataReader = dateCommand.ExecuteReader();
+
+            //while(dataReader.Read())
+            //{
+            //    //DataTable dt = new DataTable();
+            //    //dt.Load(dataReader);
+
+            //    string dbColumnName = "";
+            //    if (dbColumnName == dataReader["Username"].ToString())
+            //    {
+            //        dbColumnName = TextBox1.Text;
+            //    }
+            //    if (dbColumnName == dataReader["ExceptionType"].ToString())
+            //    {
+            //        dbColumnName = TextBox1.Text;
+            //    }
+            //    if (dbColumnName == dataReader["ErrorMessage"].ToString())
+            //    {
+            //        dbColumnName = TextBox1.Text;
+            //    }
+            //    if (dbColumnName == dataReader["ErrorSource"].ToString())
+            //    {
+            //        dbColumnName = TextBox1.Text;
+            //    }
+            //    if (dbColumnName == dataReader["Location"].ToString())
+            //    {
+            //        dbColumnName = TextBox1.Text;
+            //    }
+
+
+            //    SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+            //    connection2.Open();
+            //    SqlDataReader dataReader2 = null;
+            //    SqlCommand dateCommand2 = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE ORDER BY convert(datetime,Timestamp) DESC", connection2);
+
+            //    dateCommand2.Parameters.AddWithValue("@txtSearchValue", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
+            //    dataReader2 = dateCommand2.ExecuteReader();
+
+            //}
+
+            ////DataTable dt = new DataTable();
+            ////dt.Load(dataReader);
+
+            ////GridView1.DataSource = dt;
+            ////GridView1.DataBind();
+
+            //connection.Close();
+
+
+
+        }
+
         //protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         //{
 
