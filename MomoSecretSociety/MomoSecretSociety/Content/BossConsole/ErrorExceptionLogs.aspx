@@ -3,6 +3,36 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
+    
+    <style>
+        /* Tooltip to show password requirements */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            /*width: 120px;*/
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            left: 1%;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .tooltip {
+            position: relative;
+            z-index: 1;
+            display: inherit;
+            font-size: inherit;
+            opacity: 1 !important;
+        }
+    </style>
+
     <style>
         td {
             text-align: left;
@@ -53,6 +83,38 @@
 
 
         <div style="float: right;">
+            
+                <div class="tooltip">
+                    <asp:Label ID="Label2" runat="server" CssClass="toolbox"><span style="font-size: smaller;">Not knowing what exceptions are there &#10067; Hover me!</span>
+                    </asp:Label>
+
+                    <span class="tooltiptext" style="opacity: 0.5; margin-left: -285%; width: 280%; font-size: small; z-index: 1;">
+
+                        <u>List of exception</u><br />
+                        <br />
+                        SystemException
+AccessException
+ArgumentException
+ArgumentNullException
+ArgumentOutOfRangeException
+ArithmeticException
+ArrayTypeMismatchException
+BadImageFormatException
+CoreException
+DivideByZeroException
+FormatException
+IndexOutOfRangeException
+InvalidCastExpression
+InvalidOperationException
+MissingMemberException
+NotFiniteNumberException
+NotSupportedException
+NullReferenceException
+OutOfMemoryException
+StackOverflowException
+                    </span>
+                </div>
+
             <abbr title="Enter a Username/Exception Type/Error Message/Location">
                 <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword" CssClass="txtSearch" />
             </abbr>

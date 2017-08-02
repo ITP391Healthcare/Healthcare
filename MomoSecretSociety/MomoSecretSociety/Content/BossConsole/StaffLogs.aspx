@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
+
     <style>
         th {
             text-align: center;
@@ -55,7 +56,7 @@
                 outline: none;
             }
 
-            .txtSearch:focus{
+            .txtSearch:focus {
                 border-bottom: 2px solid black;
             }
     </style>
@@ -160,6 +161,9 @@
     <asp:Panel runat="server" Visible="false" ID="panel2">
 
         <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%);">
+
+
+
 
             <div style="float: right;">
                 <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword of action" CssClass="txtSearch" />

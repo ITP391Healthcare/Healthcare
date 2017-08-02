@@ -17,7 +17,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 {
     public partial class NewReport : System.Web.UI.Page
     {
-        int cNumber;
+        int cNumber = 201700000;
         static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
@@ -102,10 +102,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             while (myReader.Read())
             {
                 dbCaseNumber = (myReader["CaseNumber"].ToString());
-            }
 
-            cNumber = int.Parse(dbCaseNumber);
-            cNumber++;
+                cNumber = int.Parse(dbCaseNumber);
+               
+            }
+             cNumber++;
+
+            //cNumber = int.Parse(dbCaseNumber);
+            //cNumber++;
             connection.Close();
 
             //Converting input date into datetime type input

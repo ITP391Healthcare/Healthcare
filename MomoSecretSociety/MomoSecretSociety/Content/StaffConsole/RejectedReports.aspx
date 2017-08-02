@@ -48,6 +48,7 @@
         </div>
     </div>
 
+    <br />
         <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
         SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
         WHERE ([Username] = @Username AND ( ReportStatus = 'rejected' ));">

@@ -42,7 +42,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 //This should be on click of the particular report then will appear
                 string dbCaseNumber = "";
                 string dbUsername = "";
-                string dbDate = "";
+                DateTime dbDate = DateTime.Now;
                 string dbSubject = "";
                 string dbDescription = "";
                 string dbRemarks = "";
@@ -61,7 +61,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 {
                     dbCaseNumber = (myReader["CaseNumber"].ToString());
                     dbUsername = (myReader["Username"].ToString());
-                    dbDate = (myReader["Date"].ToString());
+                    dbDate = (DateTime)(myReader["Date"]);
                     dbSubject = (myReader["Subject"].ToString());
                     dbDescription = (myReader["Description"].ToString());
                     dbReportStatus = (myReader["ReportStatus"].ToString());
@@ -70,10 +70,11 @@ namespace MomoSecretSociety.Content.BossConsole
                 connection.Close();
 
                 Label2.Text = dbCaseNumber;
-                Label4.Text = dbDate;
+                Label4.Text = dbDate.ToString("dd/MM/yyyy");
                 Label6.Text = dbUsername;
                 Label8.Text = dbSubject;
                 Label10.Text = Decrypt(dbDescription);
+                //Label10.Text = Decrypt(Label10.Text.Trim());
             }
             
         }
