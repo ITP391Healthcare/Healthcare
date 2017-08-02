@@ -59,6 +59,17 @@
             .txtSearch:focus {
                 border-bottom: 2px solid black;
             }
+
+                 .btnSearchBoth {
+            border-top: thick solid #e5e5e5;
+            border-right: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            /*box-shadow: 0px 0px 0px 0px #e5e5e5;*/
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+            margin-left: -1%;
+        }
     </style>
 
     <style>
@@ -176,6 +187,18 @@
                 <asp:TextBox ID="txtSearchValueDate" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
                 <asp:Button ID="btnSearchDate" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearchDate_Click" />
             </div>
+
+                 <div style="clear: both; padding: 1%;"></div>
+
+        <%-- Search for both keyword + date together --%>
+        <div style="float: right; margin-top: 1%;">
+
+            <asp:TextBox ID="TextBox1" runat="server" Width="200" placeholder="Enter a keyword" CssClass="txtSearch" />
+            +
+            <asp:TextBox ID="TextBox2" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
+
+            <asp:Button ID="btnSearchBoth" runat="server" Text="Search &#128269;" CssClass="btnSearchBoth" OnClick="btnSearchBoth_Click" />
+        </div>
 
             <br />
             <br />
