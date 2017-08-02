@@ -152,7 +152,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
             //insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
             //insertReportCommand.Parameters.AddWithValue("@subject", Encrypt(TextBox2.Text.Trim()));
-            insertReportCommand.Parameters.AddWithValue("@description", Encrypt(TextBox1.Text.Trim()));
+            insertReportCommand.Parameters.AddWithValue("@description", Encrypt(CaseDesInput.Trim())); //TextBox1.Text.Trim()
             insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
             insertReportCommand.Parameters.AddWithValue("@createdDT", createdDateTime);
@@ -215,7 +215,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.Parameters.AddWithValue("@username", NameInput);
             insertReportCommand.Parameters.AddWithValue("@date", DateInput);
             insertReportCommand.Parameters.AddWithValue("@subject", SubjectInput);
-            insertReportCommand.Parameters.AddWithValue("@description", CaseDesInput);
+            insertReportCommand.Parameters.AddWithValue("@description", Encrypt(CaseDesInput.Trim()));
             insertReportCommand.Parameters.AddWithValue("@Remarks", "");
             insertReportCommand.Parameters.AddWithValue("@status", status);
             insertReportCommand.Parameters.AddWithValue("@createdDT", createdDateTime);

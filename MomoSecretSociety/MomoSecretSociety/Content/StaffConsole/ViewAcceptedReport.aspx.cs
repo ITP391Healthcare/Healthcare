@@ -26,7 +26,7 @@ namespace MomoSecretSociety.Content.StaffConsole
         static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
             //This should be on click of the particular report then will appear
             string dbCaseNumber = "";
             string dbUsername = "";
@@ -38,7 +38,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Open();
             SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus FROM Report WHERE CaseNumber = @caseNo", connection);
-            myCommand.Parameters.AddWithValue("@caseNo", Session["caseNumberOfThisSelectedReport"].ToString()); 
+            myCommand.Parameters.AddWithValue("@caseNo", Session["caseNumberOfThisSelectedReport"].ToString());
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
@@ -53,19 +53,20 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
             connection.Close();
-            if (!IsPostBack) { 
-            Label2.Text = dbCaseNumber + " -";
+            if (!IsPostBack)
+            {
+                Label2.Text = dbCaseNumber + " -";
 
-            Label4.Text = dbDate.ToString("dd/MM/yyyy");
-            Label6.Text = dbUsername;
-            Label8.Text = dbSubject;
-            Label10.Text = dbDescription;
+                Label4.Text = dbDate.ToString("dd/MM/yyyy");
+                Label6.Text = dbUsername;
+                Label8.Text = dbSubject;
+                Label10.Text = Decrypt(dbDescription);
 
-            TextBox3.Text = dbDate.ToString();
-            TextBox5.Text = dbUsername;
-            TextBox7.Text = dbSubject;
-            TextBox9.Text = dbDescription;
-            Label12.Text = dbRemarks;
+                TextBox3.Text = dbDate.ToString();
+                TextBox5.Text = dbUsername;
+                TextBox7.Text = dbSubject;
+                TextBox9.Text = Decrypt(dbDescription);
+                Label12.Text = dbRemarks;
             }
 
 
@@ -79,7 +80,7 @@ namespace MomoSecretSociety.Content.StaffConsole
                 Label13.Visible = false;
                 PasswordTxt.Visible = false;
             }
-            if(dbReportStatus == "rejected" || dbReportStatus == "drafts")
+            if (dbReportStatus == "rejected" || dbReportStatus == "drafts")
             {
                 //Make the labels disappear
                 Label8.Visible = false;
@@ -111,6 +112,10 @@ namespace MomoSecretSociety.Content.StaffConsole
                 errormsgPasswordAuthenticate.Visible = false;
             }
 
+            if (dbReportStatus == "drafts")
+            {
+                TextBox9.Text = Decrypt(dbDescription.Trim());
+            }
             //Label8.Text = this.Decrypt(Label8.Text.Trim());
             Label10.Text = Decrypt(dbDescription.Trim());
         }
@@ -147,7 +152,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             connection.Open();
             SqlCommand updateReport = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, Description = @Description, Subject = @Subject WHERE CaseNumber = @CaseNumber", connection);
             updateReport.Parameters.AddWithValue("@Subject", TextBox7.Text);
-            updateReport.Parameters.AddWithValue("@Description", TextBox9.Text);
+            updateReport.Parameters.AddWithValue("@Description", Encrypt(TextBox9.Text));
             updateReport.Parameters.AddWithValue("@ReportStatus", "pending");
             updateReport.Parameters.AddWithValue("@CaseNumber", dbCaseNumber);
             updateReport.ExecuteNonQuery();
@@ -219,7 +224,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         public static string dbCaseNumber = "";
         public static string dbUsername = "";
-        public static string dbDate = "";
+        public static DateTime dbDate = DateTime.Now;
         public static string dbSubject = "";
         public static string dbDescription = "";
         public static string dbRemarks = "";
@@ -234,18 +239,18 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
             connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, CreatedDateTime FROM Report WHERE Username = @AccountUsername AND ReportStatus = @reportStatus AND CaseNumber = @cNum" , connection);
+            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, CreatedDateTime FROM Report WHERE Username = @AccountUsername AND ReportStatus = @reportStatus AND CaseNumber = @cNum", connection);
             myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername); //Taking the latest report of that user only. //Should be click on a particular report number - thats the report that we should take
             myCommand.Parameters.AddWithValue("@reportStatus", rStatus);
             myCommand.Parameters.AddWithValue("@cNum", dbCaseNumber);
 
-            
+
             SqlDataReader myReader = myCommand.ExecuteReader();
             while (myReader.Read())
             {
                 //dbCaseNumber = (myReader["CaseNumber"].ToString());
                 dbUsername = (myReader["Username"].ToString());
-                dbDate = (myReader["Date"].ToString());
+                dbDate = (DateTime)(myReader["Date"]);
                 dbSubject = (myReader["Subject"].ToString());
                 dbDescription = (myReader["Description"].ToString());
                 dbRemarks = (myReader["Remarks"].ToString());
@@ -284,7 +289,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
             signaturefield.Bounds = new RectangleF(350, 600, 100, 100);
-            
+
 
             doc.Form.Fields.Add(signaturefield);
 
@@ -300,10 +305,10 @@ namespace MomoSecretSociety.Content.StaffConsole
             brush.Graphics.RotateTransform(-45);
             brush.Graphics.DrawString(wmText, new PdfFont(PdfFontFamily.Helvetica, 14), PdfBrushes.Black, 0, 0, new PdfStringFormat(PdfTextAlignment.Center));
             brush.Graphics.Restore();
-            brush.Graphics.SetTransparency(1/2);
+            brush.Graphics.SetTransparency(1 / 2);
             page.Canvas.DrawRectangle(brush, new RectangleF(new PointF(1, 1), page.Canvas.ClientSize));
 
-            
+
 
             //Save pdf to a location
             doc.SaveToFile("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
@@ -328,7 +333,7 @@ namespace MomoSecretSociety.Content.StaffConsole
             //format2.CharacterSpacing = 1f;
             text = "Report Case #" + dbCaseNumber;
             page.Canvas.DrawString(text, font1, brush1, pageWidth / 2, 10, format1);
-            
+
             //Draw the text - alignment
             PdfFont font2 = new PdfFont(PdfFontFamily.Helvetica, 10f);
             PdfTrueTypeFont font3 = new PdfTrueTypeFont(new Font("Helvetica", 10f, FontStyle.Bold));
@@ -337,7 +342,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             //DATE
             page.Canvas.DrawString("Date: ", font2, brush, x1, y1, leftAlignment);
-            page.Canvas.DrawString(dbDate, font3, brush, x2, y1, leftAlignment);
+            page.Canvas.DrawString((dbDate.ToString("dd/MM/yyyy")), font3, brush, x2, y1, leftAlignment);
             y1 = y1 + 30;
 
             //FROM
@@ -412,7 +417,29 @@ namespace MomoSecretSociety.Content.StaffConsole
             //page.Canvas.DrawString(sizeText, font3, brush, x2, y1, leftAlignment);
 
         }
-            //Response.Redirect("BossAcceptedReports.aspx");
-        }
 
+        private string Encrypt(string clearText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
+        //Response.Redirect("BossAcceptedReports.aspx");
     }
+
+}
