@@ -3,6 +3,36 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
+
+    <style>
+        /* Tooltip to show password requirements */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            /*width: 120px;*/
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            left: 1%;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .tooltip {
+            position: relative;
+            z-index: 1;
+            display: inherit;
+            font-size: inherit;
+            opacity: 1 !important;
+        }
+    </style>
+
     <style>
         td {
             text-align: left;
@@ -47,12 +77,56 @@
             .txtSearch:focus {
                 border-bottom: 2px solid black;
             }
+
+
+        .btnSearchBoth {
+            border-top: thick solid #e5e5e5;
+            border-right: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            /*box-shadow: 0px 0px 0px 0px #e5e5e5;*/
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+            margin-left: -1%;
+        }
     </style>
 
     <div class="jumbotron" style="background-color: white; font-size: 14px; display: inline-block; height: calc(100%); width: calc(100%); box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4); text-align: center;">
 
 
         <div style="float: right;">
+
+            <div class="tooltip">
+                <asp:Label ID="Label2" runat="server" CssClass="toolbox"><span style="font-size: smaller;">Not knowing what exceptions are there &#10067; Hover me!</span>
+                </asp:Label>
+
+                <span class="tooltiptext" style="opacity: 0.5; margin-left: -285%; width: 280%; font-size: small; z-index: 1;">
+
+                    <u>List of exception</u><br />
+                    <br />
+                    SystemException
+AccessException
+ArgumentException
+ArgumentNullException
+ArgumentOutOfRangeException
+ArithmeticException
+ArrayTypeMismatchException
+BadImageFormatException
+CoreException
+DivideByZeroException
+FormatException
+IndexOutOfRangeException
+InvalidCastExpression
+InvalidOperationException
+MissingMemberException
+NotFiniteNumberException
+NotSupportedException
+NullReferenceException
+OutOfMemoryException
+StackOverflowException
+                </span>
+            </div>
+
             <abbr title="Enter a Username/Exception Type/Error Message/Location">
                 <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Enter a keyword" CssClass="txtSearch" />
             </abbr>
@@ -66,6 +140,18 @@
                 <asp:TextBox ID="txtSearchValueDate" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
             </abbr>
             <asp:Button ID="btnSearchDate" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearchDate_Click" />
+        </div>
+
+        <div style="clear: both; padding: 1%;"></div>
+
+        <%-- Search for both keyword + date together --%>
+        <div style="float: right; margin-top: 1%;">
+
+            <asp:TextBox ID="TextBox1" runat="server" Width="200" placeholder="Enter a keyword" CssClass="txtSearch" />
+            +
+            <asp:TextBox ID="TextBox2" runat="server" Width="200" placeholder="Enter a date in DD/MM/YYYY" CssClass="txtSearch" />
+
+            <asp:Button ID="btnSearchBoth" runat="server" Text="Search &#128269;" CssClass="btnSearchBoth" OnClick="btnSearchBoth_Click" />
         </div>
 
         <br />

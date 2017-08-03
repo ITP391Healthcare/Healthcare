@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -41,7 +42,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 //This should be on click of the particular report then will appear
                 string dbCaseNumber = "";
                 string dbUsername = "";
-                string dbDate = "";
+                DateTime dbDate = DateTime.Now;
                 string dbSubject = "";
                 string dbDescription = "";
                 string dbRemarks = "";
@@ -60,7 +61,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 {
                     dbCaseNumber = (myReader["CaseNumber"].ToString());
                     dbUsername = (myReader["Username"].ToString());
-                    dbDate = (myReader["Date"].ToString());
+                    dbDate = (DateTime)(myReader["Date"]);
                     dbSubject = (myReader["Subject"].ToString());
                     dbDescription = (myReader["Description"].ToString());
                     dbReportStatus = (myReader["ReportStatus"].ToString());
@@ -69,15 +70,39 @@ namespace MomoSecretSociety.Content.BossConsole
                 connection.Close();
 
                 Label2.Text = dbCaseNumber;
-                Label4.Text = dbDate;
+                Label4.Text = dbDate.ToString("dd/MM/yyyy");
                 Label6.Text = dbUsername;
                 Label8.Text = dbSubject;
-                Label10.Text = dbDescription;
+                Label10.Text = Decrypt(dbDescription);
+                //Label10.Text = Decrypt(Label10.Text.Trim());
             }
             
         }
 
-
+        public static string Decrypt(string cipherText)
+        {
+            //Label8.Text = this.Decrypt(Label8.Text.Trim());
+            //Label10.Text = this.Decrypt(Label10.Text.Trim());
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+            //Response.Redirect("BossAcceptedReports.aspx");
+        }
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {
@@ -151,12 +176,13 @@ namespace MomoSecretSociety.Content.BossConsole
         {
             connection.Open();
 
-            SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
+            SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, Remarks = @Remarks WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
             //SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, AlertIsDisplayed = @AlertIsDisplayed WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
             updateReportStatus.Parameters.AddWithValue("@ReportStatus", "accepted");
             //updateReportStatus.Parameters.AddWithValue("@AlertIsDisplayed", "1");
             updateReportStatus.Parameters.AddWithValue("@AccountUsername", Label6.Text);
             updateReportStatus.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
+            updateReportStatus.Parameters.AddWithValue("@Remarks", Label12_remarks.Text);
 
             updateReportStatus.ExecuteNonQuery();
 
@@ -184,10 +210,11 @@ namespace MomoSecretSociety.Content.BossConsole
         {
             connection.Open();
 
-            SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
+            SqlCommand updateReportStatus = new SqlCommand("UPDATE Report SET ReportStatus = @ReportStatus, Remarks = @Remarks WHERE Username = @AccountUsername AND CaseNumber = @CaseNumber", connection);
             updateReportStatus.Parameters.AddWithValue("@ReportStatus", "rejected");
             updateReportStatus.Parameters.AddWithValue("@AccountUsername", Label6.Text);
             updateReportStatus.Parameters.AddWithValue("@CaseNumber", Session["caseNumberOfThisPendingReport"].ToString());
+            updateReportStatus.Parameters.AddWithValue("@Remarks", Label12_remarks.Text);
             updateReportStatus.ExecuteNonQuery();
 
             connection.Close();

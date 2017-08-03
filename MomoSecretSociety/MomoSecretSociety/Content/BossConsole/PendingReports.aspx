@@ -11,7 +11,7 @@
             text-align: center;
         }
     </style>
-    
+
     <%--Div to show alert message whether pending report is being approved/rejected--%>
     <div class="alert" runat="server" style="padding: 25px; border-radius: 2px; border: 4px solid #146882; background-color: white; margin-top: 20px; margin-bottom: 20px; text-align: center;" id="alertBoxApproved" visible="false">
         <asp:Label ID="approvedMsg" runat="server" Visible="false"></asp:Label>
@@ -127,6 +127,11 @@
                             HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
                             HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
                             RowStyle-HorizontalAlign="Center" PageSize="10" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" DataKeyNames="Username, CaseNumber, isNew" OnRowDataBound="GridView1_RowDataBound">
+
+                            <%-- If There are no reports --%>
+                            <EmptyDataTemplate>
+                                <label style="color: red; font-weight: bold; font-size: 30px;">There are no reports at the moment</label>
+                            </EmptyDataTemplate>
 
                             <PagerStyle CssClass="pagerStyle" />
 
