@@ -27,97 +27,102 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //This should be on click of the particular report then will appear
-            string dbCaseNumber = "";
-            string dbUsername = "";
-            DateTime dbDate = DateTime.Now;
-            string dbSubject = "";
-            string dbDescription = "";
-            string dbRemarks = "";
-            string dbReportStatus = "";
 
-            connection.Open();
-            SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus FROM Report WHERE CaseNumber = @caseNo", connection);
-            myCommand.Parameters.AddWithValue("@caseNo", Session["caseNumberOfThisSelectedReport"].ToString());
-            SqlDataReader myReader = myCommand.ExecuteReader();
-            while (myReader.Read())
-            {
-                dbCaseNumber = (myReader["CaseNumber"].ToString());
-                dbUsername = (myReader["Username"].ToString());
-                dbDate = (DateTime)(myReader["Date"]);
-                dbSubject = (myReader["Subject"].ToString());
-                dbDescription = (myReader["Description"].ToString());
-                dbRemarks = (myReader["Remarks"].ToString());
-                dbReportStatus = (myReader["ReportStatus"].ToString());
-
-            }
-
-            connection.Close();
             if (!IsPostBack)
             {
-                Label2.Text = dbCaseNumber + " -";
+                //This should be on click of the particular report then will appear
+                string dbCaseNumber = "";
+                string dbUsername = "";
+                DateTime dbDate = DateTime.Now;
+                string dbSubject = "";
+                string dbDescription = "";
+                string dbRemarks = "";
+                string dbReportStatus = "";
 
-                Label4.Text = dbDate.ToString("dd/MM/yyyy");
-                Label6.Text = dbUsername;
-                Label8.Text = dbSubject;
-                Label10.Text = Decrypt(dbDescription);
+                connection.Open();
+                SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, ReportStatus FROM Report WHERE CaseNumber = @caseNo", connection);
+                myCommand.Parameters.AddWithValue("@caseNo", Session["caseNumberOfThisSelectedReport"].ToString());
+                SqlDataReader myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    dbCaseNumber = (myReader["CaseNumber"].ToString());
+                    dbUsername = (myReader["Username"].ToString());
+                    dbDate = (DateTime)(myReader["Date"]);
+                    dbSubject = (myReader["Subject"].ToString());
+                    dbDescription = (myReader["Description"].ToString());
+                    dbRemarks = (myReader["Remarks"].ToString());
+                    dbReportStatus = (myReader["ReportStatus"].ToString());
 
-                TextBox3.Text = dbDate.ToString();
-                TextBox5.Text = dbUsername;
-                TextBox7.Text = dbSubject;
-                TextBox9.Text = Decrypt(dbDescription);
-                Label12.Text = dbRemarks;
+                }
+
+                connection.Close();
+                if (!IsPostBack)
+                {
+                    Label2.Text = dbCaseNumber + " -";
+
+                    Label4.Text = dbDate.ToString("dd/MM/yyyy");
+                    Label6.Text = dbUsername;
+                    Label8.Text = dbSubject;
+                    Label10.Text = Decrypt(dbDescription);
+
+                    TextBox3.Text = dbDate.ToString();
+                    TextBox5.Text = dbUsername;
+                    TextBox7.Text = dbSubject;
+                    TextBox9.Text = Decrypt(dbDescription);
+                    Label12.Text = dbRemarks;
+                }
+
+
+                if (dbReportStatus == "accepted" || dbReportStatus == "pending")
+
+                {
+                    btnReSubmitRpt.Visible = false;
+                }
+                if (dbReportStatus != "accepted")
+                {
+                    Label13.Visible = false;
+                    PasswordTxt.Visible = false;
+                }
+                if (dbReportStatus == "rejected" || dbReportStatus == "drafts")
+                {
+                    //Make the labels disappear
+                    Label8.Visible = false;
+                    Label10.Visible = false;
+
+                    //Make the textbox visible
+                    TextBox7.Visible = true;
+                    TextBox9.Visible = true;
+
+                    //Make textbox editable to resubmit
+                    TextBox7.ReadOnly = false;
+                    TextBox9.ReadOnly = false;
+                }
+
+
+                if (dbReportStatus != "accepted")
+                {
+                    btnSaveAsPDF.Enabled = false;
+                }
+
+                if (Request.IsAuthenticated)
+                {
+                    ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
+                                + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
+                }
+
+                if (IsPostBack)
+                {
+                    errormsgPasswordAuthenticate.Visible = false;
+                }
+
+                if (dbReportStatus == "drafts")
+                {
+                    TextBox9.Text = Decrypt(dbDescription.Trim());
+                }
+                //Label8.Text = this.Decrypt(Label8.Text.Trim());
+                Label10.Text = Decrypt(dbDescription.Trim());
+
             }
-
-
-            if (dbReportStatus == "accepted" || dbReportStatus == "pending")
-
-            {
-                btnReSubmitRpt.Visible = false;
-            }
-            if (dbReportStatus != "accepted")
-            {
-                Label13.Visible = false;
-                PasswordTxt.Visible = false;
-            }
-            if (dbReportStatus == "rejected" || dbReportStatus == "drafts")
-            {
-                //Make the labels disappear
-                Label8.Visible = false;
-                Label10.Visible = false;
-
-                //Make the textbox visible
-                TextBox7.Visible = true;
-                TextBox9.Visible = true;
-
-                //Make textbox editable to resubmit
-                TextBox7.ReadOnly = false;
-                TextBox9.ReadOnly = false;
-            }
-
-
-            if (dbReportStatus != "accepted")
-            {
-                btnSaveAsPDF.Enabled = false;
-            }
-
-            if (Request.IsAuthenticated)
-            {
-                ((Label)Master.FindControl("lastLoginStaff")).Text = "Your last logged in was <b>"
-                            + ActionLogs.getLastLoggedInOf(Context.User.Identity.Name) + "</b>";
-            }
-
-            if (IsPostBack)
-            {
-                errormsgPasswordAuthenticate.Visible = false;
-            }
-
-            if (dbReportStatus == "drafts")
-            {
-                TextBox9.Text = Decrypt(dbDescription.Trim());
-            }
-            //Label8.Text = this.Decrypt(Label8.Text.Trim());
-            Label10.Text = Decrypt(dbDescription.Trim());
         }
 
         public static string Decrypt(string cipherText)
