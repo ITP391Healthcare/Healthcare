@@ -50,7 +50,12 @@
         </div>
     </div>
 
-
+    <div class="searchBar">
+        <abbr title="Enter a Username/Exception Type/Error Message/Location">
+            <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Search here..." CssClass="txtSearch" />
+        </abbr>
+            <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
+    </div>
 
 <%--    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox><br />
     <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox><br />

@@ -40,6 +40,24 @@ namespace MomoSecretSociety.Content.StaffConsole {
         protected global::System.Web.UI.WebControls.Button btnAuthenticate;
         
         /// <summary>
+        /// txtSearchValue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchValue;
+        
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
+        
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
