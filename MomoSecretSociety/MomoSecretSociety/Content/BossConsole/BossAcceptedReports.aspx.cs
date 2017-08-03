@@ -241,7 +241,7 @@ namespace MomoSecretSociety.Content.BossConsole
             // + Encryption (Joanne) 
             doc.Security.KeySize = PdfEncryptionKeySize.Key128Bit;
             doc.Security.OwnerPassword = "e-iceblue";
-            doc.Security.UserPassword = "test";
+            doc.Security.UserPassword = PasswordTxt.Text;
             doc.Security.Permissions = PdfPermissionsFlags.Print | PdfPermissionsFlags.FillFields;
 
             //// + DigitalSignature Method 1 (KaiTat)
