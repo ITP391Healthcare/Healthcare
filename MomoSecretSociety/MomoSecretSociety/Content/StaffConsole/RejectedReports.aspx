@@ -20,6 +20,37 @@
              border: none;
          }
 
+         
+        .btnSearch {
+            border-top: thick solid #e5e5e5;
+            border-right: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            margin-left: -2%;
+            /*box-shadow: 0px 0px 0px 0px #e5e5e5;*/
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+        .txtSearch {
+            border-top: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+            text-align: center;
+        }
+
+            .txtSearch:focus, .btnSearch:focus {
+                /*box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+                border: 1px solid rgba(81, 203, 238, 1);*/
+                outline: none;
+            }
+
+            .txtSearch:focus {
+                border-bottom: 2px solid black;
+            }
+
     </style>
     
       <!-- Pop up Modal -->
@@ -49,15 +80,25 @@
     </div>
 
     <br />
-        <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
-        SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
+        <div class="searchBar" style="float:right;">
+        <abbr title="Enter a Username/Exception Type/Error Message/Location">
+            <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Search here..." CssClass="txtSearch" />
+        </abbr>
+            <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
+    </div>
+
+
+
+    <br />
+        <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>">
+        <%--SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
         WHERE ([Username] = @Username AND ( ReportStatus = 'rejected' ));">
         <SelectParameters>
             <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
-        </SelectParameters>
+        </SelectParameters>--%>
     </asp:SqlDataSource>
     <asp:Label ID="Label1" runat="server" Text="- Rejected Reports -" Font-Size="30px" Font-Bold="True"></asp:Label>
-    <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1" 
+    <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" 
         AutoGenerateColumns="false" OnSorting="GridView1_Sorting" OnRowCommand="GridView1_RowCommand" AllowSorting="true" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5">
         <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
 

@@ -101,7 +101,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
                 if (dbReportStatus != "accepted")
                 {
-                    btnSaveAsPDF.Enabled = false;
+                    btnSaveAsPDF.Visible = false;
                 }
 
                 if (Request.IsAuthenticated)

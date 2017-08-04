@@ -14,6 +14,8 @@ namespace MomoSecretSociety.Content.StaffConsole
 {
     public partial class SubmittedReports : System.Web.UI.Page
     {
+        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
@@ -29,6 +31,27 @@ namespace MomoSecretSociety.Content.StaffConsole
             }
 
 
+            if (!IsPostBack)
+            {
+                connection.Open();
+
+                SqlCommand retrieveSubmittedReportsCommand = new SqlCommand("SELECT CaseNumber, Date, Subject, ReportStatus, CreatedDateTime FROM Report " +
+                    "WHERE Username = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected') ", connection);
+
+   retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
+
+                SqlDataReader retrieveSubmittedReports = retrieveSubmittedReportsCommand.ExecuteReader();
+             
+                DataTable dt = new DataTable();
+                dt.Load(retrieveSubmittedReports);
+
+                connection.Close();
+
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -38,9 +61,11 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Open();
             SqlDataReader dataReader = null;
-            SqlCommand dateCommand = new SqlCommand("SELECT * FROM Report WHERE (lower(Username) LIKE @txtSearchValue OR lower(Subject) LIKE @txtSearchValue OR lower(CaseNumber) LIKE @txtSearchValue OR lower(ReportStatus) LIKE @txtSearchValue OR lower(Subject) LIKE @txtSearchValue)", connection);
+            SqlCommand dateCommand = new SqlCommand("SELECT * FROM Report WHERE (lower(Username) LIKE @txtSearchValue OR lower(Subject) LIKE @txtSearchValue OR lower(CaseNumber) LIKE @txtSearchValue OR lower(ReportStatus) LIKE @txtSearchValue OR lower(Subject) LIKE @txtSearchValue) AND Username = @AccountUsername AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected')", connection);
 
             dateCommand.Parameters.AddWithValue("@txtSearchValue", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
+            dateCommand.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
+
             dataReader = dateCommand.ExecuteReader();
 
             DataTable dt = new DataTable();
@@ -142,6 +167,20 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
+            //connection.Open();
+
+            //SqlCommand retrieveSubmittedReportsCommand = new SqlCommand("SELECT CaseNumber, Date, Subject, ReportStatus, CreatedDateTime FROM Report " +
+            //    "WHERE Username = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected') ", connection);
+
+            //retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
+
+            //SqlDataReader retrieveSubmittedReports = retrieveSubmittedReportsCommand.ExecuteReader();
+
+            //DataTable dt = new DataTable();
+            //dt.Load(retrieveSubmittedReports);
+
+            //connection.Close();
+
             DataTable dataTable = GridView1.DataSource as DataTable;
 
             if (dataTable != null)

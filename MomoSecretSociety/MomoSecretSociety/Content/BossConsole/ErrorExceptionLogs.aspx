@@ -3,7 +3,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
-
     <style>
         /* Tooltip to show password requirements */
         .tooltip .tooltiptext {

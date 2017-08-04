@@ -14,6 +14,10 @@ namespace MomoSecretSociety.Content.StaffConsole
 {
     public partial class Drafts : System.Web.UI.Page
     {
+
+        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
@@ -26,6 +30,55 @@ namespace MomoSecretSociety.Content.StaffConsole
             {
                 errormsgPasswordAuthenticate.Visible = false;
             }
+
+            if (!IsPostBack)
+            {
+                connection.Open();
+
+                SqlCommand retrieveSubmittedReportsCommand = new SqlCommand("SELECT CaseNumber, Date, Subject, ReportStatus, CreatedDateTime FROM Report " +
+                    "WHERE Username = @Username AND ReportStatus = 'drafts' ", connection);
+
+                retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
+
+                SqlDataReader retrieveSubmittedReports = retrieveSubmittedReportsCommand.ExecuteReader();
+
+                DataTable dt = new DataTable();
+                dt.Load(retrieveSubmittedReports);
+
+                connection.Close();
+
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+            connection.Open();
+            SqlDataReader dataReader = null;
+            SqlCommand dateCommand = new SqlCommand("SELECT * FROM Report WHERE (lower(Username) LIKE @txtSearchValue OR lower(Subject) LIKE @txtSearchValue OR lower(CaseNumber) LIKE @txtSearchValue OR lower(ReportStatus) LIKE @txtSearchValue OR lower(Subject) LIKE @txtSearchValue) AND Username = @AccountUsername AND ReportStatus='drafts'", connection);
+
+            dateCommand.Parameters.AddWithValue("@txtSearchValue", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
+            dateCommand.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
+
+            dataReader = dateCommand.ExecuteReader();
+
+            DataTable dt = new DataTable();
+            dt.Load(dataReader);
+
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+
+            if (dt.Rows.Count == 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
+            }
+
+            connection.Close();
 
         }
 
