@@ -41,7 +41,7 @@ namespace MomoSecretSociety.Content.StaffConsole
                 retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
 
                 SqlDataReader retrieveSubmittedReports = retrieveSubmittedReportsCommand.ExecuteReader();
-             
+
                 DataTable dt = new DataTable();
                 dt.Load(retrieveSubmittedReports);
 
@@ -84,7 +84,22 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Close();
 
+
+
+            searchValue = txtSearchValue.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
+            staffName = Context.User.Identity.Name;
+
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchByStaff;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
+
         }
+
+        public static string searchValue = "";
+        public static string url = "";
+        public static string staffName = "";
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {

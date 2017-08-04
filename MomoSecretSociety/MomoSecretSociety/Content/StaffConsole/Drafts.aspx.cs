@@ -49,7 +49,6 @@ namespace MomoSecretSociety.Content.StaffConsole
 
 
                 GridView1.DataSource = dt;
-                ViewState["Datable"] = dt;
                 GridView1.DataBind();
             }
         }
@@ -72,7 +71,6 @@ namespace MomoSecretSociety.Content.StaffConsole
             dt.Load(dataReader);
 
             GridView1.DataSource = dt;
-            ViewState["Datable"] = dt;
             GridView1.DataBind();
 
             if (dt.Rows.Count == 0)
@@ -82,8 +80,21 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Close();
 
+
+            searchValue = txtSearchValue.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
+            staffName = Context.User.Identity.Name;
+
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchByStaff;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
+
         }
 
+        public static string searchValue = "";
+        public static string url = "";
+        public static string staffName = "";
 
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
@@ -169,34 +180,15 @@ namespace MomoSecretSociety.Content.StaffConsole
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(ViewState["Datable"]);
-            DataTable dataTable = ViewState["Datable"] as DataTable;
+            DataTable dataTable = GridView1.DataSource as DataTable;
+
             if (dataTable != null)
             {
-                string SortDirection = "DESC";
-                if (ViewState["SortExpression"] != null)
-                {
-                    if (ViewState["SortExpression"].ToString() == e.SortExpression)
-                    {
-                        ViewState["SortExpression"] = null;
-                        SortDirection = "ASC";
-                    }
-                    else
-                    {
-                        ViewState["SortExpression"] = e.SortExpression;
-                    }
-                }
-                else
-                {
-                    ViewState["SortExpression"] = e.SortExpression;
-                }
-
                 DataView dataView = new DataView(dataTable);
-                dataView.Sort = e.SortExpression + " " + SortDirection;
-                System.Diagnostics.Debug.WriteLine(e.SortDirection);
+                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
                 GridView1.DataSource = dataView;
                 GridView1.DataBind();
-
             }
         }
 

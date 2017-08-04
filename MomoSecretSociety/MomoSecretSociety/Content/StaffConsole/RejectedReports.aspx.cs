@@ -80,7 +80,20 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             connection.Close();
 
+            searchValue = txtSearchValue.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
+            staffName = Context.User.Identity.Name;
+
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchByStaff;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
+
         }
+
+        public static string searchValue = "";
+        public static string url = "";
+        public static string staffName = "";
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {

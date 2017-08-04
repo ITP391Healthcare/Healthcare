@@ -205,6 +205,10 @@ StackOverflowException
 
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" AllowPaging="True" CellPadding="10" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" RowStyle-Wrap="true" HorizontalAlign="Center" AlternatingRowStyle-BackColor="White" PageSize="20" OnPageIndexChanging="GridView1_PageIndexChanging">
 
+               <%-- If There are no reports --%>
+                            <EmptyDataTemplate>
+                                <label style="color: red; font-weight: bold; font-size: 30px;">There are no error exception logs at the moment</label>
+                            </EmptyDataTemplate>
 
             <PagerStyle CssClass="pagerStyle" />
 

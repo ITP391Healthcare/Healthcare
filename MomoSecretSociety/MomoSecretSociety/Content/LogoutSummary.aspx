@@ -51,7 +51,7 @@
                     </p>
                     <p>Thank you for using our service.</p>
 
-                    <asp:GridView ID="GridView1" runat="server" BorderColor="#F0f0f0" HeaderStyle-BackColor="#2eb3ed" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium"
+                    <asp:GridView ID="GridView1" runat="server" BorderColor="#F0f0f0" HeaderStyle-BackColor="#2eb3ed" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small"
                         HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
                         HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white" HorizontalAlign="Center"
                         RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging">
