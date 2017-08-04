@@ -38,7 +38,7 @@ namespace MomoSecretSociety.Content.StaffConsole
                 SqlCommand retrieveSubmittedReportsCommand = new SqlCommand("SELECT CaseNumber, Date, Subject, ReportStatus, CreatedDateTime FROM Report " +
                     "WHERE Username = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected') ", connection);
 
-   retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
+                retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
 
                 SqlDataReader retrieveSubmittedReports = retrieveSubmittedReportsCommand.ExecuteReader();
              
@@ -49,6 +49,8 @@ namespace MomoSecretSociety.Content.StaffConsole
 
 
                 GridView1.DataSource = dt;
+                // store viewstate
+                ViewState["Datable"] = dt;
                 GridView1.DataBind();
             }
 
@@ -70,8 +72,9 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             DataTable dt = new DataTable();
             dt.Load(dataReader);
-
             GridView1.DataSource = dt;
+            //store viewstate
+            ViewState["Datable"] = dt;
             GridView1.DataBind();
 
             if (dt.Rows.Count == 0)
@@ -164,53 +167,41 @@ namespace MomoSecretSociety.Content.StaffConsole
 
             }
         }
-
+        // this whole method
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            //connection.Open();
-
-            //SqlCommand retrieveSubmittedReportsCommand = new SqlCommand("SELECT CaseNumber, Date, Subject, ReportStatus, CreatedDateTime FROM Report " +
-            //    "WHERE Username = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected') ", connection);
-
-            //retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
-
-            //SqlDataReader retrieveSubmittedReports = retrieveSubmittedReportsCommand.ExecuteReader();
-
-            //DataTable dt = new DataTable();
-            //dt.Load(retrieveSubmittedReports);
-
-            //connection.Close();
-
-            DataTable dataTable = GridView1.DataSource as DataTable;
-
+            System.Diagnostics.Debug.WriteLine(ViewState["Datable"]);
+            DataTable dataTable = ViewState["Datable"] as DataTable;
             if (dataTable != null)
             {
-                DataView dataView = new DataView(dataTable);
-                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+                string SortDirection = "DESC";
+                if (ViewState["SortExpression"] != null)
+                {
+                    if (ViewState["SortExpression"].ToString() == e.SortExpression)
+                    {
+                        ViewState["SortExpression"] = null;
+                        SortDirection = "ASC";
+                    }
+                    else
+                    {
+                        ViewState["SortExpression"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    ViewState["SortExpression"] = e.SortExpression;
+                }
 
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + SortDirection;
+                System.Diagnostics.Debug.WriteLine(e.SortDirection);
                 GridView1.DataSource = dataView;
                 GridView1.DataBind();
+
             }
         }
 
-        private string ConvertSortDirectionToSql(SortDirection sortDirection)
-        {
-            string newSortDirection = String.Empty;
-
-            switch (sortDirection)
-            {
-                case SortDirection.Ascending:
-                    newSortDirection = "ASC";
-                    break;
-
-                case SortDirection.Descending:
-                    newSortDirection = "DESC";
-                    break;
-            }
-
-            return newSortDirection;
-        }
-
+       
         /*
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
