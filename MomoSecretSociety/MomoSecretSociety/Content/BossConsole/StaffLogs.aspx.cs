@@ -18,6 +18,16 @@ namespace MomoSecretSociety.Content.BossConsole
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //To make sure do not allow staff to access boss console through browser
+            if (Context.User.Identity.Name != "KaiTatL97")
+            {
+                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
+
+                return;
+            }
+
+
             if (Request.IsAuthenticated)
             {
                 ((Label)Master.FindControl("lastLoginBoss")).Text = "Your last logged in was <b>"

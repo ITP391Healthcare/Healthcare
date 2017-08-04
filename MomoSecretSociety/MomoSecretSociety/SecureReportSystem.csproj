@@ -200,7 +200,6 @@
     <Content Include="Content\BossConsole\RejectedReports.aspx" />
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
     <Content Include="Content\BossConsole\SuperiorLogs.aspx" />
-    <Content Include="Content\BossConsole\testLogsSearchEngine.aspx" />
     <Content Include="Content\BossConsole\ErrorPages\demoPageWithError1SQL.aspx" />
     <Content Include="Content\BossConsole\ErrorPages\demoPageWithError2DivideByZero.aspx" />
     <Content Include="Content\BossConsole\ViewPendingReport.aspx" />
@@ -368,13 +367,6 @@
     </Compile>
     <Compile Include="Content\BossConsole\SuperiorLogs.aspx.designer.cs">
       <DependentUpon>SuperiorLogs.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Content\BossConsole\testLogsSearchEngine.aspx.cs">
-      <DependentUpon>testLogsSearchEngine.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Content\BossConsole\testLogsSearchEngine.aspx.designer.cs">
-      <DependentUpon>testLogsSearchEngine.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\BossConsole\ErrorPages\demoPageWithError1SQL.aspx.cs">
       <DependentUpon>demoPageWithError1SQL.aspx</DependentUpon>
