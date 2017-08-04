@@ -29,7 +29,9 @@ namespace MomoSecretSociety.Content
             BossViewPendingReport,
             ExceptionError,
             SearchStaffLogs,
-            SearchBossLogs
+            SearchBossLogs,
+            SearchErrorLogs,
+            SearchByStaff
         };
 
         public static void Log(string username, Action action)
@@ -123,7 +125,26 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Search for value of '" + SuperiorLogs.searchValue + "' in Superior Logs";
             }
-
+            else if (action == Action.SearchErrorLogs)
+            {
+                actionString = "Search for value of '" + ErrorExceptionLogs.searchValue + "' in Error Exception Logs";
+            }
+            else if (action == Action.SearchByStaff)
+            {
+                if (SubmittedReports.searchValue != "")
+                {
+                    actionString = "Search for value of '" + SubmittedReports.searchValue + "' in " + SubmittedReports.url;
+                }
+                if (StaffConsole.RejectedReports.searchValue != "")
+                {
+                    actionString = "Search for value of '" + StaffConsole.RejectedReports.searchValue + "' in " + StaffConsole.RejectedReports.url;
+                }
+                if (Drafts.searchValue != "")
+                {
+                    actionString = "Search for value of '" + Drafts.searchValue + "' in " + Drafts.url;
+                }
+            }
+            
 
             return actionString;
         }

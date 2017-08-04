@@ -81,9 +81,15 @@ namespace MomoSecretSociety.Content.BossConsole
             connection.Close();
 
 
+            searchValue = txtSearchValue.Text;
 
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
 
         }
+
+        public static string searchValue = "";
 
 
         protected void btnSearchDate_Click(object sender, EventArgs e)
@@ -142,6 +148,13 @@ namespace MomoSecretSociety.Content.BossConsole
                     connection.Close();
 
 
+                    searchValue = txtSearchValueDate.Text;
+
+                    //Add to logs
+                    ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
+                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
+
                 }
                 catch (System.NullReferenceException exc)
                 {
@@ -194,9 +207,16 @@ namespace MomoSecretSociety.Content.BossConsole
                 connection.Close();
 
 
+                searchValue = TextBox1.Text + " " + TextBox2.Text;
+
+                //Add to logs
+                ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
+                ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
+
             }
 
-            
+
 
 
         }
