@@ -1,4 +1,5 @@
 ﻿using MomoSecretSociety.Content.BossConsole;
+using MomoSecretSociety.Content.StaffConsole;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -75,7 +76,7 @@ namespace MomoSecretSociety.Content
             }
             else if (action == Action.StaffSubmittedReport)
             {
-                actionString = "Report was submitted";
+                actionString = "Report of #" + NewReport.caseNumberOfReport + " was submitted";
             }
             else if (action == Action.BossApprovedReport)
             {
@@ -87,7 +88,8 @@ namespace MomoSecretSociety.Content
             }
             else if (action == Action.ReportSavedToPdf)
             {
-                actionString = "Report saved to PDF";
+                //actionString = "Report of #" + ViewAcceptedReport.caseNumberOfReport + " saved to PDF";
+                actionString = "Report of # saved to PDF";
             }
             //else if (action == Action.AccountLockout)
             //{
