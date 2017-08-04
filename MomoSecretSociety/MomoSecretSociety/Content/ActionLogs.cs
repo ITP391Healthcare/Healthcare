@@ -23,10 +23,13 @@ namespace MomoSecretSociety.Content
             BossApprovedReport,
             BossRejectedReport,
             ReportSavedToPdf,
+            ReportSavedAsDrafts,
             AccountLockout,
             ReauthenticatedDueToAccountLockout,
             BossViewPendingReport,
-            ExceptionError
+            ExceptionError,
+            SearchStaffLogs,
+            SearchBossLogs
         };
 
         public static void Log(string username, Action action)
@@ -65,7 +68,7 @@ namespace MomoSecretSociety.Content
         public static string getActionString(Action action)
         {
             String actionString = "";
-            
+
             if (action == Action.Login)
             {
                 actionString = "Login";
@@ -88,8 +91,13 @@ namespace MomoSecretSociety.Content
             }
             else if (action == Action.ReportSavedToPdf)
             {
-                //actionString = "Report of #" + ViewAcceptedReport.caseNumberOfReport + " saved to PDF";
-                actionString = "Report of # saved to PDF";
+                //actionString = "Report of #" + ViewAcceptedReport.caseNumberOfReport + " was saved to PDF";
+                actionString = "Report of #" + TestDisplay.dbCaseNumber + " was saved to PDF";
+            }
+            else if (action == Action.ReportSavedAsDrafts)
+            {
+                //actionString = "Report of #" + ViewAcceptedReport.caseNumberOfReport + " was saved to PDF";
+                actionString = "Report of #" + NewReport.caseNumberOfReport + " was saved as drafts";
             }
             //else if (action == Action.AccountLockout)
             //{
@@ -107,7 +115,14 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Exception Error";
             }
-
+            else if (action == Action.SearchStaffLogs)
+            {
+                actionString = "Search for value of '" + StaffLogs.searchValue + "' in Staff Logs";
+            }
+            else if (action == Action.SearchBossLogs)
+            {
+                actionString = "Search for value of '" + SuperiorLogs.searchValue + "' in Superior Logs";
+            }
 
 
             return actionString;

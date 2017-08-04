@@ -85,6 +85,11 @@ namespace MomoSecretSociety.Content.BossConsole
                     if (dbPasswordHash.Equals(passwordHash))
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('hide')", true);
+
+                        //Add to logs
+                        ActionLogs.Action action = ActionLogs.Action.ReauthenticatedDueToAccountLockout;
+                        ActionLogs.Log(Context.User.Identity.Name, action);
+
                     }
                     else
                     {
@@ -128,7 +133,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
                 connection2.Open();
                 SqlDataReader logReader = null;
-                SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE Username = @AccountUsername AND convert(date, Timestamp) = convert(date,@Date) ORDER BY Timestamp ASC", connection2);
+                SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE Username = @AccountUsername AND convert(date, Timestamp) = convert(date,@Date) ORDER BY convert(date,Timestamp) ASC", connection2);
 
                 logCommand.Parameters.AddWithValue("@AccountUsername", Context.User.Identity.Name);
                 logCommand.Parameters.AddWithValue("@Date", date);
@@ -203,7 +208,7 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-sign-out bg-aqua";
             }
-            else if (actionString == "Report was submitted")
+            else if (actionString.Contains("submitted"))
             {
                 return "fa-file-text bg-aqua";
             }
@@ -215,14 +220,18 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-exclamation-triangle bg-aqua";
             }
-            else if (actionString == "Report saved to PDF")
+            else if (actionString.Contains("PDF"))
             {
                 return "fa-file-pdf-o bg-aqua";
             }
-            else if (actionString == "Account Lockout")
+            else if (actionString.Contains("drafts"))
             {
-                return "fa-hourglass-o bg-aqua";
+                return "fa-save bg-aqua";
             }
+            //else if (actionString == "Account Lockout")
+            //{
+            //    return "fa-hourglass-o bg-aqua";
+            //}
             else if (actionString == "Re-authenticated due to Account Lockout")
             {
                 return "fa-handshake-o bg-aqua";
@@ -230,6 +239,10 @@ namespace MomoSecretSociety.Content.BossConsole
             else if (actionString == "Boss View Pending Report")
             {
                 return "fa-edit bg-aqua";
+            }
+            else if (actionString.Contains("Search"))
+            {
+                return "fa-search bg-aqua";
             }
 
             return "fa-user bg-aqua";
@@ -260,7 +273,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
                 connection2.Open();
                 SqlDataReader logReader = null;
-                SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE lower(Action) LIKE @Action AND Username = @AccountUsername AND convert(date, Timestamp) = convert(date,@Date) ORDER BY Timestamp ASC", connection2);
+                SqlCommand logCommand = new SqlCommand("SELECT Action, Timestamp FROM Logs WHERE lower(Action) LIKE @Action AND Username = @AccountUsername AND convert(date, Timestamp) = convert(date,@Date) ORDER BY convert(date,Timestamp) ASC", connection2);
 
                 logCommand.Parameters.AddWithValue("@Action", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
                 logCommand.Parameters.AddWithValue("@AccountUsername", bossUsername.Text);
@@ -284,8 +297,16 @@ namespace MomoSecretSociety.Content.BossConsole
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
             }
 
+
+            searchValue = txtSearchValue.Text;
+
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchBossLogs;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
         }
 
+        public static string searchValue = "";
 
         protected void btnSearchDate_Click(object sender, EventArgs e)
         {
@@ -339,6 +360,12 @@ namespace MomoSecretSociety.Content.BossConsole
 
                     }
 
+
+                    searchValue = txtSearchValueDate.Text;
+
+                    //Add to logs
+                    ActionLogs.Action actionLog = ActionLogs.Action.SearchBossLogs;
+                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
 
                 }
                 catch (System.NullReferenceException exc)
@@ -409,6 +436,13 @@ namespace MomoSecretSociety.Content.BossConsole
                         }
 
                     }
+
+
+                    searchValue = TextBox1.Text + " " + TextBox2.Text;
+
+                    //Add to logs
+                    ActionLogs.Action actionLog = ActionLogs.Action.SearchBossLogs;
+                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
 
 
                 }

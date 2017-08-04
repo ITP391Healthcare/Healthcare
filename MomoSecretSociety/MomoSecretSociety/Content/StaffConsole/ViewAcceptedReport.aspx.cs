@@ -324,14 +324,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             System.Diagnostics.Process.Start("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
 
 
-            //caseNumberOfReport = Session["caseNumberOfThisSelectedReport"].ToString();
+            caseNumberOfReport = Session["caseNumberOfThisSelectedReport"].ToString();
 
-            ////Add to logs
-            //ActionLogs.Action action = ActionLogs.Action.ReportSavedToPdf;
-            //ActionLogs.Log(Context.User.Identity.Name, action);
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.ReportSavedToPdf;
+            ActionLogs.Log(Context.User.Identity.Name, action);
         }
 
-        //public static string caseNumberOfReport = "";
+        public static string caseNumberOfReport = "";
 
         private static void AlignText(PdfPageBase page)
         {

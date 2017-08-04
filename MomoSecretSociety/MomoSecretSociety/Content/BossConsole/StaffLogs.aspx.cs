@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -15,6 +16,8 @@ namespace MomoSecretSociety.Content.BossConsole
     public partial class StaffLogs : System.Web.UI.Page
     {
         String staffName;
+
+        static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,6 +43,29 @@ namespace MomoSecretSociety.Content.BossConsole
 
 
             }
+
+
+            if (!IsPostBack)
+            {
+                connection.Open();
+
+                SqlCommand retrieveSubmittedReportsCommand = new SqlCommand("SELECT DISTINCT(Username) FROM UserAccount WHERE Username != @Username ", connection);
+
+                retrieveSubmittedReportsCommand.Parameters.AddWithValue("@Username", Context.User.Identity.Name);
+
+                SqlDataReader retrieveSubmittedReports = retrieveSubmittedReportsCommand.ExecuteReader();
+
+                DataTable dt = new DataTable();
+                dt.Load(retrieveSubmittedReports);
+
+                connection.Close();
+
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+
+
         }
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {
@@ -74,6 +100,11 @@ namespace MomoSecretSociety.Content.BossConsole
                     if (dbPasswordHash.Equals(passwordHash))
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('hide')", true);
+
+                        //Add to logs
+                        ActionLogs.Action action = ActionLogs.Action.ReauthenticatedDueToAccountLockout;
+                        ActionLogs.Log(Context.User.Identity.Name, action);
+
                     }
                     else
                     {
@@ -189,7 +220,11 @@ namespace MomoSecretSociety.Content.BossConsole
 
         private string GetIconStyle(string actionString)
         {
-            if (actionString == "Login")
+            if (actionString.Contains("Search"))
+            {
+                return "fa-search bg-aqua";
+            }
+            else if (actionString == "Login")
             {
                 return "fa-sign-in bg-aqua";
             }
@@ -197,27 +232,31 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-sign-out bg-aqua";
             }
-            else if (actionString == "Report was submitted")
+            else if (actionString.Contains("submitted"))
             {
                 return "fa-file-text bg-aqua";
             }
-            else if (actionString == "Report was approved")
+            else if (actionString.Contains("approved"))
             {
                 return "fa-check-square-o bg-aqua";
             }
-            else if (actionString == "Report was rejected")
+            else if (actionString.Contains("rejected"))
             {
                 return "fa-exclamation-triangle bg-aqua";
             }
-            else if (actionString == "Report saved to PDF")
+            else if (actionString.Contains("PDF"))
             {
                 return "fa-file-pdf-o bg-aqua";
             }
-            else if (actionString == "Session Timeout")
+            else if (actionString.Contains("drafts"))
             {
-                return "fa-hourglass-o bg-aqua";
+                return "fa-save bg-aqua";
             }
-            else if (actionString == "Authenticated due to Session Timeout")
+            //else if (actionString == "Account Lockout")
+            //{
+            //    return "fa-hourglass-o bg-aqua";
+            //}
+            else if (actionString == "Re-authenticated due to Account Lockout")
             {
                 return "fa-handshake-o bg-aqua";
             }
@@ -225,6 +264,7 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 return "fa-edit bg-aqua";
             }
+
 
             return "fa-user bg-aqua";
 
@@ -312,7 +352,17 @@ namespace MomoSecretSociety.Content.BossConsole
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('There is no data found for this search.')", true);
             }
 
+
+            searchValue = txtSearchValue.Text;
+
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
+
         }
+
+        public static string searchValue = "";
 
 
         protected void btnSearchDate_Click(object sender, EventArgs e)
@@ -334,7 +384,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
                     connection.Open();
 
-                    SqlCommand dateCommand = new SqlCommand("SELECT DISTINCT(Timestamp) AS [DD/MM/YYYY] FROM LOGS WHERE Username = @AccountUsername AND convert(date, Timestamp, 103) = @Timestamp", connection);
+                    SqlCommand dateCommand = new SqlCommand("SELECT DISTINCT(Timestamp) AS [DD/MM/YYYY] FROM LOGS WHERE Username = @AccountUsername AND convert(date, Timestamp, 103) = convert(date, @Timestamp, 103)", connection);
 
                     dateCommand.Parameters.AddWithValue("@AccountUsername", staffUsername.Text);
                     dateCommand.Parameters.AddWithValue("@Timestamp", InputDate);
@@ -366,6 +416,14 @@ namespace MomoSecretSociety.Content.BossConsole
                         }
 
                     }
+
+
+
+                    searchValue = txtSearchValueDate.Text;
+
+                    //Add to logs
+                    ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
+                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
 
 
                 }
@@ -438,6 +496,14 @@ namespace MomoSecretSociety.Content.BossConsole
                         }
 
                     }
+
+
+                    searchValue = TextBox1.Text + " " + TextBox2.Text;
+
+                    //Add to logs
+                    ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
+                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
 
 
                 }

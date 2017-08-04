@@ -240,6 +240,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.ExecuteNonQuery();
             connection.Close();
 
+
+            caseNumberOfReport = cNumber + "";
+
+
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.ReportSavedAsDrafts;
+            ActionLogs.Log(Context.User.Identity.Name, action);
+
             //alert
             string message = "Your report has been saved in drafts!";
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);

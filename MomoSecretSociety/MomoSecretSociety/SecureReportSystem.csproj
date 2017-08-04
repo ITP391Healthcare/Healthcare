@@ -213,7 +213,6 @@
     <Content Include="Content\StaffConsole\RejectedReports.aspx" />
     <Content Include="Content\StaffConsole\testRedirectStaff.aspx" />
     <Content Include="Content\StaffConsole\testSaveReport.aspx" />
-    <Content Include="Content\StaffConsole\testSessionTimeout.aspx" />
     <Content Include="Content\StaffConsole\ViewAcceptedReport.aspx" />
     <Content Include="Content\StaffConsole\ViewSelectedReport.aspx" />
     <Content Include="Default.aspx" />
@@ -465,13 +464,6 @@
     </Compile>
     <Compile Include="Content\StaffConsole\testSaveReport.aspx.designer.cs">
       <DependentUpon>testSaveReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Content\StaffConsole\testSessionTimeout.aspx.cs">
-      <DependentUpon>testSessionTimeout.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Content\StaffConsole\testSessionTimeout.aspx.designer.cs">
-      <DependentUpon>testSessionTimeout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\StaffConsole\ViewAcceptedReport.aspx.cs">
       <DependentUpon>ViewAcceptedReport.aspx</DependentUpon>

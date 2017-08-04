@@ -146,6 +146,11 @@ namespace MomoSecretSociety.Content.BossConsole
                     if (dbPasswordHash.Equals(passwordHash))
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('hide')", true);
+
+                        //Add to logs
+                        ActionLogs.Action action = ActionLogs.Action.ReauthenticatedDueToAccountLockout;
+                        ActionLogs.Log(Context.User.Identity.Name, action);
+
                     }
                     else
                     {

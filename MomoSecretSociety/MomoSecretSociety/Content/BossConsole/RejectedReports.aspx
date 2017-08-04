@@ -4,6 +4,14 @@
 
     <link href="../../Styles/BossConsole/Reports.css" rel="stylesheet" />
 
+    <style>
+        th, tr, td {
+            padding-left: 8px;
+            padding-right: 8px;
+            text-align: center;
+        }
+    </style>
+
     <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">
@@ -57,7 +65,7 @@
                     <div style="padding: 10px; background-color: #f4f6f5;">
 
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
-                            SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
+                            SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [CreatedDateTime] FROM [Report]
         WHERE (ReportStatus = 'rejected');">
                             <SelectParameters>
                                 <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
@@ -80,10 +88,9 @@
                                         <asp:LinkButton runat="server" ID="link" CommandArgument='<%# Eval("CaseNumber")%>' CommandName="DataCommand" Text='<%# Eval("CaseNumber") %>'></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Width="200" />
-                                <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="200" />
-                                <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="200" />
-                                <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="200" />
+                                <asp:BoundField DataField="Date" HeaderText="Date of Incident" DataFormatString="{0:dd/MM/yyyy}"  />
+                                <asp:BoundField DataField="Subject" HeaderText="Subject" />
+                                <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time"/>
                             </Columns>
                         </asp:GridView>
                     </div>

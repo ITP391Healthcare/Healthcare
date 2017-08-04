@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -29,6 +31,12 @@ namespace MomoSecretSociety.Content.BossConsole
 
             GridView1.DataSource = dt;
             GridView1.DataBind();
+
+
+            if (IsPostBack)
+            {
+                errormsgPasswordAuthenticate.Visible = false;
+            }
         }
 
         public static DataTable showErrorLogsSummary()
@@ -72,6 +80,9 @@ namespace MomoSecretSociety.Content.BossConsole
 
             connection.Close();
 
+
+
+
         }
 
 
@@ -109,7 +120,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
                     connection.Open();
 
-                    SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE convert(datetime, Timestamp, 103) = @Timestamp", connection);
+                    SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE convert(date, Timestamp, 103) = convert(date,@Timestamp,103)", connection);
                     //OR convert(time(0), Timestamp) = @Time)
                     //SELECT (convert(varchar(15), Timestamp, 108)) FROM ErrorExceptionLogs
 
@@ -185,65 +196,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
             }
 
-
-
-
-            //SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
-
-            //connection.Open();
-            //SqlDataReader dataReader = null;
-            //SqlCommand dateCommand = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE (lower(Username) LIKE @txtSearchValue OR lower(ExceptionType) LIKE @txtSearchValue OR lower(ErrorMessage) LIKE @txtSearchValue OR lower(ErrorSource) LIKE @txtSearchValue OR lower(Location) LIKE @txtSearchValue) ORDER BY convert(datetime,Timestamp) DESC", connection);
-
-            //dateCommand.Parameters.AddWithValue("@txtSearchValue", "%" + TextBox1.Text.Trim().ToLower() + "%");
-            //dataReader = dateCommand.ExecuteReader();
-
-            //while(dataReader.Read())
-            //{
-            //    //DataTable dt = new DataTable();
-            //    //dt.Load(dataReader);
-
-            //    string dbColumnName = "";
-            //    if (dbColumnName == dataReader["Username"].ToString())
-            //    {
-            //        dbColumnName = TextBox1.Text;
-            //    }
-            //    if (dbColumnName == dataReader["ExceptionType"].ToString())
-            //    {
-            //        dbColumnName = TextBox1.Text;
-            //    }
-            //    if (dbColumnName == dataReader["ErrorMessage"].ToString())
-            //    {
-            //        dbColumnName = TextBox1.Text;
-            //    }
-            //    if (dbColumnName == dataReader["ErrorSource"].ToString())
-            //    {
-            //        dbColumnName = TextBox1.Text;
-            //    }
-            //    if (dbColumnName == dataReader["Location"].ToString())
-            //    {
-            //        dbColumnName = TextBox1.Text;
-            //    }
-
-
-            //    SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
-
-            //    connection2.Open();
-            //    SqlDataReader dataReader2 = null;
-            //    SqlCommand dateCommand2 = new SqlCommand("SELECT * FROM ErrorExceptionLogs WHERE ORDER BY convert(datetime,Timestamp) DESC", connection2);
-
-            //    dateCommand2.Parameters.AddWithValue("@txtSearchValue", "%" + txtSearchValue.Text.Trim().ToLower() + "%");
-            //    dataReader2 = dateCommand2.ExecuteReader();
-
-            //}
-
-            ////DataTable dt = new DataTable();
-            ////dt.Load(dataReader);
-
-            ////GridView1.DataSource = dt;
-            ////GridView1.DataBind();
-
-            //connection.Close();
-
+            
 
 
         }
@@ -257,5 +210,75 @@ namespace MomoSecretSociety.Content.BossConsole
         //    GridView1.DataBind();
 
         //}
+
+
+
+        protected void btnAuthenticate_Click(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                string inputUsername = Context.User.Identity.Name;
+                string inputPassword = txtPasswordAuthenticate.Text;
+
+                string dbUsername = "";
+                string dbPasswordHash = "";
+                string dbSalt = "";
+
+                SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
+
+                connection.Open();
+                SqlCommand myCommand = new SqlCommand("SELECT HashedPassword, Salt, Role, Username FROM UserAccount WHERE Username = @AccountUsername", connection);
+                myCommand.Parameters.AddWithValue("@AccountUsername", inputUsername);
+
+                SqlDataReader myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    dbPasswordHash = (myReader["HashedPassword"].ToString());
+                    dbSalt = (myReader["Salt"].ToString());
+                    dbUsername = (myReader["Username"].ToString());
+                }
+                connection.Close();
+
+                string passwordHash = ComputeHash(inputPassword, new SHA512CryptoServiceProvider(), Convert.FromBase64String(dbSalt));
+
+                if (dbUsername.Equals(inputUsername.Trim()))
+                {
+                    if (dbPasswordHash.Equals(passwordHash))
+                    {
+                        Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('hide')", true);
+
+                        //Add to logs
+                        ActionLogs.Action action = ActionLogs.Action.ReauthenticatedDueToAccountLockout;
+                        ActionLogs.Log(Context.User.Identity.Name, action);
+
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterStartupScript(GetType(), "alert", "$('#myModal').modal('show')", true);
+                        errormsgPasswordAuthenticate.Visible = true;
+                    }
+
+                }
+            }
+        }
+
+        public static String ComputeHash(string input, HashAlgorithm algorithm, Byte[] salt)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+            Byte[] saltedInput = new Byte[salt.Length + inputBytes.Length];
+            salt.CopyTo(saltedInput, 0);
+            inputBytes.CopyTo(saltedInput, salt.Length);
+
+            Byte[] hashedBytes = algorithm.ComputeHash(saltedInput);
+
+            return BitConverter.ToString(hashedBytes);
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+        }
     }
 }
