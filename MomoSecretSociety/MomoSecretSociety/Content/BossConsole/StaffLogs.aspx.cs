@@ -15,7 +15,7 @@ namespace MomoSecretSociety.Content.BossConsole
 {
     public partial class StaffLogs : System.Web.UI.Page
     {
-        String staffName;
+        //String staffName;
 
         static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
 
@@ -354,6 +354,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
 
             searchValue = txtSearchValue.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
 
             //Add to logs
             ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
@@ -363,6 +364,8 @@ namespace MomoSecretSociety.Content.BossConsole
         }
 
         public static string searchValue = "";
+        public static string url = "";
+        public static string staffName = "";
 
 
         protected void btnSearchDate_Click(object sender, EventArgs e)
@@ -418,14 +421,6 @@ namespace MomoSecretSociety.Content.BossConsole
                     }
 
 
-
-                    searchValue = txtSearchValueDate.Text;
-
-                    //Add to logs
-                    ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
-                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
-
-
                 }
                 catch (System.NullReferenceException exc)
                 {
@@ -436,6 +431,17 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please check that you have entered a correct format in DD/MM/YYYY.')", true);
             }
+
+
+
+
+            searchValue = txtSearchValueDate.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
+
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+
 
         }
 
@@ -498,14 +504,6 @@ namespace MomoSecretSociety.Content.BossConsole
                     }
 
 
-                    searchValue = TextBox1.Text + " " + TextBox2.Text;
-
-                    //Add to logs
-                    ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
-                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
-
-
-
                 }
                 catch (System.NullReferenceException exc)
                 {
@@ -516,6 +514,15 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please check that you have entered a correct format in DD/MM/YYYY.')", true);
             }
+
+
+
+            searchValue = TextBox1.Text + " " + TextBox2.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
+
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchStaffLogs;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
 
 
 

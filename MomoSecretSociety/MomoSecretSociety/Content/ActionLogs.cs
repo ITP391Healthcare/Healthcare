@@ -119,32 +119,33 @@ namespace MomoSecretSociety.Content
             }
             else if (action == Action.SearchStaffLogs)
             {
-                actionString = "Search for value of '" + StaffLogs.searchValue + "' in Staff Logs";
+                actionString = "Search for value of '" + StaffLogs.searchValue + "'" + " of '"
+                    + StaffLogs.staffName + "' in " + StaffLogs.url;
             }
             else if (action == Action.SearchBossLogs)
             {
-                actionString = "Search for value of '" + SuperiorLogs.searchValue + "' in Superior Logs";
+                actionString = "Search for value of '" + SuperiorLogs.searchValue + "' in " + SuperiorLogs.url;
             }
             else if (action == Action.SearchErrorLogs)
             {
-                actionString = "Search for value of '" + ErrorExceptionLogs.searchValue + "' in Error Exception Logs";
+                actionString = "Search for value of '" + ErrorExceptionLogs.searchValue + "' in " + ErrorExceptionLogs.url;
             }
             else if (action == Action.SearchByStaff)
             {
                 if (SubmittedReports.searchValue != "")
                 {
-                    actionString = "Search for value of '" + SubmittedReports.searchValue + "' in " + SubmittedReports.url;
+                    actionString = "Search for value of '" + SubmittedReports.searchValue + "'" + " by '" + SubmittedReports.staffName + "'" + " in " + SubmittedReports.url;
                 }
                 if (StaffConsole.RejectedReports.searchValue != "")
                 {
-                    actionString = "Search for value of '" + StaffConsole.RejectedReports.searchValue + "' in " + StaffConsole.RejectedReports.url;
+                    actionString = "Search for value of '" + StaffConsole.RejectedReports.searchValue + "'" + " by '" + StaffConsole.RejectedReports.staffName + "'" + " in " + StaffConsole.RejectedReports.url;
                 }
                 if (Drafts.searchValue != "")
                 {
-                    actionString = "Search for value of '" + Drafts.searchValue + "' in " + Drafts.url;
+                    actionString = "Search for value of '" + Drafts.searchValue + "'" + " by '" + Drafts.staffName + "'" + " in " + Drafts.url;
                 }
             }
-            
+
 
             return actionString;
         }

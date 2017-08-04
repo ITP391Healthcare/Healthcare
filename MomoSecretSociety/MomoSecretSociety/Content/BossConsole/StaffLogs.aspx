@@ -2,6 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ConsoleBoss_MainContent" runat="server">
 
+    <style>
+        .timeline-inverse>li>.timeline-item>.timeline-header 
+        {
+            font-size: small;
+        }
+    </style>
 
     <style>
         th {

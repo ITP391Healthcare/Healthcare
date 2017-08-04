@@ -82,6 +82,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
 
             searchValue = txtSearchValue.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
 
             //Add to logs
             ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
@@ -90,6 +91,7 @@ namespace MomoSecretSociety.Content.BossConsole
         }
 
         public static string searchValue = "";
+        public static string url = "";
 
 
         protected void btnSearchDate_Click(object sender, EventArgs e)
@@ -147,14 +149,6 @@ namespace MomoSecretSociety.Content.BossConsole
                     }
                     connection.Close();
 
-
-                    searchValue = txtSearchValueDate.Text;
-
-                    //Add to logs
-                    ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
-                    ActionLogs.Log(Context.User.Identity.Name, actionLog);
-
-
                 }
                 catch (System.NullReferenceException exc)
                 {
@@ -165,7 +159,14 @@ namespace MomoSecretSociety.Content.BossConsole
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please check that you have entered a correct format in DD/MM/YYYY.')", true);
             }
+            
+            searchValue = txtSearchValueDate.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
 
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+            
         }
 
         protected void btnSearchBoth_Click(object sender, EventArgs e)
@@ -207,32 +208,17 @@ namespace MomoSecretSociety.Content.BossConsole
                 connection.Close();
 
 
-                searchValue = TextBox1.Text + " " + TextBox2.Text;
-
-                //Add to logs
-                ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
-                ActionLogs.Log(Context.User.Identity.Name, actionLog);
-
-
             }
 
+            searchValue = TextBox1.Text + " " + TextBox2.Text;
+            url = System.Web.HttpContext.Current.Request.Url.ToString();
 
-
-
+            //Add to logs
+            ActionLogs.Action actionLog = ActionLogs.Action.SearchErrorLogs;
+            ActionLogs.Log(Context.User.Identity.Name, actionLog);
+            
         }
-
-        //protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        //{
-
-        //    //DataTable dt = showErrorLogsSummary();
-
-        //    //GridView1.DataSource = dt;
-        //    GridView1.DataBind();
-
-        //}
-
-
-
+        
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {
             if (IsPostBack)
