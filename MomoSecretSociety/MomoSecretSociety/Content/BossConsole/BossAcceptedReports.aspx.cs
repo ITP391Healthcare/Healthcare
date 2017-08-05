@@ -313,6 +313,11 @@ namespace MomoSecretSociety.Content.BossConsole
             //Kt testing
             //System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
 
+
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.ReportSavedToPdf;
+            ActionLogs.Log(Context.User.Identity.Name, action);
+
         }
 
              private static void AlignText(PdfPageBase page)
