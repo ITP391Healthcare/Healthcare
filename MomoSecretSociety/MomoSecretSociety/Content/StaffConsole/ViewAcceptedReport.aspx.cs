@@ -303,7 +303,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
 
             // + Watermark - Text (Joanne)
-            string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
+            string wmText = "Report #" + dbCaseNumber + " by " + Context.User.Identity.Name;
 
             PdfTilingBrush brush = new PdfTilingBrush(new SizeF(page.Canvas.ClientSize.Width / 2, page.Canvas.ClientSize.Height / 3));
             brush.Graphics.SetTransparency(0.3f);

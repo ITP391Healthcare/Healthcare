@@ -25,9 +25,12 @@ namespace MomoSecretSociety.Content.BossConsole
             //To make sure do not allow staff to access boss console through browser
             if (Context.User.Identity.Name != "KaiTatL97")
             {
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
-
+                Response.Redirect("../../Account/Login.aspx");
                 return;
+
+                //ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
+
+                //return;
             }
 
 

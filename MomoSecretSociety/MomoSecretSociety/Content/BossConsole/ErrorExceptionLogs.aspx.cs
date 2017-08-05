@@ -21,21 +21,34 @@ namespace MomoSecretSociety.Content.BossConsole
             //To make sure do not allow staff to access boss console through browser
             if (Context.User.Identity.Name != "KaiTatL97")
             {
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
-
+                Response.Redirect("../../Account/Login.aspx");
                 return;
+
+                //ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
+
+                //return;
             }
 
 
-            DataTable dt = showErrorLogsSummary();
+            if (!IsPostBack)
+            {
+                DataTable dt = showErrorLogsSummary();
 
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
+                GridView1.DataSource = dt;
+                ViewState["Datable"] = dt;
+                GridView1.DataBind();
 
+            }
 
             if (IsPostBack)
             {
                 errormsgPasswordAuthenticate.Visible = false;
+
+                //DataTable dt = showErrorLogsSummary();
+
+                //GridView1.DataSource = dt;
+                //ViewState["Datable"] = dt;
+                //GridView1.DataBind();
             }
         }
 
@@ -71,6 +84,7 @@ namespace MomoSecretSociety.Content.BossConsole
             dt.Load(dataReader);
 
             GridView1.DataSource = dt;
+            ViewState["Datable"] = dt;
             GridView1.DataBind();
 
             if (dt.Rows.Count == 0)
@@ -141,6 +155,7 @@ namespace MomoSecretSociety.Content.BossConsole
                     dt2.Load(dataReader);
 
                     GridView1.DataSource = dt2;
+                    ViewState["Datable"] = dt;
                     GridView1.DataBind();
 
                     if (dt2.Rows.Count == 0)
@@ -198,6 +213,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 dt.Load(dataReader);
 
                 GridView1.DataSource = dt;
+                ViewState["Datable"] = dt;
                 GridView1.DataBind();
 
                 if (dt.Rows.Count == 0)
@@ -281,10 +297,75 @@ namespace MomoSecretSociety.Content.BossConsole
             return BitConverter.ToString(hashedBytes);
         }
 
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //  //  GridView1.PageIndex = e.NewPageIndex;
+
+        // //   GridView1.DataBind();
+
+        //    DataTable dt = showErrorLogsSummary();
+
+        //    GridView1.DataSource = dt;
+        //    ViewState["Datable"] = dt;
+        //    GridView1.DataBind();
+
+        //    GridView1.PageIndex = e.NewPageIndex;
+
+
+        ////    GridView.DataSource = Dataset.Table["TestDataTable"];
+
+
+        //}
+
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            GridView1.PageIndex = e.NewPageIndex;
-            GridView1.DataBind();
+            System.Diagnostics.Debug.WriteLine(ViewState["Datable"]);
+            DataTable dataTable = ViewState["Datable"] as DataTable;
+            if (dataTable != null)
+            {
+                string SortDirection = "DESC";
+                if (ViewState["SortExpression"] != null)
+                {
+                    if (ViewState["SortExpression"].ToString() == e.SortExpression)
+                    {
+                        ViewState["SortExpression"] = null;
+                        SortDirection = "ASC";
+                    }
+                    else
+                    {
+                        ViewState["SortExpression"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    ViewState["SortExpression"] = e.SortExpression;
+                }
+
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + SortDirection;
+                System.Diagnostics.Debug.WriteLine(e.SortDirection);
+                GridView1.DataSource = dataView;
+                GridView1.DataBind();
+
+            }
         }
+
+        //private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        //{
+        //    string newSortDirection = String.Empty;
+
+        //    switch (sortDirection)
+        //    {
+        //        case SortDirection.Ascending:
+        //            newSortDirection = "ASC";
+        //            break;
+
+        //        case SortDirection.Descending:
+        //            newSortDirection = "DESC";
+        //            break;
+        //    }
+
+        //    return newSortDirection;
+        //}
     }
 }

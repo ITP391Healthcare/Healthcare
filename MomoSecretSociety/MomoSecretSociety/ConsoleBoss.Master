@@ -105,8 +105,7 @@
                         window.onunload = function () { void (0) }
 
                     }
-                    else
-                    {
+                    else {
                         $('#myModal').modal('hide');
                     }
 
@@ -143,13 +142,13 @@
     <% } %>
 
 
-<%--   <script type="text/javascript">
+    <script type="text/javascript">
         function disableRightClick() {
             alert("Sorry, right click is not allowed !!");
             return false;
         }
-    </script>--%>
-
+    </script>
+     
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -262,8 +261,8 @@
             <h1 style="text-align: left !important; color: lightblue; font-family: proxima-nova; text-shadow: 2px 2px beige;">SecureReportSystem</h1>
         </div>
 
-        
-    <asp:HiddenField ID="hiddenValue" runat="server" Value="0"/>
+
+        <asp:HiddenField ID="hiddenValue" runat="server" Value="0" />
 
         <div class="navbar-inverse ourNav" style="background-color: white;">
             <div class="container" style="background-color: white;">
@@ -311,16 +310,15 @@
         </div>
 
 
-        <div class="container body-content">
+        
+            <div class="container body-content">
 
-            <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
+                <asp:ContentPlaceHolder ID="ConsoleBoss_MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+                <hr />
 
+            </div>
 
-                <%--<asp:HiddenField runat="server" ID="JavascriptValue" value="1"/>--%>
-            </asp:ContentPlaceHolder>
-            <hr />
-
-        </div>
         <footer class="footerContent">
             <p>&copy; <%: DateTime.Now.Year %> - Proudly brought to you by SecureReportSystem</p>
         </footer>

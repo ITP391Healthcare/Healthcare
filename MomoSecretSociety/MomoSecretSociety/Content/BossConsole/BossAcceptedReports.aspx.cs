@@ -30,9 +30,12 @@ namespace MomoSecretSociety.Content.BossConsole
             //To make sure do not allow staff to access boss console through browser
             if (Context.User.Identity.Name != "KaiTatL97")
             {
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
-
+                Response.Redirect("../../Account/Login.aspx");
                 return;
+
+                //ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Dear " + Session["AccountUsername"].ToString() + ", you are not allowed to access this page.'); window.location = '../../Account/Login.aspx'; ", true);
+
+                //return;
             }
 
 
@@ -93,17 +96,17 @@ namespace MomoSecretSociety.Content.BossConsole
                 TextBox9.Visible = true;
 
                 //Make textbox editable to resubmit
-                TextBox3.ReadOnly = false;
-                TextBox5.ReadOnly = false;
-                TextBox7.ReadOnly = false;
-                TextBox9.ReadOnly = false;
+                TextBox3.ReadOnly = true;
+                TextBox5.ReadOnly = true;
+                TextBox7.ReadOnly = true;
+                TextBox9.ReadOnly = true;
             }
 
             if (dbReportStatus != "accepted")
             {
                 btnSaveAsPDF.Enabled = false;
-                Label13.Visible = false;
-                PasswordTxt.Visible = false;
+                //Label13.Visible = false;
+                PasswordTxt.Enabled = false;
             }
 
             if (Request.IsAuthenticated)
@@ -276,7 +279,7 @@ namespace MomoSecretSociety.Content.BossConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(400, 0, 150, 150);
+            signaturefield.Bounds = new RectangleF(350, 600, 100, 100);
 
 
             doc.Form.Fields.Add(signaturefield);
@@ -284,7 +287,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
 
             // + Watermark - Text (Joanne)
-            string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
+            string wmText = "Report #" + dbCaseNumber + " by " + Context.User.Identity.Name;
 
             PdfTilingBrush brush = new PdfTilingBrush(new SizeF(page.Canvas.ClientSize.Width / 2, page.Canvas.ClientSize.Height / 3));
             brush.Graphics.SetTransparency(0.3f);
@@ -309,6 +312,11 @@ namespace MomoSecretSociety.Content.BossConsole
             System.Diagnostics.Process.Start("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
             //Kt testing
             //System.Diagnostics.Process.Start("C:\\Users\\Kai Tat\\Desktop\\CreatePDFTest" + dbCaseNumber + ".pdf");
+
+
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.ReportSavedToPdf;
+            ActionLogs.Log(Context.User.Identity.Name, action);
 
         }
 
