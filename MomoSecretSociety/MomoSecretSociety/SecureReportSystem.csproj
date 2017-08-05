@@ -196,6 +196,7 @@
     </Content>
     <Content Include="Content\BossConsole\AcceptedReports.aspx" />
     <Content Include="Content\BossConsole\ErrorExceptionLogs.aspx" />
+    <Content Include="Content\BossConsole\ErrorPages\demoPageWithError3SQL.aspx" />
     <Content Include="Content\BossConsole\ErrorPages\Error.aspx" />
     <Content Include="Content\BossConsole\RejectedReports.aspx" />
     <Content Include="Content\BossConsole\StaffLogs.aspx" />
@@ -331,6 +332,13 @@
     </Compile>
     <Compile Include="Content\BossConsole\ErrorExceptionLogs.aspx.designer.cs">
       <DependentUpon>ErrorExceptionLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BossConsole\ErrorPages\demoPageWithError3SQL.aspx.cs">
+      <DependentUpon>demoPageWithError3SQL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\BossConsole\ErrorPages\demoPageWithError3SQL.aspx.designer.cs">
+      <DependentUpon>demoPageWithError3SQL.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\BossConsole\ErrorPages\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

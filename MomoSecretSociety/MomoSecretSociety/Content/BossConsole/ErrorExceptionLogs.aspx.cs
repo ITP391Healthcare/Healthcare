@@ -30,6 +30,7 @@ namespace MomoSecretSociety.Content.BossConsole
             DataTable dt = showErrorLogsSummary();
 
             GridView1.DataSource = dt;
+            ViewState["Datable"] = dt;
             GridView1.DataBind();
 
 
@@ -71,6 +72,7 @@ namespace MomoSecretSociety.Content.BossConsole
             dt.Load(dataReader);
 
             GridView1.DataSource = dt;
+            ViewState["Datable"] = dt;
             GridView1.DataBind();
 
             if (dt.Rows.Count == 0)
@@ -141,6 +143,7 @@ namespace MomoSecretSociety.Content.BossConsole
                     dt2.Load(dataReader);
 
                     GridView1.DataSource = dt2;
+                    ViewState["Datable"] = dt;
                     GridView1.DataBind();
 
                     if (dt2.Rows.Count == 0)
@@ -198,6 +201,7 @@ namespace MomoSecretSociety.Content.BossConsole
                 dt.Load(dataReader);
 
                 GridView1.DataSource = dt;
+                ViewState["Datable"] = dt;
                 GridView1.DataBind();
 
                 if (dt.Rows.Count == 0)
@@ -286,5 +290,56 @@ namespace MomoSecretSociety.Content.BossConsole
             GridView1.PageIndex = e.NewPageIndex;
             GridView1.DataBind();
         }
+
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(ViewState["Datable"]);
+            DataTable dataTable = ViewState["Datable"] as DataTable;
+            if (dataTable != null)
+            {
+                string SortDirection = "DESC";
+                if (ViewState["SortExpression"] != null)
+                {
+                    if (ViewState["SortExpression"].ToString() == e.SortExpression)
+                    {
+                        ViewState["SortExpression"] = null;
+                        SortDirection = "ASC";
+                    }
+                    else
+                    {
+                        ViewState["SortExpression"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    ViewState["SortExpression"] = e.SortExpression;
+                }
+
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + SortDirection;
+                System.Diagnostics.Debug.WriteLine(e.SortDirection);
+                GridView1.DataSource = dataView;
+                GridView1.DataBind();
+
+            }
+        }
+
+        //private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        //{
+        //    string newSortDirection = String.Empty;
+
+        //    switch (sortDirection)
+        //    {
+        //        case SortDirection.Ascending:
+        //            newSortDirection = "ASC";
+        //            break;
+
+        //        case SortDirection.Descending:
+        //            newSortDirection = "DESC";
+        //            break;
+        //    }
+
+        //    return newSortDirection;
+        //}
     }
 }
