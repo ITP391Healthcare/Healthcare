@@ -256,31 +256,14 @@ C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSoc
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Optimization.dll
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\WebGrease.dll
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Antlr3.Runtime.pdb
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\EntityFramework.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\EntityFramework.SqlServer.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Haxriderz.pdb
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AI.Web.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.ApplicationInsights.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AspNet.FriendlyUrls.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.Cookies.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.Facebook.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.Google.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Newtonsoft.Json.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Optimization.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Providers.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csprojResolveAssemblyReference.cache
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.dll
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.pdb
@@ -395,10 +378,7 @@ C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSoc
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csproj.GenerateResource.Cache
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.dll
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.pdb
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.dll
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.mshtml.dll
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.xml
-C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.xml
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.Resource1.resources
 C:\Users\Mandeal\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csproj.GenerateResource.Cache
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\EntityFramework.xml
@@ -419,6 +399,3 @@ C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociet
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Providers.xml
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csprojResolveAssemblyReference.cache
-C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.dll
-C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.xml
-C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.xml

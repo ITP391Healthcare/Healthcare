@@ -1,4 +1,5 @@
 ﻿using MomoSecretSociety.Content.BossConsole;
+using MomoSecretSociety.Content.StaffConsole;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,10 +23,15 @@ namespace MomoSecretSociety.Content
             BossApprovedReport,
             BossRejectedReport,
             ReportSavedToPdf,
+            ReportSavedAsDrafts,
             AccountLockout,
             ReauthenticatedDueToAccountLockout,
             BossViewPendingReport,
-            ExceptionError
+            ExceptionError,
+            SearchStaffLogs,
+            SearchBossLogs,
+            SearchErrorLogs,
+            SearchByStaff
         };
 
         public static void Log(string username, Action action)
@@ -64,7 +70,7 @@ namespace MomoSecretSociety.Content
         public static string getActionString(Action action)
         {
             String actionString = "";
-            
+
             if (action == Action.Login)
             {
                 actionString = "Login";
@@ -75,7 +81,7 @@ namespace MomoSecretSociety.Content
             }
             else if (action == Action.StaffSubmittedReport)
             {
-                actionString = "Report was submitted";
+                actionString = "Report of #" + NewReport.caseNumberOfReport + " was submitted";
             }
             else if (action == Action.BossApprovedReport)
             {
@@ -87,7 +93,13 @@ namespace MomoSecretSociety.Content
             }
             else if (action == Action.ReportSavedToPdf)
             {
-                actionString = "Report saved to PDF";
+                //actionString = "Report of #" + ViewAcceptedReport.caseNumberOfReport + " was saved to PDF";
+                actionString = "Report of #" + TestDisplay.dbCaseNumber + " was saved to PDF";
+            }
+            else if (action == Action.ReportSavedAsDrafts)
+            {
+                //actionString = "Report of #" + ViewAcceptedReport.caseNumberOfReport + " was saved to PDF";
+                actionString = "Report of #" + NewReport.caseNumberOfReport + " was saved as drafts";
             }
             //else if (action == Action.AccountLockout)
             //{
@@ -105,7 +117,34 @@ namespace MomoSecretSociety.Content
             {
                 actionString = "Exception Error";
             }
-
+            else if (action == Action.SearchStaffLogs)
+            {
+                actionString = "Search for value of '" + StaffLogs.searchValue + "'" + " of '"
+                    + StaffLogs.staffName + "' in " + StaffLogs.url;
+            }
+            else if (action == Action.SearchBossLogs)
+            {
+                actionString = "Search for value of '" + SuperiorLogs.searchValue + "' in " + SuperiorLogs.url;
+            }
+            else if (action == Action.SearchErrorLogs)
+            {
+                actionString = "Search for value of '" + ErrorExceptionLogs.searchValue + "' in " + ErrorExceptionLogs.url;
+            }
+            else if (action == Action.SearchByStaff)
+            {
+                if (SubmittedReports.searchValue != "")
+                {
+                    actionString = "Search for value of '" + SubmittedReports.searchValue + "'" + " by '" + SubmittedReports.staffName + "'" + " in " + SubmittedReports.url;
+                }
+                if (StaffConsole.RejectedReports.searchValue != "")
+                {
+                    actionString = "Search for value of '" + StaffConsole.RejectedReports.searchValue + "'" + " by '" + StaffConsole.RejectedReports.staffName + "'" + " in " + StaffConsole.RejectedReports.url;
+                }
+                if (Drafts.searchValue != "")
+                {
+                    actionString = "Search for value of '" + Drafts.searchValue + "'" + " by '" + Drafts.staffName + "'" + " in " + Drafts.url;
+                }
+            }
 
 
             return actionString;

@@ -101,7 +101,7 @@ namespace MomoSecretSociety.Content.StaffConsole
 
                 if (dbReportStatus != "accepted")
                 {
-                    btnSaveAsPDF.Enabled = false;
+                    btnSaveAsPDF.Visible = false;
                 }
 
                 if (Request.IsAuthenticated)
@@ -242,6 +242,8 @@ namespace MomoSecretSociety.Content.StaffConsole
             string rStatus = "accepted";
             dbCaseNumber = Session["caseNumberOfThisSelectedReport"].ToString();
 
+
+
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["FileDatabaseConnectionString2"].ConnectionString);
             connection.Open();
             SqlCommand myCommand = new SqlCommand("SELECT CaseNumber, Username, Date, Subject, Description, Remarks, CreatedDateTime FROM Report WHERE Username = @AccountUsername AND ReportStatus = @reportStatus AND CaseNumber = @cNum", connection);
@@ -321,7 +323,15 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Launching the PDF File
             System.Diagnostics.Process.Start("C:\\Saved PDF\\" + dbCaseNumber + ".pdf");
 
+
+            caseNumberOfReport = Session["caseNumberOfThisSelectedReport"].ToString();
+
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.ReportSavedToPdf;
+            ActionLogs.Log(Context.User.Identity.Name, action);
         }
+
+        public static string caseNumberOfReport = "";
 
         private static void AlignText(PdfPageBase page)
         {

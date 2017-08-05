@@ -169,9 +169,20 @@ namespace MomoSecretSociety.Content.StaffConsole
             //Page.ClientScript.RegisterStartupScript(this.GetType(), "alert",
             //"alert('Case #'" + cNumber + "' has been created.');" + "window.location = 'SubmittedReports.aspx'; ", true);
 
+
+            caseNumberOfReport = cNumber + "";
+
+
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.StaffSubmittedReport;
+            ActionLogs.Log(Context.User.Identity.Name, action);
+
+
             string message = "Case #" + cNumber + " has been created.";
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "'); window.location = 'SubmittedReports.aspx'; ", true);
         }
+
+        public static string caseNumberOfReport = "";
 
         protected void SaveAsDraftsButton_Click(object sender, EventArgs e)
         {
@@ -228,6 +239,14 @@ namespace MomoSecretSociety.Content.StaffConsole
             insertReportCommand.Connection = connection;
             insertReportCommand.ExecuteNonQuery();
             connection.Close();
+
+
+            caseNumberOfReport = cNumber + "";
+
+
+            //Add to logs
+            ActionLogs.Action action = ActionLogs.Action.ReportSavedAsDrafts;
+            ActionLogs.Log(Context.User.Identity.Name, action);
 
             //alert
             string message = "Your report has been saved in drafts!";

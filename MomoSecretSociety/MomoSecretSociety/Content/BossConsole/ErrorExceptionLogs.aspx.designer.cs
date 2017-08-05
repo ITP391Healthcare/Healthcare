@@ -13,6 +13,33 @@ namespace MomoSecretSociety.Content.BossConsole {
     public partial class ErrorExceptionLogs {
         
         /// <summary>
+        /// txtPasswordAuthenticate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPasswordAuthenticate;
+        
+        /// <summary>
+        /// errormsgPasswordAuthenticate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errormsgPasswordAuthenticate;
+        
+        /// <summary>
+        /// btnAuthenticate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAuthenticate;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>

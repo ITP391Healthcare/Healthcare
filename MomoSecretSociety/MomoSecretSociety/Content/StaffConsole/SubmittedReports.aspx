@@ -23,6 +23,40 @@
          }
 
     </style>
+
+       <style>
+        .btnSearch {
+            border-top: thick solid #e5e5e5;
+            border-right: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            margin-left: -2%;
+            /*box-shadow: 0px 0px 0px 0px #e5e5e5;*/
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+        .txtSearch {
+            border-top: thick solid #e5e5e5;
+            border-left: thick solid #e5e5e5;
+            border-bottom: thick solid #e5e5e5;
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+            text-align: center;
+        }
+
+            .txtSearch:focus, .btnSearch:focus {
+                /*box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+                border: 1px solid rgba(81, 203, 238, 1);*/
+                outline: none;
+            }
+
+            .txtSearch:focus {
+                border-bottom: 2px solid black;
+            }
+
+
+    </style>
     
       <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -50,7 +84,13 @@
         </div>
     </div>
 
-
+    <br />
+    <div class="searchBar" style="float:right;">
+        <abbr title="Enter a Username/Exception Type/Error Message/Location">
+            <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Search here..." CssClass="txtSearch" />
+        </abbr>
+            <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
+    </div>
 
 <%--    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox><br />
     <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox><br />
@@ -60,14 +100,14 @@
     <br />
     <div class="GRIDVIEW">
         <asp:Label ID="Label1" runat="server" Text="- Submitted Reports -" Font-Size="30px" Font-Bold="True"></asp:Label>
-        <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
-            SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
-            WHERE ([Username] = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected' ));">
-            <SelectParameters>
+        <asp:SqlDataSource ID ="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>">
+            <%-- SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
+            WHERE ([Username] = @Username AND (ReportStatus = 'accepted' OR ReportStatus = 'pending' OR ReportStatus = 'rejected' ));" --%>
+          <%--  <SelectParameters>
                 <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
-            </SelectParameters>
+            </SelectParameters>--%>
         </asp:SqlDataSource>
-        <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" DataSourceID ="SqlDataSource1" AllowPaging="true"
+        <asp:GridView ID ="GridView1" CssClass="myDataGrid" HeaderStyle-CssClass="header" runat="server" AllowPaging="true"
             AutoGenerateColumns="false" OnSorting="GridView1_Sorting" OnRowCommand="GridView1_RowCommand" AllowSorting="true" AlternatingRowStyle-BackColor="#adadad" RowStyle-Height="40" RowStyle-BackColor="#c5c5c5">
             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
             <%-- If There are no reports --%>
@@ -82,7 +122,7 @@
                         <asp:LinkButton runat="server" ID="link" CommandArgument='<%# Eval("CaseNumber")%>' CommandName="DataCommand" Text='<%# Eval("CaseNumber") %>'></asp:LinkButton>
                      </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="Date"  HeaderText="Date" ItemStyle-Width="300" SortExpression="Date" />
+                <asp:BoundField DataField="Date" HeaderText="Date of Incident" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-Width="300" SortExpression="Date" />
                 <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="600" SortExpression="Subject"/>
                 <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="300" SortExpression="ReportStatus" />
                 <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="500" SortExpression="CreatedDateTime" />

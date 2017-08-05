@@ -6,6 +6,8 @@
 
     <style>
         th, tr, td {
+            padding-left: 8px;
+            padding-right: 8px;
             text-align: center;
         }
     </style>
@@ -64,7 +66,7 @@
 
 
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ConnectionStrings:FileDatabaseConnectionString2 %>"
-                            SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [ReportStatus], [CreatedDateTime] FROM [Report]
+                            SelectCommand="SELECT [CaseNumber], [CaseNumber], [Date], [Subject], [CreatedDateTime] FROM [Report]
         WHERE (ReportStatus = 'accepted');">
                             <SelectParameters>
                                 <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
@@ -73,7 +75,7 @@
                         <asp:GridView ID="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small"
                             HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
                             HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
-                            RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand">
+                            RowStyle-HorizontalAlign="Center" PageSize="5" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" >
 
                             <%-- If There are no reports --%>
                             <EmptyDataTemplate>
@@ -87,10 +89,9 @@
                                         <asp:LinkButton runat="server" ID="link" CommandArgument='<%# Eval("CaseNumber")%>' CommandName="DataCommand" Text='<%# Eval("CaseNumber") %>'></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Width="200" />
-                                <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="200" />
-                                <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="200" />
-                                <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="200" />
+                                <asp:BoundField DataField="Date" HeaderText="Date of Incident" DataFormatString="{0:dd/MM/yyyy}" />
+                                <asp:BoundField DataField="Subject" HeaderText="Subject" />
+                                <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" />
                             </Columns>
                         </asp:GridView>
                     </div>

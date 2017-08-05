@@ -123,7 +123,7 @@
                             SelectCommand="SELECT [Username], [CaseNumber], [Subject], [isNew] FROM [Report]
         WHERE (ReportStatus = 'pending');"></asp:SqlDataSource>
 
-                        <asp:GridView ID="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Medium"
+                        <asp:GridView ID="GridView1" runat="server" BorderColor="#F0F0F0" HeaderStyle-BackColor="#146882" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small"
                             HeaderStyle-HorizontalAlign="Center" CellPadding="15" Font-Names="Helvetica"
                             HeaderStyle-ForeColor="White" HeaderStyle-Wrap="true" RowStyle-BorderColor="white"
                             RowStyle-HorizontalAlign="Center" PageSize="10" AllowPaging="True" DataSourceID="SqlDataSource1" Width="100%" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" DataKeyNames="Username, CaseNumber, isNew" OnRowDataBound="GridView1_RowDataBound">
@@ -136,7 +136,7 @@
                             <PagerStyle CssClass="pagerStyle" />
 
                             <Columns>
-                                <asp:TemplateField HeaderText="Case Number">
+                                <asp:TemplateField HeaderText="Case Number" ItemStyle-Width="120px">
                                     <ItemTemplate>
                                         <asp:LinkButton runat="server" ID="link"
                                             CommandArgument='<%# Eval("Username") + "," + Eval("CaseNumber")%>' CommandName="DataCommand"
