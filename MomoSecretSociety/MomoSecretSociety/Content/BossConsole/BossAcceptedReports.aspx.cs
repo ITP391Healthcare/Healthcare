@@ -93,17 +93,17 @@ namespace MomoSecretSociety.Content.BossConsole
                 TextBox9.Visible = true;
 
                 //Make textbox editable to resubmit
-                TextBox3.ReadOnly = false;
-                TextBox5.ReadOnly = false;
-                TextBox7.ReadOnly = false;
-                TextBox9.ReadOnly = false;
+                TextBox3.ReadOnly = true;
+                TextBox5.ReadOnly = true;
+                TextBox7.ReadOnly = true;
+                TextBox9.ReadOnly = true;
             }
 
             if (dbReportStatus != "accepted")
             {
                 btnSaveAsPDF.Enabled = false;
-                Label13.Visible = false;
-                PasswordTxt.Visible = false;
+                //Label13.Visible = false;
+                PasswordTxt.Enabled = false;
             }
 
             if (Request.IsAuthenticated)
