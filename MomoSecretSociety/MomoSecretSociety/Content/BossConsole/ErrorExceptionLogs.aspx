@@ -44,14 +44,21 @@
         }
 
         table tr td:nth-child(5) {
-            max-width: 400px;
+            max-width: 395px;
             overflow-wrap: break-word !important;
         }
 
-        /*table tr td:nth-child(2) {
-            text-align: left;
-            min-width:185px;
-        }*/
+
+        th:nth-child(2) {
+            min-width: 180px;
+            text-align: center;
+        }
+
+        th:nth-child(3) {
+            min-width: 380px;
+            text-align: center;
+        }
+
 
 
         th {
@@ -59,9 +66,6 @@
             text-align: center;
         }
 
-        /*.pagerStyle td {
-            padding: 15px;
-        }*/
 
         table {
             margin-left: -4.5%;
@@ -123,6 +127,8 @@
                 color: black;
             }
     </style>
+
+
 
     <!-- Pop up Modal -->
     <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -227,29 +233,33 @@ StackOverflowException
 
         </asp:SqlDataSource>
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" CellPadding="10" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" RowStyle-Wrap="true" HorizontalAlign="Center" AlternatingRowStyle-BackColor="White" OnSorting="GridView1_Sorting" AllowSorting="true" AllowPaging="false">
+        <asp:PlaceHolder ID="placeholder" runat="server">
 
-            <%--  OnPageIndexChanging="GridView1_PageIndexChanging"   PageSize="30" --%>
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" CellPadding="10" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" RowStyle-Wrap="true" HorizontalAlign="Center" AlternatingRowStyle-BackColor="White" OnSorting="GridView1_Sorting" AllowSorting="true" AllowPaging="false">
 
-            <%-- If There are no reports --%>
-            <EmptyDataTemplate>
-                <label style="color: red; font-weight: bold; font-size: 30px;">There are no error exception logs at the moment</label>
-            </EmptyDataTemplate>
+                <%--  OnPageIndexChanging="GridView1_PageIndexChanging"   PageSize="30" --%>
 
-            <PagerStyle CssClass="pagerStyle" />
+                <%-- If There are no reports --%>
+                <EmptyDataTemplate>
+                    <label style="color: red; font-weight: bold; font-size: 30px;">There are no error exception logs at the moment</label>
+                </EmptyDataTemplate>
 
-            <Columns>
-                <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
-                <asp:BoundField DataField="ExceptionType" HeaderText="Exception Type" SortExpression="ExceptionType" ItemStyle-Width="200" />
-                <asp:BoundField DataField="ErrorMessage" HeaderText="Error Message" SortExpression="ErrorMessage" />
+                <PagerStyle CssClass="pagerStyle" />
 
-                <asp:BoundField DataField="Timestamp" HeaderText="Timestamp" SortExpression="Timestamp" />
-                <asp:BoundField DataField="Location" HeaderText="Location" ItemStyle-Wrap="true" SortExpression="Location" />
+                <Columns>
+                    <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" ItemStyle-Wrap="true" />
+                    <asp:BoundField DataField="ExceptionType" HeaderText="Exception Type" SortExpression="ExceptionType" ItemStyle-Wrap="true" />
+                    <asp:BoundField DataField="ErrorMessage" HeaderText="Error Message" SortExpression="ErrorMessage" ItemStyle-Wrap="true" />
+
+                    <asp:BoundField DataField="Timestamp" HeaderText="Timestamp" SortExpression="Timestamp" ItemStyle-Wrap="true" />
+                    <asp:BoundField DataField="Location" HeaderText="Location" ItemStyle-Wrap="true" SortExpression="Location" />
 
 
-                <%--<asp:ButtonField Text="View Logs" ItemStyle-Width="150px" HeaderStyle-Width="150px" CommandName="view" ButtonType="Button"></asp:ButtonField>--%>
-            </Columns>
-        </asp:GridView>
+                    <%--<asp:ButtonField Text="View Logs" ItemStyle-Width="150px" HeaderStyle-Width="150px" CommandName="view" ButtonType="Button"></asp:ButtonField>--%>
+                </Columns>
+            </asp:GridView>
+
+        </asp:PlaceHolder>
     </div>
 
 </asp:Content>
