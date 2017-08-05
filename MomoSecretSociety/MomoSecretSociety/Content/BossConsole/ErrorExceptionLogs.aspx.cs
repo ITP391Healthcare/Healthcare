@@ -30,12 +30,15 @@ namespace MomoSecretSociety.Content.BossConsole
             }
 
 
-            DataTable dt = showErrorLogsSummary();
+            if (!IsPostBack)
+            {
+                DataTable dt = showErrorLogsSummary();
 
-            GridView1.DataSource = dt;
-            ViewState["Datable"] = dt;
-            GridView1.DataBind();
+                GridView1.DataSource = dt;
+                ViewState["Datable"] = dt;
+                GridView1.DataBind();
 
+            }
 
             if (IsPostBack)
             {
@@ -288,11 +291,11 @@ namespace MomoSecretSociety.Content.BossConsole
             return BitConverter.ToString(hashedBytes);
         }
 
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            GridView1.PageIndex = e.NewPageIndex;
-            GridView1.DataBind();
-        }
+        //protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //    GridView1.PageIndex = e.NewPageIndex;
+        //    GridView1.DataBind();
+        //}
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {

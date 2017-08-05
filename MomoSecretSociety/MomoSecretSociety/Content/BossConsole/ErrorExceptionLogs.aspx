@@ -37,30 +37,35 @@
             text-align: left;
         }
 
-        table tr td:nth-child(3){
+        table tr td:nth-child(3) {
             max-width: 385px;
-    overflow-wrap: break-word !important;
-    /*overflow: scroll;*/
+            overflow-wrap: break-word !important;
+            /*overflow: scroll;*/
         }
 
-                table tr td:nth-child(5){
+        table tr td:nth-child(5) {
             max-width: 400px;
-    overflow-wrap: break-word !important;
+            overflow-wrap: break-word !important;
         }
+
+        /*table tr td:nth-child(2) {
+            text-align: left;
+            min-width:185px;
+        }*/
+
 
         th {
+            /*min-width:185px;*/
             text-align: center;
         }
 
-        .pagerStyle td {
-            padding: 10px;
-        }
+        /*.pagerStyle td {
+            padding: 15px;
+        }*/
 
         table {
             margin-left: -4.5%;
         }
-
-
     </style>
 
     <style>
@@ -110,6 +115,8 @@
     <style>
         .pagerStyle td {
             min-width: 50px;
+            padding-right: 5%;
+            padding-left: 5%;
         }
 
             .pagerStyle td a {
@@ -212,29 +219,31 @@ StackOverflowException
 
         <h2 style="text-align: center; text-shadow: 2px 2px beige;">List of Error Exception Logs</h2>
 
-           <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>">
-               <%--  SelectCommand="SELECT * FROM [ErrorExceptionLogs]" --%>
-        <%--                <SelectParameters>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>">
+            <%--  SelectCommand="SELECT * FROM [ErrorExceptionLogs]" --%>
+            <%--                <SelectParameters>
                     <asp:SessionParameter Name="Username" SessionField="AccountUsername" Type="String" />
                 </SelectParameters>--%>
 
-         </asp:SqlDataSource>
+        </asp:SqlDataSource>
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" AllowPaging="True" CellPadding="10" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" RowStyle-Wrap="true" HorizontalAlign="Center" AlternatingRowStyle-BackColor="White" PageSize="20" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting" AllowSorting="true" >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" CellPadding="10" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" RowStyle-Wrap="true" HorizontalAlign="Center" AlternatingRowStyle-BackColor="White" OnSorting="GridView1_Sorting" AllowSorting="true" AllowPaging="false">
 
-               <%-- If There are no reports --%>
-                            <EmptyDataTemplate>
-                                <label style="color: red; font-weight: bold; font-size: 30px;">There are no error exception logs at the moment</label>
-                            </EmptyDataTemplate>
+            <%--  OnPageIndexChanging="GridView1_PageIndexChanging"   PageSize="30" --%>
+
+            <%-- If There are no reports --%>
+            <EmptyDataTemplate>
+                <label style="color: red; font-weight: bold; font-size: 30px;">There are no error exception logs at the moment</label>
+            </EmptyDataTemplate>
 
             <PagerStyle CssClass="pagerStyle" />
 
             <Columns>
-                <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username"  />
-                <asp:BoundField DataField="ExceptionType" HeaderText="Exception Type" SortExpression="ExceptionType"  />
-                <asp:BoundField DataField="ErrorMessage" HeaderText="Error Message" SortExpression="ErrorMessage"/>
+                <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
+                <asp:BoundField DataField="ExceptionType" HeaderText="Exception Type" SortExpression="ExceptionType" ItemStyle-Width="200" />
+                <asp:BoundField DataField="ErrorMessage" HeaderText="Error Message" SortExpression="ErrorMessage" />
 
-                <asp:BoundField DataField="Timestamp" HeaderText="Timestamp" SortExpression="Timestamp"/>
+                <asp:BoundField DataField="Timestamp" HeaderText="Timestamp" SortExpression="Timestamp" />
                 <asp:BoundField DataField="Location" HeaderText="Location" ItemStyle-Wrap="true" SortExpression="Location" />
 
 
