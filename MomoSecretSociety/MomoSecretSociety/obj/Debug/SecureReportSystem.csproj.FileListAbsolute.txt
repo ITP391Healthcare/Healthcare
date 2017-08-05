@@ -343,7 +343,6 @@ C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSoc
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Newtonsoft.Json.dll
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Optimization.dll
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\WebGrease.dll
-C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.dll
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.mshtml.dll
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Antlr3.Runtime.pdb
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\EntityFramework.xml
@@ -369,10 +368,8 @@ C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSoc
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Newtonsoft.Json.xml
-C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.xml
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Optimization.xml
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Providers.xml
-C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.xml
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csprojResolveAssemblyReference.cache
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\MomoSecretSociety.Resource1.resources
 C:\Users\Kai Tat\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csproj.GenerateResource.Cache

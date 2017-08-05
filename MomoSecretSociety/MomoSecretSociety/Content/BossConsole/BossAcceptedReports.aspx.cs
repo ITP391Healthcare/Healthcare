@@ -102,6 +102,8 @@ namespace MomoSecretSociety.Content.BossConsole
             if (dbReportStatus != "accepted")
             {
                 btnSaveAsPDF.Enabled = false;
+                Label13.Visible = false;
+                PasswordTxt.Visible = false;
             }
 
             if (Request.IsAuthenticated)
@@ -117,6 +119,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
             //Label8.Text = this.Decrypt(Label8.Text.Trim());
             Label10.Text = Decrypt(Label10.Text.Trim());
+                TextBox9.Text= Decrypt(TextBox9.Text.Trim());
         }
 
         public static string Decrypt(string cipherText)

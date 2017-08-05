@@ -109,7 +109,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
                 Session["caseNumberOfThisSelectedReport"] = commandArgs;
 
-                Response.Redirect("ViewAcceptedReport.aspx");
+                Response.Redirect("BossAcceptedReports.aspx");
 
 
             }
