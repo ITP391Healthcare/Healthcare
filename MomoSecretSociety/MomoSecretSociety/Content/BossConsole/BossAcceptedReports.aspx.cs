@@ -276,7 +276,7 @@ namespace MomoSecretSociety.Content.BossConsole
             signaturefield.BorderStyle = PdfBorderStyle.Solid;
             signaturefield.BorderColor = new PdfRGBColor(System.Drawing.Color.Black);
             signaturefield.HighlightMode = PdfHighlightMode.Outline;
-            signaturefield.Bounds = new RectangleF(400, 0, 150, 150);
+            signaturefield.Bounds = new RectangleF(350, 600, 100, 100);
 
 
             doc.Form.Fields.Add(signaturefield);
@@ -284,7 +284,7 @@ namespace MomoSecretSociety.Content.BossConsole
 
 
             // + Watermark - Text (Joanne)
-            string wmText = "Report #" + dbCaseNumber + " by " + dbUsername;
+            string wmText = "Report #" + dbCaseNumber + " by " + Context.User.Identity.Name;
 
             PdfTilingBrush brush = new PdfTilingBrush(new SizeF(page.Canvas.ClientSize.Width / 2, page.Canvas.ClientSize.Height / 3));
             brush.Graphics.SetTransparency(0.3f);
