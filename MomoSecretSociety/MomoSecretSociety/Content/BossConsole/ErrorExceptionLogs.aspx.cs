@@ -43,6 +43,12 @@ namespace MomoSecretSociety.Content.BossConsole
             if (IsPostBack)
             {
                 errormsgPasswordAuthenticate.Visible = false;
+
+                //DataTable dt = showErrorLogsSummary();
+
+                //GridView1.DataSource = dt;
+                //ViewState["Datable"] = dt;
+                //GridView1.DataBind();
             }
         }
 
@@ -293,8 +299,22 @@ namespace MomoSecretSociety.Content.BossConsole
 
         //protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         //{
-        //    GridView1.PageIndex = e.NewPageIndex;
+        //  //  GridView1.PageIndex = e.NewPageIndex;
+
+        // //   GridView1.DataBind();
+
+        //    DataTable dt = showErrorLogsSummary();
+
+        //    GridView1.DataSource = dt;
+        //    ViewState["Datable"] = dt;
         //    GridView1.DataBind();
+
+        //    GridView1.PageIndex = e.NewPageIndex;
+
+
+        ////    GridView.DataSource = Dataset.Table["TestDataTable"];
+
+
         //}
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
