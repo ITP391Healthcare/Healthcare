@@ -122,7 +122,7 @@
                         <asp:LinkButton runat="server" ID="link" CommandArgument='<%# Eval("CaseNumber")%>' CommandName="DataCommand" Text='<%# Eval("CaseNumber") %>'></asp:LinkButton>
                      </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="Date"  HeaderText="Date" ItemStyle-Width="300" SortExpression="Date" />
+                <asp:BoundField DataField="Date" HeaderText="Date of Incident" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-Width="300" SortExpression="Date" />
                 <asp:BoundField DataField="Subject" HeaderText="Subject" ItemStyle-Width="600" SortExpression="Subject"/>
                 <asp:BoundField DataField="ReportStatus" HeaderText="Report Status" ItemStyle-Width="300" SortExpression="ReportStatus" />
                 <asp:BoundField DataField="CreatedDateTime" HeaderText="Created Date Time" ItemStyle-Width="500" SortExpression="CreatedDateTime" />

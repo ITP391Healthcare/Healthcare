@@ -399,6 +399,3 @@ C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociet
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\System.Web.Providers.xml
 C:\Users\User\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\obj\Debug\SecureReportSystem.csprojResolveAssemblyReference.cache
-C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.dll
-C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.Pdf.xml
-C:\Users\ASUS\Source\Repos\SecureReportSystem\MomoSecretSociety\MomoSecretSociety\bin\Spire.License.xml
