@@ -79,7 +79,7 @@
     </div>
     <br />
         <div class="searchBar" style="float:right;">
-        <abbr title="Enter a Username/Exception Type/Error Message/Location">
+        <abbr title="Enter a case number/keyword">
             <asp:TextBox ID="txtSearchValue" runat="server" Width="200" placeholder="Search here..." CssClass="txtSearch" />
         </abbr>
             <asp:Button ID="btnSearch" runat="server" Text="Search &#128269;" CssClass="btnSearch" OnClick="btnSearch_Click" />
