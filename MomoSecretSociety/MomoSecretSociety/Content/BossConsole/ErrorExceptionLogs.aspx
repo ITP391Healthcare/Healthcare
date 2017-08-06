@@ -67,9 +67,9 @@
         }
 
 
-        table {
+        /*table {
             margin-left: -4.5%;
-        }
+        }*/
     </style>
 
     <style>
@@ -127,6 +127,16 @@
                 color: black;
             }
     </style>
+
+<%--    <style>
+        
+    </style>--%>
+
+    <style type="text/css">
+        .FixedHeader {
+            position: absolute;
+        }     
+    </style>   
 
 
 
@@ -225,6 +235,7 @@ StackOverflowException
 
         <h2 style="text-align: center; text-shadow: 2px 2px beige;">List of Error Exception Logs</h2>
 
+        <asp:Panel ID="tablePanel" runat="server" style="overflow:scroll; width: 100%; height: 1000px;">
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FileDatabaseConnectionString2 %>">
             <%--  SelectCommand="SELECT * FROM [ErrorExceptionLogs]" --%>
             <%--                <SelectParameters>
@@ -235,7 +246,7 @@ StackOverflowException
 
         <asp:PlaceHolder ID="placeholder" runat="server">
 
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" CellPadding="10" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" RowStyle-Wrap="true" HorizontalAlign="Center" AlternatingRowStyle-BackColor="White" OnSorting="GridView1_Sorting" AllowSorting="true" AllowPaging="false" >
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderColor="#F0F0F0" HeaderStyle-BackColor="#add8e6" RowStyle-BackColor="#f3f3f3" RowStyle-Font-Size="Small" Font-Names="Helvetica" HeaderStyle-ForeColor="White" RowStyle-BorderColor="white" RowStyle-HorizontalAlign="Center" CellPadding="10" HeaderStyle-Wrap="true" HeaderStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" RowStyle-Wrap="true" HorizontalAlign="Center" AlternatingRowStyle-BackColor="White" OnSorting="GridView1_Sorting" AllowSorting="true" AllowPaging="false">
 
                 <%--  OnPageIndexChanging="GridView1_PageIndexChanging"   PageSize="30" --%>
 
@@ -260,6 +271,8 @@ StackOverflowException
             </asp:GridView>
 
         </asp:PlaceHolder>
+
+            </asp:Panel>
     </div>
 
 </asp:Content>

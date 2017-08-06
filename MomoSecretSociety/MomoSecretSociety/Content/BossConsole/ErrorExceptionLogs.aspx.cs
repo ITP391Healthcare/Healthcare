@@ -349,6 +349,8 @@ namespace MomoSecretSociety.Content.BossConsole
 
             }
         }
+        
+        
 
         //private string ConvertSortDirectionToSql(SortDirection sortDirection)
         //{
